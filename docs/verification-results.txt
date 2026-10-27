@@ -1,0 +1,54 @@
+Task20 verification — 2026-10-28
+
+Newman 6.2.3
+Requests: 111; failed: 0
+Assertions: 142; failed: 0
+
+DELETE occupied department -> 409 Conflict
+{
+  "detail": "Cannot delete department with employees",
+  "instance": "/test-demo/api/departments/3",
+  "status": 409,
+  "title": "Conflict"
+}
+
+POST duplicate author-book link -> 409 Conflict
+{
+  "detail": "Author is already associated with this book",
+  "instance": "/test-demo/api/books/1/authors/1",
+  "status": 409,
+  "title": "Conflict"
+}
+
+Separate screenshot run — direct PostgreSQL checks:
+ id | gender_id
+----+-----------
+  6 |         1
+  7 |         2
+(2 rows)
+
+ orphan_passport_rows
+----------------------
+                    0
+(1 row)
+
+ student_rows
+--------------
+            0
+(1 row)
+
+ id |     title
+----+---------------
+  5 | SQL-13c4218e
+  6 | Java-13c4218e
+(2 rows)
+
+ student_links
+---------------
+             0
+(1 row)
+
+
+Student DELETE /api/students/5 -> 204
+Subsequent GET /api/students/5 -> 404
+Courses 5 and 6 still exist; student_course rows for student 5 = 0.

@@ -1,0 +1,24 @@
+name: spring-task-4
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: school-postgres
+    environment:
+      POSTGRES_DB: school_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - school-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U postgres -d school_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+      start_period: 10s
+
+volumes:
+  school-data:
+    name: spring-task-4-school-data

@@ -1,0 +1,22 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /test-demo
+
+spring:
+  config:
+    import: "optional:file:.env[.properties]"
+  application:
+    name: test-demo-api
+  datasource:
+    url: jdbc:postgresql://localhost:5432/school_db
+    username: postgres
+    password: ${POSTGRES_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true

@@ -1,0 +1,26 @@
+GET http://localhost:8080/test-demo/api/users/6
+HTTP 200
+
+Captured Hibernate output for this isolated request:
+
+Hibernate:
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.gender_id,
+        u1_0.name,
+        p1_0.id,
+        p1_0.country,
+        p1_0.issue_date,
+        p1_0.serial_number,
+        p1_0.user_id,
+        u1_0.surname
+    from
+        users u1_0
+    left join
+        passports p1_0
+            on u1_0.id=p1_0.user_id
+    where
+        u1_0.id=?
+
+Observed SQL SELECT count: 1
