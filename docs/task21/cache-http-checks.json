@@ -1,0 +1,255 @@
+{
+  "beforeEvict": {
+    "secondLevelCacheHitCount": 0,
+    "secondLevelCacheMissCount": 1,
+    "secondLevelCachePutCount": 1,
+    "queryCacheHitCount": 0,
+    "regions": {
+      "courses": {
+        "hitCount": 0,
+        "missCount": 1,
+        "putCount": 1
+      },
+      "departments": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "authors": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "books": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "author-books": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "author-authorBooks": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "book-authorBooks": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      }
+    }
+  },
+  "evictStatus": 204,
+  "afterEvict": {
+    "secondLevelCacheHitCount": 0,
+    "secondLevelCacheMissCount": 2,
+    "secondLevelCachePutCount": 2,
+    "queryCacheHitCount": 0,
+    "regions": {
+      "courses": {
+        "hitCount": 0,
+        "missCount": 2,
+        "putCount": 2
+      },
+      "departments": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "authors": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "books": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "author-books": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "author-authorBooks": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "book-authorBooks": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      }
+    }
+  },
+  "resetStatus": 204,
+  "afterReset": {
+    "secondLevelCacheHitCount": 1,
+    "secondLevelCacheMissCount": 0,
+    "secondLevelCachePutCount": 0,
+    "queryCacheHitCount": 0,
+    "regions": {
+      "courses": {
+        "hitCount": 1,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "departments": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "authors": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "books": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "author-books": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "author-authorBooks": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "book-authorBooks": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      }
+    }
+  },
+  "unknownRegionStatus": 400,
+  "joinFetchSelects": [
+    1,
+    1
+  ],
+  "queryAfterFirst": {
+    "secondLevelCacheHitCount": 0,
+    "secondLevelCacheMissCount": 0,
+    "secondLevelCachePutCount": 2,
+    "queryCacheHitCount": 0,
+    "regions": {
+      "courses": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "departments": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "authors": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 2
+      },
+      "books": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "author-books": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "author-authorBooks": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "book-authorBooks": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      }
+    }
+  },
+  "queryAfterSecond": {
+    "secondLevelCacheHitCount": 0,
+    "secondLevelCacheMissCount": 0,
+    "secondLevelCachePutCount": 2,
+    "queryCacheHitCount": 1,
+    "regions": {
+      "courses": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "departments": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "authors": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 2
+      },
+      "books": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "author-books": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "author-authorBooks": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "book-authorBooks": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      }
+    }
+  },
+  "querySelects": [
+    1,
+    0
+  ],
+  "queryInvalidationSelects": 1,
+  "queryCounts": [
+    2,
+    2,
+    3
+  ],
+  "bookOld": {
+    "id": 9,
+    "title": "CacheCheck-e4109b94afdc4d9786732c16d8326ce0",
+    "price": 11.25,
+    "pageCount": 123,
+    "authors": []
+  },
+  "bookUpdated": {
+    "id": 9,
+    "title": "CacheCheck-e4109b94afdc4d9786732c16d8326ce0",
+    "price": 22.5,
+    "pageCount": 123,
+    "authors": null
+  },
+  "bookReadAfterUpdate": {
+    "id": 9,
+    "title": "CacheCheck-e4109b94afdc4d9786732c16d8326ce0",
+    "price": 22.5,
+    "pageCount": 123,
+    "authors": []
+  }
+}

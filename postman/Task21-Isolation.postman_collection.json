@@ -1,0 +1,528 @@
+{
+  "info": {
+    "name": "Task21 Isolation",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/test-demo/api"
+    }
+  ],
+  "item": [
+    {
+      "name": "Isolation",
+      "item": [
+        {
+          "name": "D1 salary report",
+          "description": "Bu qovluq ardıcıl HTTP smoke/validation yoxlamasıdır. Paralel update fərqi ayrıca docs/task21/d1-parallel-results.json ilə sübut olunub; bu ardıcıl run özü concurrency sübutu deyil.",
+          "item": [
+            {
+              "name": "READ_COMMITTED",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/departments/1/salary-report?isolation=READ_COMMITTED&delayMs=0"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                      "pm.test(\"Report isolation\",()=>pm.expect(pm.response.json().isolation).to.eql(\"READ_COMMITTED\"));",
+                      "pm.test(\"No concurrent writer: averages equal\",()=>{const r=pm.response.json();pm.expect(r.firstAvg).to.eql(r.secondAvg);});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "REPEATABLE_READ",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/departments/1/salary-report?isolation=REPEATABLE_READ&delayMs=0"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                      "pm.test(\"Report isolation\",()=>pm.expect(pm.response.json().isolation).to.eql(\"REPEATABLE_READ\"));",
+                      "pm.test(\"No concurrent writer: averages equal\",()=>{const r=pm.response.json();pm.expect(r.firstAvg).to.eql(r.secondAvg);});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "D1 unsupported SERIALIZABLE",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/departments/1/salary-report?isolation=SERIALIZABLE&delayMs=0"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Negative delay",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/departments/1/salary-report?isolation=READ_COMMITTED&delayMs=-1"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "D2 salary raise",
+          "description": "Ardıcıl HTTP smoke və validation yoxlaması. Lost update və409 paralel sınağı ayrıca d2-parallel-results.json-da saxlanılıb.",
+          "item": [
+            {
+              "name": "01. D2 test employee",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{baseUrl}}/employees",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"D2Postman\",\n  \"surname\": \"{{$guid}}\",\n  \"salary\": 1000,\n  \"departmentId\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\",()=>pm.response.to.have.status(201));",
+                      "pm.collectionVariables.set(\"d2EmployeeId\",pm.response.json().id);"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "02. Sequential READ_COMMITTED raise",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/employees/{{d2EmployeeId}}/raise?amount=100&isolation=READ_COMMITTED&delayMs=0"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                      "pm.test(\"Salary1100\",()=>pm.expect(pm.response.json().newSalary).to.eql(1100));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "03. Sequential REPEATABLE_READ raise",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/employees/{{d2EmployeeId}}/raise?amount=100&isolation=REPEATABLE_READ&delayMs=0"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                      "pm.test(\"Salary1200\",()=>pm.expect(pm.response.json().newSalary).to.eql(1200));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "04. Unsupported SERIALIZABLE",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/employees/{{d2EmployeeId}}/raise?amount=100&isolation=SERIALIZABLE&delayMs=0"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "05. Negative amount",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/employees/{{d2EmployeeId}}/raise?amount=-100&isolation=READ_COMMITTED&delayMs=0"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "06. Negative delay",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/employees/{{d2EmployeeId}}/raise?amount=100&isolation=READ_COMMITTED&delayMs=-1"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "07. Final salary unchanged after rejected requests",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/employees/{{d2EmployeeId}}"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                      "pm.test(\"Final salary1200\",()=>pm.expect(pm.response.json().salary).to.eql(1200));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "08. Delete test employee",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": "{{baseUrl}}/employees/{{d2EmployeeId}}"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 204\",()=>pm.response.to.have.status(204));"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "D3 course capacity",
+          "description": "Ardıcıl smoke yoxlaması; course1 capacity1 və boş qeydiyyat tələb olunur. Paralel write skew ayrıca d3-parallel-results.json-da yoxlanılıb.",
+          "item": [
+            {
+              "name": "Create student1",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{baseUrl}}/students",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"D3Postman\",\n  \"surname\": \"{{$guid}}\",\n  \"age\": 22\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\",()=>pm.response.to.have.status(201));",
+                      "pm.collectionVariables.set(\"d3FirstId\",pm.response.json().id);"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Create student2",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{baseUrl}}/students",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"D3Postman\",\n  \"surname\": \"{{$guid}}\",\n  \"age\": 22\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\",()=>pm.response.to.have.status(201));",
+                      "pm.collectionVariables.set(\"d3SecondId\",pm.response.json().id);"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "RR enroll first student",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/courses/1/enroll/{{d3FirstId}}?isolation=REPEATABLE_READ&delayMs=0"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                      "pm.test(\"Initially empty, capacity1\",()=>{const r=pm.response.json();pm.expect(r.countBefore).to.eql(0);pm.expect(r.capacity).to.eql(1);});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Full course rejects second student",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/courses/1/enroll/{{d3SecondId}}?isolation=SERIALIZABLE&delayMs=0"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 409\",()=>pm.response.to.have.status(409));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Unsupported READ_COMMITTED",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/courses/1/enroll/{{d3SecondId}}?isolation=READ_COMMITTED&delayMs=0"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Negative delay",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/courses/1/enroll/{{d3SecondId}}?isolation=SERIALIZABLE&delayMs=-1"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Unenroll first student",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": "{{baseUrl}}/students/{{d3FirstId}}/courses/1"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 204\",()=>pm.response.to.have.status(204));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "SERIALIZABLE enroll second student",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/courses/1/enroll/{{d3SecondId}}?isolation=SERIALIZABLE&delayMs=0"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                      "pm.test(\"Serializable response\",()=>pm.expect(pm.response.json().isolation).to.eql(\"SERIALIZABLE\"));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Duplicate enrollment rejected",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/courses/1/enroll/{{d3SecondId}}?isolation=SERIALIZABLE&delayMs=0"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 409\",()=>pm.response.to.have.status(409));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Delete d3FirstId",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": "{{baseUrl}}/students/{{d3FirstId}}"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 204\",()=>pm.response.to.have.status(204));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Delete d3SecondId",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": "{{baseUrl}}/students/{{d3SecondId}}"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 204\",()=>pm.response.to.have.status(204));"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,8 +1,10 @@
 package az.iktex.organization.structure.testders.repository;
 
 import az.iktex.organization.structure.testders.entity.Author;
+import jakarta.persistence.QueryHint;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
@@ -13,6 +15,9 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
     // ORM
     boolean existsByNameAndSurname(String name, String surname);
     boolean existsByNameAndSurnameAndIdNot(String name, String surname, Long id);
+    @QueryHints(
+            @QueryHint(name = "org.hibernate.cacheable", value = "true")
+    )
     List<Author> findAllByCountry(String country);
 
     // JPQL

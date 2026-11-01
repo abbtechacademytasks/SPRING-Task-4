@@ -1,0 +1,132 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-1
+      author: VagifPashayev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: students
+      changes:
+        - createTable:
+            tableName: students
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_students
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: surname
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: age
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 003-2
+      author: VagifPashayev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: courses
+      changes:
+        - createTable:
+            tableName: courses
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_courses
+                    nullable: false
+              - column:
+                  name: title
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+                    unique: true
+                    uniqueConstraintName: uk_course_title
+              - column:
+                  name: credit
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: teacher
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 003-3
+      author: VagifPashayev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: student_course
+      changes:
+        - createTable:
+            tableName: student_course
+            columns:
+              - column:
+                  name: student_id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_student_course
+                    nullable: false
+              - column:
+                  name: course_id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_student_course
+                    nullable: false
+
+  - changeSet:
+      id: 003-4
+      author: VagifPashayev
+      changes:
+        - addUniqueConstraint:
+            tableName: student_course
+            columnNames: student_id, course_id
+            constraintName: uk_student_course
+
+  - changeSet:
+      id: 003-5
+      author: VagifPashayev
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: student_course
+            baseColumnNames: student_id
+            referencedTableName: students
+            referencedColumnNames: id
+            constraintName: fk_sc_student
+
+  - changeSet:
+      id: 003-6
+      author: VagifPashayev
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: student_course
+            baseColumnNames: course_id
+            referencedTableName: courses
+            referencedColumnNames: id
+            constraintName: fk_sc_course

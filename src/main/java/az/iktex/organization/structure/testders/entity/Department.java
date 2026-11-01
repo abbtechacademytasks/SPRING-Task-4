@@ -5,12 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "departments", uniqueConstraints = @UniqueConstraint(name = "uk_department_name", columnNames = "name"))
+@Cacheable
+@Cache(
+        usage = CacheConcurrencyStrategy.READ_WRITE,
+        region = "departments"
+)
 @Getter
 @Setter
 @NoArgsConstructor

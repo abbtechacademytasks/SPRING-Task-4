@@ -1,6 +1,8 @@
 package az.iktex.organization.structure.testders.service;
 
+import az.iktex.organization.structure.testders.enums.AuditStatus;
 import az.iktex.organization.structure.testders.request.EmployeeRequest;
+import az.iktex.organization.structure.testders.request.TransferRequest;
 import az.iktex.organization.structure.testders.response.EmployeeResponse;
 import az.iktex.organization.structure.testders.entity.Department;
 import az.iktex.organization.structure.testders.entity.Employee;
@@ -10,6 +12,7 @@ import az.iktex.organization.structure.testders.repository.EmployeeRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
@@ -23,8 +26,10 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final DepartmentRepository departmentRepository;
     private final EmployeeMapper employeeMapper;
+    private final SalaryService salaryService;
+    private final AuditLogService auditLogService;
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public EmployeeResponse create(EmployeeRequest request) {
         Department department = departmentRepository.findById(request.departmentId())
                 .orElseThrow(() ->
@@ -57,14 +62,14 @@ public class EmployeeService {
                 employeeRepository.findAllByDepartmentIdWithDepartment(departmentId));
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public void delete(Long id) {
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Employee not found: " + id));
         employeeRepository.delete(employee);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public EmployeeResponse update(Long id, EmployeeRequest request) {
         Employee employee = employeeRepository.findByIdWithDepartment(id)
                 .orElseThrow(() -> new EntityNotFoundException("Employee not found: " + id));
@@ -97,5 +102,47 @@ public class EmployeeService {
 
         Double averageSalary = employeeRepository.findAverageSalaryByDepartmentId(departmentId);
         return averageSalary != null ? averageSalary : 0.0;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public EmployeeResponse transfer(Long id, TransferRequest request) {
+        if (request.departmentId() == null) {
+            throw new IllegalArgumentException("Department id is required");
+        }
+
+        Employee employee = employeeRepository.findByIdWithDepartment(id)
+                .orElseThrow(() ->
+                        new EntityNotFoundException("Employee not found: " + id));
+
+        Department department = departmentRepository
+                .findById(request.departmentId())
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Department not found: " + request.departmentId()
+                ));
+
+        try {
+            employee.setDepartment(department);
+            salaryService.raise(employee, request.raisePercent());
+        } catch (RuntimeException exception) {
+            auditLogService.log(
+                    "TRANSFER",
+                    "Employee",
+                    id,
+                    AuditStatus.FAILED,
+                    exception.getMessage()
+            );
+
+            throw exception;
+        }
+
+        auditLogService.log(
+                "TRANSFER",
+                "Employee",
+                id,
+                AuditStatus.SUCCESS,
+                "Employee transferred and salary increased"
+        );
+
+        return employeeMapper.toResponse(employee);
     }
 }

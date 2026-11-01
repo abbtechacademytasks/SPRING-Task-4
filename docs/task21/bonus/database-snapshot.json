@@ -1,0 +1,54 @@
+{
+  "school_task21_db": {
+    "authors": {
+      "count": 5,
+      "contentHash": "b630cc0d586f22a978e98d5ccd58523f"
+    },
+    "books": {
+      "count": 8,
+      "contentHash": "685a1e89afdf021d54e900741d8d79cc"
+    },
+    "courses": {
+      "count": 5,
+      "contentHash": "e541e18e9dba252e718cea7d0db3cec8"
+    },
+    "departments": {
+      "count": 3,
+      "contentHash": "40cddb1b83f300b90124ca61db81ba20"
+    },
+    "employees": {
+      "count": 10,
+      "contentHash": "472d78f2a3842005ca718308ff369da3"
+    },
+    "students": {
+      "count": 10,
+      "contentHash": "2da3a1d88bc570262c97c5a9a5c4e553"
+    }
+  },
+  "school_task21_bonus_checks": {
+    "authors": {
+      "count": 5,
+      "contentHash": "b630cc0d586f22a978e98d5ccd58523f"
+    },
+    "books": {
+      "count": 8,
+      "contentHash": "685a1e89afdf021d54e900741d8d79cc"
+    },
+    "courses": {
+      "count": 5,
+      "contentHash": "e541e18e9dba252e718cea7d0db3cec8"
+    },
+    "departments": {
+      "count": 3,
+      "contentHash": "40cddb1b83f300b90124ca61db81ba20"
+    },
+    "employees": {
+      "count": 10,
+      "contentHash": "472d78f2a3842005ca718308ff369da3"
+    },
+    "students": {
+      "count": 10,
+      "contentHash": "2da3a1d88bc570262c97c5a9a5c4e553"
+    }
+  }
+}

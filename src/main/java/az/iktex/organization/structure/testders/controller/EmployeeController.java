@@ -1,6 +1,7 @@
 package az.iktex.organization.structure.testders.controller;
 
 import az.iktex.organization.structure.testders.request.EmployeeRequest;
+import az.iktex.organization.structure.testders.request.TransferRequest;
 import az.iktex.organization.structure.testders.response.EmployeeResponse;
 import az.iktex.organization.structure.testders.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
@@ -53,5 +54,13 @@ public class EmployeeController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") Long id) {
         employeeService.delete(id);
+    }
+
+    @PostMapping("/{id}/transfer")
+    public EmployeeResponse transfer(
+            @PathVariable("id") Long id,
+            @RequestBody TransferRequest request
+    ) {
+        return employeeService.transfer(id, request);
     }
 }

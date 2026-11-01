@@ -1,0 +1,82 @@
+2026-11-01T23:54:29.502+04:00 TRACE 1804 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.IsolationDemoService.enrollRepeatableRead' with attribute: PROPAGATION_REQUIRED,ISOLATION_REPEATABLE_READ
+2026-11-01T23:54:29.503+04:00 TRACE 1804 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable' with attribute: PROPAGATION_REQUIRED,ISOLATION_SERIALIZABLE
+2026-11-01T23:54:46.801+04:00 DEBUG 1804 --- [test-demo-api] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollRepeatableRead]: PROPAGATION_REQUIRED,ISOLATION_REPEATABLE_READ
+2026-11-01T23:54:46.801+04:00 DEBUG 1804 --- [test-demo-api] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollRepeatableRead]: PROPAGATION_REQUIRED,ISOLATION_REPEATABLE_READ
+2026-11-01T23:54:46.805+04:00 TRACE 1804 --- [test-demo-api] [nio-8080-exec-6] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollRepeatableRead]
+2026-11-01T23:54:46.805+04:00 TRACE 1804 --- [test-demo-api] [nio-8080-exec-5] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollRepeatableRead]
+        student_course c1_0 
+        student_course c1_0 
+        student_course c1_0 
+        student_course c1_0 
+            student_course s1_0 
+            student_course s1_0 
+        student_course s1_0 
+        student_course s1_0 
+2026-11-01T23:54:51.927+04:00 TRACE 1804 --- [test-demo-api] [nio-8080-exec-5] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollRepeatableRead]
+2026-11-01T23:54:51.927+04:00 TRACE 1804 --- [test-demo-api] [nio-8080-exec-6] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollRepeatableRead]
+        student_course
+        student_course
+        student_course 
+        student_course 
+2026-11-01T23:54:52.406+04:00 DEBUG 1804 --- [test-demo-api] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable]: PROPAGATION_REQUIRED,ISOLATION_SERIALIZABLE
+2026-11-01T23:54:52.407+04:00 DEBUG 1804 --- [test-demo-api] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable]: PROPAGATION_REQUIRED,ISOLATION_SERIALIZABLE
+2026-11-01T23:54:52.409+04:00 TRACE 1804 --- [test-demo-api] [nio-8080-exec-5] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable]
+2026-11-01T23:54:52.409+04:00 TRACE 1804 --- [test-demo-api] [nio-8080-exec-6] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable]
+        student_course c1_0 
+        student_course c1_0 
+        student_course c1_0 
+        student_course c1_0 
+            student_course s1_0 
+            student_course s1_0 
+        student_course s1_0 
+        student_course s1_0 
+2026-11-01T23:54:57.453+04:00 TRACE 1804 --- [test-demo-api] [nio-8080-exec-5] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable]
+2026-11-01T23:54:57.453+04:00 TRACE 1804 --- [test-demo-api] [nio-8080-exec-6] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable]
+        student_course
+        student_course
+org.springframework.dao.CannotAcquireLockException: Hibernate transaction: Unable to commit against JDBC Connection; ERROR: could not serialize access due to read/write dependencies among transactions
+Caused by: org.postgresql.util.PSQLException: ERROR: could not serialize access due to read/write dependencies among transactions
+        student_course 
+        student_course 
+2026-11-01T23:55:26.458+04:00 DEBUG 1804 --- [test-demo-api] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollRepeatableRead]: PROPAGATION_REQUIRED,ISOLATION_REPEATABLE_READ
+2026-11-01T23:55:26.461+04:00 TRACE 1804 --- [test-demo-api] [nio-8080-exec-5] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollRepeatableRead]
+        student_course c1_0 
+        student_course c1_0 
+            student_course s1_0 
+        student_course s1_0 
+2026-11-01T23:55:26.470+04:00 TRACE 1804 --- [test-demo-api] [nio-8080-exec-5] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollRepeatableRead]
+        student_course
+2026-11-01T23:55:26.597+04:00 DEBUG 1804 --- [test-demo-api] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable]: PROPAGATION_REQUIRED,ISOLATION_SERIALIZABLE
+2026-11-01T23:55:26.600+04:00 TRACE 1804 --- [test-demo-api] [nio-8080-exec-2] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable]
+        student_course c1_0 
+        student_course c1_0 
+            student_course s1_0 
+2026-11-01T23:55:26.609+04:00 TRACE 1804 --- [test-demo-api] [nio-8080-exec-2] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable] after exception: java.lang.IllegalStateException: Course is full
+2026-11-01T23:55:26.609+04:00 TRACE 1804 --- [test-demo-api] [nio-8080-exec-2] o.s.t.i.TransactionInterceptor           : MethodRollbackEvent: az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable [java.lang.IllegalStateException: Course is full]
+	at az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable(IsolationDemoService.java:276) ~[!/:0.0.1-SNAPSHOT]
+2026-11-01T23:55:26.800+04:00 DEBUG 1804 --- [test-demo-api] [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable]: PROPAGATION_REQUIRED,ISOLATION_SERIALIZABLE
+2026-11-01T23:55:26.803+04:00 TRACE 1804 --- [test-demo-api] [io-8080-exec-10] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable]
+2026-11-01T23:55:26.803+04:00 TRACE 1804 --- [test-demo-api] [io-8080-exec-10] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable] after exception: java.lang.IllegalArgumentException: Delay must be between 0 and 15000 ms
+2026-11-01T23:55:26.803+04:00 TRACE 1804 --- [test-demo-api] [io-8080-exec-10] o.s.t.i.TransactionInterceptor           : MethodRollbackEvent: az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable [java.lang.IllegalArgumentException: Delay must be between 0 and 15000 ms]
+	at az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable(IsolationDemoService.java:249) ~[!/:0.0.1-SNAPSHOT]
+        student_course c1_0 
+        student_course c1_0 
+        student_course s1_0 
+        student_course 
+2026-11-01T23:55:27.019+04:00 DEBUG 1804 --- [test-demo-api] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable]: PROPAGATION_REQUIRED,ISOLATION_SERIALIZABLE
+2026-11-01T23:55:27.022+04:00 TRACE 1804 --- [test-demo-api] [nio-8080-exec-3] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable]
+        student_course c1_0 
+        student_course c1_0 
+            student_course s1_0 
+        student_course s1_0 
+2026-11-01T23:55:27.036+04:00 TRACE 1804 --- [test-demo-api] [nio-8080-exec-3] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable]
+        student_course
+2026-11-01T23:55:27.140+04:00 DEBUG 1804 --- [test-demo-api] [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable]: PROPAGATION_REQUIRED,ISOLATION_SERIALIZABLE
+2026-11-01T23:55:27.143+04:00 TRACE 1804 --- [test-demo-api] [nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable]
+        student_course c1_0 
+        student_course c1_0 
+2026-11-01T23:55:27.147+04:00 TRACE 1804 --- [test-demo-api] [nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable] after exception: java.lang.IllegalStateException: Student is already enrolled in this course
+2026-11-01T23:55:27.147+04:00 TRACE 1804 --- [test-demo-api] [nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : MethodRollbackEvent: az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable [java.lang.IllegalStateException: Student is already enrolled in this course]
+	at az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable(IsolationDemoService.java:267) ~[!/:0.0.1-SNAPSHOT]
+        student_course 
+        student_course 

@@ -1,0 +1,36 @@
+2026-11-01T15:00:35.871+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EnrollmentService.reserveSeat' with attribute: PROPAGATION_MANDATORY,ISOLATION_DEFAULT
+2026-11-01T15:00:35.879+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.StudentService.enroll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:46.473+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:46.750+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:46.911+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:47.034+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.StudentService.enroll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:47.034+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.StudentService.enroll]
+2026-11-01T15:00:47.058+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:47.093+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:47.093+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.EnrollmentService.reserveSeat]
+2026-11-01T15:00:47.093+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:47.099+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.EnrollmentService.reserveSeat]
+2026-11-01T15:00:47.103+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.StudentService.enroll]
+2026-11-01T15:00:47.237+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:47.329+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.StudentService.enroll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:47.330+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.StudentService.enroll]
+2026-11-01T15:00:47.333+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:47.338+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:47.338+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.EnrollmentService.reserveSeat]
+2026-11-01T15:00:47.338+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:47.341+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.EnrollmentService.reserveSeat] after exception: java.lang.IllegalStateException: Course is full
+2026-11-01T15:00:47.341+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : MethodRollbackEvent: az.iktex.organization.structure.testders.service.EnrollmentService.reserveSeat [java.lang.IllegalStateException: Course is full]
+java.lang.IllegalStateException: Course is full
+	at az.iktex.organization.structure.testders.service.EnrollmentService.reserveSeat(EnrollmentService.java:29) ~[!/:0.0.1-SNAPSHOT]
+	at az.iktex.organization.structure.testders.service.StudentService.enroll(StudentService.java:74) ~[!/:0.0.1-SNAPSHOT]
+2026-11-01T15:00:47.346+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.StudentService.enroll] after exception: java.lang.IllegalStateException: Course is full
+2026-11-01T15:00:47.346+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : MethodRollbackEvent: az.iktex.organization.structure.testders.service.StudentService.enroll [java.lang.IllegalStateException: Course is full]
+java.lang.IllegalStateException: Course is full
+	at az.iktex.organization.structure.testders.service.EnrollmentService.reserveSeat(EnrollmentService.java:29) ~[!/:0.0.1-SNAPSHOT]
+	at az.iktex.organization.structure.testders.service.StudentService.enroll(StudentService.java:74) ~[!/:0.0.1-SNAPSHOT]
+2026-11-01T15:00:47.347+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction rollback
+2026-11-01T15:00:47.531+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:47.535+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:47.657+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:47.660+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:47.767+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction

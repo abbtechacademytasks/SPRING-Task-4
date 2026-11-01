@@ -1,0 +1,9 @@
+tests=4, failures=0, errors=0
+PASS nonstrictBookUpdateInvalidatesActualCachedEntity()
+PASS findByIdUsesL2ButJoinFetchStillExecutesSql()
+PASS modifyingBulkUpdateEvictsCourseRegion()
+PASS bothAuthorBookCollectionsAreCachedAcrossTransactions()
+CACHE CHECK: NONSTRICT_READ_WRITE invalidated cached Book; new price returned
+CACHE CHECK: findById SELECTs=1+0; JOIN FETCH SELECTs=1+1
+CACHE CHECK: @Modifying evicted entire courses region, including untouched Course 2
+CACHE CHECK: both AuthorBook collections hit; second transaction SELECTs=0

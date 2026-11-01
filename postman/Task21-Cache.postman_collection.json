@@ -1,0 +1,569 @@
+{
+  "info": {
+    "name": "Task21 Cache",
+    "description": "Task20 endpoint-ləri və Task21 Cache yoxlamaları və əlaqə yoxlamaları. Run bütün qovluqları sıra ilə icra edir, unikal test məlumatları yaradır və sonda silir. Mövcud məlumatları dəyişmir. Java 25 tətbiqi və PostgreSQL işləməlidir.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/test-demo/api"
+    }
+  ],
+  "item": [
+    {
+      "name": "Cache",
+      "description": "Task21: entity/query cache, evict, stats reset, invalidation və Book qiyməti. Seed Course 1 lazımdır. Test müəllifi və kitabı sonda silinir. Collection və bulk @Modifying yoxlamaları ayrıca JUnit testindədir.",
+      "item": [
+        {
+          "name": "01. Bütün cache-i təmizlə",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/cache"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "02. Statistikanı sıfırla",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/cache/stats"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "03. Course ilk oxuma",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/courses/1"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "04. Course miss və put",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/cache/stats"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"First read: miss1 put1 hit0\", () => { const s=pm.response.json().regions.courses; pm.expect(s.missCount).to.eql(1); pm.expect(s.putCount).to.eql(1); pm.expect(s.hitCount).to.eql(0); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "05. Course ikinci oxuma",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/courses/1"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "06. Course L2 hit",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/cache/stats"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Second read hits L2\", () => { const s=pm.response.json().regions.courses; pm.expect(s.hitCount).to.eql(1); pm.expect(s.missCount).to.eql(1); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "07. Yalnız statistikanı sıfırla",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/cache/stats"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "08. Course cache-də qalıb",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/courses/1"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "09. Reset cache-i silmir",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/cache/stats"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Reset preserves cached Course\", () => { const s=pm.response.json().regions.courses; pm.expect(s.hitCount).to.eql(1); pm.expect(s.missCount).to.eql(0); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "10. Course region-u təmizlə",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/cache/courses"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "11. Course yenidən DB-dən",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/courses/1"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "12. Evict-dən sonra miss",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/cache/stats"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Entity eviction causes a miss\", () => { const s=pm.response.json().regions.courses; pm.expect(s.missCount).to.eql(1); pm.expect(s.putCount).to.eql(1); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "13. Naməlum region",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/cache/unknown"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "14. Query yoxlaması üçün cache-i təmizlə",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/cache"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "15. Query statistikasını sıfırla",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/cache/stats"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "16. Müəllif ölkə ilə ilk oxuma",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/authors?country=Azerbaijan"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.collectionVariables.set(\"cacheAuthorCount\", pm.response.json().length);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "17. Müəllif ölkə ilə ikinci oxuma",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/authors?country=Azerbaijan"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "18. Query cache hit",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/cache/stats"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Query cache hit\", () => pm.expect(pm.response.json().queryCacheHitCount).to.eql(1));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "19. Yeni müəllif",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/authors",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"CacheCheck\",\n  \"surname\": \"{{$guid}}\",\n  \"country\": \"Azerbaijan\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "pm.collectionVariables.set(\"cacheAuthorId\", pm.response.json().id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "20. Query invalidation-dan sonra yeni nəticə",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/authors?country=Azerbaijan"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"New author appears\", () => { const data=pm.response.json(); pm.expect(data.length).to.eql(Number(pm.collectionVariables.get(\"cacheAuthorCount\"))+1); pm.expect(data.some(a=>a.id===Number(pm.collectionVariables.get(\"cacheAuthorId\")))).to.eql(true); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "21. Test kitabı",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/books",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"CacheCheck-{{$guid}}\",\n  \"price\": 11.25,\n  \"pageCount\": 123\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "pm.collectionVariables.set(\"cacheBookId\", pm.response.json().id);",
+                  "pm.collectionVariables.set(\"cacheBookTitle\", pm.response.json().title);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "22. Köhnə qiymət",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/books/{{cacheBookId}}"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Old price\", () => pm.expect(pm.response.json().price).to.eql(11.25));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "23. Qiyməti dəyiş",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/books/{{cacheBookId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"{{cacheBookTitle}}\",\n  \"price\": 22.5,\n  \"pageCount\": 123\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "24. Yeni qiyməti oxu",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/books/{{cacheBookId}}"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Updated price\", () => pm.expect(pm.response.json().price).to.eql(22.5));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "25. Test kitabını sil",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/books/{{cacheBookId}}"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "26. Test müəllifini sil",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/authors/{{cacheAuthorId}}"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

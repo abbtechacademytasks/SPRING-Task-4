@@ -8,6 +8,7 @@ import az.iktex.organization.structure.testders.repository.DepartmentRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class DepartmentService {
     private final DepartmentRepository departmentRepository;
     private final DepartmentMapper departmentMapper;
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public DepartmentResponse create(DepartmentRequest request) {
         if (departmentRepository.existsByName(request.name())) {
             throw new IllegalStateException("Department name already exists");
@@ -43,7 +44,7 @@ public class DepartmentService {
         return departmentMapper.toResponseList(departmentRepository.findAllWithoutEmployees());
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public DepartmentResponse update(Long id, DepartmentRequest request) {
         Department department = departmentRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Department not found: " + id));
@@ -54,7 +55,7 @@ public class DepartmentService {
         return departmentMapper.toResponse(department);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public void delete(Long id) {
         Department department = departmentRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Department not found: " + id));

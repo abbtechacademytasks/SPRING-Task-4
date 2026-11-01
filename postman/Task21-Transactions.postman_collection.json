@@ -1,0 +1,598 @@
+{
+  "info": {
+    "name": "Task21 Transactions",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Task21 transaction propagation yoxlamaları."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/test-demo/api"
+    }
+  ],
+  "item": [
+    {
+      "name": "Transactions",
+      "item": [
+        {
+          "name": "C1 REQUIRED",
+          "description": "İki ayrı service bean bir tranzaksiyada. Maaş limiti keçəndə departament dəyişikliyi rollback olur. Seed departments1/2 lazımdır; test işçiləri sonda silinir.",
+          "item": [
+            {
+              "name": "01. Transfer üçün işçi yarat",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{baseUrl}}/employees",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"TxCheck\",\n  \"surname\": \"{{$guid}}\",\n  \"salary\": 1000,\n  \"departmentId\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                      "pm.collectionVariables.set(\"txSuccessId\",pm.response.json().id);"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "02. REQUIRED uğurlu transfer",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{baseUrl}}/employees/{{txSuccessId}}/transfer",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"departmentId\": 2,\n  \"raisePercent\": 15\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                      "pm.test(\"Salary1150 and department2\",()=>{const e=pm.response.json();pm.expect(e.salary).to.eql(1150);pm.expect(e.departmentId).to.eql(2);});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "03. Commit-dən sonra işçini oxu",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/employees/{{txSuccessId}}"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                      "pm.test(\"Both changes committed\",()=>{const e=pm.response.json();pm.expect(e.salary).to.eql(1150);pm.expect(e.departmentId).to.eql(2);});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "04. Rollback üçün işçi yarat",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{baseUrl}}/employees",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"TxRollback\",\n  \"surname\": \"{{$guid}}\",\n  \"salary\": 9000,\n  \"departmentId\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                      "pm.collectionVariables.set(\"txFailureId\",pm.response.json().id);"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "05. Əvvəlki departament və maaş",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/employees/{{txFailureId}}"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                      "pm.test(\"Before: department1 salary9000\",()=>{const e=pm.response.json();pm.expect(e.departmentId).to.eql(1);pm.expect(e.salary).to.eql(9000);});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "06. Limitdən yuxarı transfer",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{baseUrl}}/employees/{{txFailureId}}/transfer",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"departmentId\": 2,\n  \"raisePercent\": 15\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));",
+                      "pm.test(\"Salary limit error\",()=>pm.expect(pm.response.json().detail).to.eql(\"Salary cannot exceed 10000\"));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "07. Rollback-dən sonra köhnə departament",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/employees/{{txFailureId}}"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                      "pm.test(\"Rollback: department1 salary9000\",()=>{const e=pm.response.json();pm.expect(e.departmentId).to.eql(1);pm.expect(e.salary).to.eql(9000);});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "08. Sərhəd yoxlaması üçün maaş8000",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{baseUrl}}/employees/{{txSuccessId}}",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"TxBoundary\",\n  \"surname\": \"{{$guid}}\",\n  \"salary\": 8000,\n  \"departmentId\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "09. Dəqiq10000 qəbul olunur",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{baseUrl}}/employees/{{txSuccessId}}/transfer",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"departmentId\": 1,\n  \"raisePercent\": 25\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                      "pm.test(\"Salary boundary10000\",()=>{const e=pm.response.json();pm.expect(e.salary).to.eql(10000);pm.expect(e.departmentId).to.eql(1);});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "10. Uğurlu test işçisini sil",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": "{{baseUrl}}/employees/{{txSuccessId}}"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "11. Rollback test işçisini sil",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": "{{baseUrl}}/employees/{{txFailureId}}"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "C3 MANDATORY",
+          "description": "Seed Course1 capacity1 və boş enrollment tələb edir. Yalnız yeni test tələbələri yaradılır və sonda silinir.",
+          "item": [
+            {
+              "name": "01. MANDATORY tranzaksiyasız",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/tx-demo/reserve-seat/1"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 409\",()=>pm.response.to.have.status(409));",
+                      "pm.test(\"MANDATORY rejects missing transaction\",()=>pm.expect(pm.response.json().detail.toLowerCase()).to.include(\"mandatory\"));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "02. Mövcud olmayan ID də metodun içinə çatmır",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/tx-demo/reserve-seat/999999999"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 409\",()=>pm.response.to.have.status(409));",
+                      "pm.test(\"MANDATORY rejects missing transaction\",()=>pm.expect(pm.response.json().detail.toLowerCase()).to.include(\"mandatory\"));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "03. Capacity1 kurs əvvəl boşdur",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/courses/1/students/count"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                      "pm.test(\"Initial enrollment count0\",()=>pm.expect(pm.response.json()).to.eql(0));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "04. Birinci test tələbəsi",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{baseUrl}}/students",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"MandatoryA\",\n  \"surname\": \"{{$guid}}\",\n  \"age\": 21\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\",()=>pm.response.to.have.status(201));",
+                      "pm.collectionVariables.set(\"mandatoryStudentA\",pm.response.json().id);"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "05. İkinci test tələbəsi",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{baseUrl}}/students",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"MandatoryB\",\n  \"surname\": \"{{$guid}}\",\n  \"age\": 22\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\",()=>pm.response.to.have.status(201));",
+                      "pm.collectionVariables.set(\"mandatoryStudentB\",pm.response.json().id);"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "06. enroll REQUIRED içindən MANDATORY keçir",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/students/{{mandatoryStudentA}}/courses/1"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\",()=>pm.response.to.have.status(201));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "07. Kursda bir tələbə var",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/courses/1/students/count"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                      "pm.test(\"One occupied seat\",()=>pm.expect(pm.response.json()).to.eql(1));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "08. Dolu kurs ikinci tələbəni qəbul etmir",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/students/{{mandatoryStudentB}}/courses/1"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 409\",()=>pm.response.to.have.status(409));",
+                      "pm.test(\"Course full\",()=>pm.expect(pm.response.json().detail).to.eql(\"Course is full\"));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "09. İkinci tələbə qeydiyyatsız qalıb",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/students/{{mandatoryStudentB}}"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                      "pm.test(\"Rejected student has no courses\",()=>pm.expect(pm.response.json().courses).to.have.lengthOf(0));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "10. Birinci test tələbəsini sil",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": "{{baseUrl}}/students/{{mandatoryStudentA}}"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 204\",()=>pm.response.to.have.status(204));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "11. İkinci test tələbəsini sil",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": "{{baseUrl}}/students/{{mandatoryStudentB}}"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 204\",()=>pm.response.to.have.status(204));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "12. Testdən sonra kurs yenə boşdur",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/courses/1/students/count"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                      "pm.test(\"Enrollment cleanup\",()=>pm.expect(pm.response.json()).to.eql(0));"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

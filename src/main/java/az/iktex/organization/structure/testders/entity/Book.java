@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Check;
 
 import java.math.BigDecimal;
@@ -14,6 +16,11 @@ import java.util.List;
 @Entity
 @Table(name = "books")
 @Check(name = "chk_book_price", constraints = "price >= 0")
+@Cacheable
+@Cache(
+        usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE,
+        region = "books"
+)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -41,6 +48,10 @@ public class Book {
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
             orphanRemoval = true
+    )
+    @Cache(
+            usage = CacheConcurrencyStrategy.READ_WRITE,
+            region = "book-authorBooks"
     )
     private List<AuthorBook> authorBooks = new ArrayList<>();
 }

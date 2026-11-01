@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="http://www.ehcache.org/v3">
+
+    <cache alias="courses">
+        <expiry>
+            <ttl unit="minutes">10</ttl>
+        </expiry>
+        <resources>
+            <heap unit="entries">1000</heap>
+        </resources>
+    </cache>
+
+    <cache alias="departments" uses-template="ten-minutes"/>
+    <cache alias="authors" uses-template="ten-minutes"/>
+    <cache alias="author-books" uses-template="ten-minutes"/>
+    <cache alias="author-authorBooks" uses-template="ten-minutes"/>
+    <cache alias="book-authorBooks" uses-template="ten-minutes"/>
+    <cache alias="default-query-results-region" uses-template="ten-minutes"/>
+
+    <cache alias="books">
+        <expiry>
+            <ttl unit="minutes">2</ttl>
+        </expiry>
+        <resources>
+            <heap unit="entries">1000</heap>
+        </resources>
+    </cache>
+
+    <cache alias="default-update-timestamps-region">
+        <expiry>
+            <none/>
+        </expiry>
+        <resources>
+            <heap unit="entries">10000</heap>
+        </resources>
+    </cache>
+
+    <cache-template name="ten-minutes">
+        <expiry>
+            <ttl unit="minutes">10</ttl>
+        </expiry>
+        <resources>
+            <heap unit="entries">1000</heap>
+        </resources>
+    </cache-template>
+
+</config>

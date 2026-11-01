@@ -1,0 +1,9 @@
+{
+  "status": 409,
+  "body": {
+    "detail": "Salary cannot exceed 10000",
+    "instance": "/test-demo/api/employees/26/transfer",
+    "status": 409,
+    "title": "Conflict"
+  }
+}

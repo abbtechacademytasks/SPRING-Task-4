@@ -1,0 +1,325 @@
+01:39:16.741 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [az.iktex.organization.structure.testders.CacheIntegrationTests]: CacheIntegrationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+01:39:16.861 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration az.iktex.organization.structure.testders.SchoolApplication for test class az.iktex.organization.structure.testders.CacheIntegrationTests
+01:39:16.956 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [az.iktex.organization.structure.testders.CacheIntegrationTests]: CacheIntegrationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+01:39:16.957 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration az.iktex.organization.structure.testders.SchoolApplication for test class az.iktex.organization.structure.testders.CacheIntegrationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.2)
+
+2026-10-31T01:39:17.330+04:00  INFO 2188 --- [test-demo-api] [    Test worker] a.i.o.s.testders.CacheIntegrationTests   : Starting CacheIntegrationTests using Java 25.0.4.1 with PID 2188 (started by USER in C:\Users\USER\Desktop\ABB Tech Academy\SPRING-Task-4)
+2026-10-31T01:39:17.331+04:00  INFO 2188 --- [test-demo-api] [    Test worker] a.i.o.s.testders.CacheIntegrationTests   : No active profile set, falling back to 1 default profile: "default"
+2026-10-31T01:39:17.993+04:00  INFO 2188 --- [test-demo-api] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-31T01:39:18.084+04:00  INFO 2188 --- [test-demo-api] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 79 ms. Found 9 JPA repository interfaces.
+2026-10-31T01:39:18.560+04:00  INFO 2188 --- [test-demo-api] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-31T01:39:18.751+04:00  INFO 2188 --- [test-demo-api] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@d504137
+2026-10-31T01:39:18.752+04:00  INFO 2188 --- [test-demo-api] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-31T01:39:18.942+04:00  INFO 2188 --- [test-demo-api] [    Test worker] liquibase.database                       : Set default schema name to public
+2026-10-31T01:39:20.413+04:00  INFO 2188 --- [test-demo-api] [    Test worker] liquibase.changelog                      : Reading from public.databasechangelog
+2026-10-31T01:39:20.618+04:00  INFO 2188 --- [test-demo-api] [    Test worker] liquibase.ui                             : Database is up to date, no changesets to execute
+2026-10-31T01:39:20.621+04:00  INFO 2188 --- [test-demo-api] [    Test worker] liquibase.changelog                      : Reading from public.databasechangelog
+2026-10-31T01:39:20.641+04:00  INFO 2188 --- [test-demo-api] [    Test worker] liquibase.util                           : UPDATE SUMMARY
+2026-10-31T01:39:20.641+04:00  INFO 2188 --- [test-demo-api] [    Test worker] liquibase.util                           : Run:                          0
+2026-10-31T01:39:20.642+04:00  INFO 2188 --- [test-demo-api] [    Test worker] liquibase.util                           : Previously run:              32
+2026-10-31T01:39:20.642+04:00  INFO 2188 --- [test-demo-api] [    Test worker] liquibase.util                           : Filtered out:                 0
+2026-10-31T01:39:20.642+04:00  INFO 2188 --- [test-demo-api] [    Test worker] liquibase.util                           : -------------------------------
+2026-10-31T01:39:20.642+04:00  INFO 2188 --- [test-demo-api] [    Test worker] liquibase.util                           : Total change sets:           32
+2026-10-31T01:39:20.643+04:00  INFO 2188 --- [test-demo-api] [    Test worker] liquibase.util                           : Update summary generated
+2026-10-31T01:39:20.644+04:00  INFO 2188 --- [test-demo-api] [    Test worker] liquibase.command                        : Command execution complete
+2026-10-31T01:39:20.771+04:00  INFO 2188 --- [test-demo-api] [    Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-31T01:39:20.841+04:00  INFO 2188 --- [test-demo-api] [    Test worker] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.13.Final
+2026-10-31T01:39:20.886+04:00  INFO 2188 --- [test-demo-api] [    Test worker] org.hibernate.orm.cache                  : HHH90001028: Second-level cache region factory [org.hibernate.cache.jcache.internal.JCacheRegionFactory]
+2026-10-31T01:39:21.396+04:00  INFO 2188 --- [test-demo-api] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-31T01:39:21.488+04:00  INFO 2188 --- [test-demo-api] [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/school_task21_cache_checks]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.15
+	Default catalog/schema: school_task21_cache_checks/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-31T01:39:22.312+04:00  INFO 2188 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'courses' created in EhcacheManager.
+2026-10-31T01:39:22.314+04:00  INFO 2188 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'book-authorBooks' created in EhcacheManager.
+2026-10-31T01:39:22.316+04:00  INFO 2188 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'books' created in EhcacheManager.
+2026-10-31T01:39:22.318+04:00  INFO 2188 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'author-authorBooks' created in EhcacheManager.
+2026-10-31T01:39:22.319+04:00  INFO 2188 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'default-query-results-region' created in EhcacheManager.
+2026-10-31T01:39:22.322+04:00  INFO 2188 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'default-update-timestamps-region' created in EhcacheManager.
+2026-10-31T01:39:22.323+04:00  INFO 2188 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'departments' created in EhcacheManager.
+2026-10-31T01:39:22.326+04:00  INFO 2188 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'author-books' created in EhcacheManager.
+2026-10-31T01:39:22.327+04:00  INFO 2188 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'authors' created in EhcacheManager.
+2026-10-31T01:39:22.428+04:00  INFO 2188 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=courses
+2026-10-31T01:39:22.430+04:00  INFO 2188 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=book-authorBooks
+2026-10-31T01:39:22.430+04:00  INFO 2188 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=books
+2026-10-31T01:39:22.431+04:00  INFO 2188 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=author-authorBooks
+2026-10-31T01:39:22.431+04:00  INFO 2188 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=default-query-results-region
+2026-10-31T01:39:22.432+04:00  INFO 2188 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=default-update-timestamps-region
+2026-10-31T01:39:22.432+04:00  INFO 2188 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=departments
+2026-10-31T01:39:22.433+04:00  INFO 2188 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=author-books
+2026-10-31T01:39:22.433+04:00  INFO 2188 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=authors
+2026-10-31T01:39:23.444+04:00  INFO 2188 --- [test-demo-api] [    Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-31T01:39:23.500+04:00  INFO 2188 --- [test-demo-api] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-31T01:39:23.596+04:00  INFO 2188 --- [test-demo-api] [    Test worker] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-31T01:39:25.394+04:00  INFO 2188 --- [test-demo-api] [    Test worker] a.i.o.s.testders.CacheIntegrationTests   : Started CacheIntegrationTests in 8.371 seconds (process running for 9.659)
+Hibernate: 
+    select
+        b1_0.id,
+        b1_0.page_count,
+        b1_0.price,
+        b1_0.title 
+    from
+        books b1_0 
+    where
+        b1_0.id=?
+Hibernate: 
+    update
+        books 
+    set
+        page_count=?,
+        price=?,
+        title=? 
+    where
+        id=?
+Hibernate: 
+    select
+        b1_0.id,
+        b1_0.page_count,
+        b1_0.price,
+        b1_0.title 
+    from
+        books b1_0 
+    where
+        b1_0.id=?
+CACHE CHECK: NONSTRICT_READ_WRITE invalidated cached Book; new price returned
+Hibernate: 
+    update
+        books 
+    set
+        page_count=?,
+        price=?,
+        title=? 
+    where
+        id=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.capacity,
+        c1_0.credit,
+        c1_0.teacher,
+        c1_0.title 
+    from
+        courses c1_0 
+    where
+        c1_0.id=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.capacity,
+        c1_0.credit,
+        s1_0.course_id,
+        s1_1.id,
+        s1_1.age,
+        s1_1.name,
+        s1_1.surname,
+        c1_0.teacher,
+        c1_0.title 
+    from
+        courses c1_0 
+    left join
+        student_course s1_0 
+            on c1_0.id=s1_0.course_id 
+    left join
+        students s1_1 
+            on s1_1.id=s1_0.student_id 
+    where
+        c1_0.id=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.capacity,
+        c1_0.credit,
+        s1_0.course_id,
+        s1_1.id,
+        s1_1.age,
+        s1_1.name,
+        s1_1.surname,
+        c1_0.teacher,
+        c1_0.title 
+    from
+        courses c1_0 
+    left join
+        student_course s1_0 
+            on c1_0.id=s1_0.course_id 
+    left join
+        students s1_1 
+            on s1_1.id=s1_0.student_id 
+    where
+        c1_0.id=?
+CACHE CHECK: findById SELECTs=1+0; JOIN FETCH SELECTs=1+1
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.capacity,
+        c1_0.credit,
+        c1_0.teacher,
+        c1_0.title 
+    from
+        courses c1_0 
+    where
+        c1_0.id=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.capacity,
+        c1_0.credit,
+        c1_0.teacher,
+        c1_0.title 
+    from
+        courses c1_0 
+    where
+        c1_0.id=?
+Hibernate: 
+    update
+        courses c1_0 
+    set
+        credit=? 
+    where
+        c1_0.id=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.capacity,
+        c1_0.credit,
+        c1_0.teacher,
+        c1_0.title 
+    from
+        courses c1_0 
+    where
+        c1_0.id=?
+CACHE CHECK: @Modifying evicted entire courses region, including untouched Course 2
+Hibernate: 
+    update
+        courses c1_0 
+    set
+        credit=? 
+    where
+        c1_0.id=?
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.country,
+        a1_0.name,
+        a1_0.surname 
+    from
+        authors a1_0 
+    where
+        a1_0.id=?
+Hibernate: 
+    select
+        b1_0.id,
+        b1_0.page_count,
+        b1_0.price,
+        b1_0.title 
+    from
+        books b1_0 
+    where
+        b1_0.id=?
+Hibernate: 
+    select
+        ab1_0.id 
+    from
+        author_book ab1_0 
+    where
+        ab1_0.author_id=? 
+        and ab1_0.book_id=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        author_book
+        (author_id, book_id) 
+    values
+        (?, ?)
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.country,
+        a1_0.name,
+        a1_0.surname 
+    from
+        authors a1_0 
+    where
+        a1_0.id=?
+Hibernate: 
+    select
+        b1_0.id,
+        b1_0.page_count,
+        b1_0.price,
+        b1_0.title 
+    from
+        books b1_0 
+    where
+        b1_0.id=?
+Hibernate: 
+    select
+        ab1_0.author_id,
+        ab1_0.id,
+        ab1_0.book_id 
+    from
+        author_book ab1_0 
+    where
+        ab1_0.author_id=?
+Hibernate: 
+    select
+        ab1_0.book_id,
+        ab1_0.id,
+        ab1_0.author_id 
+    from
+        author_book ab1_0 
+    where
+        ab1_0.book_id=?
+CACHE CHECK: both AuthorBook collections hit; second transaction SELECTs=0
+Hibernate: 
+    select
+        ab1_0.id,
+        ab1_0.author_id,
+        ab1_0.book_id 
+    from
+        author_book ab1_0 
+    where
+        ab1_0.author_id=? 
+        and ab1_0.book_id=?
+Hibernate: 
+    delete 
+    from
+        author_book 
+    where
+        id=?
+Hibernate: 
+    select
+        ab1_0.author_id,
+        ab1_0.id,
+        ab1_0.book_id 
+    from
+        author_book ab1_0 
+    where
+        ab1_0.author_id=?
+Hibernate: 
+    select
+        ab1_0.book_id,
+        ab1_0.id,
+        ab1_0.author_id 
+    from
+        author_book ab1_0 
+    where
+        ab1_0.book_id=?
+

@@ -1,0 +1,43 @@
+ Container school-postgres Running 
+ Container school-postgres Waiting 
+ Container school-postgres Healthy 
+ Container spring-task-4-liquibase-run-79a6cb332abb Creating 
+ Container spring-task-4-liquibase-run-79a6cb332abb Created 
+####################################################
+##   _     _             _ _                      ##
+##  | |   (_)           (_) |                     ##
+##  | |    _  __ _ _   _ _| |__   __ _ ___  ___   ##
+##  | |   | |/ _` | | | | | '_ \ / _` / __|/ _ \  ##
+##  | |___| | (_| | |_| | | |_) | (_| \__ \  __/  ##
+##  \_____/_|\__, |\__,_|_|_.__/ \__,_|___/\___|  ##
+##              | |                               ##
+##              |_|                               ##
+##                                                ## 
+##  Taking Liquibase to production?               ##
+##  liquibase.com/liquibase-secure                ## 
+##                                                ##
+####################################################
+Starting Liquibase at 10:35:32 using Java 21.0.11 (version 5.0.4 #11282 built at 2026-08-18 12:10:05 UTC)
+Liquibase Version: 5.0.4
+
+Running Changeset: db/changelog/changes/005-tag-v1.0.yaml::005-1::VagifPashayev
+Running Changeset: db/changelog/changes/006-add-course-capacity.yaml::006-1::VagifPashayev
+Running Changeset: db/changelog/changes/006-add-course-capacity.yaml::006-2::VagifPashayev
+Running Changeset: db/changelog/changes/007-create-audit-logs.yaml::007-1::VagifPashayev
+Running Changeset: db/changelog/changes/007-create-audit-logs.yaml::007-2::VagifPashayev
+Running Changeset: db/changelog/changes/100-seed-data.yaml::100-1::VagifPashayev
+Running Changeset: db/changelog/changes/100-seed-data.yaml::100-2::VagifPashayev
+Running Changeset: db/changelog/changes/100-seed-data.yaml::100-3::VagifPashayev
+Running Changeset: db/changelog/changes/100-seed-data.yaml::100-4::VagifPashayev
+Running Changeset: db/changelog/changes/100-seed-data.yaml::100-5::VagifPashayev
+Running Changeset: db/changelog/changes/100-seed-data.yaml::100-6::VagifPashayev
+
+UPDATE SUMMARY
+Run:                         11
+Previously run:              21
+Filtered out:                 0
+-------------------------------
+Total change sets:           32
+
+Liquibase: Update has been successful. Rows affected: 41
+Liquibase command 'update' was executed successfully.

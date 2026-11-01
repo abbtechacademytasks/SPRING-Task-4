@@ -1,0 +1,5613 @@
+{
+  "collection": {
+    "item": [
+      {
+        "id": "a18a7ff1-39ec-4be8-8074-96deead02efc",
+        "name": "Create Occupant",
+        "request": {
+          "url": {
+            "path": [
+              "students"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"name\": \"Occupant\", \"surname\": \"Bonus-{{runTag}}\", \"age\": 20}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "e9f940f9-f970-464a-b15e-7735e99e2c2f",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 201',()=>pm.response.to.have.status(201));",
+                "pm.collectionVariables.set('occupant',pm.response.json().id);"
+              ],
+              "_lastExecutionId": "b11bc48f-ea1c-4b03-bb25-8708cbf9d524"
+            }
+          }
+        ]
+      },
+      {
+        "id": "a5d7c72b-e4b3-4cd0-90d2-9f5f78539a6a",
+        "name": "Create Candidate",
+        "request": {
+          "url": {
+            "path": [
+              "students"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"name\": \"Candidate\", \"surname\": \"Bonus-{{runTag}}\", \"age\": 20}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "f4723b95-6e83-4840-adb1-d0d111a68a63",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 201',()=>pm.response.to.have.status(201));",
+                "pm.collectionVariables.set('candidate',pm.response.json().id);"
+              ],
+              "_lastExecutionId": "c2590354-5cb0-4db3-abfb-e17690734d05"
+            }
+          }
+        ]
+      },
+      {
+        "id": "76c9d8b3-f5d9-42c0-9c00-9a2da8df4a11",
+        "name": "Create Rollback",
+        "request": {
+          "url": {
+            "path": [
+              "students"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"name\": \"Rollback\", \"surname\": \"Bonus-{{runTag}}\", \"age\": 20}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "1f6af379-c61f-43e9-ae6e-f4d6b5485e84",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 201',()=>pm.response.to.have.status(201));",
+                "pm.collectionVariables.set('rollbackStudent',pm.response.json().id);"
+              ],
+              "_lastExecutionId": "db6d4fb9-b2ba-486c-ba89-89e06d7c9f00"
+            }
+          }
+        ]
+      },
+      {
+        "id": "b5558f30-c922-4ca3-9baa-8c734542a5e2",
+        "name": "Create Open course",
+        "request": {
+          "url": {
+            "path": [
+              "courses"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"title\": \"Open-{{runTag}}\", \"credit\": 3, \"teacher\": \"Bonus\"}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "46c9c8c3-12de-4663-ad05-40dab66bca85",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 201',()=>pm.response.to.have.status(201));",
+                "pm.collectionVariables.set('openCourse',pm.response.json().id);"
+              ],
+              "_lastExecutionId": "772b4d73-fa4a-4061-8803-b22d495d3410"
+            }
+          }
+        ]
+      },
+      {
+        "id": "66e824bf-dd43-407a-ba6f-3cf7b5cb856b",
+        "name": "Create Rollback course",
+        "request": {
+          "url": {
+            "path": [
+              "courses"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"title\": \"Rollback-{{runTag}}\", \"credit\": 3, \"teacher\": \"Bonus\"}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "6363a774-4e25-463b-a92b-c250eef0c62c",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 201',()=>pm.response.to.have.status(201));",
+                "pm.collectionVariables.set('rollbackCourse',pm.response.json().id);"
+              ],
+              "_lastExecutionId": "bdea56c7-0e8b-4879-add3-e64f090e07c6"
+            }
+          }
+        ]
+      },
+      {
+        "id": "102791fd-c135-4f19-b75f-f290a4dbc640",
+        "name": "Fill the one-seat fixture",
+        "request": {
+          "url": {
+            "path": [
+              "students",
+              "{{occupant}}",
+              "courses",
+              "{{fullCourseId}}"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "method": "POST"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "ca79d39c-d259-4df7-b386-872c1c7e9741",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 201',()=>pm.response.to.have.status(201));"
+              ],
+              "_lastExecutionId": "e800aa4c-421f-4597-8c52-5c0ab342208d"
+            }
+          }
+        ]
+      },
+      {
+        "id": "1e7b0e93-209e-4355-8ffd-9f4a9e1b9691",
+        "name": "Bulk - skip full course",
+        "request": {
+          "url": {
+            "path": [
+              "students",
+              "{{candidate}}",
+              "courses",
+              "bulk"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"courseIds\":[{{openCourse}},{{fullCourseId}}]}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "c1587bc5-8cd5-4c69-8021-94c3645718c4",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 200',()=>pm.response.to.have.status(200));",
+                "const b=pm.response.json();",
+                "pm.test('Available course committed',()=>pm.expect(b.enrolledCourseIds).to.eql([Number(pm.collectionVariables.get('openCourse'))]));",
+                "pm.test('Full course skipped',()=>pm.expect(b.fullCourseIds).to.eql([Number(pm.collectionVariables.get('fullCourseId'))]));"
+              ],
+              "_lastExecutionId": "21b80700-d897-443a-b8cb-04f1ee48af66"
+            }
+          }
+        ]
+      },
+      {
+        "id": "cc692603-5324-4677-b3af-95ddd996df53",
+        "name": "Read committed membership",
+        "request": {
+          "url": {
+            "path": [
+              "students",
+              "{{candidate}}"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "method": "GET"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "ceb53ab1-dcb2-40ec-ace1-e72e39fef96d",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 200',()=>pm.response.to.have.status(200));",
+                "pm.test('Only available membership',()=>pm.expect(pm.response.json().courses.map(c=>c.id)).to.eql([Number(pm.collectionVariables.get('openCourse'))]));"
+              ],
+              "_lastExecutionId": "3dc52f14-7785-492c-9fed-769ddbdd1ab7"
+            }
+          }
+        ]
+      },
+      {
+        "id": "19c0daa0-591d-4489-8ab2-237373d4ea66",
+        "name": "Bulk - later error rolls back outer transaction",
+        "request": {
+          "url": {
+            "path": [
+              "students",
+              "{{rollbackStudent}}",
+              "courses",
+              "bulk"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"courseIds\":[{{rollbackCourse}},9223372036854775807]}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "55e952b2-b8fd-4967-8dec-2dbcb1699aa6",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 404',()=>pm.response.to.have.status(404));"
+              ],
+              "_lastExecutionId": "64681e55-2d49-4d89-a671-c5e694853691"
+            }
+          }
+        ]
+      },
+      {
+        "id": "3e4ae62f-69ac-4610-b588-44fbfe192281",
+        "name": "No membership after outer rollback",
+        "request": {
+          "url": {
+            "path": [
+              "students",
+              "{{rollbackStudent}}"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "method": "GET"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "de5752e6-6084-4df5-baa3-caa9b0480626",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 200',()=>pm.response.to.have.status(200));",
+                "pm.test('Successful nested work also rolled back',()=>pm.expect(pm.response.json().courses).to.eql([]));"
+              ],
+              "_lastExecutionId": "df51c0e4-2657-46e9-a8d5-d46d2dcde6f4"
+            }
+          }
+        ]
+      },
+      {
+        "id": "8f24a8da-4874-4970-8010-695845699704",
+        "name": "Empty list rejected",
+        "request": {
+          "url": {
+            "path": [
+              "students",
+              "{{candidate}}",
+              "courses",
+              "bulk"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"courseIds\":[]}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "ca976445-63f1-4753-accc-366beebd0b86",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 400',()=>pm.response.to.have.status(400));"
+              ],
+              "_lastExecutionId": "9e6cb728-37b5-4224-b63b-fed027d832cb"
+            }
+          }
+        ]
+      },
+      {
+        "id": "cf590e52-9693-4bea-a0bb-c9d8bb76df3b",
+        "name": "Create salary fixture",
+        "request": {
+          "url": {
+            "path": [
+              "employees"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"name\":\"Bonus\",\"surname\":\"Retry-{{runTag}}\",\"salary\":1000,\"departmentId\":1}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "ec6d9669-1c81-4cd8-8c65-af1127b738ae",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 201',()=>pm.response.to.have.status(201));",
+                "pm.collectionVariables.set('retryEmployee',pm.response.json().id);"
+              ],
+              "_lastExecutionId": "bf833198-c1de-4010-a048-c546be18bbe9"
+            }
+          }
+        ]
+      },
+      {
+        "id": "ab783e71-936c-46ec-9a10-21972d09098a",
+        "name": "Retry-enabled salary operation",
+        "request": {
+          "url": {
+            "path": [
+              "isolation",
+              "employees",
+              "{{retryEmployee}}",
+              "raise"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [
+              {
+                "key": "amount",
+                "value": "100"
+              },
+              {
+                "key": "isolation",
+                "value": "REPEATABLE_READ"
+              },
+              {
+                "key": "delayMs",
+                "value": "0"
+              },
+              {
+                "key": "retry",
+                "value": "true"
+              }
+            ],
+            "variable": []
+          },
+          "method": "POST"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "782049fc-44df-4df4-b455-a0fa4afa3b9e",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 200',()=>pm.response.to.have.status(200));",
+                "pm.test('Salary updated',()=>pm.expect(pm.response.json().newSalary).to.eql(1100));"
+              ],
+              "_lastExecutionId": "4e9ba391-fa6d-4c83-ac11-e602ec70a320"
+            }
+          }
+        ]
+      },
+      {
+        "id": "110a5df1-63be-4397-acf4-d3a178ecbad7",
+        "name": "Retry isolation guard",
+        "request": {
+          "url": {
+            "path": [
+              "isolation",
+              "employees",
+              "{{retryEmployee}}",
+              "raise"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [
+              {
+                "key": "amount",
+                "value": "100"
+              },
+              {
+                "key": "isolation",
+                "value": "READ_COMMITTED"
+              },
+              {
+                "key": "delayMs",
+                "value": "0"
+              },
+              {
+                "key": "retry",
+                "value": "true"
+              }
+            ],
+            "variable": []
+          },
+          "method": "POST"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "66df69e8-1e27-4542-804c-5e2bb0fb15ff",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 400',()=>pm.response.to.have.status(400));"
+              ],
+              "_lastExecutionId": "f719102d-535b-4b3c-9b06-ced365ceac77"
+            }
+          }
+        ]
+      },
+      {
+        "id": "87580c29-ac4a-4788-a4ae-59e371e70663",
+        "name": "Cleanup candidate",
+        "request": {
+          "url": {
+            "path": [
+              "students",
+              "{{candidate}}"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "method": "DELETE"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "a0146411-72e4-4e84-be52-e384353ed4f1",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 204',()=>pm.response.to.have.status(204));"
+              ],
+              "_lastExecutionId": "27e0c878-9262-4cc9-8f9d-d157722a2162"
+            }
+          }
+        ]
+      },
+      {
+        "id": "5fcd7527-f98f-4691-8ff7-619837a79c59",
+        "name": "Cleanup occupant",
+        "request": {
+          "url": {
+            "path": [
+              "students",
+              "{{occupant}}"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "method": "DELETE"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "75096a94-bf02-4de8-8b47-3237aa610613",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 204',()=>pm.response.to.have.status(204));"
+              ],
+              "_lastExecutionId": "482e97a6-28d1-4173-9ee7-cba2f4b5bd71"
+            }
+          }
+        ]
+      },
+      {
+        "id": "354cb5c5-0431-4a02-914b-b6208954225c",
+        "name": "Cleanup rollbackStudent",
+        "request": {
+          "url": {
+            "path": [
+              "students",
+              "{{rollbackStudent}}"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "method": "DELETE"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "9276d3bf-d433-4620-84b6-4b1b3fbab7f2",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 204',()=>pm.response.to.have.status(204));"
+              ],
+              "_lastExecutionId": "9e52df2b-700d-48c6-ac3b-4b7409d27558"
+            }
+          }
+        ]
+      },
+      {
+        "id": "5b3ce5ea-9c1d-487b-809b-3d91352fea4b",
+        "name": "Cleanup retryEmployee",
+        "request": {
+          "url": {
+            "path": [
+              "employees",
+              "{{retryEmployee}}"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "method": "DELETE"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "eacc5e68-dad8-4b4b-8779-8db11d6028d5",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 204',()=>pm.response.to.have.status(204));"
+              ],
+              "_lastExecutionId": "2467ad28-767a-4d98-a4e2-3a2feb97dc13"
+            }
+          }
+        ]
+      },
+      {
+        "id": "a52a0d1f-6e18-4e1b-aca4-5fe7d54bee17",
+        "name": "Cleanup openCourse",
+        "request": {
+          "url": {
+            "path": [
+              "courses",
+              "{{openCourse}}"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "method": "DELETE"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "9f480a4f-a64b-4475-9a53-a6307ff2de7e",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 204',()=>pm.response.to.have.status(204));"
+              ],
+              "_lastExecutionId": "849e400e-7532-4d7e-bc31-df43a5f73eec"
+            }
+          }
+        ]
+      },
+      {
+        "id": "69f77e7d-d51b-48fc-a648-bb91b3381490",
+        "name": "Cleanup rollbackCourse",
+        "request": {
+          "url": {
+            "path": [
+              "courses",
+              "{{rollbackCourse}}"
+            ],
+            "host": [
+              "{{baseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "method": "DELETE"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "0989b494-5d4b-4698-815c-2ab4542bb750",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('HTTP 204',()=>pm.response.to.have.status(204));"
+              ],
+              "_lastExecutionId": "f9153545-a713-47e7-9ea6-4a39ca1fc2dc"
+            }
+          }
+        ]
+      }
+    ],
+    "event": [
+      {
+        "listen": "prerequest",
+        "script": {
+          "id": "ab295a31-40c3-40fc-b1d2-0c8dcc6e6589",
+          "type": "text/javascript",
+          "exec": [
+            "if (!pm.collectionVariables.get('runTag')) pm.collectionVariables.set('runTag',pm.variables.replaceIn('{{$guid}}')); "
+          ],
+          "_lastExecutionId": "1ed83c34-7209-4128-b546-375ec1974334"
+        }
+      }
+    ],
+    "variable": [
+      {
+        "type": "any",
+        "value": "http://localhost:8080/test-demo/api",
+        "key": "baseUrl"
+      },
+      {
+        "type": "any",
+        "value": 1,
+        "key": "fullCourseId"
+      }
+    ],
+    "info": {
+      "_postman_id": "106bb0dd-0115-42da-80b0-001c9c989eb7",
+      "name": "Task21 Bonus - Nested and Retry",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+      "description": {
+        "content": "Requires dev seed course1: capacity1, no enrolled students. Uses own fixtures and cleans up. Real concurrent conflict verification is recorded separately.",
+        "type": "text/plain"
+      }
+    }
+  },
+  "environment": {
+    "id": "1b7b3e03-c916-42bc-872b-bb5faaf4bdab",
+    "values": [
+      {
+        "type": "any",
+        "value": "http://localhost:8083/test-demo/api",
+        "key": "baseUrl"
+      }
+    ]
+  },
+  "globals": {
+    "id": "367fae75-bf94-470b-94d6-cddea0d93d63",
+    "values": []
+  },
+  "run": {
+    "stats": {
+      "iterations": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "items": {
+        "total": 20,
+        "pending": 0,
+        "failed": 0
+      },
+      "scripts": {
+        "total": 40,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequests": {
+        "total": 20,
+        "pending": 0,
+        "failed": 0
+      },
+      "requests": {
+        "total": 20,
+        "pending": 0,
+        "failed": 0
+      },
+      "tests": {
+        "total": 20,
+        "pending": 0,
+        "failed": 0
+      },
+      "assertions": {
+        "total": 25,
+        "pending": 0,
+        "failed": 0
+      },
+      "testScripts": {
+        "total": 20,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequestScripts": {
+        "total": 20,
+        "pending": 0,
+        "failed": 0
+      }
+    },
+    "timings": {
+      "responseAverage": 31.8,
+      "responseMin": 3,
+      "responseMax": 66,
+      "responseSd": 15.635216659835585,
+      "dnsAverage": 0,
+      "dnsMin": 0,
+      "dnsMax": 0,
+      "dnsSd": 0,
+      "firstByteAverage": 0,
+      "firstByteMin": 0,
+      "firstByteMax": 0,
+      "firstByteSd": 0,
+      "started": 1793570434880,
+      "completed": 1793570437174
+    },
+    "executions": [
+      {
+        "cursor": {
+          "position": 0,
+          "iteration": 0,
+          "length": 20,
+          "cycles": 1,
+          "empty": false,
+          "eof": false,
+          "bof": true,
+          "cr": false,
+          "ref": "ff402ce6-d07a-4b74-b4af-d2eb3c2cdc4e",
+          "httpRequestId": "e4650482-60fe-4de7-9eb6-7cedfb3a89c4"
+        },
+        "item": {
+          "id": "a18a7ff1-39ec-4be8-8074-96deead02efc",
+          "name": "Create Occupant",
+          "request": {
+            "url": {
+              "path": [
+                "students"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\": \"Occupant\", \"surname\": \"Bonus-{{runTag}}\", \"age\": 20}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "e9f940f9-f970-464a-b15e-7735e99e2c2f",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 201',()=>pm.response.to.have.status(201));",
+                  "pm.collectionVariables.set('occupant',pm.response.json().id);"
+                ],
+                "_lastExecutionId": "b11bc48f-ea1c-4b03-bb25-8708cbf9d524"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8083",
+            "path": [
+              "test-demo",
+              "api",
+              "students"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "7b9b0ba3-bf6f-46bd-a6b3-bb312160e304",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8083",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "88",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"name\": \"Occupant\", \"surname\": \"Bonus-2a0dad25-8faa-404f-950a-db0dbfbb5fde\", \"age\": 20}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "9a960c94-51ed-4b62-acaa-58fbbd8898ba",
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "106"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 22:00:34 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              50,
+              50,
+              44,
+              34,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              79,
+              99,
+              99,
+              117,
+              112,
+              97,
+              110,
+              116,
+              34,
+              44,
+              34,
+              115,
+              117,
+              114,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              66,
+              111,
+              110,
+              117,
+              115,
+              45,
+              50,
+              97,
+              48,
+              100,
+              97,
+              100,
+              50,
+              53,
+              45,
+              56,
+              102,
+              97,
+              97,
+              45,
+              52,
+              48,
+              52,
+              102,
+              45,
+              57,
+              53,
+              48,
+              97,
+              45,
+              100,
+              98,
+              48,
+              100,
+              98,
+              102,
+              98,
+              98,
+              53,
+              102,
+              100,
+              101,
+              34,
+              44,
+              34,
+              97,
+              103,
+              101,
+              34,
+              58,
+              50,
+              48,
+              44,
+              34,
+              99,
+              111,
+              117,
+              114,
+              115,
+              101,
+              115,
+              34,
+              58,
+              110,
+              117,
+              108,
+              108,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 66,
+          "responseSize": 106
+        },
+        "id": "a18a7ff1-39ec-4be8-8074-96deead02efc",
+        "assertions": [
+          {
+            "assertion": "HTTP 201",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "2b13b263-c063-405f-a31e-91b69c889bb5",
+          "length": 20,
+          "cycles": 1,
+          "position": 1,
+          "iteration": 0,
+          "httpRequestId": "80831861-3a90-451a-9e90-7f6947baa949"
+        },
+        "item": {
+          "id": "a5d7c72b-e4b3-4cd0-90d2-9f5f78539a6a",
+          "name": "Create Candidate",
+          "request": {
+            "url": {
+              "path": [
+                "students"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\": \"Candidate\", \"surname\": \"Bonus-{{runTag}}\", \"age\": 20}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "f4723b95-6e83-4840-adb1-d0d111a68a63",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 201',()=>pm.response.to.have.status(201));",
+                  "pm.collectionVariables.set('candidate',pm.response.json().id);"
+                ],
+                "_lastExecutionId": "c2590354-5cb0-4db3-abfb-e17690734d05"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8083",
+            "path": [
+              "test-demo",
+              "api",
+              "students"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "81c6c6fb-cb82-4dad-be8c-c4bdf846c811",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8083",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "89",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"name\": \"Candidate\", \"surname\": \"Bonus-2a0dad25-8faa-404f-950a-db0dbfbb5fde\", \"age\": 20}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "a0c23866-8343-46b1-98a2-a50839883161",
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "107"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 22:00:35 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              50,
+              51,
+              44,
+              34,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              67,
+              97,
+              110,
+              100,
+              105,
+              100,
+              97,
+              116,
+              101,
+              34,
+              44,
+              34,
+              115,
+              117,
+              114,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              66,
+              111,
+              110,
+              117,
+              115,
+              45,
+              50,
+              97,
+              48,
+              100,
+              97,
+              100,
+              50,
+              53,
+              45,
+              56,
+              102,
+              97,
+              97,
+              45,
+              52,
+              48,
+              52,
+              102,
+              45,
+              57,
+              53,
+              48,
+              97,
+              45,
+              100,
+              98,
+              48,
+              100,
+              98,
+              102,
+              98,
+              98,
+              53,
+              102,
+              100,
+              101,
+              34,
+              44,
+              34,
+              97,
+              103,
+              101,
+              34,
+              58,
+              50,
+              48,
+              44,
+              34,
+              99,
+              111,
+              117,
+              114,
+              115,
+              101,
+              115,
+              34,
+              58,
+              110,
+              117,
+              108,
+              108,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 35,
+          "responseSize": 107
+        },
+        "id": "a5d7c72b-e4b3-4cd0-90d2-9f5f78539a6a",
+        "assertions": [
+          {
+            "assertion": "HTTP 201",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "f1cf284a-8ad1-4dd2-a6d4-b3c850ba415a",
+          "length": 20,
+          "cycles": 1,
+          "position": 2,
+          "iteration": 0,
+          "httpRequestId": "b66f27c9-070e-482c-b0ec-07d0115d9388"
+        },
+        "item": {
+          "id": "76c9d8b3-f5d9-42c0-9c00-9a2da8df4a11",
+          "name": "Create Rollback",
+          "request": {
+            "url": {
+              "path": [
+                "students"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\": \"Rollback\", \"surname\": \"Bonus-{{runTag}}\", \"age\": 20}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "1f6af379-c61f-43e9-ae6e-f4d6b5485e84",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 201',()=>pm.response.to.have.status(201));",
+                  "pm.collectionVariables.set('rollbackStudent',pm.response.json().id);"
+                ],
+                "_lastExecutionId": "db6d4fb9-b2ba-486c-ba89-89e06d7c9f00"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8083",
+            "path": [
+              "test-demo",
+              "api",
+              "students"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "196158dd-9ab3-433a-aee5-742fff0a03de",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8083",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "88",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"name\": \"Rollback\", \"surname\": \"Bonus-2a0dad25-8faa-404f-950a-db0dbfbb5fde\", \"age\": 20}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "39b26b74-8f3d-4074-8a40-f22c10911514",
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "106"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 22:00:35 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              50,
+              52,
+              44,
+              34,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              82,
+              111,
+              108,
+              108,
+              98,
+              97,
+              99,
+              107,
+              34,
+              44,
+              34,
+              115,
+              117,
+              114,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              66,
+              111,
+              110,
+              117,
+              115,
+              45,
+              50,
+              97,
+              48,
+              100,
+              97,
+              100,
+              50,
+              53,
+              45,
+              56,
+              102,
+              97,
+              97,
+              45,
+              52,
+              48,
+              52,
+              102,
+              45,
+              57,
+              53,
+              48,
+              97,
+              45,
+              100,
+              98,
+              48,
+              100,
+              98,
+              102,
+              98,
+              98,
+              53,
+              102,
+              100,
+              101,
+              34,
+              44,
+              34,
+              97,
+              103,
+              101,
+              34,
+              58,
+              50,
+              48,
+              44,
+              34,
+              99,
+              111,
+              117,
+              114,
+              115,
+              101,
+              115,
+              34,
+              58,
+              110,
+              117,
+              108,
+              108,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 27,
+          "responseSize": 106
+        },
+        "id": "76c9d8b3-f5d9-42c0-9c00-9a2da8df4a11",
+        "assertions": [
+          {
+            "assertion": "HTTP 201",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "c6023ecb-2943-42e8-90bc-e6c9f431873b",
+          "length": 20,
+          "cycles": 1,
+          "position": 3,
+          "iteration": 0,
+          "httpRequestId": "005177dd-085c-4702-9e53-98c42c89665e"
+        },
+        "item": {
+          "id": "b5558f30-c922-4ca3-9baa-8c734542a5e2",
+          "name": "Create Open course",
+          "request": {
+            "url": {
+              "path": [
+                "courses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\": \"Open-{{runTag}}\", \"credit\": 3, \"teacher\": \"Bonus\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "46c9c8c3-12de-4663-ad05-40dab66bca85",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 201',()=>pm.response.to.have.status(201));",
+                  "pm.collectionVariables.set('openCourse',pm.response.json().id);"
+                ],
+                "_lastExecutionId": "772b4d73-fa4a-4061-8803-b22d495d3410"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8083",
+            "path": [
+              "test-demo",
+              "api",
+              "courses"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "b224fec3-89b3-4511-a8a9-5e251ea9c52a",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8083",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "87",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"title\": \"Open-2a0dad25-8faa-404f-950a-db0dbfbb5fde\", \"credit\": 3, \"teacher\": \"Bonus\"}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "9a81d474-2d45-41da-ac0e-bb33c37721ec",
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "90"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 22:00:35 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              49,
+              51,
+              44,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              34,
+              79,
+              112,
+              101,
+              110,
+              45,
+              50,
+              97,
+              48,
+              100,
+              97,
+              100,
+              50,
+              53,
+              45,
+              56,
+              102,
+              97,
+              97,
+              45,
+              52,
+              48,
+              52,
+              102,
+              45,
+              57,
+              53,
+              48,
+              97,
+              45,
+              100,
+              98,
+              48,
+              100,
+              98,
+              102,
+              98,
+              98,
+              53,
+              102,
+              100,
+              101,
+              34,
+              44,
+              34,
+              99,
+              114,
+              101,
+              100,
+              105,
+              116,
+              34,
+              58,
+              51,
+              44,
+              34,
+              116,
+              101,
+              97,
+              99,
+              104,
+              101,
+              114,
+              34,
+              58,
+              34,
+              66,
+              111,
+              110,
+              117,
+              115,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 37,
+          "responseSize": 90
+        },
+        "id": "b5558f30-c922-4ca3-9baa-8c734542a5e2",
+        "assertions": [
+          {
+            "assertion": "HTTP 201",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "29b04028-7941-443a-aa1d-999a29013a79",
+          "length": 20,
+          "cycles": 1,
+          "position": 4,
+          "iteration": 0,
+          "httpRequestId": "e54ce9be-b573-4aac-afc7-105f1e3df621"
+        },
+        "item": {
+          "id": "66e824bf-dd43-407a-ba6f-3cf7b5cb856b",
+          "name": "Create Rollback course",
+          "request": {
+            "url": {
+              "path": [
+                "courses"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\": \"Rollback-{{runTag}}\", \"credit\": 3, \"teacher\": \"Bonus\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "6363a774-4e25-463b-a92b-c250eef0c62c",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 201',()=>pm.response.to.have.status(201));",
+                  "pm.collectionVariables.set('rollbackCourse',pm.response.json().id);"
+                ],
+                "_lastExecutionId": "bdea56c7-0e8b-4879-add3-e64f090e07c6"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8083",
+            "path": [
+              "test-demo",
+              "api",
+              "courses"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "2aa29799-4c51-4a5b-83f0-69cd3e0714d3",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8083",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "91",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"title\": \"Rollback-2a0dad25-8faa-404f-950a-db0dbfbb5fde\", \"credit\": 3, \"teacher\": \"Bonus\"}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "a2f5fb90-fce4-4a58-8534-fe751a23d850",
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "94"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 22:00:35 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              49,
+              52,
+              44,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              34,
+              82,
+              111,
+              108,
+              108,
+              98,
+              97,
+              99,
+              107,
+              45,
+              50,
+              97,
+              48,
+              100,
+              97,
+              100,
+              50,
+              53,
+              45,
+              56,
+              102,
+              97,
+              97,
+              45,
+              52,
+              48,
+              52,
+              102,
+              45,
+              57,
+              53,
+              48,
+              97,
+              45,
+              100,
+              98,
+              48,
+              100,
+              98,
+              102,
+              98,
+              98,
+              53,
+              102,
+              100,
+              101,
+              34,
+              44,
+              34,
+              99,
+              114,
+              101,
+              100,
+              105,
+              116,
+              34,
+              58,
+              51,
+              44,
+              34,
+              116,
+              101,
+              97,
+              99,
+              104,
+              101,
+              114,
+              34,
+              58,
+              34,
+              66,
+              111,
+              110,
+              117,
+              115,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 32,
+          "responseSize": 94
+        },
+        "id": "66e824bf-dd43-407a-ba6f-3cf7b5cb856b",
+        "assertions": [
+          {
+            "assertion": "HTTP 201",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "acf9049f-8cb0-42ac-b847-68aef1612533",
+          "length": 20,
+          "cycles": 1,
+          "position": 5,
+          "iteration": 0,
+          "httpRequestId": "a6e10cbe-06e0-40e7-9c50-26ac516ff059"
+        },
+        "item": {
+          "id": "102791fd-c135-4f19-b75f-f290a4dbc640",
+          "name": "Fill the one-seat fixture",
+          "request": {
+            "url": {
+              "path": [
+                "students",
+                "{{occupant}}",
+                "courses",
+                "{{fullCourseId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "ca79d39c-d259-4df7-b386-872c1c7e9741",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 201',()=>pm.response.to.have.status(201));"
+                ],
+                "_lastExecutionId": "e800aa4c-421f-4597-8c52-5c0ab342208d"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8083",
+            "path": [
+              "test-demo",
+              "api",
+              "students",
+              "22",
+              "courses",
+              "1"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "eeda21ce-b0d6-44ba-8208-b670f26b4e77",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8083",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "0",
+              "system": true
+            }
+          ],
+          "method": "POST"
+        },
+        "response": {
+          "id": "c06920e4-9949-4e51-bb6f-6af7bf4f2c7a",
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "Content-Length",
+              "value": "0"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 22:00:35 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": []
+          },
+          "cookie": [],
+          "responseTime": 50,
+          "responseSize": 0
+        },
+        "id": "102791fd-c135-4f19-b75f-f290a4dbc640",
+        "assertions": [
+          {
+            "assertion": "HTTP 201",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "fe87e8b6-3203-44c3-ab1b-63c2561a3b4f",
+          "length": 20,
+          "cycles": 1,
+          "position": 6,
+          "iteration": 0,
+          "httpRequestId": "086f9c3b-c202-40a1-a23c-17787ce79dc3"
+        },
+        "item": {
+          "id": "1e7b0e93-209e-4355-8ffd-9f4a9e1b9691",
+          "name": "Bulk - skip full course",
+          "request": {
+            "url": {
+              "path": [
+                "students",
+                "{{candidate}}",
+                "courses",
+                "bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"courseIds\":[{{openCourse}},{{fullCourseId}}]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "c1587bc5-8cd5-4c69-8021-94c3645718c4",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200',()=>pm.response.to.have.status(200));",
+                  "const b=pm.response.json();",
+                  "pm.test('Available course committed',()=>pm.expect(b.enrolledCourseIds).to.eql([Number(pm.collectionVariables.get('openCourse'))]));",
+                  "pm.test('Full course skipped',()=>pm.expect(b.fullCourseIds).to.eql([Number(pm.collectionVariables.get('fullCourseId'))]));"
+                ],
+                "_lastExecutionId": "21b80700-d897-443a-b8cb-04f1ee48af66"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8083",
+            "path": [
+              "test-demo",
+              "api",
+              "students",
+              "23",
+              "courses",
+              "bulk"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "8f04037d-e7b8-42a7-8bd7-e3201d75164b",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8083",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "20",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"courseIds\":[13,1]}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "0911f453-cb3c-4566-bb17-e13884315fb3",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "61"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 22:00:35 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              115,
+              116,
+              117,
+              100,
+              101,
+              110,
+              116,
+              73,
+              100,
+              34,
+              58,
+              50,
+              51,
+              44,
+              34,
+              101,
+              110,
+              114,
+              111,
+              108,
+              108,
+              101,
+              100,
+              67,
+              111,
+              117,
+              114,
+              115,
+              101,
+              73,
+              100,
+              115,
+              34,
+              58,
+              91,
+              49,
+              51,
+              93,
+              44,
+              34,
+              102,
+              117,
+              108,
+              108,
+              67,
+              111,
+              117,
+              114,
+              115,
+              101,
+              73,
+              100,
+              115,
+              34,
+              58,
+              91,
+              49,
+              93,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 38,
+          "responseSize": 61
+        },
+        "id": "1e7b0e93-209e-4355-8ffd-9f4a9e1b9691",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Available course committed",
+            "skipped": false
+          },
+          {
+            "assertion": "Full course skipped",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "f49525e6-ee78-4bb9-b74c-7f8da70b015e",
+          "length": 20,
+          "cycles": 1,
+          "position": 7,
+          "iteration": 0,
+          "httpRequestId": "49f93e85-7381-4933-becf-abcc98356cd3"
+        },
+        "item": {
+          "id": "cc692603-5324-4677-b3af-95ddd996df53",
+          "name": "Read committed membership",
+          "request": {
+            "url": {
+              "path": [
+                "students",
+                "{{candidate}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "ceb53ab1-dcb2-40ec-ace1-e72e39fef96d",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200',()=>pm.response.to.have.status(200));",
+                  "pm.test('Only available membership',()=>pm.expect(pm.response.json().courses.map(c=>c.id)).to.eql([Number(pm.collectionVariables.get('openCourse'))]));"
+                ],
+                "_lastExecutionId": "3dc52f14-7785-492c-9fed-769ddbdd1ab7"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8083",
+            "path": [
+              "test-demo",
+              "api",
+              "students",
+              "23"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "429a145e-7434-4e42-9873-9fab285d40e6",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8083",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "e889a57d-9bb8-4ec7-a824-2dfb6e14ced1",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "195"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 22:00:35 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              50,
+              51,
+              44,
+              34,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              67,
+              97,
+              110,
+              100,
+              105,
+              100,
+              97,
+              116,
+              101,
+              34,
+              44,
+              34,
+              115,
+              117,
+              114,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              66,
+              111,
+              110,
+              117,
+              115,
+              45,
+              50,
+              97,
+              48,
+              100,
+              97,
+              100,
+              50,
+              53,
+              45,
+              56,
+              102,
+              97,
+              97,
+              45,
+              52,
+              48,
+              52,
+              102,
+              45,
+              57,
+              53,
+              48,
+              97,
+              45,
+              100,
+              98,
+              48,
+              100,
+              98,
+              102,
+              98,
+              98,
+              53,
+              102,
+              100,
+              101,
+              34,
+              44,
+              34,
+              97,
+              103,
+              101,
+              34,
+              58,
+              50,
+              48,
+              44,
+              34,
+              99,
+              111,
+              117,
+              114,
+              115,
+              101,
+              115,
+              34,
+              58,
+              91,
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              49,
+              51,
+              44,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              34,
+              79,
+              112,
+              101,
+              110,
+              45,
+              50,
+              97,
+              48,
+              100,
+              97,
+              100,
+              50,
+              53,
+              45,
+              56,
+              102,
+              97,
+              97,
+              45,
+              52,
+              48,
+              52,
+              102,
+              45,
+              57,
+              53,
+              48,
+              97,
+              45,
+              100,
+              98,
+              48,
+              100,
+              98,
+              102,
+              98,
+              98,
+              53,
+              102,
+              100,
+              101,
+              34,
+              44,
+              34,
+              99,
+              114,
+              101,
+              100,
+              105,
+              116,
+              34,
+              58,
+              51,
+              44,
+              34,
+              116,
+              101,
+              97,
+              99,
+              104,
+              101,
+              114,
+              34,
+              58,
+              34,
+              66,
+              111,
+              110,
+              117,
+              115,
+              34,
+              125,
+              93,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 8,
+          "responseSize": 195
+        },
+        "id": "cc692603-5324-4677-b3af-95ddd996df53",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Only available membership",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "fa1a4e28-882e-47ee-ad94-052de43510b8",
+          "length": 20,
+          "cycles": 1,
+          "position": 8,
+          "iteration": 0,
+          "httpRequestId": "247fd120-0264-442e-bdee-c1be84ed0315"
+        },
+        "item": {
+          "id": "19c0daa0-591d-4489-8ab2-237373d4ea66",
+          "name": "Bulk - later error rolls back outer transaction",
+          "request": {
+            "url": {
+              "path": [
+                "students",
+                "{{rollbackStudent}}",
+                "courses",
+                "bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"courseIds\":[{{rollbackCourse}},9223372036854775807]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "55e952b2-b8fd-4967-8dec-2dbcb1699aa6",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 404',()=>pm.response.to.have.status(404));"
+                ],
+                "_lastExecutionId": "64681e55-2d49-4d89-a671-c5e694853691"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8083",
+            "path": [
+              "test-demo",
+              "api",
+              "students",
+              "24",
+              "courses",
+              "bulk"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "a148ad24-76ef-4eb6-8c37-804d0aa549d8",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8083",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "38",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"courseIds\":[14,9223372036854775807]}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "9036dfed-542b-4487-9ff4-80d4fd2081e3",
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 22:00:35 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              100,
+              101,
+              116,
+              97,
+              105,
+              108,
+              34,
+              58,
+              34,
+              67,
+              111,
+              117,
+              114,
+              115,
+              101,
+              32,
+              110,
+              111,
+              116,
+              32,
+              102,
+              111,
+              117,
+              110,
+              100,
+              58,
+              32,
+              57,
+              50,
+              50,
+              51,
+              51,
+              55,
+              50,
+              48,
+              51,
+              54,
+              56,
+              53,
+              52,
+              55,
+              55,
+              53,
+              56,
+              48,
+              55,
+              34,
+              44,
+              34,
+              105,
+              110,
+              115,
+              116,
+              97,
+              110,
+              99,
+              101,
+              34,
+              58,
+              34,
+              47,
+              116,
+              101,
+              115,
+              116,
+              45,
+              100,
+              101,
+              109,
+              111,
+              47,
+              97,
+              112,
+              105,
+              47,
+              115,
+              116,
+              117,
+              100,
+              101,
+              110,
+              116,
+              115,
+              47,
+              50,
+              52,
+              47,
+              99,
+              111,
+              117,
+              114,
+              115,
+              101,
+              115,
+              47,
+              98,
+              117,
+              108,
+              107,
+              34,
+              44,
+              34,
+              115,
+              116,
+              97,
+              116,
+              117,
+              115,
+              34,
+              58,
+              52,
+              48,
+              52,
+              44,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              34,
+              78,
+              111,
+              116,
+              32,
+              70,
+              111,
+              117,
+              110,
+              100,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 18,
+          "responseSize": 136
+        },
+        "id": "19c0daa0-591d-4489-8ab2-237373d4ea66",
+        "assertions": [
+          {
+            "assertion": "HTTP 404",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "145d1feb-9dce-456e-b5e1-f4e2d8e227f5",
+          "length": 20,
+          "cycles": 1,
+          "position": 9,
+          "iteration": 0,
+          "httpRequestId": "e6791dc1-d415-4743-8c0f-048700d6e58f"
+        },
+        "item": {
+          "id": "3e4ae62f-69ac-4610-b588-44fbfe192281",
+          "name": "No membership after outer rollback",
+          "request": {
+            "url": {
+              "path": [
+                "students",
+                "{{rollbackStudent}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "de5752e6-6084-4df5-baa3-caa9b0480626",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200',()=>pm.response.to.have.status(200));",
+                  "pm.test('Successful nested work also rolled back',()=>pm.expect(pm.response.json().courses).to.eql([]));"
+                ],
+                "_lastExecutionId": "df51c0e4-2657-46e9-a8d5-d46d2dcde6f4"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8083",
+            "path": [
+              "test-demo",
+              "api",
+              "students",
+              "24"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "fc047885-21fc-41a7-93af-d02927ca31a8",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8083",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "36d33c28-3ae3-4a77-a0fb-8c5fece8ef97",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "104"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 22:00:35 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              50,
+              52,
+              44,
+              34,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              82,
+              111,
+              108,
+              108,
+              98,
+              97,
+              99,
+              107,
+              34,
+              44,
+              34,
+              115,
+              117,
+              114,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              66,
+              111,
+              110,
+              117,
+              115,
+              45,
+              50,
+              97,
+              48,
+              100,
+              97,
+              100,
+              50,
+              53,
+              45,
+              56,
+              102,
+              97,
+              97,
+              45,
+              52,
+              48,
+              52,
+              102,
+              45,
+              57,
+              53,
+              48,
+              97,
+              45,
+              100,
+              98,
+              48,
+              100,
+              98,
+              102,
+              98,
+              98,
+              53,
+              102,
+              100,
+              101,
+              34,
+              44,
+              34,
+              97,
+              103,
+              101,
+              34,
+              58,
+              50,
+              48,
+              44,
+              34,
+              99,
+              111,
+              117,
+              114,
+              115,
+              101,
+              115,
+              34,
+              58,
+              91,
+              93,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 9,
+          "responseSize": 104
+        },
+        "id": "3e4ae62f-69ac-4610-b588-44fbfe192281",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Successful nested work also rolled back",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "daa88066-1d51-4ecd-bc62-ab29ae92319e",
+          "length": 20,
+          "cycles": 1,
+          "position": 10,
+          "iteration": 0,
+          "httpRequestId": "d43ad5e3-df1d-42fe-995b-57a6b38711d3"
+        },
+        "item": {
+          "id": "8f24a8da-4874-4970-8010-695845699704",
+          "name": "Empty list rejected",
+          "request": {
+            "url": {
+              "path": [
+                "students",
+                "{{candidate}}",
+                "courses",
+                "bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"courseIds\":[]}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "ca976445-63f1-4753-accc-366beebd0b86",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 400',()=>pm.response.to.have.status(400));"
+                ],
+                "_lastExecutionId": "9e6cb728-37b5-4224-b63b-fed027d832cb"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8083",
+            "path": [
+              "test-demo",
+              "api",
+              "students",
+              "23",
+              "courses",
+              "bulk"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "78ef0ee0-0071-4447-aa7a-35fa283374fc",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8083",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "16",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"courseIds\":[]}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "85ffaf19-aa19-49ac-a214-1dea51d83cfc",
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 22:00:36 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              100,
+              101,
+              116,
+              97,
+              105,
+              108,
+              34,
+              58,
+              34,
+              67,
+              111,
+              117,
+              114,
+              115,
+              101,
+              32,
+              73,
+              68,
+              115,
+              32,
+              109,
+              117,
+              115,
+              116,
+              32,
+              98,
+              101,
+              32,
+              112,
+              111,
+              115,
+              105,
+              116,
+              105,
+              118,
+              101,
+              44,
+              32,
+              117,
+              110,
+              105,
+              113,
+              117,
+              101,
+              32,
+              97,
+              110,
+              100,
+              32,
+              110,
+              111,
+              116,
+              32,
+              101,
+              109,
+              112,
+              116,
+              121,
+              34,
+              44,
+              34,
+              105,
+              110,
+              115,
+              116,
+              97,
+              110,
+              99,
+              101,
+              34,
+              58,
+              34,
+              47,
+              116,
+              101,
+              115,
+              116,
+              45,
+              100,
+              101,
+              109,
+              111,
+              47,
+              97,
+              112,
+              105,
+              47,
+              115,
+              116,
+              117,
+              100,
+              101,
+              110,
+              116,
+              115,
+              47,
+              50,
+              51,
+              47,
+              99,
+              111,
+              117,
+              114,
+              115,
+              101,
+              115,
+              47,
+              98,
+              117,
+              108,
+              107,
+              34,
+              44,
+              34,
+              115,
+              116,
+              97,
+              116,
+              117,
+              115,
+              34,
+              58,
+              52,
+              48,
+              48,
+              44,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              34,
+              66,
+              97,
+              100,
+              32,
+              82,
+              101,
+              113,
+              117,
+              101,
+              115,
+              116,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 6,
+          "responseSize": 150
+        },
+        "id": "8f24a8da-4874-4970-8010-695845699704",
+        "assertions": [
+          {
+            "assertion": "HTTP 400",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "84029805-ad33-45ff-a51d-6ca3cd7ac0e2",
+          "length": 20,
+          "cycles": 1,
+          "position": 11,
+          "iteration": 0,
+          "httpRequestId": "6718abc1-f9e7-45ec-bd3c-0311f2876305"
+        },
+        "item": {
+          "id": "cf590e52-9693-4bea-a0bb-c9d8bb76df3b",
+          "name": "Create salary fixture",
+          "request": {
+            "url": {
+              "path": [
+                "employees"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"Bonus\",\"surname\":\"Retry-{{runTag}}\",\"salary\":1000,\"departmentId\":1}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "ec6d9669-1c81-4cd8-8c65-af1127b738ae",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 201',()=>pm.response.to.have.status(201));",
+                  "pm.collectionVariables.set('retryEmployee',pm.response.json().id);"
+                ],
+                "_lastExecutionId": "bf833198-c1de-4010-a048-c546be18bbe9"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8083",
+            "path": [
+              "test-demo",
+              "api",
+              "employees"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "c393abe1-099a-49b8-bd26-2f47c5c0fd4a",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8083",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "102",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"name\":\"Bonus\",\"surname\":\"Retry-2a0dad25-8faa-404f-950a-db0dbfbb5fde\",\"salary\":1000,\"departmentId\":1}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "035ed1cc-6a99-47e2-aa16-168b8ba5b97d",
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "141"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 22:00:36 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              49,
+              55,
+              44,
+              34,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              66,
+              111,
+              110,
+              117,
+              115,
+              34,
+              44,
+              34,
+              115,
+              117,
+              114,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              82,
+              101,
+              116,
+              114,
+              121,
+              45,
+              50,
+              97,
+              48,
+              100,
+              97,
+              100,
+              50,
+              53,
+              45,
+              56,
+              102,
+              97,
+              97,
+              45,
+              52,
+              48,
+              52,
+              102,
+              45,
+              57,
+              53,
+              48,
+              97,
+              45,
+              100,
+              98,
+              48,
+              100,
+              98,
+              102,
+              98,
+              98,
+              53,
+              102,
+              100,
+              101,
+              34,
+              44,
+              34,
+              115,
+              97,
+              108,
+              97,
+              114,
+              121,
+              34,
+              58,
+              49,
+              48,
+              48,
+              48,
+              44,
+              34,
+              100,
+              101,
+              112,
+              97,
+              114,
+              116,
+              109,
+              101,
+              110,
+              116,
+              73,
+              100,
+              34,
+              58,
+              49,
+              44,
+              34,
+              100,
+              101,
+              112,
+              97,
+              114,
+              116,
+              109,
+              101,
+              110,
+              116,
+              78,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              68,
+              101,
+              118,
+              101,
+              108,
+              111,
+              112,
+              109,
+              101,
+              110,
+              116,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 34,
+          "responseSize": 141
+        },
+        "id": "cf590e52-9693-4bea-a0bb-c9d8bb76df3b",
+        "assertions": [
+          {
+            "assertion": "HTTP 201",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "89f7f72c-1a55-4ec8-847e-0874366724d0",
+          "length": 20,
+          "cycles": 1,
+          "position": 12,
+          "iteration": 0,
+          "httpRequestId": "8a01685b-d5fb-431d-845a-ec9f09374404"
+        },
+        "item": {
+          "id": "ab783e71-936c-46ec-9a10-21972d09098a",
+          "name": "Retry-enabled salary operation",
+          "request": {
+            "url": {
+              "path": [
+                "isolation",
+                "employees",
+                "{{retryEmployee}}",
+                "raise"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "amount",
+                  "value": "100"
+                },
+                {
+                  "key": "isolation",
+                  "value": "REPEATABLE_READ"
+                },
+                {
+                  "key": "delayMs",
+                  "value": "0"
+                },
+                {
+                  "key": "retry",
+                  "value": "true"
+                }
+              ],
+              "variable": []
+            },
+            "method": "POST"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "782049fc-44df-4df4-b455-a0fa4afa3b9e",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 200',()=>pm.response.to.have.status(200));",
+                  "pm.test('Salary updated',()=>pm.expect(pm.response.json().newSalary).to.eql(1100));"
+                ],
+                "_lastExecutionId": "4e9ba391-fa6d-4c83-ac11-e602ec70a320"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8083",
+            "path": [
+              "test-demo",
+              "api",
+              "isolation",
+              "employees",
+              "17",
+              "raise"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [
+              {
+                "key": "amount",
+                "value": "100"
+              },
+              {
+                "key": "isolation",
+                "value": "REPEATABLE_READ"
+              },
+              {
+                "key": "delayMs",
+                "value": "0"
+              },
+              {
+                "key": "retry",
+                "value": "true"
+              }
+            ],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "e4de19a9-3b98-4c53-9e83-7759349da2fe",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8083",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "0",
+              "system": true
+            }
+          ],
+          "method": "POST"
+        },
+        "response": {
+          "id": "68630bc8-fdab-44fe-867f-a6ba41630220",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "87"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 22:00:36 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              101,
+              109,
+              112,
+              108,
+              111,
+              121,
+              101,
+              101,
+              73,
+              100,
+              34,
+              58,
+              49,
+              55,
+              44,
+              34,
+              111,
+              108,
+              100,
+              83,
+              97,
+              108,
+              97,
+              114,
+              121,
+              34,
+              58,
+              49,
+              48,
+              48,
+              48,
+              46,
+              48,
+              48,
+              44,
+              34,
+              110,
+              101,
+              119,
+              83,
+              97,
+              108,
+              97,
+              114,
+              121,
+              34,
+              58,
+              49,
+              49,
+              48,
+              48,
+              46,
+              48,
+              48,
+              44,
+              34,
+              105,
+              115,
+              111,
+              108,
+              97,
+              116,
+              105,
+              111,
+              110,
+              34,
+              58,
+              34,
+              82,
+              69,
+              80,
+              69,
+              65,
+              84,
+              65,
+              66,
+              76,
+              69,
+              95,
+              82,
+              69,
+              65,
+              68,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 40,
+          "responseSize": 87
+        },
+        "id": "ab783e71-936c-46ec-9a10-21972d09098a",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Salary updated",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "00dd6999-0076-4482-b987-953ad6d184ba",
+          "length": 20,
+          "cycles": 1,
+          "position": 13,
+          "iteration": 0,
+          "httpRequestId": "7d46ee96-9153-4fb5-9d90-7cb1cdfe6e8d"
+        },
+        "item": {
+          "id": "110a5df1-63be-4397-acf4-d3a178ecbad7",
+          "name": "Retry isolation guard",
+          "request": {
+            "url": {
+              "path": [
+                "isolation",
+                "employees",
+                "{{retryEmployee}}",
+                "raise"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "amount",
+                  "value": "100"
+                },
+                {
+                  "key": "isolation",
+                  "value": "READ_COMMITTED"
+                },
+                {
+                  "key": "delayMs",
+                  "value": "0"
+                },
+                {
+                  "key": "retry",
+                  "value": "true"
+                }
+              ],
+              "variable": []
+            },
+            "method": "POST"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "66df69e8-1e27-4542-804c-5e2bb0fb15ff",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 400',()=>pm.response.to.have.status(400));"
+                ],
+                "_lastExecutionId": "f719102d-535b-4b3c-9b06-ced365ceac77"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8083",
+            "path": [
+              "test-demo",
+              "api",
+              "isolation",
+              "employees",
+              "17",
+              "raise"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [
+              {
+                "key": "amount",
+                "value": "100"
+              },
+              {
+                "key": "isolation",
+                "value": "READ_COMMITTED"
+              },
+              {
+                "key": "delayMs",
+                "value": "0"
+              },
+              {
+                "key": "retry",
+                "value": "true"
+              }
+            ],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "891833b9-22fb-442f-bfc5-72c5a21e2a4d",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8083",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "0",
+              "system": true
+            }
+          ],
+          "method": "POST"
+        },
+        "response": {
+          "id": "792098d1-9d3c-416c-849f-7861347523bd",
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 22:00:36 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              100,
+              101,
+              116,
+              97,
+              105,
+              108,
+              34,
+              58,
+              34,
+              83,
+              97,
+              108,
+              97,
+              114,
+              121,
+              32,
+              114,
+              101,
+              116,
+              114,
+              121,
+              32,
+              114,
+              101,
+              113,
+              117,
+              105,
+              114,
+              101,
+              115,
+              32,
+              82,
+              69,
+              80,
+              69,
+              65,
+              84,
+              65,
+              66,
+              76,
+              69,
+              95,
+              82,
+              69,
+              65,
+              68,
+              34,
+              44,
+              34,
+              105,
+              110,
+              115,
+              116,
+              97,
+              110,
+              99,
+              101,
+              34,
+              58,
+              34,
+              47,
+              116,
+              101,
+              115,
+              116,
+              45,
+              100,
+              101,
+              109,
+              111,
+              47,
+              97,
+              112,
+              105,
+              47,
+              105,
+              115,
+              111,
+              108,
+              97,
+              116,
+              105,
+              111,
+              110,
+              47,
+              101,
+              109,
+              112,
+              108,
+              111,
+              121,
+              101,
+              101,
+              115,
+              47,
+              49,
+              55,
+              47,
+              114,
+              97,
+              105,
+              115,
+              101,
+              34,
+              44,
+              34,
+              115,
+              116,
+              97,
+              116,
+              117,
+              115,
+              34,
+              58,
+              52,
+              48,
+              48,
+              44,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              34,
+              66,
+              97,
+              100,
+              32,
+              82,
+              101,
+              113,
+              117,
+              101,
+              115,
+              116,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 3,
+          "responseSize": 142
+        },
+        "id": "110a5df1-63be-4397-acf4-d3a178ecbad7",
+        "assertions": [
+          {
+            "assertion": "HTTP 400",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "d660b2ff-ba75-4a04-bd5a-c0d68176465d",
+          "length": 20,
+          "cycles": 1,
+          "position": 14,
+          "iteration": 0,
+          "httpRequestId": "d049e103-c354-4559-a836-7c7c6a4ee2d8"
+        },
+        "item": {
+          "id": "87580c29-ac4a-4788-a4ae-59e371e70663",
+          "name": "Cleanup candidate",
+          "request": {
+            "url": {
+              "path": [
+                "students",
+                "{{candidate}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "DELETE"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "a0146411-72e4-4e84-be52-e384353ed4f1",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 204',()=>pm.response.to.have.status(204));"
+                ],
+                "_lastExecutionId": "27e0c878-9262-4cc9-8f9d-d157722a2162"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8083",
+            "path": [
+              "test-demo",
+              "api",
+              "students",
+              "23"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "80414dec-86cb-4a71-8ee3-d2e0db2c291a",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8083",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "DELETE"
+        },
+        "response": {
+          "id": "ea62494c-0048-46a2-aaa8-2ef5a9526417",
+          "status": "No Content",
+          "code": 204,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 22:00:36 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": []
+          },
+          "cookie": [],
+          "responseTime": 40,
+          "responseSize": 0
+        },
+        "id": "87580c29-ac4a-4788-a4ae-59e371e70663",
+        "assertions": [
+          {
+            "assertion": "HTTP 204",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "f3dba9f8-87f1-411d-a3dc-58d443f7b722",
+          "length": 20,
+          "cycles": 1,
+          "position": 15,
+          "iteration": 0,
+          "httpRequestId": "05da78aa-5195-4247-a151-5062798f60b8"
+        },
+        "item": {
+          "id": "5fcd7527-f98f-4691-8ff7-619837a79c59",
+          "name": "Cleanup occupant",
+          "request": {
+            "url": {
+              "path": [
+                "students",
+                "{{occupant}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "DELETE"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "75096a94-bf02-4de8-8b47-3237aa610613",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 204',()=>pm.response.to.have.status(204));"
+                ],
+                "_lastExecutionId": "482e97a6-28d1-4173-9ee7-cba2f4b5bd71"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8083",
+            "path": [
+              "test-demo",
+              "api",
+              "students",
+              "22"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "5a9b4a25-e629-4bc3-9b5a-82e23bc1bd59",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8083",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "DELETE"
+        },
+        "response": {
+          "id": "86afd9a8-006d-412d-8e24-7107a98e1abf",
+          "status": "No Content",
+          "code": 204,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 22:00:36 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": []
+          },
+          "cookie": [],
+          "responseTime": 47,
+          "responseSize": 0
+        },
+        "id": "5fcd7527-f98f-4691-8ff7-619837a79c59",
+        "assertions": [
+          {
+            "assertion": "HTTP 204",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "b6606940-c0c2-495f-8470-31796a8aa295",
+          "length": 20,
+          "cycles": 1,
+          "position": 16,
+          "iteration": 0,
+          "httpRequestId": "eff71e1f-98cf-48c2-bb5d-d70dc048461e"
+        },
+        "item": {
+          "id": "354cb5c5-0431-4a02-914b-b6208954225c",
+          "name": "Cleanup rollbackStudent",
+          "request": {
+            "url": {
+              "path": [
+                "students",
+                "{{rollbackStudent}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "DELETE"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "9276d3bf-d433-4620-84b6-4b1b3fbab7f2",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 204',()=>pm.response.to.have.status(204));"
+                ],
+                "_lastExecutionId": "9e52df2b-700d-48c6-ac3b-4b7409d27558"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8083",
+            "path": [
+              "test-demo",
+              "api",
+              "students",
+              "24"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "5bf4fb0b-dadd-4643-ad31-dd96ef2319b5",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8083",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "DELETE"
+        },
+        "response": {
+          "id": "f97590d5-8fc4-4d10-9496-b827762053a5",
+          "status": "No Content",
+          "code": 204,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 22:00:36 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": []
+          },
+          "cookie": [],
+          "responseTime": 32,
+          "responseSize": 0
+        },
+        "id": "354cb5c5-0431-4a02-914b-b6208954225c",
+        "assertions": [
+          {
+            "assertion": "HTTP 204",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "b7227c36-a870-4c0f-9be7-a53374b6caeb",
+          "length": 20,
+          "cycles": 1,
+          "position": 17,
+          "iteration": 0,
+          "httpRequestId": "b3acf611-2e1a-4435-98be-b7ab76abb306"
+        },
+        "item": {
+          "id": "5b3ce5ea-9c1d-487b-809b-3d91352fea4b",
+          "name": "Cleanup retryEmployee",
+          "request": {
+            "url": {
+              "path": [
+                "employees",
+                "{{retryEmployee}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "DELETE"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "eacc5e68-dad8-4b4b-8779-8db11d6028d5",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 204',()=>pm.response.to.have.status(204));"
+                ],
+                "_lastExecutionId": "2467ad28-767a-4d98-a4e2-3a2feb97dc13"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8083",
+            "path": [
+              "test-demo",
+              "api",
+              "employees",
+              "17"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "6fc2f0f9-f0a5-48f4-b5cf-5d0eb8253004",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8083",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "DELETE"
+        },
+        "response": {
+          "id": "c1df2a67-3a68-41f7-8a5e-6e4bdcb4f5e5",
+          "status": "No Content",
+          "code": 204,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 22:00:36 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": []
+          },
+          "cookie": [],
+          "responseTime": 38,
+          "responseSize": 0
+        },
+        "id": "5b3ce5ea-9c1d-487b-809b-3d91352fea4b",
+        "assertions": [
+          {
+            "assertion": "HTTP 204",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "60f99254-9f61-4448-b9a8-555e3e34dd0b",
+          "length": 20,
+          "cycles": 1,
+          "position": 18,
+          "iteration": 0,
+          "httpRequestId": "5accf61d-bb07-4713-94f3-8086652631dd"
+        },
+        "item": {
+          "id": "a52a0d1f-6e18-4e1b-aca4-5fe7d54bee17",
+          "name": "Cleanup openCourse",
+          "request": {
+            "url": {
+              "path": [
+                "courses",
+                "{{openCourse}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "DELETE"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "9f480a4f-a64b-4475-9a53-a6307ff2de7e",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 204',()=>pm.response.to.have.status(204));"
+                ],
+                "_lastExecutionId": "849e400e-7532-4d7e-bc31-df43a5f73eec"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8083",
+            "path": [
+              "test-demo",
+              "api",
+              "courses",
+              "13"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "28375ef8-11a3-4648-873f-e097df7d0af4",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8083",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "DELETE"
+        },
+        "response": {
+          "id": "e4c77f73-88e2-4f22-9350-b687a683372b",
+          "status": "No Content",
+          "code": 204,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 22:00:37 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": []
+          },
+          "cookie": [],
+          "responseTime": 34,
+          "responseSize": 0
+        },
+        "id": "a52a0d1f-6e18-4e1b-aca4-5fe7d54bee17",
+        "assertions": [
+          {
+            "assertion": "HTTP 204",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "a14df849-a0fc-43a7-a674-deac3d71fcd9",
+          "length": 20,
+          "cycles": 1,
+          "position": 19,
+          "iteration": 0,
+          "httpRequestId": "fd4efaba-f947-4695-913c-b7c02c86916f"
+        },
+        "item": {
+          "id": "69f77e7d-d51b-48fc-a648-bb91b3381490",
+          "name": "Cleanup rollbackCourse",
+          "request": {
+            "url": {
+              "path": [
+                "courses",
+                "{{rollbackCourse}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "DELETE"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "0989b494-5d4b-4698-815c-2ab4542bb750",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HTTP 204',()=>pm.response.to.have.status(204));"
+                ],
+                "_lastExecutionId": "f9153545-a713-47e7-9ea6-4a39ca1fc2dc"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8083",
+            "path": [
+              "test-demo",
+              "api",
+              "courses",
+              "14"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "1dbfd93f-f8db-47bb-a211-8da9e9537975",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8083",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "DELETE"
+        },
+        "response": {
+          "id": "448c84bc-06d6-4854-970c-39752f59afe0",
+          "status": "No Content",
+          "code": 204,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 22:00:37 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": []
+          },
+          "cookie": [],
+          "responseTime": 42,
+          "responseSize": 0
+        },
+        "id": "69f77e7d-d51b-48fc-a648-bb91b3381490",
+        "assertions": [
+          {
+            "assertion": "HTTP 204",
+            "skipped": false
+          }
+        ]
+      }
+    ],
+    "transfers": {
+      "responseTotal": 1519
+    },
+    "failures": [],
+    "error": null
+  }
+}

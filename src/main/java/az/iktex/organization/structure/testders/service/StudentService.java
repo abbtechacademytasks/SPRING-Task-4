@@ -10,6 +10,7 @@ import az.iktex.organization.structure.testders.repository.StudentRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -22,8 +23,9 @@ public class StudentService {
     private final StudentRepository studentRepository;
     private final CourseRepository courseRepository;
     private final StudentMapper studentMapper;
+    private final EnrollmentService enrollmentService;
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public StudentResponse create(StudentRequest request) {
         Student student = studentMapper.toEntity(request);
         return studentMapper.toResponse(studentRepository.save(student));
@@ -43,7 +45,7 @@ public class StudentService {
         return studentMapper.toResponseList(studentRepository.findAllWithoutCourses());
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public StudentResponse update(Long id, StudentRequest request) {
         Student student = studentRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Student not found: " + id));
@@ -51,14 +53,14 @@ public class StudentService {
         return studentMapper.toResponse(student);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public void delete(Long id) {
         Student student = studentRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Student not found: " + id));
         studentRepository.delete(student);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public void enroll(Long studentId, Long courseId) {
         Student student = studentRepository.findByIdWithCourses(studentId)
                 .orElseThrow(() -> new EntityNotFoundException("Student not found: " + studentId));
@@ -69,10 +71,11 @@ public class StudentService {
             throw new IllegalStateException("Student is already enrolled in this course");
         }
 
+        enrollmentService.reserveSeat(courseId);
         student.addCourse(course);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public void unenroll(Long studentId, Long courseId) {
         Student student = studentRepository.findByIdWithCourses(studentId)
                 .orElseThrow(() -> new EntityNotFoundException("Student not found: " + studentId));

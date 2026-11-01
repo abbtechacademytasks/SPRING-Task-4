@@ -12,6 +12,7 @@ import az.iktex.organization.structure.testders.repository.BookRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
@@ -27,7 +28,7 @@ public class BookService {
     private final AuthorBookRepository authorBookRepository;
     private final BookMapper bookMapper;
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public BookResponse create(BookRequest request) {
         if (bookRepository.existsByTitle(request.title())) {
             throw new IllegalStateException("Book title already exists");
@@ -53,7 +54,7 @@ public class BookService {
         return bookMapper.toResponseList(bookRepository.findAllByPriceLessThanEqualOrderByPriceAsc(price));
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public BookResponse update(Long id, BookRequest request) {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Book not found: " + id));
@@ -64,14 +65,14 @@ public class BookService {
         return bookMapper.toResponse(book);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public void delete(Long id) {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Book not found: " + id));
         bookRepository.delete(book);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public void addAuthor(Long bookId, Long authorId) {
         Author author = authorRepository.findById(authorId)
                 .orElseThrow(() -> new EntityNotFoundException("Author not found: " + authorId));
@@ -92,13 +93,13 @@ public class BookService {
         authorBookRepository.save(link);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public void removeAuthor(Long bookId, Long authorId) {
         AuthorBook link = authorBookRepository
                 .findByAuthorIdAndBookId(authorId, bookId)
                 .orElseThrow(() ->
                         new EntityNotFoundException("Author-book link not found"));
 
-        authorBookRepository.delete(link);
+        link.getAuthor().removeAuthorBook(link);
     }
 }

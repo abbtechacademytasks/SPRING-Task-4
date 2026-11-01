@@ -1,0 +1,511 @@
+{
+  "summary": {
+    "nestedPartialSuccess": {
+      "studentId": 17,
+      "enrolledCourseIds": [
+        8,
+        10
+      ],
+      "fullCourseIds": [
+        9
+      ]
+    },
+    "outerRollbackPreserved": true,
+    "salaryRetry": {
+      "bothInitialReadsObserved": true,
+      "responses": [
+        {
+          "method": "POST",
+          "path": "/isolation/employees/16/raise?amount=100&isolation=REPEATABLE_READ&delayMs=3000&retry=true",
+          "status": 200,
+          "body": {
+            "employeeId": 16,
+            "oldSalary": 1100.0,
+            "newSalary": 1200.0,
+            "isolation": "REPEATABLE_READ"
+          },
+          "seconds": 6.123
+        },
+        {
+          "method": "POST",
+          "path": "/isolation/employees/16/raise?amount=100&isolation=REPEATABLE_READ&delayMs=3000&retry=true",
+          "status": 200,
+          "body": {
+            "employeeId": 16,
+            "oldSalary": 1000.0,
+            "newSalary": 1100.0,
+            "isolation": "REPEATABLE_READ"
+          },
+          "seconds": 3.071
+        }
+      ],
+      "finalSalary": 1200.0
+    },
+    "enrollmentRetry": {
+      "bothInitialReadsObserved": true,
+      "responses": [
+        {
+          "method": "POST",
+          "path": "/isolation/courses/12/enroll/20?isolation=SERIALIZABLE&delayMs=3000&retry=true",
+          "status": 409,
+          "body": {
+            "detail": "Course is full",
+            "instance": "/test-demo/api/isolation/courses/12/enroll/20",
+            "status": 409,
+            "title": "Conflict"
+          },
+          "seconds": 6.064
+        },
+        {
+          "method": "POST",
+          "path": "/isolation/courses/12/enroll/21?isolation=SERIALIZABLE&delayMs=3000&retry=true",
+          "status": 200,
+          "body": {
+            "courseId": 12,
+            "studentId": 21,
+            "countBefore": 0,
+            "capacity": 1,
+            "isolation": "SERIALIZABLE"
+          },
+          "seconds": 3.052
+        }
+      ],
+      "finalCount": 1
+    },
+    "success": true,
+    "cleanupSuccessful": true
+  },
+  "requests": [
+    {
+      "method": "POST",
+      "path": "/students",
+      "status": 201,
+      "body": {
+        "id": 17,
+        "name": "Bonus",
+        "surname": "6b205da4-219a-47d8-abf9-2294897f398e",
+        "age": 20,
+        "courses": null
+      },
+      "seconds": 0.108
+    },
+    {
+      "method": "POST",
+      "path": "/students",
+      "status": 201,
+      "body": {
+        "id": 18,
+        "name": "Bonus",
+        "surname": "f3fb65e3-5a7d-497d-9f1b-a767b7693edb",
+        "age": 20,
+        "courses": null
+      },
+      "seconds": 0.04
+    },
+    {
+      "method": "POST",
+      "path": "/courses",
+      "status": 201,
+      "body": {
+        "id": 8,
+        "title": "Bonus-a4ce550e-6aac-4028-a952-38aba6fb3811",
+        "credit": 3,
+        "teacher": "Bonus"
+      },
+      "seconds": 0.048
+    },
+    {
+      "method": "DELETE",
+      "path": "/cache/courses",
+      "status": 204,
+      "body": null,
+      "seconds": 0.003
+    },
+    {
+      "method": "POST",
+      "path": "/courses",
+      "status": 201,
+      "body": {
+        "id": 9,
+        "title": "Bonus-e6875729-d54e-4028-9e0e-fb7a26d16e16",
+        "credit": 3,
+        "teacher": "Bonus"
+      },
+      "seconds": 0.039
+    },
+    {
+      "method": "DELETE",
+      "path": "/cache/courses",
+      "status": 204,
+      "body": null,
+      "seconds": 0.024
+    },
+    {
+      "method": "POST",
+      "path": "/courses",
+      "status": 201,
+      "body": {
+        "id": 10,
+        "title": "Bonus-35dcd484-03ac-4190-a97c-40f997313773",
+        "credit": 3,
+        "teacher": "Bonus"
+      },
+      "seconds": 0.05
+    },
+    {
+      "method": "DELETE",
+      "path": "/cache/courses",
+      "status": 204,
+      "body": null,
+      "seconds": 0.024
+    },
+    {
+      "method": "POST",
+      "path": "/students/18/courses/9",
+      "status": 201,
+      "body": null,
+      "seconds": 0.051
+    },
+    {
+      "method": "POST",
+      "path": "/students/17/courses/bulk",
+      "status": 200,
+      "body": {
+        "studentId": 17,
+        "enrolledCourseIds": [
+          8,
+          10
+        ],
+        "fullCourseIds": [
+          9
+        ]
+      },
+      "seconds": 0.09
+    },
+    {
+      "method": "GET",
+      "path": "/students/17",
+      "status": 200,
+      "body": {
+        "id": 17,
+        "name": "Bonus",
+        "surname": "6b205da4-219a-47d8-abf9-2294897f398e",
+        "age": 20,
+        "courses": [
+          {
+            "id": 8,
+            "title": "Bonus-a4ce550e-6aac-4028-a952-38aba6fb3811",
+            "credit": 3,
+            "teacher": "Bonus"
+          },
+          {
+            "id": 10,
+            "title": "Bonus-35dcd484-03ac-4190-a97c-40f997313773",
+            "credit": 3,
+            "teacher": "Bonus"
+          }
+        ]
+      },
+      "seconds": 0.022
+    },
+    {
+      "method": "POST",
+      "path": "/students",
+      "status": 201,
+      "body": {
+        "id": 19,
+        "name": "Bonus",
+        "surname": "2fada3dc-b2ee-4708-8815-457282e7fa41",
+        "age": 20,
+        "courses": null
+      },
+      "seconds": 0.055
+    },
+    {
+      "method": "POST",
+      "path": "/courses",
+      "status": 201,
+      "body": {
+        "id": 11,
+        "title": "Bonus-6f440256-3014-41c8-9fcb-61c3a8f26ed4",
+        "credit": 3,
+        "teacher": "Bonus"
+      },
+      "seconds": 0.041
+    },
+    {
+      "method": "DELETE",
+      "path": "/cache/courses",
+      "status": 204,
+      "body": null,
+      "seconds": 0.02
+    },
+    {
+      "method": "POST",
+      "path": "/students/19/courses/bulk",
+      "status": 404,
+      "body": {
+        "detail": "Course not found: 9223372036854775807",
+        "instance": "/test-demo/api/students/19/courses/bulk",
+        "status": 404,
+        "title": "Not Found"
+      },
+      "seconds": 0.031
+    },
+    {
+      "method": "POST",
+      "path": "/students/17/courses/bulk",
+      "status": 400,
+      "body": {
+        "detail": "Course IDs must be positive, unique and not empty",
+        "instance": "/test-demo/api/students/17/courses/bulk",
+        "status": 400,
+        "title": "Bad Request"
+      },
+      "seconds": 0.028
+    },
+    {
+      "method": "POST",
+      "path": "/students/17/courses/bulk",
+      "status": 400,
+      "body": {
+        "detail": "Course IDs must be positive, unique and not empty",
+        "instance": "/test-demo/api/students/17/courses/bulk",
+        "status": 400,
+        "title": "Bad Request"
+      },
+      "seconds": 0.015
+    },
+    {
+      "method": "POST",
+      "path": "/departments",
+      "status": 201,
+      "body": {
+        "id": 6,
+        "name": "Bonus-a3432ed7-7424-4de5-9d91-8241f2604328",
+        "location": null,
+        "phone": null,
+        "employees": null
+      },
+      "seconds": 0.052
+    },
+    {
+      "method": "POST",
+      "path": "/employees",
+      "status": 201,
+      "body": {
+        "id": 16,
+        "name": "Bonus",
+        "surname": "Retry",
+        "salary": 1000,
+        "departmentId": 6,
+        "departmentName": "Bonus-a3432ed7-7424-4de5-9d91-8241f2604328"
+      },
+      "seconds": 0.059
+    },
+    {
+      "method": "POST",
+      "path": "/isolation/employees/16/raise?amount=100&isolation=REPEATABLE_READ&delayMs=3000&retry=true",
+      "status": 200,
+      "body": {
+        "employeeId": 16,
+        "oldSalary": 1000.0,
+        "newSalary": 1100.0,
+        "isolation": "REPEATABLE_READ"
+      },
+      "seconds": 3.071
+    },
+    {
+      "method": "POST",
+      "path": "/isolation/employees/16/raise?amount=100&isolation=REPEATABLE_READ&delayMs=3000&retry=true",
+      "status": 200,
+      "body": {
+        "employeeId": 16,
+        "oldSalary": 1100.0,
+        "newSalary": 1200.0,
+        "isolation": "REPEATABLE_READ"
+      },
+      "seconds": 6.123
+    },
+    {
+      "method": "GET",
+      "path": "/employees/16",
+      "status": 200,
+      "body": {
+        "id": 16,
+        "name": "Bonus",
+        "surname": "Retry",
+        "salary": 1200.0,
+        "departmentId": 6,
+        "departmentName": "Bonus-a3432ed7-7424-4de5-9d91-8241f2604328"
+      },
+      "seconds": 0.009
+    },
+    {
+      "method": "POST",
+      "path": "/isolation/employees/16/raise?amount=100&isolation=READ_COMMITTED&delayMs=0&retry=true",
+      "status": 400,
+      "body": {
+        "detail": "Salary retry requires REPEATABLE_READ",
+        "instance": "/test-demo/api/isolation/employees/16/raise",
+        "status": 400,
+        "title": "Bad Request"
+      },
+      "seconds": 0.003
+    },
+    {
+      "method": "POST",
+      "path": "/students",
+      "status": 201,
+      "body": {
+        "id": 20,
+        "name": "Bonus",
+        "surname": "4f2ed494-ac7b-4ab1-9738-ed60e5b03b52",
+        "age": 20,
+        "courses": null
+      },
+      "seconds": 0.034
+    },
+    {
+      "method": "POST",
+      "path": "/students",
+      "status": 201,
+      "body": {
+        "id": 21,
+        "name": "Bonus",
+        "surname": "a21a97ba-4ecb-4aab-9ed4-05350ca3553b",
+        "age": 20,
+        "courses": null
+      },
+      "seconds": 0.052
+    },
+    {
+      "method": "POST",
+      "path": "/courses",
+      "status": 201,
+      "body": {
+        "id": 12,
+        "title": "Bonus-cdbbbad8-8f57-49cb-9d19-f2a313dcab92",
+        "credit": 3,
+        "teacher": "Bonus"
+      },
+      "seconds": 0.048
+    },
+    {
+      "method": "DELETE",
+      "path": "/cache/courses",
+      "status": 204,
+      "body": null,
+      "seconds": 0.002
+    },
+    {
+      "method": "POST",
+      "path": "/isolation/courses/12/enroll/21?isolation=SERIALIZABLE&delayMs=3000&retry=true",
+      "status": 200,
+      "body": {
+        "courseId": 12,
+        "studentId": 21,
+        "countBefore": 0,
+        "capacity": 1,
+        "isolation": "SERIALIZABLE"
+      },
+      "seconds": 3.052
+    },
+    {
+      "method": "POST",
+      "path": "/isolation/courses/12/enroll/20?isolation=SERIALIZABLE&delayMs=3000&retry=true",
+      "status": 409,
+      "body": {
+        "detail": "Course is full",
+        "instance": "/test-demo/api/isolation/courses/12/enroll/20",
+        "status": 409,
+        "title": "Conflict"
+      },
+      "seconds": 6.064
+    },
+    {
+      "method": "DELETE",
+      "path": "/students/21",
+      "status": 204,
+      "body": null,
+      "seconds": 0.051
+    },
+    {
+      "method": "DELETE",
+      "path": "/students/20",
+      "status": 204,
+      "body": null,
+      "seconds": 0.063
+    },
+    {
+      "method": "DELETE",
+      "path": "/students/19",
+      "status": 204,
+      "body": null,
+      "seconds": 0.059
+    },
+    {
+      "method": "DELETE",
+      "path": "/students/18",
+      "status": 204,
+      "body": null,
+      "seconds": 0.052
+    },
+    {
+      "method": "DELETE",
+      "path": "/students/17",
+      "status": 204,
+      "body": null,
+      "seconds": 0.037
+    },
+    {
+      "method": "DELETE",
+      "path": "/employees/16",
+      "status": 204,
+      "body": null,
+      "seconds": 0.052
+    },
+    {
+      "method": "DELETE",
+      "path": "/courses/12",
+      "status": 204,
+      "body": null,
+      "seconds": 0.059
+    },
+    {
+      "method": "DELETE",
+      "path": "/courses/11",
+      "status": 204,
+      "body": null,
+      "seconds": 0.041
+    },
+    {
+      "method": "DELETE",
+      "path": "/courses/10",
+      "status": 204,
+      "body": null,
+      "seconds": 0.048
+    },
+    {
+      "method": "DELETE",
+      "path": "/courses/9",
+      "status": 204,
+      "body": null,
+      "seconds": 0.052
+    },
+    {
+      "method": "DELETE",
+      "path": "/courses/8",
+      "status": 204,
+      "body": null,
+      "seconds": 0.037
+    },
+    {
+      "method": "DELETE",
+      "path": "/departments/6",
+      "status": 204,
+      "body": null,
+      "seconds": 0.041
+    }
+  ]
+}

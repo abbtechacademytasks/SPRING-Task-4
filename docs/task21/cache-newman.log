@@ -1,0 +1,136 @@
+newman
+
+Task21 Cache
+
+□ Cache
+└ 01. Bütün cache-i təmizlə
+  DELETE http://localhost:8080/test-demo/api/cache [204 No Content, 112B, 98ms]
+  √  HTTP 204
+
+└ 02. Statistikanı sıfırla
+  DELETE http://localhost:8080/test-demo/api/cache/stats [204 No Content, 112B, 3ms]
+  √  HTTP 204
+
+└ 03. Course ilk oxuma
+  GET http://localhost:8080/test-demo/api/courses/1 [200 OK, 216B, 145ms]
+  √  HTTP 200
+
+└ 04. Course miss və put
+  GET http://localhost:8080/test-demo/api/cache/stats [200 OK, 672B, 11ms]
+  √  HTTP 200
+  √  First read: miss1 put1 hit0
+
+└ 05. Course ikinci oxuma
+  GET http://localhost:8080/test-demo/api/courses/1 [200 OK, 216B, 6ms]
+  √  HTTP 200
+
+└ 06. Course L2 hit
+  GET http://localhost:8080/test-demo/api/cache/stats [200 OK, 672B, 4ms]
+  √  HTTP 200
+  √  Second read hits L2
+
+└ 07. Yalnız statistikanı sıfırla
+  DELETE http://localhost:8080/test-demo/api/cache/stats [204 No Content, 112B, 3ms]
+  √  HTTP 204
+
+└ 08. Course cache-də qalıb
+  GET http://localhost:8080/test-demo/api/courses/1 [200 OK, 216B, 4ms]
+  √  HTTP 200
+
+└ 09. Reset cache-i silmir
+  GET http://localhost:8080/test-demo/api/cache/stats [200 OK, 672B, 3ms]
+  √  HTTP 200
+  √  Reset preserves cached Course
+
+└ 10. Course region-u təmizlə
+  DELETE http://localhost:8080/test-demo/api/cache/courses [204 No Content, 112B, 6ms]
+  √  HTTP 204
+
+└ 11. Course yenidən DB-dən
+  GET http://localhost:8080/test-demo/api/courses/1 [200 OK, 216B, 7ms]
+  √  HTTP 200
+
+└ 12. Evict-dən sonra miss
+  GET http://localhost:8080/test-demo/api/cache/stats [200 OK, 672B, 3ms]
+  √  HTTP 200
+  √  Entity eviction causes a miss
+
+└ 13. Naməlum region
+  DELETE http://localhost:8080/test-demo/api/cache/unknown [400 Bad Request, 278B, 13ms]
+  √  HTTP 400
+
+└ 14. Query yoxlaması üçün cache-i təmizlə
+  DELETE http://localhost:8080/test-demo/api/cache [204 No Content, 112B, 4ms]
+  √  HTTP 204
+
+└ 15. Query statistikasını sıfırla
+  DELETE http://localhost:8080/test-demo/api/cache/stats [204 No Content, 112B, 2ms]
+  √  HTTP 204
+
+└ 16. Müəllif ölkə ilə ilk oxuma
+  GET http://localhost:8080/test-demo/api/authors?country=Azerbaijan [200 OK, 293B, 81ms]
+  √  HTTP 200
+
+└ 17. Müəllif ölkə ilə ikinci oxuma
+  GET http://localhost:8080/test-demo/api/authors?country=Azerbaijan [200 OK, 293B, 4ms]
+  √  HTTP 200
+
+└ 18. Query cache hit
+  GET http://localhost:8080/test-demo/api/cache/stats [200 OK, 672B, 2ms]
+  √  HTTP 200
+  √  Query cache hit
+
+└ 19. Yeni müəllif
+  POST http://localhost:8080/test-demo/api/authors [201 Created, 262B, 122ms]
+  √  HTTP 201
+
+└ 20. Query invalidation-dan sonra yeni nəticə
+  GET http://localhost:8080/test-demo/api/authors?country=Azerbaijan [200 OK, 394B, 7ms]
+  √  HTTP 200
+  √  New author appears
+
+└ 21. Test kitabı
+  POST http://localhost:8080/test-demo/api/books [201 Created, 274B, 41ms]
+  √  HTTP 201
+
+└ 22. Köhnə qiymət
+  GET http://localhost:8080/test-demo/api/books/10 [200 OK, 267B, 18ms]
+  √  HTTP 200
+  √  Old price
+
+└ 23. Qiyməti dəyiş
+  PUT http://localhost:8080/test-demo/api/books/10 [200 OK, 268B, 49ms]
+  √  HTTP 200
+
+└ 24. Yeni qiyməti oxu
+  GET http://localhost:8080/test-demo/api/books/10 [200 OK, 267B, 7ms]
+  √  HTTP 200
+  √  Updated price
+
+└ 25. Test kitabını sil
+  DELETE http://localhost:8080/test-demo/api/books/10 [204 No Content, 112B, 29ms]
+  √  HTTP 204
+
+└ 26. Test müəllifini sil
+  DELETE http://localhost:8080/test-demo/api/authors/8 [204 No Content, 112B, 41ms]
+  √  HTTP 204
+
+┌─────────────────────────┬───────────────────┬──────────────────┐
+│                         │          executed │           failed │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│              iterations │                 1 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│                requests │                26 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│            test-scripts │                26 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│      prerequest-scripts │                 0 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│              assertions │                34 │                0 │
+├─────────────────────────┴───────────────────┴──────────────────┤
+│ total run duration: 2.8s                                       │
+├────────────────────────────────────────────────────────────────┤
+│ total data received: 3.99kB (approx)                           │
+├────────────────────────────────────────────────────────────────┤
+│ average response time: 27ms [min: 2ms, max: 145ms, s.d.: 39ms] │
+└────────────────────────────────────────────────────────────────┘

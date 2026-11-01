@@ -1,0 +1,9 @@
+Demo Isolation         HTTP      Observed result
+D1  READ_COMMITTED    200       AVG 1000 -> 3000
+D1  REPEATABLE_READ   200       AVG 1000 -> 1000
+D2  READ_COMMITTED    200,200   salary=1100; two successful increments would give1200
+D2  REPEATABLE_READ   200,409   salary=1100; two successful increments would give1200
+D3  REPEATABLE_READ   200,200   capacity=1; enrolled=2
+D3  SERIALIZABLE      200,409   capacity=1; enrolled=1
+PASS: all six comparisons matched; temporary data will now be removed.
+Evidence: docs/task21/bonus/isolation-demo

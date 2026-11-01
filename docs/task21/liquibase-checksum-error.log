@@ -1,0 +1,119 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.2)
+
+2026-10-30T14:20:39.238+04:00  INFO 10344 --- [test-demo-api] [           main] a.i.o.s.testders.SchoolApplication       : Starting SchoolApplication v0.0.1-SNAPSHOT using Java 25.0.4.1 with PID 10344 (C:\Users\USER\Desktop\ABB Tech Academy\SPRING-Task-4\build\libs\test-ders-0.0.1-SNAPSHOT.jar started by USER in C:\Users\USER\Desktop\ABB Tech Academy\SPRING-Task-4)
+2026-10-30T14:20:39.241+04:00  INFO 10344 --- [test-demo-api] [           main] a.i.o.s.testders.SchoolApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-10-30T14:20:39.811+04:00  INFO 10344 --- [test-demo-api] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-30T14:20:39.870+04:00  INFO 10344 --- [test-demo-api] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 51 ms. Found 9 JPA repository interfaces.
+2026-10-30T14:20:40.391+04:00  INFO 10344 --- [test-demo-api] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-10-30T14:20:40.404+04:00  INFO 10344 --- [test-demo-api] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-30T14:20:40.405+04:00  INFO 10344 --- [test-demo-api] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.27]
+2026-10-30T14:20:40.437+04:00  INFO 10344 --- [test-demo-api] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1151 ms
+2026-10-30T14:20:40.594+04:00  INFO 10344 --- [test-demo-api] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-30T14:20:40.748+04:00  INFO 10344 --- [test-demo-api] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1b7f06c7
+2026-10-30T14:20:40.750+04:00  INFO 10344 --- [test-demo-api] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-30T14:20:40.873+04:00  INFO 10344 --- [test-demo-api] [           main] liquibase.database                       : Set default schema name to public
+2026-10-30T14:20:42.270+04:00  INFO 10344 --- [test-demo-api] [           main] liquibase.changelog                      : Reading from public.databasechangelog
+2026-10-30T14:20:42.423+04:00  INFO 10344 --- [test-demo-api] [           main] liquibase.changelog                      : Change failed validation!
+2026-10-30T14:20:42.426+04:00  INFO 10344 --- [test-demo-api] [           main] liquibase.command                        : Logging exception.
+2026-10-30T14:20:42.426+04:00  INFO 10344 --- [test-demo-api] [           main] liquibase.ui                             : ERROR: Exception Details
+2026-10-30T14:20:42.426+04:00  INFO 10344 --- [test-demo-api] [           main] liquibase.ui                             : ERROR: Exception Primary Class:  ValidationFailedException
+2026-10-30T14:20:42.426+04:00  INFO 10344 --- [test-demo-api] [           main] liquibase.ui                             : ERROR: Exception Primary Reason:  Validation Failed:
+     1 changesets check sum
+          db/changelog/changes/001-create-users-passports.yaml::001-1::VagifPashayev was: 9:231f6a33b969c53d3caa0ee2c4f7618a but is now: 9:c283abb9a65777ee35ccf0d06580d8bd
+
+2026-10-30T14:20:42.427+04:00  INFO 10344 --- [test-demo-api] [           main] liquibase.ui                             : ERROR: Exception Primary Source:  5.0.4
+2026-10-30T14:20:42.427+04:00  INFO 10344 --- [test-demo-api] [           main] liquibase.command                        : Command execution complete
+2026-10-30T14:20:42.430+04:00  WARN 10344 --- [test-demo-api] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'liquibase' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/liquibase/autoconfigure/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
+     1 changesets check sum
+          db/changelog/changes/001-create-users-passports.yaml::001-1::VagifPashayev was: 9:231f6a33b969c53d3caa0ee2c4f7618a but is now: 9:c283abb9a65777ee35ccf0d06580d8bd
+
+2026-10-30T14:20:42.431+04:00  INFO 10344 --- [test-demo-api] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-10-30T14:20:42.433+04:00  INFO 10344 --- [test-demo-api] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-10-30T14:20:42.438+04:00  INFO 10344 --- [test-demo-api] [           main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2026-10-30T14:20:42.450+04:00  INFO 10344 --- [test-demo-api] [           main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-10-30T14:20:42.464+04:00 ERROR 10344 --- [test-demo-api] [           main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'liquibase' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/liquibase/autoconfigure/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
+     1 changesets check sum
+          db/changelog/changes/001-create-users-passports.yaml::001-1::VagifPashayev was: 9:231f6a33b969c53d3caa0ee2c4f7618a but is now: 9:c283abb9a65777ee35ccf0d06580d8bd
+
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322) ~[spring-beans-7.0.10.jar!/:7.0.10]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.10.jar!/:7.0.10]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:977) ~[spring-context-7.0.10.jar!/:7.0.10]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.10.jar!/:7.0.10]
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:131) ~[spring-boot-web-server-4.1.2.jar!/:4.1.2]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:744) ~[spring-boot-4.1.2.jar!/:4.1.2]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:433) ~[spring-boot-4.1.2.jar!/:4.1.2]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:309) ~[spring-boot-4.1.2.jar!/:4.1.2]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1353) ~[spring-boot-4.1.2.jar!/:4.1.2]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1342) ~[spring-boot-4.1.2.jar!/:4.1.2]
+	at az.iktex.organization.structure.testders.SchoolApplication.main(SchoolApplication.java:10) ~[!/:0.0.1-SNAPSHOT]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:94) ~[test-ders-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:52) ~[test-ders-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:28) ~[test-ders-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/liquibase/autoconfigure/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
+     1 changesets check sum
+          db/changelog/changes/001-create-users-passports.yaml::001-1::VagifPashayev was: 9:231f6a33b969c53d3caa0ee2c4f7618a but is now: 9:c283abb9a65777ee35ccf0d06580d8bd
+
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1815) ~[spring-beans-7.0.10.jar!/:7.0.10]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601) ~[spring-beans-7.0.10.jar!/:7.0.10]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523) ~[spring-beans-7.0.10.jar!/:7.0.10]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.10.jar!/:7.0.10]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.10.jar!/:7.0.10]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.10.jar!/:7.0.10]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.10.jar!/:7.0.10]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:309) ~[spring-beans-7.0.10.jar!/:7.0.10]
+	... 15 common frames omitted
+Caused by: liquibase.exception.LiquibaseException: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
+     1 changesets check sum
+          db/changelog/changes/001-create-users-passports.yaml::001-1::VagifPashayev was: 9:231f6a33b969c53d3caa0ee2c4f7618a but is now: 9:c283abb9a65777ee35ccf0d06580d8bd
+
+	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:289) ~[liquibase-core-5.0.4.jar!/:na]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1862) ~[spring-beans-7.0.10.jar!/:7.0.10]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1811) ~[spring-beans-7.0.10.jar!/:7.0.10]
+	... 22 common frames omitted
+Caused by: liquibase.exception.CommandExecutionException: liquibase.exception.ValidationFailedException: Validation Failed:
+     1 changesets check sum
+          db/changelog/changes/001-create-users-passports.yaml::001-1::VagifPashayev was: 9:231f6a33b969c53d3caa0ee2c4f7618a but is now: 9:c283abb9a65777ee35ccf0d06580d8bd
+
+	at liquibase.command.CommandScope.lambda$execute$5(CommandScope.java:357) ~[liquibase-core-5.0.4.jar!/:na]
+	at liquibase.Scope.child(Scope.java:280) ~[liquibase-core-5.0.4.jar!/:na]
+	at liquibase.Scope.child(Scope.java:256) ~[liquibase-core-5.0.4.jar!/:na]
+	at liquibase.command.CommandScope.execute(CommandScope.java:289) ~[liquibase-core-5.0.4.jar!/:na]
+	at liquibase.Liquibase.lambda$update$0(Liquibase.java:216) ~[liquibase-core-5.0.4.jar!/:na]
+	at liquibase.Scope.lambda$child$0(Scope.java:271) ~[liquibase-core-5.0.4.jar!/:na]
+	at liquibase.Scope.child(Scope.java:280) ~[liquibase-core-5.0.4.jar!/:na]
+	at liquibase.Scope.child(Scope.java:270) ~[liquibase-core-5.0.4.jar!/:na]
+	at liquibase.Scope.child(Scope.java:249) ~[liquibase-core-5.0.4.jar!/:na]
+	at liquibase.Liquibase.runInScope(Liquibase.java:1370) ~[liquibase-core-5.0.4.jar!/:na]
+	at liquibase.Liquibase.update(Liquibase.java:205) ~[liquibase-core-5.0.4.jar!/:na]
+	at liquibase.Liquibase.update(Liquibase.java:188) ~[liquibase-core-5.0.4.jar!/:na]
+	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:327) ~[liquibase-core-5.0.4.jar!/:na]
+	at liquibase.integration.spring.SpringLiquibase.lambda$afterPropertiesSet$0(SpringLiquibase.java:279) ~[liquibase-core-5.0.4.jar!/:na]
+	at liquibase.Scope.lambda$child$0(Scope.java:271) ~[liquibase-core-5.0.4.jar!/:na]
+	at liquibase.Scope.child(Scope.java:280) ~[liquibase-core-5.0.4.jar!/:na]
+	at liquibase.Scope.child(Scope.java:270) ~[liquibase-core-5.0.4.jar!/:na]
+	at liquibase.Scope.child(Scope.java:249) ~[liquibase-core-5.0.4.jar!/:na]
+	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:272) ~[liquibase-core-5.0.4.jar!/:na]
+	... 24 common frames omitted
+Caused by: liquibase.exception.ValidationFailedException: Validation Failed:
+     1 changesets check sum
+          db/changelog/changes/001-create-users-passports.yaml::001-1::VagifPashayev was: 9:231f6a33b969c53d3caa0ee2c4f7618a but is now: 9:c283abb9a65777ee35ccf0d06580d8bd
+
+	at liquibase.changelog.DatabaseChangeLog.validate(DatabaseChangeLog.java:392) ~[liquibase-core-5.0.4.jar!/:na]
+	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.run(DatabaseChangelogCommandStep.java:102) ~[liquibase-core-5.0.4.jar!/:na]
+	at liquibase.command.CommandScope.lambda$execute$5(CommandScope.java:301) ~[liquibase-core-5.0.4.jar!/:na]
+	... 42 common frames omitted
+

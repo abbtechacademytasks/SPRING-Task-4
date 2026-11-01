@@ -1,0 +1,659 @@
+13:47:08.076 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [az.iktex.organization.structure.testders.PropagationIntegrationTests]: PropagationIntegrationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+13:47:08.225 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration az.iktex.organization.structure.testders.SchoolApplication for test class az.iktex.organization.structure.testders.PropagationIntegrationTests
+13:47:08.342 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [az.iktex.organization.structure.testders.PropagationIntegrationTests]: PropagationIntegrationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+13:47:08.344 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration az.iktex.organization.structure.testders.SchoolApplication for test class az.iktex.organization.structure.testders.PropagationIntegrationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.2)
+
+2026-11-01T13:47:08.815+04:00  INFO 46792 --- [test-demo-api] [    Test worker] a.i.o.s.t.PropagationIntegrationTests    : Starting PropagationIntegrationTests using Java 25.0.4.1 with PID 46792 (started by USER in C:\Users\USER\Desktop\ABB Tech Academy\SPRING-Task-4)
+2026-11-01T13:47:08.817+04:00  INFO 46792 --- [test-demo-api] [    Test worker] a.i.o.s.t.PropagationIntegrationTests    : No active profile set, falling back to 1 default profile: "default"
+2026-11-01T13:47:09.618+04:00  INFO 46792 --- [test-demo-api] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-01T13:47:09.725+04:00  INFO 46792 --- [test-demo-api] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 96 ms. Found 10 JPA repository interfaces.
+2026-11-01T13:47:10.316+04:00  INFO 46792 --- [test-demo-api] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-01T13:47:11.065+04:00  INFO 46792 --- [test-demo-api] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6aad919c
+2026-11-01T13:47:11.067+04:00  INFO 46792 --- [test-demo-api] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-01T13:47:11.550+04:00  INFO 46792 --- [test-demo-api] [    Test worker] liquibase.database                       : Set default schema name to public
+2026-11-01T13:47:13.382+04:00  INFO 46792 --- [test-demo-api] [    Test worker] liquibase.changelog                      : Reading from public.databasechangelog
+2026-11-01T13:47:13.637+04:00  INFO 46792 --- [test-demo-api] [    Test worker] liquibase.ui                             : Database is up to date, no changesets to execute
+2026-11-01T13:47:13.640+04:00  INFO 46792 --- [test-demo-api] [    Test worker] liquibase.changelog                      : Reading from public.databasechangelog
+2026-11-01T13:47:13.654+04:00  INFO 46792 --- [test-demo-api] [    Test worker] liquibase.util                           : UPDATE SUMMARY
+2026-11-01T13:47:13.654+04:00  INFO 46792 --- [test-demo-api] [    Test worker] liquibase.util                           : Run:                          0
+2026-11-01T13:47:13.655+04:00  INFO 46792 --- [test-demo-api] [    Test worker] liquibase.util                           : Previously run:              32
+2026-11-01T13:47:13.655+04:00  INFO 46792 --- [test-demo-api] [    Test worker] liquibase.util                           : Filtered out:                 0
+2026-11-01T13:47:13.655+04:00  INFO 46792 --- [test-demo-api] [    Test worker] liquibase.util                           : -------------------------------
+2026-11-01T13:47:13.655+04:00  INFO 46792 --- [test-demo-api] [    Test worker] liquibase.util                           : Total change sets:           32
+2026-11-01T13:47:13.656+04:00  INFO 46792 --- [test-demo-api] [    Test worker] liquibase.util                           : Update summary generated
+2026-11-01T13:47:13.657+04:00  INFO 46792 --- [test-demo-api] [    Test worker] liquibase.command                        : Command execution complete
+2026-11-01T13:47:13.807+04:00  INFO 46792 --- [test-demo-api] [    Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-11-01T13:47:13.922+04:00  INFO 46792 --- [test-demo-api] [    Test worker] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.13.Final
+2026-11-01T13:47:13.959+04:00  INFO 46792 --- [test-demo-api] [    Test worker] org.hibernate.orm.cache                  : HHH90001028: Second-level cache region factory [org.hibernate.cache.jcache.internal.JCacheRegionFactory]
+2026-11-01T13:47:14.541+04:00  INFO 46792 --- [test-demo-api] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-01T13:47:14.677+04:00  INFO 46792 --- [test-demo-api] [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/school_task21_cache_checks]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.15
+	Default catalog/schema: school_task21_cache_checks/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-11-01T13:47:15.707+04:00  INFO 46792 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'courses' created in EhcacheManager.
+2026-11-01T13:47:15.709+04:00  INFO 46792 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'book-authorBooks' created in EhcacheManager.
+2026-11-01T13:47:15.710+04:00  INFO 46792 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'books' created in EhcacheManager.
+2026-11-01T13:47:15.712+04:00  INFO 46792 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'author-authorBooks' created in EhcacheManager.
+2026-11-01T13:47:15.714+04:00  INFO 46792 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'default-query-results-region' created in EhcacheManager.
+2026-11-01T13:47:15.715+04:00  INFO 46792 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'default-update-timestamps-region' created in EhcacheManager.
+2026-11-01T13:47:15.716+04:00  INFO 46792 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'departments' created in EhcacheManager.
+2026-11-01T13:47:15.718+04:00  INFO 46792 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'author-books' created in EhcacheManager.
+2026-11-01T13:47:15.719+04:00  INFO 46792 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'authors' created in EhcacheManager.
+2026-11-01T13:47:15.838+04:00  INFO 46792 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=courses
+2026-11-01T13:47:15.840+04:00  INFO 46792 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=book-authorBooks
+2026-11-01T13:47:15.840+04:00  INFO 46792 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=books
+2026-11-01T13:47:15.841+04:00  INFO 46792 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=author-authorBooks
+2026-11-01T13:47:15.841+04:00  INFO 46792 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=default-query-results-region
+2026-11-01T13:47:15.842+04:00  INFO 46792 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=default-update-timestamps-region
+2026-11-01T13:47:15.842+04:00  INFO 46792 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=departments
+2026-11-01T13:47:15.842+04:00  INFO 46792 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=author-books
+2026-11-01T13:47:15.843+04:00  INFO 46792 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=authors
+2026-11-01T13:47:16.827+04:00  INFO 46792 --- [test-demo-api] [    Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-01T13:47:16.972+04:00  INFO 46792 --- [test-demo-api] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-01T13:47:17.078+04:00  INFO 46792 --- [test-demo-api] [    Test worker] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-01T13:47:17.902+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.AuthorService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:17.946+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.AuthorService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:17.946+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.AuthorService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:17.946+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.AuthorService.getAll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:17.946+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.AuthorService.getById' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:17.946+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.AuthorService.getAllWithoutBooks' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:17.947+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.AuthorService.getBooks' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:18.008+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.BookService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.010+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.BookService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.010+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.BookService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.010+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.BookService.getAll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:18.010+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.BookService.addAuthor' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.010+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.BookService.removeAuthor' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.010+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.BookService.getById' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:18.011+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.BookService.getCheaperThan' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:18.091+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.CourseService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.093+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.CourseService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.093+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.CourseService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.093+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.CourseService.getAll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:18.094+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.CourseService.getStudents' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:18.094+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.CourseService.getById' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:18.094+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.CourseService.getStudentCount' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:18.094+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.CourseService.getByStudent' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:18.179+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.DepartmentService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.181+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.DepartmentService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.181+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.DepartmentService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.182+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.DepartmentService.getAll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:18.182+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.DepartmentService.getById' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:18.182+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.DepartmentService.getAllWithoutEmployees' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:18.220+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.SalaryService.raise' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.237+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.AuditLogService.log' with attribute: PROPAGATION_REQUIRES_NEW,ISOLATION_DEFAULT
+2026-11-01T13:47:18.245+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EmployeeService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.245+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EmployeeService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.245+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EmployeeService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.246+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EmployeeService.transfer' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.246+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EmployeeService.getBySalaryRange' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:18.246+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EmployeeService.getByDepartment' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:18.246+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EmployeeService.getAverageSalary' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:18.246+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EmployeeService.getById' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:18.252+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.StudentService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.253+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.StudentService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.254+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.StudentService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.254+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.StudentService.getAll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:18.254+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.StudentService.getById' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:18.254+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.StudentService.getAllWithoutCourses' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:18.254+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.StudentService.enroll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.254+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.StudentService.unenroll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.301+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.303+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.303+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.304+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.getAll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:18.304+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.getById' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:18.304+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.getPassport' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:18.304+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.deletePassport' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.304+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.addPassport' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:18.304+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.getAllWithoutPassport' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:18.304+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.getByEmail' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T13:47:18.905+04:00  INFO 46792 --- [test-demo-api] [    Test worker] a.i.o.s.t.PropagationIntegrationTests    : Started PropagationIntegrationTests in 10.464 seconds (process running for 12.068)
+2026-11-01T13:47:19.245+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.EmployeeService.create]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:19.246+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(557771572<open>)] for JPA transaction
+2026-11-01T13:47:19.253+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@5bbcd407]
+2026-11-01T13:47:19.253+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.EmployeeService.create]
+2026-11-01T13:47:19.256+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(557771572<open>)] for JPA transaction
+2026-11-01T13:47:19.256+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T13:47:19.256+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.location,
+        d1_0.name,
+        d1_0.phone 
+    from
+        departments d1_0 
+    where
+        d1_0.id=?
+2026-11-01T13:47:19.346+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2026-11-01T13:47:19.347+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsByNameAndSurnameAndDepartmentId]: This method is not transactional.
+Hibernate: 
+    select
+        e1_0.id 
+    from
+        employees e1_0 
+    where
+        e1_0.name=? 
+        and e1_0.surname=? 
+        and e1_0.department_id=? 
+    fetch
+        first ? rows only
+2026-11-01T13:47:19.453+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(557771572<open>)] for JPA transaction
+2026-11-01T13:47:19.453+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T13:47:19.453+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+Hibernate: 
+    insert 
+    into
+        employees
+        (department_id, name, salary, surname) 
+    values
+        (?, ?, ?, ?)
+2026-11-01T13:47:19.504+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2026-11-01T13:47:19.504+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.EmployeeService.create]
+2026-11-01T13:47:19.504+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-01T13:47:19.505+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(557771572<open>)]
+2026-11-01T13:47:19.563+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager after transaction
+2026-11-01T13:47:19.564+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.EmployeeService.transfer]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:19.564+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(1744955563<open>)] for JPA transaction
+2026-11-01T13:47:19.564+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@575baeea]
+2026-11-01T13:47:19.564+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.EmployeeService.transfer]
+2026-11-01T13:47:19.565+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByIdWithDepartment]: This method is not transactional.
+Hibernate: 
+    select
+        e1_0.id,
+        e1_0.department_id,
+        d1_0.id,
+        d1_0.location,
+        d1_0.name,
+        d1_0.phone,
+        e1_0.name,
+        e1_0.salary,
+        e1_0.surname 
+    from
+        employees e1_0 
+    join
+        departments d1_0 
+            on d1_0.id=e1_0.department_id 
+    where
+        e1_0.id=?
+2026-11-01T13:47:19.580+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1744955563<open>)] for JPA transaction
+2026-11-01T13:47:19.580+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T13:47:19.580+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.location,
+        d1_0.name,
+        d1_0.phone 
+    from
+        departments d1_0 
+    where
+        d1_0.id=?
+2026-11-01T13:47:19.582+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2026-11-01T13:47:19.583+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1744955563<open>)] for JPA transaction
+2026-11-01T13:47:19.583+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T13:47:19.583+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.SalaryService.raise]
+2026-11-01T13:47:19.583+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.SalaryService.raise]
+2026-11-01T13:47:19.583+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1744955563<open>)] for JPA transaction
+2026-11-01T13:47:19.583+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Suspending current transaction, creating new transaction with name [az.iktex.organization.structure.testders.service.AuditLogService.log]
+2026-11-01T13:47:19.585+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(186175999<open>)] for JPA transaction
+2026-11-01T13:47:19.586+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@3d3bd9e3]
+2026-11-01T13:47:19.586+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.AuditLogService.log]
+2026-11-01T13:47:19.587+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(186175999<open>)] for JPA transaction
+2026-11-01T13:47:19.587+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T13:47:19.587+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+Hibernate: 
+    insert 
+    into
+        audit_logs
+        (action, created_at, entity_id, entity_name, message, status) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2026-11-01T13:47:19.593+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2026-11-01T13:47:19.593+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.AuditLogService.log]
+2026-11-01T13:47:19.593+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-01T13:47:19.593+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(186175999<open>)]
+2026-11-01T13:47:19.626+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager after transaction
+2026-11-01T13:47:19.627+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Resuming suspended transaction after completion of inner transaction
+2026-11-01T13:47:19.627+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.EmployeeService.transfer]
+2026-11-01T13:47:19.627+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-01T13:47:19.627+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1744955563<open>)]
+Hibernate: 
+    update
+        employees 
+    set
+        department_id=?,
+        name=?,
+        salary=?,
+        surname=? 
+    where
+        id=?
+2026-11-01T13:47:19.662+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager after transaction
+C2 CHECK: success transfer department2 salary1150; SUCCESS rows=1
+2026-11-01T13:47:19.715+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.EmployeeService.delete]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:19.716+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(570944415<open>)] for JPA transaction
+2026-11-01T13:47:19.716+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@62b5a16f]
+2026-11-01T13:47:19.716+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.EmployeeService.delete]
+2026-11-01T13:47:19.716+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(570944415<open>)] for JPA transaction
+2026-11-01T13:47:19.716+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T13:47:19.716+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+Hibernate: 
+    select
+        e1_0.id,
+        e1_0.department_id,
+        e1_0.name,
+        e1_0.salary,
+        e1_0.surname 
+    from
+        employees e1_0 
+    where
+        e1_0.id=?
+2026-11-01T13:47:19.723+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2026-11-01T13:47:19.724+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(570944415<open>)] for JPA transaction
+2026-11-01T13:47:19.724+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T13:47:19.724+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.delete]
+2026-11-01T13:47:19.726+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.delete]
+2026-11-01T13:47:19.726+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.EmployeeService.delete]
+2026-11-01T13:47:19.726+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-01T13:47:19.726+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(570944415<open>)]
+Hibernate: 
+    delete 
+    from
+        employees 
+    where
+        id=?
+2026-11-01T13:47:19.751+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager after transaction
+2026-11-01T13:47:19.762+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.EmployeeService.create]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:19.762+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(458917511<open>)] for JPA transaction
+2026-11-01T13:47:19.762+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@311d3cab]
+2026-11-01T13:47:19.762+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.EmployeeService.create]
+2026-11-01T13:47:19.762+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(458917511<open>)] for JPA transaction
+2026-11-01T13:47:19.762+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T13:47:19.762+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2026-11-01T13:47:19.763+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2026-11-01T13:47:19.763+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsByNameAndSurnameAndDepartmentId]: This method is not transactional.
+Hibernate: 
+    select
+        e1_0.id 
+    from
+        employees e1_0 
+    where
+        e1_0.name=? 
+        and e1_0.surname=? 
+        and e1_0.department_id=? 
+    fetch
+        first ? rows only
+2026-11-01T13:47:19.766+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(458917511<open>)] for JPA transaction
+2026-11-01T13:47:19.766+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T13:47:19.766+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+Hibernate: 
+    insert 
+    into
+        employees
+        (department_id, name, salary, surname) 
+    values
+        (?, ?, ?, ?)
+2026-11-01T13:47:19.768+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2026-11-01T13:47:19.768+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.EmployeeService.create]
+2026-11-01T13:47:19.768+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-01T13:47:19.768+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(458917511<open>)]
+2026-11-01T13:47:19.806+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager after transaction
+2026-11-01T13:47:19.807+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.EmployeeService.transfer]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:19.808+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(17893747<open>)] for JPA transaction
+2026-11-01T13:47:19.808+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@12885677]
+2026-11-01T13:47:19.808+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.EmployeeService.transfer]
+2026-11-01T13:47:19.808+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByIdWithDepartment]: This method is not transactional.
+Hibernate: 
+    select
+        e1_0.id,
+        e1_0.department_id,
+        d1_0.id,
+        d1_0.location,
+        d1_0.name,
+        d1_0.phone,
+        e1_0.name,
+        e1_0.salary,
+        e1_0.surname 
+    from
+        employees e1_0 
+    join
+        departments d1_0 
+            on d1_0.id=e1_0.department_id 
+    where
+        e1_0.id=?
+2026-11-01T13:47:19.810+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(17893747<open>)] for JPA transaction
+2026-11-01T13:47:19.810+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T13:47:19.810+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2026-11-01T13:47:19.811+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2026-11-01T13:47:19.811+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(17893747<open>)] for JPA transaction
+2026-11-01T13:47:19.811+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T13:47:19.811+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.SalaryService.raise]
+2026-11-01T13:47:19.811+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.SalaryService.raise] after exception: java.lang.IllegalStateException: Salary cannot exceed 10000
+2026-11-01T13:47:19.812+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : MethodRollbackEvent: az.iktex.organization.structure.testders.service.SalaryService.raise [java.lang.IllegalStateException: Salary cannot exceed 10000]
+
+java.lang.IllegalStateException: Salary cannot exceed 10000
+	at az.iktex.organization.structure.testders.service.SalaryService.raise(SalaryService.java:31) ~[main/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:714) ~[spring-aop-7.0.10.jar:7.0.10]
+	at az.iktex.organization.structure.testders.service.SalaryService$$SpringCGLIB$$0.raise(<generated>) ~[main/:na]
+	at az.iktex.organization.structure.testders.service.EmployeeService.transfer(EmployeeService.java:125) ~[main/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:714) ~[spring-aop-7.0.10.jar:7.0.10]
+	at az.iktex.organization.structure.testders.service.EmployeeService$$SpringCGLIB$$0.transfer(<generated>) ~[main/:na]
+	at az.iktex.organization.structure.testders.PropagationIntegrationTests.lambda$failedTransferRollsBackEmployeeAndChecksAuditTransaction$0(PropagationIntegrationTests.java:41) ~[test/:na]
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:54) ~[junit-jupiter-api-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35) ~[junit-jupiter-api-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223) ~[junit-jupiter-api-6.0.3.jar:6.0.3]
+	at az.iktex.organization.structure.testders.PropagationIntegrationTests.failedTransferRollsBackEmployeeAndChecksAuditTransaction(PropagationIntegrationTests.java:40) ~[test/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:701) ~[junit-platform-commons-6.0.3.jar:6.0.3]
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:502) ~[junit-platform-commons-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.support.MethodReflectionUtils.invoke(MethodReflectionUtils.java:45) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:61) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:124) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:163) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:148) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:123) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:105) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:99) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:66) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:47) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:39) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:104) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:98) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invokeVoid(InterceptingExecutableInvoker.java:71) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$0(TestMethodTestDescriptor.java:219) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:215) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:157) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:176) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:36) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:52) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:58) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:246) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:218) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:179) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:66) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:157) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:65) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:125) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:93) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$0(InterceptingLauncher.java:41) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:40) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor$CollectThenExecuteTestDefinitionConsumer.processAllTestDefinitions(JUnitPlatformTestDefinitionProcessor.java:206) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor$CollectThenExecuteTestDefinitionConsumer.access$000(JUnitPlatformTestDefinitionProcessor.java:123) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor.stop(JUnitPlatformTestDefinitionProcessor.java:117) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.SuiteTestDefinitionProcessor.stop(SuiteTestDefinitionProcessor.java:63) ~[na:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.gradle.internal.dispatch.MethodInvocation.invokeOn(MethodInvocation.java:77) ~[na:na]
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:28) ~[na:na]
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:19) ~[na:na]
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33) ~[na:na]
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:88) ~[na:na]
+	at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:195) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:126) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63) ~[na:na]
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56) ~[na:na]
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:122) ~[na:na]
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:72) ~[na:na]
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
+
+2026-11-01T13:47:19.820+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Participating transaction failed - marking existing transaction as rollback-only
+2026-11-01T13:47:19.820+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Setting JPA transaction on EntityManager [SessionImpl(17893747<open>)] rollback-only
+2026-11-01T13:47:19.821+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(17893747<open>)] for JPA transaction
+2026-11-01T13:47:19.821+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Suspending current transaction, creating new transaction with name [az.iktex.organization.structure.testders.service.AuditLogService.log]
+2026-11-01T13:47:19.821+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(1645139084<open>)] for JPA transaction
+2026-11-01T13:47:19.821+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@2db51c5b]
+2026-11-01T13:47:19.821+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.AuditLogService.log]
+2026-11-01T13:47:19.821+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1645139084<open>)] for JPA transaction
+2026-11-01T13:47:19.821+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T13:47:19.821+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+Hibernate: 
+    insert 
+    into
+        audit_logs
+        (action, created_at, entity_id, entity_name, message, status) 
+    values
+        (?, ?, ?, ?, ?, ?)
+2026-11-01T13:47:19.823+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2026-11-01T13:47:19.823+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.AuditLogService.log]
+2026-11-01T13:47:19.823+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-01T13:47:19.823+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1645139084<open>)]
+2026-11-01T13:47:19.848+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager after transaction
+2026-11-01T13:47:19.849+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Resuming suspended transaction after completion of inner transaction
+2026-11-01T13:47:19.849+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.EmployeeService.transfer] after exception: java.lang.IllegalStateException: Salary cannot exceed 10000
+2026-11-01T13:47:19.849+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : MethodRollbackEvent: az.iktex.organization.structure.testders.service.EmployeeService.transfer [java.lang.IllegalStateException: Salary cannot exceed 10000]
+
+java.lang.IllegalStateException: Salary cannot exceed 10000
+	at az.iktex.organization.structure.testders.service.SalaryService.raise(SalaryService.java:31) ~[main/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:714) ~[spring-aop-7.0.10.jar:7.0.10]
+	at az.iktex.organization.structure.testders.service.SalaryService$$SpringCGLIB$$0.raise(<generated>) ~[main/:na]
+	at az.iktex.organization.structure.testders.service.EmployeeService.transfer(EmployeeService.java:125) ~[main/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:714) ~[spring-aop-7.0.10.jar:7.0.10]
+	at az.iktex.organization.structure.testders.service.EmployeeService$$SpringCGLIB$$0.transfer(<generated>) ~[main/:na]
+	at az.iktex.organization.structure.testders.PropagationIntegrationTests.lambda$failedTransferRollsBackEmployeeAndChecksAuditTransaction$0(PropagationIntegrationTests.java:41) ~[test/:na]
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:54) ~[junit-jupiter-api-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35) ~[junit-jupiter-api-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223) ~[junit-jupiter-api-6.0.3.jar:6.0.3]
+	at az.iktex.organization.structure.testders.PropagationIntegrationTests.failedTransferRollsBackEmployeeAndChecksAuditTransaction(PropagationIntegrationTests.java:40) ~[test/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:701) ~[junit-platform-commons-6.0.3.jar:6.0.3]
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:502) ~[junit-platform-commons-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.support.MethodReflectionUtils.invoke(MethodReflectionUtils.java:45) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:61) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:124) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:163) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:148) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:123) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:105) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:99) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:66) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:47) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:39) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:104) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:98) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invokeVoid(InterceptingExecutableInvoker.java:71) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$0(TestMethodTestDescriptor.java:219) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:215) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:157) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:176) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:36) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:52) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:58) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:246) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:218) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:179) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:66) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:157) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:65) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:125) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:93) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$0(InterceptingLauncher.java:41) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:40) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor$CollectThenExecuteTestDefinitionConsumer.processAllTestDefinitions(JUnitPlatformTestDefinitionProcessor.java:206) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor$CollectThenExecuteTestDefinitionConsumer.access$000(JUnitPlatformTestDefinitionProcessor.java:123) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor.stop(JUnitPlatformTestDefinitionProcessor.java:117) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.SuiteTestDefinitionProcessor.stop(SuiteTestDefinitionProcessor.java:63) ~[na:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.gradle.internal.dispatch.MethodInvocation.invokeOn(MethodInvocation.java:77) ~[na:na]
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:28) ~[na:na]
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:19) ~[na:na]
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33) ~[na:na]
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:88) ~[na:na]
+	at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:195) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:126) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63) ~[na:na]
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56) ~[na:na]
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:122) ~[na:na]
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:72) ~[na:na]
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
+
+2026-11-01T13:47:19.854+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction rollback
+2026-11-01T13:47:19.854+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Rolling back JPA transaction on EntityManager [SessionImpl(17893747<open>)]
+2026-11-01T13:47:19.857+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager after transaction
+C2 CHECK: audit=REQUIRES_NEW; failed transfer: department1 salary9000; FAILED rows=1
+2026-11-01T13:47:19.884+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.EmployeeService.delete]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T13:47:19.884+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(45104575<open>)] for JPA transaction
+2026-11-01T13:47:19.884+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@4f80c511]
+2026-11-01T13:47:19.884+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.EmployeeService.delete]
+2026-11-01T13:47:19.884+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(45104575<open>)] for JPA transaction
+2026-11-01T13:47:19.884+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T13:47:19.884+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+Hibernate: 
+    select
+        e1_0.id,
+        e1_0.department_id,
+        e1_0.name,
+        e1_0.salary,
+        e1_0.surname 
+    from
+        employees e1_0 
+    where
+        e1_0.id=?
+2026-11-01T13:47:19.886+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2026-11-01T13:47:19.886+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(45104575<open>)] for JPA transaction
+2026-11-01T13:47:19.886+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T13:47:19.886+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.delete]
+2026-11-01T13:47:19.886+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.delete]
+2026-11-01T13:47:19.886+04:00 TRACE 46792 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.EmployeeService.delete]
+2026-11-01T13:47:19.886+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-01T13:47:19.886+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(45104575<open>)]
+Hibernate: 
+    delete 
+    from
+        employees 
+    where
+        id=?
+2026-11-01T13:47:19.915+04:00 DEBUG 46792 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager after transaction
+

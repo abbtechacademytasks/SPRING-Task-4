@@ -1,0 +1,59 @@
+[
+  {
+    "isolation": "REPEATABLE_READ",
+    "twoCountsObservedBeforeWrites": true,
+    "durationMs": 5462,
+    "responses": [
+      {
+        "status": 200,
+        "body": {
+          "courseId": 1,
+          "studentId": 15,
+          "countBefore": 0,
+          "capacity": 1,
+          "isolation": "REPEATABLE_READ"
+        }
+      },
+      {
+        "status": 200,
+        "body": {
+          "courseId": 1,
+          "studentId": 16,
+          "countBefore": 0,
+          "capacity": 1,
+          "isolation": "REPEATABLE_READ"
+        }
+      }
+    ],
+    "capacity": 1,
+    "finalEnrollmentCount": 2
+  },
+  {
+    "isolation": "SERIALIZABLE",
+    "twoCountsObservedBeforeWrites": true,
+    "durationMs": 5315,
+    "responses": [
+      {
+        "status": 200,
+        "body": {
+          "courseId": 1,
+          "studentId": 17,
+          "countBefore": 0,
+          "capacity": 1,
+          "isolation": "SERIALIZABLE"
+        }
+      },
+      {
+        "status": 409,
+        "body": {
+          "detail": "Concurrent transaction conflict; retry the whole operation",
+          "instance": "/test-demo/api/isolation/courses/1/enroll/18",
+          "status": 409,
+          "title": "Conflict"
+        }
+      }
+    ],
+    "capacity": 1,
+    "finalEnrollmentCount": 1
+  }
+]

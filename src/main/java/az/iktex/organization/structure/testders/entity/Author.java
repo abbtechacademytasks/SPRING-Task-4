@@ -5,12 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "authors")
+@Cacheable
+@Cache(
+        usage = CacheConcurrencyStrategy.READ_WRITE,
+        region = "authors"
+)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -38,6 +45,10 @@ public class Author {
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
             orphanRemoval = true
+    )
+    @Cache(
+            usage = CacheConcurrencyStrategy.READ_WRITE,
+            region = "author-authorBooks"
     )
     private List<AuthorBook> authorBooks = new ArrayList<>();
 

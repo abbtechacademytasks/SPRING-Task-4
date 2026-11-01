@@ -1,0 +1,34 @@
+[
+  {
+    "Path": "C:\\Users\\USER\\Desktop\\ABB Tech Academy\\SPRING-Task-4\\src\\main\\resources\\db\\changelog\\changes\\001-create-users-passports.yaml",
+    "Hash": "BA5ACC7C769A41CD7FCF0B0C5E8B1C50564A134BC5ADE83916EB6F50D4D6E499"
+  },
+  {
+    "Path": "C:\\Users\\USER\\Desktop\\ABB Tech Academy\\SPRING-Task-4\\src\\main\\resources\\db\\changelog\\changes\\002-create-departments-employees.yaml",
+    "Hash": "D4F9CD3055736D7539D9DCE6EC604A62041D5BC3C7B18FD04B6F68E48AD8DDB1"
+  },
+  {
+    "Path": "C:\\Users\\USER\\Desktop\\ABB Tech Academy\\SPRING-Task-4\\src\\main\\resources\\db\\changelog\\changes\\003-create-students-courses.yaml",
+    "Hash": "F0D75417CE385E109399D57979C86B1158634060BB60DC5906EC53004EB334CC"
+  },
+  {
+    "Path": "C:\\Users\\USER\\Desktop\\ABB Tech Academy\\SPRING-Task-4\\src\\main\\resources\\db\\changelog\\changes\\004-create-authors-books.yaml",
+    "Hash": "3D2B55D91271B74E265384069702E5A20E98014CB3DF0E584938805B502DBE8C"
+  },
+  {
+    "Path": "C:\\Users\\USER\\Desktop\\ABB Tech Academy\\SPRING-Task-4\\src\\main\\resources\\db\\changelog\\changes\\005-tag-v1.0.yaml",
+    "Hash": "37D53AEF22B9E1D1221CB2A487264CD49954F44F977C21A8B9A6C28473FCDAEA"
+  },
+  {
+    "Path": "C:\\Users\\USER\\Desktop\\ABB Tech Academy\\SPRING-Task-4\\src\\main\\resources\\db\\changelog\\changes\\006-add-course-capacity.yaml",
+    "Hash": "BDB1ECC14FEC17A0CC60F5BF9A331883D60F47034EAD385EEDC3F0400F675D8E"
+  },
+  {
+    "Path": "C:\\Users\\USER\\Desktop\\ABB Tech Academy\\SPRING-Task-4\\src\\main\\resources\\db\\changelog\\changes\\007-create-audit-logs.yaml",
+    "Hash": "7C7448B3C9D00C567C3672443F00135F1B0B6A1A4B3FD6D084436A3371583E42"
+  },
+  {
+    "Path": "C:\\Users\\USER\\Desktop\\ABB Tech Academy\\SPRING-Task-4\\src\\main\\resources\\db\\changelog\\changes\\100-seed-data.yaml",
+    "Hash": "7E644BF27CDF104F02683ACDF7F6F2C46D1925491C84A33FC9580C33CC1481E6"
+  }
+]

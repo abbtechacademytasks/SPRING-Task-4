@@ -1,0 +1,7 @@
+ entity_id |  action  | entity_name | status  |                  message                  
+-----------+----------+-------------+---------+-------------------------------------------
+        15 | TRANSFER | Employee    | SUCCESS | Employee transferred and salary increased
+        16 | TRANSFER | Employee    | FAILED  | Salary cannot exceed 10000
+        15 | TRANSFER | Employee    | SUCCESS | Employee transferred and salary increased
+(3 rows)
+

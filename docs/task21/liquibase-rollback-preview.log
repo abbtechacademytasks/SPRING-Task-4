@@ -1,0 +1,105 @@
+ Container school-postgres Running 
+ Container school-postgres Waiting 
+ Container school-postgres Healthy 
+ Container spring-task-4-liquibase-run-fc430f6f7592 Creating 
+ Container spring-task-4-liquibase-run-fc430f6f7592 Created 
+####################################################
+##   _     _             _ _                      ##
+##  | |   (_)           (_) |                     ##
+##  | |    _  __ _ _   _ _| |__   __ _ ___  ___   ##
+##  | |   | |/ _` | | | | | '_ \ / _` / __|/ _ \  ##
+##  | |___| | (_| | |_| | | |_) | (_| \__ \  __/  ##
+##  \_____/_|\__, |\__,_|_|_.__/ \__,_|___/\___|  ##
+##              | |                               ##
+##              |_|                               ##
+##                                                ## 
+##  Taking Liquibase to production?               ##
+##  liquibase.com/liquibase-secure                ## 
+##                                                ##
+####################################################
+Starting Liquibase at 10:29:22 using Java 21.0.11 (version 5.0.4 #11282 built at 2026-08-18 12:10:05 UTC)
+Liquibase Version: 5.0.4
+
+-- Lock Database
+UPDATE public.databasechangeloglock SET LOCKED = TRUE, LOCKEDBY = 'b75beb6bb99e (172.19.0.3)', LOCKGRANTED = NOW() WHERE ID = 1 AND LOCKED = FALSE;
+
+-- *********************************************************************
+-- Rollback to 'v1.0' Script
+-- *********************************************************************
+-- Change Log: db/changelog/db.changelog-master.yaml
+-- Ran at: 10/30/26, 10:29 AM
+-- Against: postgres@jdbc:postgresql://postgres:5432/school_task21_db
+-- Liquibase version: 5.0.4
+-- *********************************************************************
+
+-- Rolling Back ChangeSet: db/changelog/changes/100-seed-data.yaml::100-6::VagifPashayev
+DELETE FROM public.books WHERE id IN (1, 2, 3, 4, 5, 6, 7, 8);
+
+SELECT setval(pg_get_serial_sequence('books', 'id'), COALESCE(MAX(id), 1), MAX(id) IS NOT NULL) FROM books;
+
+DELETE FROM public.databasechangelog WHERE ID = '100-6' AND AUTHOR = 'VagifPashayev' AND FILENAME = 'db/changelog/changes/100-seed-data.yaml';
+
+-- Rolling Back ChangeSet: db/changelog/changes/100-seed-data.yaml::100-5::VagifPashayev
+DELETE FROM public.authors WHERE id IN (1, 2, 3, 4, 5);
+
+SELECT setval(pg_get_serial_sequence('authors', 'id'), COALESCE(MAX(id), 1), MAX(id) IS NOT NULL) FROM authors;
+
+DELETE FROM public.databasechangelog WHERE ID = '100-5' AND AUTHOR = 'VagifPashayev' AND FILENAME = 'db/changelog/changes/100-seed-data.yaml';
+
+-- Rolling Back ChangeSet: db/changelog/changes/100-seed-data.yaml::100-4::VagifPashayev
+DELETE FROM public.students WHERE id IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+SELECT setval(pg_get_serial_sequence('students', 'id'), COALESCE(MAX(id), 1), MAX(id) IS NOT NULL) FROM students;
+
+DELETE FROM public.databasechangelog WHERE ID = '100-4' AND AUTHOR = 'VagifPashayev' AND FILENAME = 'db/changelog/changes/100-seed-data.yaml';
+
+-- Rolling Back ChangeSet: db/changelog/changes/100-seed-data.yaml::100-3::VagifPashayev
+DELETE FROM public.courses WHERE id IN (1, 2, 3, 4, 5);
+
+SELECT setval(pg_get_serial_sequence('courses', 'id'), COALESCE(MAX(id), 1), MAX(id) IS NOT NULL) FROM courses;
+
+DELETE FROM public.databasechangelog WHERE ID = '100-3' AND AUTHOR = 'VagifPashayev' AND FILENAME = 'db/changelog/changes/100-seed-data.yaml';
+
+-- Rolling Back ChangeSet: db/changelog/changes/100-seed-data.yaml::100-2::VagifPashayev
+DELETE FROM public.employees WHERE id IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+SELECT setval(pg_get_serial_sequence('employees', 'id'), COALESCE(MAX(id), 1), MAX(id) IS NOT NULL) FROM employees;
+
+DELETE FROM public.databasechangelog WHERE ID = '100-2' AND AUTHOR = 'VagifPashayev' AND FILENAME = 'db/changelog/changes/100-seed-data.yaml';
+
+-- Rolling Back ChangeSet: db/changelog/changes/100-seed-data.yaml::100-1::VagifPashayev
+DELETE FROM public.departments WHERE id IN (1, 2, 3);
+
+SELECT setval(pg_get_serial_sequence('departments', 'id'), COALESCE(MAX(id), 1), MAX(id) IS NOT NULL) FROM departments;
+
+DELETE FROM public.databasechangelog WHERE ID = '100-1' AND AUTHOR = 'VagifPashayev' AND FILENAME = 'db/changelog/changes/100-seed-data.yaml';
+
+-- Rolling Back ChangeSet: db/changelog/changes/007-create-audit-logs.yaml::007-2::VagifPashayev
+ALTER TABLE audit_logs DROP CONSTRAINT chk_audit_status;
+
+DELETE FROM public.databasechangelog WHERE ID = '007-2' AND AUTHOR = 'VagifPashayev' AND FILENAME = 'db/changelog/changes/007-create-audit-logs.yaml';
+
+-- Rolling Back ChangeSet: db/changelog/changes/007-create-audit-logs.yaml::007-1::VagifPashayev
+DROP TABLE public.audit_logs;
+
+DELETE FROM public.databasechangelog WHERE ID = '007-1' AND AUTHOR = 'VagifPashayev' AND FILENAME = 'db/changelog/changes/007-create-audit-logs.yaml';
+
+-- Rolling Back ChangeSet: db/changelog/changes/006-add-course-capacity.yaml::006-2::VagifPashayev
+ALTER TABLE courses DROP CONSTRAINT chk_course_capacity;
+
+DELETE FROM public.databasechangelog WHERE ID = '006-2' AND AUTHOR = 'VagifPashayev' AND FILENAME = 'db/changelog/changes/006-add-course-capacity.yaml';
+
+-- Rolling Back ChangeSet: db/changelog/changes/006-add-course-capacity.yaml::006-1::VagifPashayev
+ALTER TABLE public.courses ALTER COLUMN capacity DROP DEFAULT;
+
+ALTER TABLE public.courses DROP COLUMN capacity;
+
+DELETE FROM public.databasechangelog WHERE ID = '006-1' AND AUTHOR = 'VagifPashayev' AND FILENAME = 'db/changelog/changes/006-add-course-capacity.yaml';
+
+-- Rolling Back ChangeSet: db/changelog/changes/005-tag-v1.0.yaml::005-1::VagifPashayev
+DELETE FROM public.databasechangelog WHERE ID = '005-1' AND AUTHOR = 'VagifPashayev' AND FILENAME = 'db/changelog/changes/005-tag-v1.0.yaml';
+
+-- Release Database Lock
+UPDATE public.databasechangeloglock SET LOCKED = FALSE, LOCKEDBY = NULL, LOCKGRANTED = NULL WHERE ID = 1;
+
+Liquibase command 'rollback-sql' was executed successfully.

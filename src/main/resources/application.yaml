@@ -9,14 +9,38 @@ spring:
   application:
     name: test-demo-api
   datasource:
-    url: jdbc:postgresql://localhost:5432/school_db
+    url: jdbc:postgresql://localhost:5432/school_task21_db
     username: postgres
     password: ${POSTGRES_PASSWORD}
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     show-sql: true
     open-in-view: false
     properties:
       hibernate:
         format_sql: true
+        generate_statistics: true
+        cache:
+          use_second_level_cache: true
+          use_query_cache: true
+          region:
+            factory_class: org.hibernate.cache.jcache.internal.JCacheRegionFactory
+      jakarta:
+        persistence:
+          sharedCache:
+            mode: ENABLE_SELECTIVE
+      hibernate.javax.cache:
+        provider: org.ehcache.jsr107.EhcacheCachingProvider
+        uri: ehcache.xml
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    contexts: dev
+
+logging:
+  level:
+    org.hibernate.cache: debug
+    org.springframework.orm.jpa.JpaTransactionManager: debug
+    org.springframework.jdbc.support.JdbcTransactionManager: debug
+    org.springframework.transaction: trace

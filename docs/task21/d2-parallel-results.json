@@ -1,0 +1,56 @@
+[
+  {
+    "isolation": "READ_COMMITTED",
+    "twoReadersObservedBeforeWrites": true,
+    "durationMs": 5130,
+    "responses": [
+      {
+        "status": 200,
+        "body": {
+          "employeeId": 18,
+          "oldSalary": 1000.0,
+          "newSalary": 1100.0,
+          "isolation": "READ_COMMITTED"
+        }
+      },
+      {
+        "status": 200,
+        "body": {
+          "employeeId": 18,
+          "oldSalary": 1000.0,
+          "newSalary": 1100.0,
+          "isolation": "READ_COMMITTED"
+        }
+      }
+    ],
+    "finalSalary": 1100.0,
+    "expectedIfBothIncrementsApplied": 1200
+  },
+  {
+    "isolation": "REPEATABLE_READ",
+    "twoReadersObservedBeforeWrites": true,
+    "durationMs": 5166,
+    "responses": [
+      {
+        "status": 409,
+        "body": {
+          "detail": "Concurrent transaction conflict; retry the whole operation",
+          "instance": "/test-demo/api/isolation/employees/18/raise",
+          "status": 409,
+          "title": "Conflict"
+        }
+      },
+      {
+        "status": 200,
+        "body": {
+          "employeeId": 18,
+          "oldSalary": 1000.0,
+          "newSalary": 1100.0,
+          "isolation": "REPEATABLE_READ"
+        }
+      }
+    ],
+    "finalSalary": 1100.0,
+    "expectedIfBothIncrementsApplied": 1200
+  }
+]

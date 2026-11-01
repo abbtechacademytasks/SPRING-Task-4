@@ -1,0 +1,1 @@
+Two tests passed; inner and outer transaction name=EmployeeService.transfer; no transaction interceptor for this.raise

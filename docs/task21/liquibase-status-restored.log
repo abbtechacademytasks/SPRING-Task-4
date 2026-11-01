@@ -1,0 +1,24 @@
+ Container school-postgres Running 
+ Container school-postgres Waiting 
+ Container school-postgres Healthy 
+ Container spring-task-4-liquibase-run-b72ef2c55bf5 Creating 
+ Container spring-task-4-liquibase-run-b72ef2c55bf5 Created 
+####################################################
+##   _     _             _ _                      ##
+##  | |   (_)           (_) |                     ##
+##  | |    _  __ _ _   _ _| |__   __ _ ___  ___   ##
+##  | |   | |/ _` | | | | | '_ \ / _` / __|/ _ \  ##
+##  | |___| | (_| | |_| | | |_) | (_| \__ \  __/  ##
+##  \_____/_|\__, |\__,_|_|_.__/ \__,_|___/\___|  ##
+##              | |                               ##
+##              |_|                               ##
+##                                                ## 
+##  Taking Liquibase to production?               ##
+##  liquibase.com/liquibase-secure                ## 
+##                                                ##
+####################################################
+Starting Liquibase at 10:36:24 using Java 21.0.11 (version 5.0.4 #11282 built at 2026-08-18 12:10:05 UTC)
+Liquibase Version: 5.0.4
+
+postgres@jdbc:postgresql://postgres:5432/school_task21_db is up to date
+Liquibase command 'status' was executed successfully.

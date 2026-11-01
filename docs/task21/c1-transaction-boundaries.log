@@ -1,0 +1,52 @@
+2026-11-01T10:06:50.197+04:00 TRACE 2248 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.SalaryService.raise' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T10:06:50.204+04:00 TRACE 2248 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EmployeeService.transfer' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T10:07:36.127+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T10:07:36.233+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T10:07:36.258+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-01T10:07:36.420+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.EmployeeService.transfer]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T10:07:36.420+04:00 TRACE 2248 --- [test-demo-api] [nio-8080-exec-3] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.EmployeeService.transfer]
+2026-11-01T10:07:36.433+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T10:07:36.436+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T10:07:36.436+04:00 TRACE 2248 --- [test-demo-api] [nio-8080-exec-3] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.SalaryService.raise]
+2026-11-01T10:07:36.437+04:00 TRACE 2248 --- [test-demo-api] [nio-8080-exec-3] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.SalaryService.raise]
+2026-11-01T10:07:36.438+04:00 TRACE 2248 --- [test-demo-api] [nio-8080-exec-3] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.EmployeeService.transfer]
+2026-11-01T10:07:36.438+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-01T10:07:36.580+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-01T10:07:36.667+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T10:07:36.671+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T10:07:36.674+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-01T10:07:36.794+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-01T10:07:36.869+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.EmployeeService.transfer]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T10:07:36.869+04:00 TRACE 2248 --- [test-demo-api] [nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.EmployeeService.transfer]
+2026-11-01T10:07:36.872+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T10:07:36.873+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T10:07:36.873+04:00 TRACE 2248 --- [test-demo-api] [nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.SalaryService.raise]
+2026-11-01T10:07:36.873+04:00 TRACE 2248 --- [test-demo-api] [nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.SalaryService.raise] after exception: java.lang.IllegalStateException: Salary cannot exceed 10000
+2026-11-01T10:07:36.874+04:00 TRACE 2248 --- [test-demo-api] [nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : MethodRollbackEvent: az.iktex.organization.structure.testders.service.SalaryService.raise [java.lang.IllegalStateException: Salary cannot exceed 10000]
+	at az.iktex.organization.structure.testders.service.SalaryService.raise(SalaryService.java:31) ~[!/:0.0.1-SNAPSHOT]
+	at az.iktex.organization.structure.testders.service.EmployeeService.transfer(EmployeeService.java:122) ~[!/:0.0.1-SNAPSHOT]
+2026-11-01T10:07:36.878+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Participating transaction failed - marking existing transaction as rollback-only
+2026-11-01T10:07:36.878+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Setting JPA transaction on EntityManager [SessionImpl(2115191313<open>)] rollback-only
+2026-11-01T10:07:36.878+04:00 TRACE 2248 --- [test-demo-api] [nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.EmployeeService.transfer] after exception: java.lang.IllegalStateException: Salary cannot exceed 10000
+2026-11-01T10:07:36.879+04:00 TRACE 2248 --- [test-demo-api] [nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : MethodRollbackEvent: az.iktex.organization.structure.testders.service.EmployeeService.transfer [java.lang.IllegalStateException: Salary cannot exceed 10000]
+	at az.iktex.organization.structure.testders.service.SalaryService.raise(SalaryService.java:31) ~[!/:0.0.1-SNAPSHOT]
+	at az.iktex.organization.structure.testders.service.EmployeeService.transfer(EmployeeService.java:122) ~[!/:0.0.1-SNAPSHOT]
+2026-11-01T10:07:36.879+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction rollback
+2026-11-01T10:07:36.880+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Rolling back JPA transaction on EntityManager [SessionImpl(2115191313<open>)]
+2026-11-01T10:07:36.965+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-01T10:07:37.058+04:00 DEBUG 2248 --- [test-demo-api] [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T10:07:37.064+04:00 DEBUG 2248 --- [test-demo-api] [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-01T10:07:37.196+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.EmployeeService.transfer]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T10:07:37.196+04:00 TRACE 2248 --- [test-demo-api] [nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.EmployeeService.transfer]
+2026-11-01T10:07:37.199+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T10:07:37.200+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T10:07:37.200+04:00 TRACE 2248 --- [test-demo-api] [nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.SalaryService.raise]
+2026-11-01T10:07:37.200+04:00 TRACE 2248 --- [test-demo-api] [nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.SalaryService.raise]
+2026-11-01T10:07:37.200+04:00 TRACE 2248 --- [test-demo-api] [nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.EmployeeService.transfer]
+2026-11-01T10:07:37.200+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-01T10:07:37.320+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T10:07:37.326+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T10:07:37.328+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-01T10:07:37.459+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T10:07:37.461+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T10:07:37.462+04:00 DEBUG 2248 --- [test-demo-api] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit

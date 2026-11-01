@@ -1,0 +1,826 @@
+newman
+
+SPRING-Task-4
+
+□ 1. User / Passport
+└ 01. User yarat
+  POST http://localhost:8080/test-demo/api/users [201 Created, 275B, 105ms]
+  √  HTTP 201
+
+└ 02. Eyni email qadağandır
+  POST http://localhost:8080/test-demo/api/users [409 Conflict, 277B, 12ms]
+  √  HTTP 409
+
+└ 03. User passport olmadan
+  GET http://localhost:8080/test-demo/api/users/3 [200 OK, 270B, 16ms]
+  √  HTTP 200
+  √  Passport null-dır
+
+└ 04. Passport yarat
+  POST http://localhost:8080/test-demo/api/users/3/passport [201 Created, 245B, 47ms]
+  √  HTTP 201
+
+└ 05. User passport ilə
+  GET http://localhost:8080/test-demo/api/users/3 [200 OK, 350B, 10ms]
+  √  HTTP 200
+  √  Passport qaytarılır
+
+└ 06. Passportu gətir
+  GET http://localhost:8080/test-demo/api/users/3/passport [200 OK, 240B, 9ms]
+  √  HTTP 200
+
+└ 07. İkinci passport qadağandır
+  POST http://localhost:8080/test-demo/api/users/3/passport [409 Conflict, 295B, 10ms]
+  √  HTTP 409
+
+└ 08. Ana yarat
+  POST http://localhost:8080/test-demo/api/users [201 Created, 275B, 43ms]
+  √  HTTP 201
+
+└ 09. Passport serialı unikaldır
+  POST http://localhost:8080/test-demo/api/users/4/passport [409 Conflict, 305B, 12ms]
+  √  HTTP 409
+
+└ 10. Bütün user-lər
+  GET http://localhost:8080/test-demo/api/users [200 OK, 466B, 26ms]
+  √  HTTP 200
+
+└ 11. Gender filter
+  GET http://localhost:8080/test-demo/api/users?gender=FEMALE [200 OK, 272B, 11ms]
+  √  HTTP 200
+  √  Hamısı FEMALE
+
+└ 12. Email ilə axtar
+  GET http://localhost:8080/test-demo/api/users/by-email?email=vaqif-2028705c@example.com [200 OK, 350B, 12ms]
+  √  HTTP 200
+  √  User tapıldı
+
+└ 13. Passportsuz user-lər
+  GET http://localhost:8080/test-demo/api/users/without-passport [200 OK, 272B, 15ms]
+  √  HTTP 200
+  √  Passport yoxdur
+
+└ 14. User yenilə
+  PUT http://localhost:8080/test-demo/api/users/3 [200 OK, 358B, 36ms]
+  √  HTTP 200
+
+└ 15. Dirty checking yoxla
+  GET http://localhost:8080/test-demo/api/users/3 [200 OK, 358B, 9ms]
+  √  HTTP 200
+  √  Ad saxlanıb
+
+└ 16. Başqasının emaili qadağandır
+  PUT http://localhost:8080/test-demo/api/users/3 [409 Conflict, 279B, 13ms]
+  √  HTTP 409
+
+└ 17. Passportu sil
+  DELETE http://localhost:8080/test-demo/api/users/3/passport [204 No Content, 112B, 33ms]
+  √  HTTP 204
+
+└ 18. Orphan removal nəticəsi
+  GET http://localhost:8080/test-demo/api/users/3 [200 OK, 278B, 7ms]
+  √  HTTP 200
+  √  User qalır, passport yoxdur
+
+└ 19. Silinmiş passport tapılmır
+  GET http://localhost:8080/test-demo/api/users/3/passport [404 Not Found, 300B, 9ms]
+  √  HTTP 404
+
+└ 20. Cascade yoxlaması üçün passport
+  POST http://localhost:8080/test-demo/api/users/3/passport [201 Created, 245B, 37ms]
+  √  HTTP 201
+
+└ 21. User-i sil
+  DELETE http://localhost:8080/test-demo/api/users/3 [204 No Content, 112B, 38ms]
+  √  HTTP 204
+
+└ 22. Silinmiş user tapılmır
+  GET http://localhost:8080/test-demo/api/users/3 [404 Not Found, 278B, 8ms]
+  √  HTTP 404
+
+└ 23. Ana-nı sil
+  DELETE http://localhost:8080/test-demo/api/users/4 [204 No Content, 112B, 34ms]
+  √  HTTP 204
+
+└ 24. Səhv gender
+  GET http://localhost:8080/test-demo/api/users?gender=OTHER [400 Bad Request, 310B, 3ms]
+  √  HTTP 400
+
+□ 2. Department / Employee
+└ 25. Şöbə yarat
+  POST http://localhost:8080/test-demo/api/departments [201 Created, 246B, 40ms]
+  √  HTTP 201
+
+└ 26. İkinci şöbə
+  POST http://localhost:8080/test-demo/api/departments [201 Created, 246B, 30ms]
+  √  HTTP 201
+
+└ 27. Təkrar şöbə adı
+  POST http://localhost:8080/test-demo/api/departments [409 Conflict, 293B, 9ms]
+  √  HTTP 409
+
+└ 28. Şöbələr
+  GET http://localhost:8080/test-demo/api/departments [200 OK, 581B, 10ms]
+  √  HTTP 200
+  √  İşçilər siyahıya əlavə edilmir
+
+└ 29. İşçisiz şöbələr
+  GET http://localhost:8080/test-demo/api/departments/without-employees [200 OK, 330B, 13ms]
+  √  HTTP 200
+
+└ 30. İşçi yarat
+  POST http://localhost:8080/test-demo/api/employees [201 Created, 267B, 41ms]
+  √  HTTP 201
+
+└ 31. İkinci işçi
+  POST http://localhost:8080/test-demo/api/employees [201 Created, 265B, 34ms]
+  √  HTTP 201
+
+└ 32. Təkrar işçi
+  POST http://localhost:8080/test-demo/api/employees [409 Conflict, 334B, 9ms]
+  √  HTTP 409
+
+└ 33. İşçi və şöbə
+  GET http://localhost:8080/test-demo/api/employees/21 [200 OK, 265B, 9ms]
+  √  HTTP 200
+  √  Şöbə ID və adı var
+
+└ 34. Şöbə işçiləri ilə
+  GET http://localhost:8080/test-demo/api/departments/8 [200 OK, 455B, 12ms]
+  √  HTTP 200
+  √  İki işçi var
+
+└ 35. Şöbənin işçiləri
+  GET http://localhost:8080/test-demo/api/employees/department/8 [200 OK, 374B, 17ms]
+  √  HTTP 200
+  √  İki nəticə
+
+└ 36. Orta maaş
+  GET http://localhost:8080/test-demo/api/employees/department/8/average-salary [200 OK, 161B, 10ms]
+  √  HTTP 200
+  √  Orta 1500
+
+└ 37. Maaş aralığı
+  GET http://localhost:8080/test-demo/api/employees/salary-range?min=1000&max=2000 [200 OK, 1.02kB, 15ms]
+  √  HTTP 200
+  √  Sərhədlər daxildir
+
+└ 38. Səhv maaş aralığı
+  GET http://localhost:8080/test-demo/api/employees/salary-range?min=2000&max=1000 [400 Bad Request, 303B, 5ms]
+  √  HTTP 400
+
+└ 39. İşçili şöbə silinmir
+  DELETE http://localhost:8080/test-demo/api/departments/8 [409 Conflict, 304B, 11ms]
+  √  HTTP 409
+
+└ 40. Təkrar işçiyə update olmaz
+  PUT http://localhost:8080/test-demo/api/employees/21 [409 Conflict, 337B, 12ms]
+  √  HTTP 409
+
+└ 41. İşçini başqa şöbəyə keçir
+  PUT http://localhost:8080/test-demo/api/employees/21 [200 OK, 262B, 39ms]
+  √  HTTP 200
+
+└ 42. Yeni şöbə saxlanıb
+  GET http://localhost:8080/test-demo/api/employees/21 [200 OK, 265B, 9ms]
+  √  HTTP 200
+  √  Transfer saxlanıb
+
+└ 43. Şöbəni yenilə
+  PUT http://localhost:8080/test-demo/api/departments/8 [200 OK, 242B, 43ms]
+  √  HTTP 200
+
+└ 44. İşçini sil
+  DELETE http://localhost:8080/test-demo/api/employees/22 [204 No Content, 112B, 28ms]
+  √  HTTP 204
+
+└ 45. Boş şöbəni sil
+  DELETE http://localhost:8080/test-demo/api/departments/8 [204 No Content, 112B, 41ms]
+  √  HTTP 204
+
+└ 46. Köçürülmüş işçi qalır
+  GET http://localhost:8080/test-demo/api/employees/21 [200 OK, 265B, 8ms]
+  √  HTTP 200
+
+└ 47. İşçini təmizlə
+  DELETE http://localhost:8080/test-demo/api/employees/21 [204 No Content, 112B, 25ms]
+  √  HTTP 204
+
+└ 48. İkinci şöbəni təmizlə
+  DELETE http://localhost:8080/test-demo/api/departments/9 [204 No Content, 112B, 38ms]
+  √  HTTP 204
+
+□ 3. Student / Course
+└ 49. Tələbə yarat
+  POST http://localhost:8080/test-demo/api/students [201 Created, 239B, 45ms]
+  √  HTTP 201
+
+└ 50. İkinci tələbə
+  POST http://localhost:8080/test-demo/api/students [201 Created, 237B, 31ms]
+  √  HTTP 201
+
+└ 51. Kurs yarat
+  POST http://localhost:8080/test-demo/api/courses [201 Created, 222B, 49ms]
+  √  HTTP 201
+
+└ 52. İkinci kurs
+  POST http://localhost:8080/test-demo/api/courses [201 Created, 223B, 32ms]
+  √  HTTP 201
+
+└ 53. Kurs adı unikaldır
+  POST http://localhost:8080/test-demo/api/courses [409 Conflict, 286B, 8ms]
+  √  HTTP 409
+
+└ 54. Kurssuz tələbələr
+  GET http://localhost:8080/test-demo/api/students/without-courses [200 OK, 999B, 10ms]
+  √  HTTP 200
+
+└ 55. Kursa yaz
+  POST http://localhost:8080/test-demo/api/students/25/courses/8 [201 Created, 128B, 54ms]
+  √  HTTP 201
+
+└ 56. İkinci kursa yaz
+  POST http://localhost:8080/test-demo/api/students/25/courses/9 [201 Created, 128B, 39ms]
+  √  HTTP 201
+
+└ 57. Ana-nı kursa yaz
+  POST http://localhost:8080/test-demo/api/students/26/courses/8 [201 Created, 128B, 39ms]
+  √  HTTP 201
+
+└ 58. Təkrar enroll qadağandır
+  POST http://localhost:8080/test-demo/api/students/25/courses/8 [409 Conflict, 315B, 12ms]
+  √  HTTP 409
+
+└ 59. Tələbə kursları ilə
+  GET http://localhost:8080/test-demo/api/students/25 [200 OK, 357B, 8ms]
+  √  HTTP 200
+  √  İki kurs var
+
+└ 60. Tələbə siyahısı kurssuzdur
+  GET http://localhost:8080/test-demo/api/students [200 OK, 999B, 9ms]
+  √  HTTP 200
+  √  Detail olmayan cavabda kurslar yoxdur
+
+└ 61. Kurs siyahısı
+  GET http://localhost:8080/test-demo/api/courses [200 OK, 572B, 13ms]
+  √  HTTP 200
+
+└ 62. Kursu gətir
+  GET http://localhost:8080/test-demo/api/courses/8 [200 OK, 217B, 5ms]
+  √  HTTP 200
+
+└ 63. Tələbənin kursları
+  GET http://localhost:8080/test-demo/api/courses/student/25 [200 OK, 283B, 16ms]
+  √  HTTP 200
+  √  İki kurs var
+
+└ 64. Kursun tələbələri
+  GET http://localhost:8080/test-demo/api/courses/8/students [200 OK, 314B, 11ms]
+  √  HTTP 200
+  √  İki tələbə var
+
+└ 65. Tələbə sayı
+  GET http://localhost:8080/test-demo/api/courses/8/students/count [200 OK, 156B, 16ms]
+  √  HTTP 200
+  √  Say 2
+
+└ 66. Tələbəni yenilə
+  PUT http://localhost:8080/test-demo/api/students/25 [200 OK, 234B, 43ms]
+  √  HTTP 200
+
+└ 67. Kursu yenilə
+  PUT http://localhost:8080/test-demo/api/courses/8 [200 OK, 217B, 39ms]
+  √  HTTP 200
+
+└ 68. Kursdan çıxar
+  DELETE http://localhost:8080/test-demo/api/students/25/courses/8 [204 No Content, 112B, 39ms]
+  √  HTTP 204
+
+└ 69. Təkrar unenroll qadağandır
+  DELETE http://localhost:8080/test-demo/api/students/25/courses/8 [409 Conflict, 311B, 14ms]
+  √  HTTP 409
+
+└ 70. Yenidən kursa yaz
+  POST http://localhost:8080/test-demo/api/students/25/courses/8 [201 Created, 128B, 47ms]
+  √  HTTP 201
+
+└ 71. Ümumi kursu sil
+  DELETE http://localhost:8080/test-demo/api/courses/8 [204 No Content, 112B, 43ms]
+  √  HTTP 204
+
+└ 72. Vaqif qalır, Java qalır
+  GET http://localhost:8080/test-demo/api/students/25 [200 OK, 295B, 8ms]
+  √  HTTP 200
+  √  Bir kurs qalır
+
+└ 73. Ana qalır
+  GET http://localhost:8080/test-demo/api/students/26 [200 OK, 230B, 7ms]
+  √  HTTP 200
+  √  Kursu yoxdur
+
+└ 74. Tələbəni sil
+  DELETE http://localhost:8080/test-demo/api/students/25 [204 No Content, 112B, 43ms]
+  √  HTTP 204
+
+└ 75. Kurs silinməyib
+  GET http://localhost:8080/test-demo/api/courses/9 [200 OK, 218B, 4ms]
+  √  HTTP 200
+
+└ 76. Tələbə sayı sıfırdır
+  GET http://localhost:8080/test-demo/api/courses/9/students/count [200 OK, 156B, 10ms]
+  √  HTTP 200
+  √  Say 0
+
+└ 77. Ana-nı təmizlə
+  DELETE http://localhost:8080/test-demo/api/students/26 [204 No Content, 112B, 31ms]
+  √  HTTP 204
+
+└ 78. Java kursunu təmizlə
+  DELETE http://localhost:8080/test-demo/api/courses/9 [204 No Content, 112B, 45ms]
+  √  HTTP 204
+
+□ 4. Author / Book
+└ 79. Müəllif yarat
+  POST http://localhost:8080/test-demo/api/authors [201 Created, 236B, 34ms]
+  √  HTTP 201
+
+└ 80. İkinci müəllif
+  POST http://localhost:8080/test-demo/api/authors [201 Created, 232B, 41ms]
+  √  HTTP 201
+
+└ 81. Təkrar müəllif
+  POST http://localhost:8080/test-demo/api/authors [409 Conflict, 296B, 9ms]
+  √  HTTP 409
+
+└ 82. Kitab yarat
+  POST http://localhost:8080/test-demo/api/books [201 Created, 243B, 52ms]
+  √  HTTP 201
+
+└ 83. İkinci kitab
+  POST http://localhost:8080/test-demo/api/books [201 Created, 242B, 44ms]
+  √  HTTP 201
+
+└ 84. Təkrar kitab adı
+  POST http://localhost:8080/test-demo/api/books [409 Conflict, 282B, 9ms]
+  √  HTTP 409
+
+└ 85. Kitaba müəllif bağla
+  POST http://localhost:8080/test-demo/api/books/15/authors/13 [201 Created, 128B, 48ms]
+  √  HTTP 201
+
+└ 86. İkinci müəllifi bağla
+  POST http://localhost:8080/test-demo/api/books/15/authors/14 [201 Created, 128B, 37ms]
+  √  HTTP 201
+
+└ 87. İkinci kitaba müəllif
+  POST http://localhost:8080/test-demo/api/books/16/authors/13 [201 Created, 128B, 39ms]
+  √  HTTP 201
+
+└ 88. Təkrar əlaqə qadağandır
+  POST http://localhost:8080/test-demo/api/books/15/authors/13 [409 Conflict, 314B, 8ms]
+  √  HTTP 409
+
+└ 89. Kitab müəllifləri ilə
+  GET http://localhost:8080/test-demo/api/books/15 [200 OK, 387B, 10ms]
+  √  HTTP 200
+  √  İki müəllif var
+
+└ 90. Kitab siyahısı
+  GET http://localhost:8080/test-demo/api/books [200 OK, 957B, 9ms]
+  √  HTTP 200
+  √  Siyahıda authors doldurulmur
+
+└ 91. Başlıq axtarışı
+  GET http://localhost:8080/test-demo/api/books?title=JAVA%20BASICS-2028705c [200 OK, 243B, 65ms]
+  √  HTTP 200
+  √  Case-insensitive axtarış
+
+└ 92. Qiymətə görə artan sıra
+  GET http://localhost:8080/test-demo/api/books/cheaper-than?price=20 [200 OK, 485B, 12ms]
+  √  HTTP 200
+  √  Qiymət <= 20 və ASC
+
+└ 93. Müəllifi gətir
+  GET http://localhost:8080/test-demo/api/authors/13 [200 OK, 231B, 5ms]
+  √  HTTP 200
+
+└ 94. Müəlliflər
+  GET http://localhost:8080/test-demo/api/authors [200 OK, 648B, 9ms]
+  √  HTTP 200
+
+└ 95. Ölkə filteri
+  GET http://localhost:8080/test-demo/api/authors?country=Turkey [200 OK, 229B, 12ms]
+  √  HTTP 200
+  √  Ölkə düzgündür
+
+└ 96. Kitabsız müəlliflər
+  GET http://localhost:8080/test-demo/api/authors/without-books [200 OK, 500B, 10ms]
+  √  HTTP 200
+
+└ 97. Müəllifin kitabları
+  GET http://localhost:8080/test-demo/api/authors/13/books [200 OK, 329B, 18ms]
+  √  HTTP 200
+  √  İki kitab var
+
+└ 98. Müəllifi yenilə
+  PUT http://localhost:8080/test-demo/api/authors/13 [200 OK, 228B, 93ms]
+  √  HTTP 200
+
+└ 99. Kitabı yenilə
+  PUT http://localhost:8080/test-demo/api/books/15 [200 OK, 238B, 50ms]
+  √  HTTP 200
+
+└ 100. Əlaqəni sil
+  DELETE http://localhost:8080/test-demo/api/books/15/authors/13 [204 No Content, 112B, 37ms]
+  √  HTTP 204
+
+└ 101. Təkrar əlaqə silinməsi 404
+  DELETE http://localhost:8080/test-demo/api/books/15/authors/13 [404 Not Found, 299B, 8ms]
+  √  HTTP 404
+
+└ 102. Kitab və ikinci müəllif qalır
+  GET http://localhost:8080/test-demo/api/books/15 [200 OK, 311B, 8ms]
+  √  HTTP 200
+  √  Bir müəllif qalır
+
+└ 103. Birinci müəllif qalır
+  GET http://localhost:8080/test-demo/api/authors/13 [200 OK, 228B, 3ms]
+  √  HTTP 200
+
+└ 104. Yenidən əlaqə yarat
+  POST http://localhost:8080/test-demo/api/books/15/authors/13 [201 Created, 128B, 36ms]
+  √  HTTP 201
+
+└ 105. Müəllifi sil
+  DELETE http://localhost:8080/test-demo/api/authors/13 [204 No Content, 112B, 36ms]
+  √  HTTP 204
+
+└ 106. Birinci kitab qalır
+  GET http://localhost:8080/test-demo/api/books/15 [200 OK, 311B, 7ms]
+  √  HTTP 200
+  √  İkinci müəllif qalır
+
+└ 107. İkinci kitab qalır
+  GET http://localhost:8080/test-demo/api/books/16 [200 OK, 238B, 7ms]
+  √  HTTP 200
+  √  Müəllifləri yoxdur
+
+└ 108. Kitabı sil
+  DELETE http://localhost:8080/test-demo/api/books/15 [204 No Content, 112B, 38ms]
+  √  HTTP 204
+
+└ 109. İkinci müəllif qalır
+  GET http://localhost:8080/test-demo/api/authors/14 [200 OK, 227B, 3ms]
+  √  HTTP 200
+
+└ 110. İkinci müəllifi təmizlə
+  DELETE http://localhost:8080/test-demo/api/authors/14 [204 No Content, 112B, 34ms]
+  √  HTTP 204
+
+└ 111. İkinci kitabı təmizlə
+  DELETE http://localhost:8080/test-demo/api/books/16 [204 No Content, 112B, 34ms]
+  √  HTTP 204
+
+□ Cache
+└ 01. Bütün cache-i təmizlə
+  DELETE http://localhost:8080/test-demo/api/cache [204 No Content, 112B, 3ms]
+  √  HTTP 204
+
+└ 02. Statistikanı sıfırla
+  DELETE http://localhost:8080/test-demo/api/cache/stats [204 No Content, 112B, 2ms]
+  √  HTTP 204
+
+└ 03. Course ilk oxuma
+  GET http://localhost:8080/test-demo/api/courses/1 [200 OK, 216B, 8ms]
+  √  HTTP 200
+
+└ 04. Course miss və put
+  GET http://localhost:8080/test-demo/api/cache/stats [200 OK, 672B, 5ms]
+  √  HTTP 200
+  √  First read: miss1 put1 hit0
+
+└ 05. Course ikinci oxuma
+  GET http://localhost:8080/test-demo/api/courses/1 [200 OK, 216B, 3ms]
+  √  HTTP 200
+
+└ 06. Course L2 hit
+  GET http://localhost:8080/test-demo/api/cache/stats [200 OK, 672B, 3ms]
+  √  HTTP 200
+  √  Second read hits L2
+
+└ 07. Yalnız statistikanı sıfırla
+  DELETE http://localhost:8080/test-demo/api/cache/stats [204 No Content, 112B, 2ms]
+  √  HTTP 204
+
+└ 08. Course cache-də qalıb
+  GET http://localhost:8080/test-demo/api/courses/1 [200 OK, 216B, 4ms]
+  √  HTTP 200
+
+└ 09. Reset cache-i silmir
+  GET http://localhost:8080/test-demo/api/cache/stats [200 OK, 672B, 2ms]
+  √  HTTP 200
+  √  Reset preserves cached Course
+
+└ 10. Course region-u təmizlə
+  DELETE http://localhost:8080/test-demo/api/cache/courses [204 No Content, 112B, 3ms]
+  √  HTTP 204
+
+└ 11. Course yenidən DB-dən
+  GET http://localhost:8080/test-demo/api/courses/1 [200 OK, 216B, 8ms]
+  √  HTTP 200
+
+└ 12. Evict-dən sonra miss
+  GET http://localhost:8080/test-demo/api/cache/stats [200 OK, 672B, 2ms]
+  √  HTTP 200
+  √  Entity eviction causes a miss
+
+└ 13. Naməlum region
+  DELETE http://localhost:8080/test-demo/api/cache/unknown [400 Bad Request, 278B, 2ms]
+  √  HTTP 400
+
+└ 14. Query yoxlaması üçün cache-i təmizlə
+  DELETE http://localhost:8080/test-demo/api/cache [204 No Content, 112B, 3ms]
+  √  HTTP 204
+
+└ 15. Query statistikasını sıfırla
+  DELETE http://localhost:8080/test-demo/api/cache/stats [204 No Content, 112B, 2ms]
+  √  HTTP 204
+
+└ 16. Müəllif ölkə ilə ilk oxuma
+  GET http://localhost:8080/test-demo/api/authors?country=Azerbaijan [200 OK, 293B, 7ms]
+  √  HTTP 200
+
+└ 17. Müəllif ölkə ilə ikinci oxuma
+  GET http://localhost:8080/test-demo/api/authors?country=Azerbaijan [200 OK, 293B, 8ms]
+  √  HTTP 200
+
+└ 18. Query cache hit
+  GET http://localhost:8080/test-demo/api/cache/stats [200 OK, 672B, 2ms]
+  √  HTTP 200
+  √  Query cache hit
+
+└ 19. Yeni müəllif
+  POST http://localhost:8080/test-demo/api/authors [201 Created, 263B, 29ms]
+  √  HTTP 201
+
+└ 20. Query invalidation-dan sonra yeni nəticə
+  GET http://localhost:8080/test-demo/api/authors?country=Azerbaijan [200 OK, 395B, 6ms]
+  √  HTTP 200
+  √  New author appears
+
+└ 21. Test kitabı
+  POST http://localhost:8080/test-demo/api/books [201 Created, 274B, 37ms]
+  √  HTTP 201
+
+└ 22. Köhnə qiymət
+  GET http://localhost:8080/test-demo/api/books/17 [200 OK, 267B, 6ms]
+  √  HTTP 200
+  √  Old price
+
+└ 23. Qiyməti dəyiş
+  PUT http://localhost:8080/test-demo/api/books/17 [200 OK, 268B, 37ms]
+  √  HTTP 200
+
+└ 24. Yeni qiyməti oxu
+  GET http://localhost:8080/test-demo/api/books/17 [200 OK, 267B, 6ms]
+  √  HTTP 200
+  √  Updated price
+
+└ 25. Test kitabını sil
+  DELETE http://localhost:8080/test-demo/api/books/17 [204 No Content, 112B, 32ms]
+  √  HTTP 204
+
+└ 26. Test müəllifini sil
+  DELETE http://localhost:8080/test-demo/api/authors/15 [204 No Content, 112B, 31ms]
+  √  HTTP 204
+
+□ Transactions / C1 REQUIRED
+└ 01. Transfer üçün işçi yarat
+  POST http://localhost:8080/test-demo/api/employees [201 Created, 299B, 38ms]
+  √  HTTP 201
+
+└ 02. REQUIRED uğurlu transfer
+  POST http://localhost:8080/test-demo/api/employees/23/transfer [200 OK, 293B, 73ms]
+  √  HTTP 200
+  √  Salary1150 and department2
+
+└ 03. Commit-dən sonra işçini oxu
+  GET http://localhost:8080/test-demo/api/employees/23 [200 OK, 293B, 6ms]
+  √  HTTP 200
+  √  Both changes committed
+
+└ 04. Rollback üçün işçi yarat
+  POST http://localhost:8080/test-demo/api/employees [201 Created, 302B, 33ms]
+  √  HTTP 201
+
+└ 05. Əvvəlki departament və maaş
+  GET http://localhost:8080/test-demo/api/employees/24 [200 OK, 300B, 7ms]
+  √  HTTP 200
+  √  Before: department1 salary9000
+
+└ 06. Limitdən yuxarı transfer
+  POST http://localhost:8080/test-demo/api/employees/24/transfer [409 Conflict, 299B, 42ms]
+  √  HTTP 409
+  √  Salary limit error
+
+└ 07. Rollback-dən sonra köhnə departament
+  GET http://localhost:8080/test-demo/api/employees/24 [200 OK, 300B, 7ms]
+  √  HTTP 200
+  √  Rollback: department1 salary9000
+
+└ 08. Sərhəd yoxlaması üçün maaş8000
+  PUT http://localhost:8080/test-demo/api/employees/23 [200 OK, 293B, 39ms]
+  √  HTTP 200
+
+└ 09. Dəqiq10000 qəbul olunur
+  POST http://localhost:8080/test-demo/api/employees/23/transfer [200 OK, 301B, 66ms]
+  √  HTTP 200
+  √  Salary boundary10000
+
+└ 10. Uğurlu test işçisini sil
+  DELETE http://localhost:8080/test-demo/api/employees/23 [204 No Content, 112B, 41ms]
+  √  HTTP 204
+
+└ 11. Rollback test işçisini sil
+  DELETE http://localhost:8080/test-demo/api/employees/24 [204 No Content, 112B, 32ms]
+  √  HTTP 204
+
+□ Transactions / C3 MANDATORY
+└ 01. MANDATORY tranzaksiyasız
+  POST http://localhost:8080/test-demo/api/tx-demo/reserve-seat/1 [409 Conflict, 355B, 3ms]
+  √  HTTP 409
+  √  MANDATORY rejects missing transaction
+
+└ 02. Mövcud olmayan ID də metodun içinə çatmır
+  POST http://localhost:8080/test-demo/api/tx-demo/reserve-seat/999999999 [409 Conflict, 363B, 3ms]
+  √  HTTP 409
+  √  MANDATORY rejects missing transaction
+
+└ 03. Capacity1 kurs əvvəl boşdur
+  GET http://localhost:8080/test-demo/api/courses/1/students/count [200 OK, 156B, 7ms]
+  √  HTTP 200
+  √  Initial enrollment count0
+
+└ 04. Birinci test tələbəsi
+  POST http://localhost:8080/test-demo/api/students [201 Created, 264B, 50ms]
+  √  HTTP 201
+
+└ 05. İkinci test tələbəsi
+  POST http://localhost:8080/test-demo/api/students [201 Created, 264B, 36ms]
+  √  HTTP 201
+
+└ 06. enroll REQUIRED içindən MANDATORY keçir
+  POST http://localhost:8080/test-demo/api/students/27/courses/1 [201 Created, 128B, 41ms]
+  √  HTTP 201
+
+└ 07. Kursda bir tələbə var
+  GET http://localhost:8080/test-demo/api/courses/1/students/count [200 OK, 156B, 8ms]
+  √  HTTP 200
+  √  One occupied seat
+
+└ 08. Dolu kurs ikinci tələbəni qəbul etmir
+  POST http://localhost:8080/test-demo/api/students/28/courses/1 [409 Conflict, 287B, 15ms]
+  √  HTTP 409
+  √  Course full
+
+└ 09. İkinci tələbə qeydiyyatsız qalıb
+  GET http://localhost:8080/test-demo/api/students/28 [200 OK, 257B, 8ms]
+  √  HTTP 200
+  √  Rejected student has no courses
+
+└ 10. Birinci test tələbəsini sil
+  DELETE http://localhost:8080/test-demo/api/students/27 [204 No Content, 112B, 65ms]
+  √  HTTP 204
+
+└ 11. İkinci test tələbəsini sil
+  DELETE http://localhost:8080/test-demo/api/students/28 [204 No Content, 112B, 34ms]
+  √  HTTP 204
+
+└ 12. Testdən sonra kurs yenə boşdur
+  GET http://localhost:8080/test-demo/api/courses/1/students/count [200 OK, 156B, 8ms]
+  √  HTTP 200
+  √  Enrollment cleanup
+
+□ Isolation / D1 salary report
+└ READ_COMMITTED
+  GET http://localhost:8080/test-demo/api/isolation/departments/1/salary-report?isolation=READ_COMMITTED&delayMs=0 [200 OK, 223B, 9ms]
+  √  HTTP 200
+  √  Report isolation
+  √  No concurrent writer: averages equal
+
+└ REPEATABLE_READ
+  GET http://localhost:8080/test-demo/api/isolation/departments/1/salary-report?isolation=REPEATABLE_READ&delayMs=0 [200 OK, 224B, 11ms]
+  √  HTTP 200
+  √  Report isolation
+  √  No concurrent writer: averages equal
+
+└ D1 unsupported SERIALIZABLE
+  GET http://localhost:8080/test-demo/api/isolation/departments/1/salary-report?isolation=SERIALIZABLE&delayMs=0 [400 Bad Request, 318B, 3ms]
+  √  HTTP 400
+
+└ Negative delay
+  GET http://localhost:8080/test-demo/api/isolation/departments/1/salary-report?isolation=READ_COMMITTED&delayMs=-1 [400 Bad Request, 302B, 7ms]
+  √  HTTP 400
+
+□ Isolation / D2 salary raise
+└ 01. D2 test employee
+  POST http://localhost:8080/test-demo/api/employees [201 Created, 301B, 44ms]
+  √  HTTP 201
+
+└ 02. Sequential READ_COMMITTED raise
+  POST http://localhost:8080/test-demo/api/isolation/employees/25/raise?amount=100&isolation=READ_COMMITTED&delayMs=0 [200 OK, 242B, 34ms]
+  √  HTTP 200
+  √  Salary1100
+
+└ 03. Sequential REPEATABLE_READ raise
+  POST http://localhost:8080/test-demo/api/isolation/employees/25/raise?amount=100&isolation=REPEATABLE_READ&delayMs=0 [200 OK, 243B, 42ms]
+  √  HTTP 200
+  √  Salary1200
+
+└ 04. Unsupported SERIALIZABLE
+  POST http://localhost:8080/test-demo/api/isolation/employees/25/raise?amount=100&isolation=SERIALIZABLE&delayMs=0 [400 Bad Request, 309B, 4ms]
+  √  HTTP 400
+
+└ 05. Negative amount
+  POST http://localhost:8080/test-demo/api/isolation/employees/25/raise?amount=-100&isolation=READ_COMMITTED&delayMs=0 [400 Bad Request, 280B, 7ms]
+  √  HTTP 400
+
+└ 06. Negative delay
+  POST http://localhost:8080/test-demo/api/isolation/employees/25/raise?amount=100&isolation=READ_COMMITTED&delayMs=-1 [400 Bad Request, 293B, 9ms]
+  √  HTTP 400
+
+└ 07. Final salary unchanged after rejected requests
+  GET http://localhost:8080/test-demo/api/employees/25 [200 OK, 299B, 7ms]
+  √  HTTP 200
+  √  Final salary1200
+
+└ 08. Delete test employee
+  DELETE http://localhost:8080/test-demo/api/employees/25 [204 No Content, 112B, 42ms]
+  √  HTTP 204
+
+□ Isolation / D3 course capacity
+└ Create student1
+  POST http://localhost:8080/test-demo/api/students [201 Created, 263B, 38ms]
+  √  HTTP 201
+
+└ Create student2
+  POST http://localhost:8080/test-demo/api/students [201 Created, 263B, 39ms]
+  √  HTTP 201
+
+└ RR enroll first student
+  POST http://localhost:8080/test-demo/api/isolation/courses/1/enroll/29?isolation=REPEATABLE_READ&delayMs=0 [200 OK, 244B, 40ms]
+  √  HTTP 200
+  √  Initially empty, capacity1
+
+└ Full course rejects second student
+  POST http://localhost:8080/test-demo/api/isolation/courses/1/enroll/30?isolation=SERIALIZABLE&delayMs=0 [409 Conflict, 295B, 16ms]
+  √  HTTP 409
+
+└ Unsupported READ_COMMITTED
+  POST http://localhost:8080/test-demo/api/isolation/courses/1/enroll/30?isolation=READ_COMMITTED&delayMs=0 [400 Bad Request, 308B, 2ms]
+  √  HTTP 400
+
+└ Negative delay
+  POST http://localhost:8080/test-demo/api/isolation/courses/1/enroll/30?isolation=SERIALIZABLE&delayMs=-1 [400 Bad Request, 294B, 9ms]
+  √  HTTP 400
+
+└ Unenroll first student
+  DELETE http://localhost:8080/test-demo/api/students/29/courses/1 [204 No Content, 112B, 54ms]
+  √  HTTP 204
+
+└ SERIALIZABLE enroll second student
+  POST http://localhost:8080/test-demo/api/isolation/courses/1/enroll/30?isolation=SERIALIZABLE&delayMs=0 [200 OK, 241B, 39ms]
+  √  HTTP 200
+  √  Serializable response
+
+└ Duplicate enrollment rejected
+  POST http://localhost:8080/test-demo/api/isolation/courses/1/enroll/30?isolation=SERIALIZABLE&delayMs=0 [409 Conflict, 323B, 14ms]
+  √  HTTP 409
+
+└ Delete d3FirstId
+  DELETE http://localhost:8080/test-demo/api/students/29 [204 No Content, 112B, 35ms]
+  √  HTTP 204
+
+└ Delete d3SecondId
+  DELETE http://localhost:8080/test-demo/api/students/30 [204 No Content, 112B, 43ms]
+  √  HTTP 204
+
+┌─────────────────────────┬───────────────────┬──────────────────┐
+│                         │          executed │           failed │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│              iterations │                 1 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│                requests │               183 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│            test-scripts │               183 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│      prerequest-scripts │                 1 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│              assertions │               244 │                0 │
+├─────────────────────────┴───────────────────┴──────────────────┤
+│ total run duration: 19.2s                                      │
+├────────────────────────────────────────────────────────────────┤
+│ total data received: 22.5kB (approx)                           │
+├────────────────────────────────────────────────────────────────┤
+│ average response time: 22ms [min: 2ms, max: 105ms, s.d.: 18ms] │
+└────────────────────────────────────────────────────────────────┘

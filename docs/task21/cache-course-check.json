@@ -1,0 +1,145 @@
+{
+  "clearStatus": 204,
+  "resetStatus": 204,
+  "before": {
+    "secondLevelCacheHitCount": 0,
+    "secondLevelCacheMissCount": 0,
+    "secondLevelCachePutCount": 0,
+    "queryCacheHitCount": 0,
+    "regions": {
+      "courses": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "departments": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "authors": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "books": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "author-books": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "author-authorBooks": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "book-authorBooks": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      }
+    }
+  },
+  "firstCourse": {
+    "id": 1,
+    "title": "Java Basics",
+    "credit": 5,
+    "teacher": "Ruslan"
+  },
+  "afterFirst": {
+    "secondLevelCacheHitCount": 0,
+    "secondLevelCacheMissCount": 1,
+    "secondLevelCachePutCount": 1,
+    "queryCacheHitCount": 0,
+    "regions": {
+      "courses": {
+        "hitCount": 0,
+        "missCount": 1,
+        "putCount": 1
+      },
+      "departments": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "authors": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "books": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "author-books": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "author-authorBooks": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "book-authorBooks": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      }
+    }
+  },
+  "secondCourse": {
+    "id": 1,
+    "title": "Java Basics",
+    "credit": 5,
+    "teacher": "Ruslan"
+  },
+  "afterSecond": {
+    "secondLevelCacheHitCount": 1,
+    "secondLevelCacheMissCount": 1,
+    "secondLevelCachePutCount": 1,
+    "queryCacheHitCount": 0,
+    "regions": {
+      "courses": {
+        "hitCount": 1,
+        "missCount": 1,
+        "putCount": 1
+      },
+      "departments": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "authors": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "books": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "author-books": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "author-authorBooks": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      },
+      "book-authorBooks": {
+        "hitCount": 0,
+        "missCount": 0,
+        "putCount": 0
+      }
+    }
+  }
+}

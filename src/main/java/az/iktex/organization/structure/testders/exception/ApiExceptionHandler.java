@@ -1,14 +1,24 @@
 package az.iktex.organization.structure.testders.exception;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.dao.ConcurrencyFailureException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
+import org.springframework.transaction.IllegalTransactionStateException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class ApiExceptionHandler {
+
+    @ExceptionHandler(ConcurrencyFailureException.class)
+    public ProblemDetail handleConcurrency(ConcurrencyFailureException exception) {
+        return ProblemDetail.forStatusAndDetail(
+                HttpStatus.CONFLICT,
+                "Concurrent transaction conflict; retry the whole operation"
+        );
+    }
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ProblemDetail handleNotFound(EntityNotFoundException exception) {
@@ -28,5 +38,10 @@ public class ApiExceptionHandler {
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ProblemDetail handleConstraint(DataIntegrityViolationException exception) {
         return ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, "Database constraint violation");
+    }
+
+    @ExceptionHandler(IllegalTransactionStateException.class)
+    public ProblemDetail handleTransactionState(IllegalTransactionStateException exception) {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, exception.getMessage());
     }
 }
