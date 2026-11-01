@@ -1,0 +1,28 @@
+> Task :compileJava
+> Task :processResources UP-TO-DATE
+> Task :classes
+> Task :compileTestJava
+> Task :processTestResources NO-SOURCE
+> Task :testClasses
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.ehcache.impl.internal.concurrent.ThreadLocalRandomUtil (file:/C:/Users/USER/.gradle/caches/modules-2/files-2.1/org.ehcache/ehcache/3.10.8/892b8caf98d188d0bac6ff16db564cae13a6874f/ehcache-3.10.8-jakarta.jar)
+WARNING: Please consider reporting this to the maintainers of class org.ehcache.impl.internal.concurrent.ThreadLocalRandomUtil
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+2026-11-01T13:47:19.930+04:00  INFO 46792 --- [test-demo-api] [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-11-01T13:47:19.932+04:00  INFO 46792 --- [test-demo-api] [ionShutdownHook] org.ehcache.core.EhcacheManager          : Cache 'courses' removed from EhcacheManager.
+2026-11-01T13:47:19.932+04:00  INFO 46792 --- [test-demo-api] [ionShutdownHook] org.ehcache.core.EhcacheManager          : Cache 'book-authorBooks' removed from EhcacheManager.
+2026-11-01T13:47:19.933+04:00  INFO 46792 --- [test-demo-api] [ionShutdownHook] org.ehcache.core.EhcacheManager          : Cache 'books' removed from EhcacheManager.
+2026-11-01T13:47:19.933+04:00  INFO 46792 --- [test-demo-api] [ionShutdownHook] org.ehcache.core.EhcacheManager          : Cache 'default-query-results-region' removed from EhcacheManager.
+2026-11-01T13:47:19.933+04:00  INFO 46792 --- [test-demo-api] [ionShutdownHook] org.ehcache.core.EhcacheManager          : Cache 'author-authorBooks' removed from EhcacheManager.
+2026-11-01T13:47:19.933+04:00  INFO 46792 --- [test-demo-api] [ionShutdownHook] org.ehcache.core.EhcacheManager          : Cache 'departments' removed from EhcacheManager.
+2026-11-01T13:47:19.933+04:00  INFO 46792 --- [test-demo-api] [ionShutdownHook] org.ehcache.core.EhcacheManager          : Cache 'author-books' removed from EhcacheManager.
+2026-11-01T13:47:19.933+04:00  INFO 46792 --- [test-demo-api] [ionShutdownHook] org.ehcache.core.EhcacheManager          : Cache 'authors' removed from EhcacheManager.
+2026-11-01T13:47:19.934+04:00  INFO 46792 --- [test-demo-api] [ionShutdownHook] org.ehcache.core.EhcacheManager          : Cache 'default-update-timestamps-region' removed from EhcacheManager.
+2026-11-01T13:47:19.938+04:00  INFO 46792 --- [test-demo-api] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-11-01T13:47:19.940+04:00  INFO 46792 --- [test-demo-api] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+> Task :test
+
+BUILD SUCCESSFUL in 19s
+4 actionable tasks: 3 executed, 1 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.8.2/userguide/configuration_cache_enabling.html

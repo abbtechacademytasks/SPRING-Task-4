@@ -1,0 +1,1404 @@
+{
+  "collection": {
+    "item": [
+      {
+        "id": "6ea246b3-96a8-461c-9910-e4e8a37fa6e3",
+        "name": "Isolation",
+        "item": [
+          {
+            "id": "f6dc62d1-16d0-4097-b6ba-6f0866adc5b4",
+            "name": "D1 salary report",
+            "description": {
+              "content": "Bu qovluq ardıcıl HTTP smoke/validation yoxlamasıdır. Paralel update fərqi ayrıca docs/task21/d1-parallel-results.json ilə sübut olunub; bu ardıcıl run özü concurrency sübutu deyil.",
+              "type": "text/plain"
+            },
+            "item": [
+              {
+                "id": "9a253817-5e0e-4f04-be5f-eff840cae73d",
+                "name": "READ_COMMITTED",
+                "request": {
+                  "url": {
+                    "path": [
+                      "isolation",
+                      "departments",
+                      "1",
+                      "salary-report"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [
+                      {
+                        "key": "isolation",
+                        "value": "READ_COMMITTED"
+                      },
+                      {
+                        "key": "delayMs",
+                        "value": "0"
+                      }
+                    ],
+                    "variable": []
+                  },
+                  "method": "GET"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "e0005ca2-7ff7-4e3a-8dd5-63694aebe232",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                        "pm.test(\"Report isolation\",()=>pm.expect(pm.response.json().isolation).to.eql(\"READ_COMMITTED\"));",
+                        "pm.test(\"No concurrent writer: averages equal\",()=>{const r=pm.response.json();pm.expect(r.firstAvg).to.eql(r.secondAvg);});"
+                      ],
+                      "_lastExecutionId": "3ada124a-b2b0-4e94-a9bf-e219c1f478a8"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "27b54a0a-82ad-4c0f-be23-016741210556",
+                "name": "REPEATABLE_READ",
+                "request": {
+                  "url": {
+                    "path": [
+                      "isolation",
+                      "departments",
+                      "1",
+                      "salary-report"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [
+                      {
+                        "key": "isolation",
+                        "value": "REPEATABLE_READ"
+                      },
+                      {
+                        "key": "delayMs",
+                        "value": "0"
+                      }
+                    ],
+                    "variable": []
+                  },
+                  "method": "GET"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "ef64dadd-3ca1-4b70-93eb-232109624a02",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                        "pm.test(\"Report isolation\",()=>pm.expect(pm.response.json().isolation).to.eql(\"REPEATABLE_READ\"));",
+                        "pm.test(\"No concurrent writer: averages equal\",()=>{const r=pm.response.json();pm.expect(r.firstAvg).to.eql(r.secondAvg);});"
+                      ],
+                      "_lastExecutionId": "a77aaf24-1c35-45e0-949b-25947a9802ba"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "c34e25cf-8fee-480b-b34e-d93de8780ae2",
+                "name": "D1 unsupported SERIALIZABLE",
+                "request": {
+                  "url": {
+                    "path": [
+                      "isolation",
+                      "departments",
+                      "1",
+                      "salary-report"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [
+                      {
+                        "key": "isolation",
+                        "value": "SERIALIZABLE"
+                      },
+                      {
+                        "key": "delayMs",
+                        "value": "0"
+                      }
+                    ],
+                    "variable": []
+                  },
+                  "method": "GET"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "60958f65-b59d-4d91-9f4d-dc7262da50e8",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                      ],
+                      "_lastExecutionId": "fec783f4-8ff4-40b3-aa0a-1a6aad397a3e"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "e543b4e2-61dc-45f6-9234-89d5aaaa96a8",
+                "name": "Negative delay",
+                "request": {
+                  "url": {
+                    "path": [
+                      "isolation",
+                      "departments",
+                      "1",
+                      "salary-report"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [
+                      {
+                        "key": "isolation",
+                        "value": "READ_COMMITTED"
+                      },
+                      {
+                        "key": "delayMs",
+                        "value": "-1"
+                      }
+                    ],
+                    "variable": []
+                  },
+                  "method": "GET"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "2e96360d-bad4-4737-9772-044fd9559808",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                      ],
+                      "_lastExecutionId": "f325fc4b-06b7-498a-a0b6-d444ed9f1877"
+                    }
+                  }
+                ]
+              }
+            ],
+            "event": []
+          }
+        ],
+        "event": []
+      }
+    ],
+    "event": [],
+    "variable": [
+      {
+        "type": "any",
+        "value": "http://localhost:8080/test-demo/api",
+        "key": "baseUrl"
+      }
+    ],
+    "info": {
+      "_postman_id": "11d1316d-d429-4b34-96c1-c2ec99e4dcb7",
+      "name": "Task21 Isolation",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    }
+  },
+  "environment": {
+    "id": "069a5687-09c3-4e73-878f-d8c6eef4ce6d",
+    "values": []
+  },
+  "globals": {
+    "id": "bc60ef67-7dc3-4548-8da2-56cf4d9ddc66",
+    "values": []
+  },
+  "run": {
+    "stats": {
+      "iterations": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "items": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "scripts": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequests": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "requests": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "tests": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "assertions": {
+        "total": 8,
+        "pending": 0,
+        "failed": 0
+      },
+      "testScripts": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequestScripts": {
+        "total": 0,
+        "pending": 0,
+        "failed": 0
+      }
+    },
+    "timings": {
+      "responseAverage": 19.25,
+      "responseMin": 11,
+      "responseMax": 39,
+      "responseSd": 11.583932838203095,
+      "dnsAverage": 0,
+      "dnsMin": 0,
+      "dnsMax": 0,
+      "dnsSd": 0,
+      "firstByteAverage": 0,
+      "firstByteMin": 0,
+      "firstByteMax": 0,
+      "firstByteSd": 0,
+      "started": 1793560481535,
+      "completed": 1793560481896
+    },
+    "executions": [
+      {
+        "cursor": {
+          "position": 0,
+          "iteration": 0,
+          "length": 4,
+          "cycles": 1,
+          "empty": false,
+          "eof": false,
+          "bof": true,
+          "cr": false,
+          "ref": "09162903-688d-4586-8061-f27d04c0a9fc",
+          "httpRequestId": "a0a08377-2b05-4a9e-a419-f25d24879371"
+        },
+        "item": {
+          "id": "9a253817-5e0e-4f04-be5f-eff840cae73d",
+          "name": "READ_COMMITTED",
+          "request": {
+            "url": {
+              "path": [
+                "isolation",
+                "departments",
+                "1",
+                "salary-report"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "isolation",
+                  "value": "READ_COMMITTED"
+                },
+                {
+                  "key": "delayMs",
+                  "value": "0"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "e0005ca2-7ff7-4e3a-8dd5-63694aebe232",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                  "pm.test(\"Report isolation\",()=>pm.expect(pm.response.json().isolation).to.eql(\"READ_COMMITTED\"));",
+                  "pm.test(\"No concurrent writer: averages equal\",()=>{const r=pm.response.json();pm.expect(r.firstAvg).to.eql(r.secondAvg);});"
+                ],
+                "_lastExecutionId": "3ada124a-b2b0-4e94-a9bf-e219c1f478a8"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "isolation",
+              "departments",
+              "1",
+              "salary-report"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [
+              {
+                "key": "isolation",
+                "value": "READ_COMMITTED"
+              },
+              {
+                "key": "delayMs",
+                "value": "0"
+              }
+            ],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "9cba0584-6abf-4910-b49e-fc75d2ab7302",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "3ad66a2f-37d1-4635-9ebb-0d066e752269",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "67"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 19:14:41 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              102,
+              105,
+              114,
+              115,
+              116,
+              65,
+              118,
+              103,
+              34,
+              58,
+              49,
+              53,
+              48,
+              48,
+              46,
+              48,
+              44,
+              34,
+              115,
+              101,
+              99,
+              111,
+              110,
+              100,
+              65,
+              118,
+              103,
+              34,
+              58,
+              49,
+              53,
+              48,
+              48,
+              46,
+              48,
+              44,
+              34,
+              105,
+              115,
+              111,
+              108,
+              97,
+              116,
+              105,
+              111,
+              110,
+              34,
+              58,
+              34,
+              82,
+              69,
+              65,
+              68,
+              95,
+              67,
+              79,
+              77,
+              77,
+              73,
+              84,
+              84,
+              69,
+              68,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 39,
+          "responseSize": 67
+        },
+        "id": "9a253817-5e0e-4f04-be5f-eff840cae73d",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Report isolation",
+            "skipped": false
+          },
+          {
+            "assertion": "No concurrent writer: averages equal",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "2b7b45e5-dba4-41be-83e5-8a2c8e6ca8d7",
+          "length": 4,
+          "cycles": 1,
+          "position": 1,
+          "iteration": 0,
+          "httpRequestId": "d0111b36-2dcb-4afc-86d8-ab11748b065e"
+        },
+        "item": {
+          "id": "27b54a0a-82ad-4c0f-be23-016741210556",
+          "name": "REPEATABLE_READ",
+          "request": {
+            "url": {
+              "path": [
+                "isolation",
+                "departments",
+                "1",
+                "salary-report"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "isolation",
+                  "value": "REPEATABLE_READ"
+                },
+                {
+                  "key": "delayMs",
+                  "value": "0"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "ef64dadd-3ca1-4b70-93eb-232109624a02",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                  "pm.test(\"Report isolation\",()=>pm.expect(pm.response.json().isolation).to.eql(\"REPEATABLE_READ\"));",
+                  "pm.test(\"No concurrent writer: averages equal\",()=>{const r=pm.response.json();pm.expect(r.firstAvg).to.eql(r.secondAvg);});"
+                ],
+                "_lastExecutionId": "a77aaf24-1c35-45e0-949b-25947a9802ba"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "isolation",
+              "departments",
+              "1",
+              "salary-report"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [
+              {
+                "key": "isolation",
+                "value": "REPEATABLE_READ"
+              },
+              {
+                "key": "delayMs",
+                "value": "0"
+              }
+            ],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "78b27434-3597-4072-a239-849c2fef2987",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "702117c8-987b-4ee6-aade-ada3a7e1057a",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "68"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 19:14:41 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              102,
+              105,
+              114,
+              115,
+              116,
+              65,
+              118,
+              103,
+              34,
+              58,
+              49,
+              53,
+              48,
+              48,
+              46,
+              48,
+              44,
+              34,
+              115,
+              101,
+              99,
+              111,
+              110,
+              100,
+              65,
+              118,
+              103,
+              34,
+              58,
+              49,
+              53,
+              48,
+              48,
+              46,
+              48,
+              44,
+              34,
+              105,
+              115,
+              111,
+              108,
+              97,
+              116,
+              105,
+              111,
+              110,
+              34,
+              58,
+              34,
+              82,
+              69,
+              80,
+              69,
+              65,
+              84,
+              65,
+              66,
+              76,
+              69,
+              95,
+              82,
+              69,
+              65,
+              68,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 16,
+          "responseSize": 68
+        },
+        "id": "27b54a0a-82ad-4c0f-be23-016741210556",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Report isolation",
+            "skipped": false
+          },
+          {
+            "assertion": "No concurrent writer: averages equal",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "fd2df9d6-309d-4e86-b745-934444353d7b",
+          "length": 4,
+          "cycles": 1,
+          "position": 2,
+          "iteration": 0,
+          "httpRequestId": "666cb7ca-5b97-4bb4-9869-7d199fb20170"
+        },
+        "item": {
+          "id": "c34e25cf-8fee-480b-b34e-d93de8780ae2",
+          "name": "D1 unsupported SERIALIZABLE",
+          "request": {
+            "url": {
+              "path": [
+                "isolation",
+                "departments",
+                "1",
+                "salary-report"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "isolation",
+                  "value": "SERIALIZABLE"
+                },
+                {
+                  "key": "delayMs",
+                  "value": "0"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "60958f65-b59d-4d91-9f4d-dc7262da50e8",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                ],
+                "_lastExecutionId": "fec783f4-8ff4-40b3-aa0a-1a6aad397a3e"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "isolation",
+              "departments",
+              "1",
+              "salary-report"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [
+              {
+                "key": "isolation",
+                "value": "SERIALIZABLE"
+              },
+              {
+                "key": "delayMs",
+                "value": "0"
+              }
+            ],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "4c0e7a88-714e-452d-92e1-2e32f981bbf5",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "ede03f0b-dd99-45c0-b5d8-8100419cf7d9",
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 19:14:41 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              100,
+              101,
+              116,
+              97,
+              105,
+              108,
+              34,
+              58,
+              34,
+              83,
+              117,
+              112,
+              112,
+              111,
+              114,
+              116,
+              101,
+              100,
+              32,
+              105,
+              115,
+              111,
+              108,
+              97,
+              116,
+              105,
+              111,
+              110,
+              58,
+              32,
+              82,
+              69,
+              65,
+              68,
+              95,
+              67,
+              79,
+              77,
+              77,
+              73,
+              84,
+              84,
+              69,
+              68,
+              44,
+              32,
+              82,
+              69,
+              80,
+              69,
+              65,
+              84,
+              65,
+              66,
+              76,
+              69,
+              95,
+              82,
+              69,
+              65,
+              68,
+              34,
+              44,
+              34,
+              105,
+              110,
+              115,
+              116,
+              97,
+              110,
+              99,
+              101,
+              34,
+              58,
+              34,
+              47,
+              116,
+              101,
+              115,
+              116,
+              45,
+              100,
+              101,
+              109,
+              111,
+              47,
+              97,
+              112,
+              105,
+              47,
+              105,
+              115,
+              111,
+              108,
+              97,
+              116,
+              105,
+              111,
+              110,
+              47,
+              100,
+              101,
+              112,
+              97,
+              114,
+              116,
+              109,
+              101,
+              110,
+              116,
+              115,
+              47,
+              49,
+              47,
+              115,
+              97,
+              108,
+              97,
+              114,
+              121,
+              45,
+              114,
+              101,
+              112,
+              111,
+              114,
+              116,
+              34,
+              44,
+              34,
+              115,
+              116,
+              97,
+              116,
+              117,
+              115,
+              34,
+              58,
+              52,
+              48,
+              48,
+              44,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              34,
+              66,
+              97,
+              100,
+              32,
+              82,
+              101,
+              113,
+              117,
+              101,
+              115,
+              116,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 11,
+          "responseSize": 166
+        },
+        "id": "c34e25cf-8fee-480b-b34e-d93de8780ae2",
+        "assertions": [
+          {
+            "assertion": "HTTP 400",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "945c5d04-3270-4497-be99-db2abfa3b0bd",
+          "length": 4,
+          "cycles": 1,
+          "position": 3,
+          "iteration": 0,
+          "httpRequestId": "367de8f9-d78c-4bc6-a60f-2b8f04fee211"
+        },
+        "item": {
+          "id": "e543b4e2-61dc-45f6-9234-89d5aaaa96a8",
+          "name": "Negative delay",
+          "request": {
+            "url": {
+              "path": [
+                "isolation",
+                "departments",
+                "1",
+                "salary-report"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "isolation",
+                  "value": "READ_COMMITTED"
+                },
+                {
+                  "key": "delayMs",
+                  "value": "-1"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "2e96360d-bad4-4737-9772-044fd9559808",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                ],
+                "_lastExecutionId": "f325fc4b-06b7-498a-a0b6-d444ed9f1877"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "isolation",
+              "departments",
+              "1",
+              "salary-report"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [
+              {
+                "key": "isolation",
+                "value": "READ_COMMITTED"
+              },
+              {
+                "key": "delayMs",
+                "value": "-1"
+              }
+            ],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "8af16ec0-0147-4b4e-a315-341f5376b4d4",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "c4f41f5c-0253-4c84-9d20-3c074ada8bdc",
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 19:14:41 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              100,
+              101,
+              116,
+              97,
+              105,
+              108,
+              34,
+              58,
+              34,
+              68,
+              101,
+              108,
+              97,
+              121,
+              32,
+              109,
+              117,
+              115,
+              116,
+              32,
+              98,
+              101,
+              32,
+              98,
+              101,
+              116,
+              119,
+              101,
+              101,
+              110,
+              32,
+              48,
+              32,
+              97,
+              110,
+              100,
+              32,
+              49,
+              53,
+              48,
+              48,
+              48,
+              32,
+              109,
+              115,
+              34,
+              44,
+              34,
+              105,
+              110,
+              115,
+              116,
+              97,
+              110,
+              99,
+              101,
+              34,
+              58,
+              34,
+              47,
+              116,
+              101,
+              115,
+              116,
+              45,
+              100,
+              101,
+              109,
+              111,
+              47,
+              97,
+              112,
+              105,
+              47,
+              105,
+              115,
+              111,
+              108,
+              97,
+              116,
+              105,
+              111,
+              110,
+              47,
+              100,
+              101,
+              112,
+              97,
+              114,
+              116,
+              109,
+              101,
+              110,
+              116,
+              115,
+              47,
+              49,
+              47,
+              115,
+              97,
+              108,
+              97,
+              114,
+              121,
+              45,
+              114,
+              101,
+              112,
+              111,
+              114,
+              116,
+              34,
+              44,
+              34,
+              115,
+              116,
+              97,
+              116,
+              117,
+              115,
+              34,
+              58,
+              52,
+              48,
+              48,
+              44,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              34,
+              66,
+              97,
+              100,
+              32,
+              82,
+              101,
+              113,
+              117,
+              101,
+              115,
+              116,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 11,
+          "responseSize": 150
+        },
+        "id": "e543b4e2-61dc-45f6-9234-89d5aaaa96a8",
+        "assertions": [
+          {
+            "assertion": "HTTP 400",
+            "skipped": false
+          }
+        ]
+      }
+    ],
+    "transfers": {
+      "responseTotal": 451
+    },
+    "failures": [],
+    "error": null
+  }
+}

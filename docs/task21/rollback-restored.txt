@@ -1,0 +1,19 @@
+     database     | changesets | capacity_exists | audit_logs_exists | courses | tags 
+------------------+------------+-----------------+-------------------+---------+------
+ school_task21_db |         32 | t               | t                 |       5 |    1
+(1 row)
+
+ locked 
+--------
+ f
+(1 row)
+
+ id | capacity 
+----+----------
+  1 |        1
+  2 |       30
+  3 |       30
+  4 |       30
+  5 |       30
+(5 rows)
+

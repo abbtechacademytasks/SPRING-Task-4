@@ -1,0 +1,4 @@
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.ehcache.impl.internal.concurrent.ThreadLocalRandomUtil (jar:nested:/C:/Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/libs/test-ders-0.0.1-SNAPSHOT.jar/!BOOT-INF/lib/ehcache-3.10.8-jakarta.jar!/)
+WARNING: Please consider reporting this to the maintainers of class org.ehcache.impl.internal.concurrent.ThreadLocalRandomUtil
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release

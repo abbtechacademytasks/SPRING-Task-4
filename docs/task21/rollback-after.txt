@@ -1,0 +1,5 @@
+     database     | changesets | capacity_exists | audit_logs_exists | courses | tags 
+------------------+------------+-----------------+-------------------+---------+------
+ school_task21_db |         21 | f               | f                 |       0 |    0
+(1 row)
+

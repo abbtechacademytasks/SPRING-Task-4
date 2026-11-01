@@ -5,7 +5,7 @@ services:
     image: postgres:16
     container_name: school-postgres
     environment:
-      POSTGRES_DB: school_db
+      POSTGRES_DB: school_task21_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
     ports:
@@ -13,11 +13,30 @@ services:
     volumes:
       - school-data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U postgres -d school_db"]
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U postgres -d school_task21_db"]
       interval: 5s
       timeout: 3s
       retries: 15
       start_period: 10s
+
+  liquibase:
+    image: spring-task-4-liquibase:5.0.4
+    build:
+      context: ./docker/liquibase
+    profiles: ["tools"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    working_dir: /liquibase/changelog
+    environment:
+      LIQUIBASE_COMMAND_URL: jdbc:postgresql://postgres:5432/school_task21_db
+      LIQUIBASE_COMMAND_USERNAME: postgres
+      LIQUIBASE_COMMAND_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      LIQUIBASE_COMMAND_CHANGELOG_FILE: db/changelog/db.changelog-master.yaml
+      LIQUIBASE_COMMAND_CONTEXT_FILTER: dev
+    volumes:
+      - ./src/main/resources:/liquibase/changelog:ro
+    command: ["status", "--verbose"]
 
 volumes:
   school-data:

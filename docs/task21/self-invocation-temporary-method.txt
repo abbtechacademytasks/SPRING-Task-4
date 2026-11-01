@@ -1,0 +1,26 @@
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void raise(Employee employee, BigDecimal percent) {
+        System.out.println("SELF INVOCATION inner transaction: " + org.springframework.transaction.support.TransactionSynchronizationManager.getCurrentTransactionName());
+        if (percent == null || percent.signum() <= 0) {
+            throw new IllegalArgumentException(
+                    "Raise percent must be positive"
+            );
+        }
+
+        BigDecimal multiplier = BigDecimal.ONE.add(
+                percent.divide(new BigDecimal("100"))
+        );
+
+        BigDecimal newSalary = employee.getSalary()
+                .multiply(multiplier)
+                .setScale(2, RoundingMode.HALF_UP);
+
+        if (newSalary.compareTo(new BigDecimal("10000")) > 0) {
+            throw new IllegalStateException(
+                    "Salary cannot exceed 10000"
+            );
+        }
+
+        employee.setSalary(newSalary);
+    }
+

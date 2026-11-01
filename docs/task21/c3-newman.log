@@ -1,0 +1,79 @@
+newman
+
+Task21 Transactions
+
+□ Transactions / C3 MANDATORY
+└ 01. MANDATORY tranzaksiyasız
+  POST http://localhost:8080/test-demo/api/tx-demo/reserve-seat/1 [409 Conflict, 355B, 185ms]
+  √  HTTP 409
+  √  MANDATORY rejects missing transaction
+
+└ 02. Mövcud olmayan ID də metodun içinə çatmır
+  POST http://localhost:8080/test-demo/api/tx-demo/reserve-seat/999999999 [409 Conflict, 363B, 5ms]
+  √  HTTP 409
+  √  MANDATORY rejects missing transaction
+
+└ 03. Capacity1 kurs əvvəl boşdur
+  GET http://localhost:8080/test-demo/api/courses/1/students/count [200 OK, 156B, 167ms]
+  √  HTTP 200
+  √  Initial enrollment count0
+
+└ 04. Birinci test tələbəsi
+  POST http://localhost:8080/test-demo/api/students [201 Created, 264B, 124ms]
+  √  HTTP 201
+
+└ 05. İkinci test tələbəsi
+  POST http://localhost:8080/test-demo/api/students [201 Created, 264B, 41ms]
+  √  HTTP 201
+
+└ 06. enroll REQUIRED içindən MANDATORY keçir
+  POST http://localhost:8080/test-demo/api/students/13/courses/1 [201 Created, 128B, 120ms]
+  √  HTTP 201
+
+└ 07. Kursda bir tələbə var
+  GET http://localhost:8080/test-demo/api/courses/1/students/count [200 OK, 156B, 11ms]
+  √  HTTP 200
+  √  One occupied seat
+
+└ 08. Dolu kurs ikinci tələbəni qəbul etmir
+  POST http://localhost:8080/test-demo/api/students/14/courses/1 [409 Conflict, 287B, 27ms]
+  √  HTTP 409
+  √  Course full
+
+└ 09. İkinci tələbə qeydiyyatsız qalıb
+  GET http://localhost:8080/test-demo/api/students/14 [200 OK, 257B, 13ms]
+  √  HTTP 200
+  √  Rejected student has no courses
+
+└ 10. Birinci test tələbəsini sil
+  DELETE http://localhost:8080/test-demo/api/students/13 [204 No Content, 112B, 52ms]
+  √  HTTP 204
+
+└ 11. İkinci test tələbəsini sil
+  DELETE http://localhost:8080/test-demo/api/students/14 [204 No Content, 112B, 28ms]
+  √  HTTP 204
+
+└ 12. Testdən sonra kurs yenə boşdur
+  GET http://localhost:8080/test-demo/api/courses/1/students/count [200 OK, 156B, 11ms]
+  √  HTTP 200
+  √  Enrollment cleanup
+
+┌─────────────────────────┬───────────────────┬──────────────────┐
+│                         │          executed │           failed │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│              iterations │                 1 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│                requests │                12 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│            test-scripts │                12 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│      prerequest-scripts │                 0 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│              assertions │                19 │                0 │
+├─────────────────────────┴───────────────────┴──────────────────┤
+│ total run duration: 1791ms                                     │
+├────────────────────────────────────────────────────────────────┤
+│ total data received: 778B (approx)                             │
+├────────────────────────────────────────────────────────────────┤
+│ average response time: 65ms [min: 5ms, max: 185ms, s.d.: 62ms] │
+└────────────────────────────────────────────────────────────────┘

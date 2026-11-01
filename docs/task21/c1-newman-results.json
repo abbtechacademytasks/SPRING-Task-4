@@ -1,0 +1,3555 @@
+{
+  "collection": {
+    "item": [
+      {
+        "id": "d7771e46-03be-4dd0-9efc-a1fa938782fb",
+        "name": "Transactions",
+        "item": [
+          {
+            "id": "be7e7b29-4a22-452f-b5b7-d12690ce5fdc",
+            "name": "C1 REQUIRED",
+            "description": {
+              "content": "İki ayrı service bean bir tranzaksiyada. Maaş limiti keçəndə departament dəyişikliyi rollback olur. Seed departments1/2 lazımdır; test işçiləri sonda silinir.",
+              "type": "text/plain"
+            },
+            "item": [
+              {
+                "id": "c60e6f2d-a5d1-4f0f-9c53-87979c0b56c5",
+                "name": "01. Transfer üçün işçi yarat",
+                "request": {
+                  "url": {
+                    "path": [
+                      "employees"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "method": "POST",
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"name\": \"TxCheck\",\n  \"surname\": \"{{$guid}}\",\n  \"salary\": 1000,\n  \"departmentId\": 1\n}",
+                    "options": {
+                      "raw": {
+                        "language": "json"
+                      }
+                    }
+                  }
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "f9b5b216-1e86-4520-8f12-52025d6f9e5f",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                        "pm.collectionVariables.set(\"txSuccessId\",pm.response.json().id);"
+                      ],
+                      "_lastExecutionId": "954eea36-c907-4220-b571-afd242dc881c"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "1a3f14c8-416e-447f-bdf2-4344bfca8c36",
+                "name": "02. REQUIRED uğurlu transfer",
+                "request": {
+                  "url": {
+                    "path": [
+                      "employees",
+                      "{{txSuccessId}}",
+                      "transfer"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "method": "POST",
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"departmentId\": 2,\n  \"raisePercent\": 15\n}",
+                    "options": {
+                      "raw": {
+                        "language": "json"
+                      }
+                    }
+                  }
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "1ea07bcb-c150-45ed-9a9c-a39de980dbbc",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                        "pm.test(\"Salary1150 and department2\",()=>{const e=pm.response.json();pm.expect(e.salary).to.eql(1150);pm.expect(e.departmentId).to.eql(2);});"
+                      ],
+                      "_lastExecutionId": "7c29aa28-da7e-4906-ae1b-bbf982236765"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "5454e808-1229-4f9e-8a72-c999f2712a3f",
+                "name": "03. Commit-dən sonra işçini oxu",
+                "request": {
+                  "url": {
+                    "path": [
+                      "employees",
+                      "{{txSuccessId}}"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "GET"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "9676e265-34b5-4179-a9bc-db0ecce32cf2",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                        "pm.test(\"Both changes committed\",()=>{const e=pm.response.json();pm.expect(e.salary).to.eql(1150);pm.expect(e.departmentId).to.eql(2);});"
+                      ],
+                      "_lastExecutionId": "37bba53f-78fd-421d-98b9-56a8a3f96bc4"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "15823ab8-5001-4f56-9b38-9143641cf063",
+                "name": "04. Rollback üçün işçi yarat",
+                "request": {
+                  "url": {
+                    "path": [
+                      "employees"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "method": "POST",
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"name\": \"TxRollback\",\n  \"surname\": \"{{$guid}}\",\n  \"salary\": 9000,\n  \"departmentId\": 1\n}",
+                    "options": {
+                      "raw": {
+                        "language": "json"
+                      }
+                    }
+                  }
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "d2d9d62b-a8db-433f-adec-bed492bb37b9",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                        "pm.collectionVariables.set(\"txFailureId\",pm.response.json().id);"
+                      ],
+                      "_lastExecutionId": "f26ac118-fcf1-44d2-b2d9-0dbf8e8f1d10"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "d22cf7d9-bc9c-4e9e-a79f-40babb2aacaa",
+                "name": "05. Əvvəlki departament və maaş",
+                "request": {
+                  "url": {
+                    "path": [
+                      "employees",
+                      "{{txFailureId}}"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "GET"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "8768410d-c719-4cd2-aa01-d79d34e92bc7",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                        "pm.test(\"Before: department1 salary9000\",()=>{const e=pm.response.json();pm.expect(e.departmentId).to.eql(1);pm.expect(e.salary).to.eql(9000);});"
+                      ],
+                      "_lastExecutionId": "c8637ad3-8e40-41cf-9553-4c565f359102"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "b5d614c7-0d0d-47d9-bfc1-f72ff1ea320f",
+                "name": "06. Limitdən yuxarı transfer",
+                "request": {
+                  "url": {
+                    "path": [
+                      "employees",
+                      "{{txFailureId}}",
+                      "transfer"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "method": "POST",
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"departmentId\": 2,\n  \"raisePercent\": 15\n}",
+                    "options": {
+                      "raw": {
+                        "language": "json"
+                      }
+                    }
+                  }
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "d496b6a5-b93b-485d-84de-9fcd37eb75b0",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));",
+                        "pm.test(\"Salary limit error\",()=>pm.expect(pm.response.json().detail).to.eql(\"Salary cannot exceed 10000\"));"
+                      ],
+                      "_lastExecutionId": "da9ebb45-ffd0-4e38-9dc7-f385ebd719d7"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "a67e8ce9-5de5-47f1-9e4d-ef8260171a66",
+                "name": "07. Rollback-dən sonra köhnə departament",
+                "request": {
+                  "url": {
+                    "path": [
+                      "employees",
+                      "{{txFailureId}}"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "GET"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "44e94d10-56a0-4385-ad62-e0aeaa5ccbb8",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                        "pm.test(\"Rollback: department1 salary9000\",()=>{const e=pm.response.json();pm.expect(e.departmentId).to.eql(1);pm.expect(e.salary).to.eql(9000);});"
+                      ],
+                      "_lastExecutionId": "f81efee1-9016-468c-97fe-92135e9baf7f"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "06e23462-a2d7-412c-88d9-884e8747fb04",
+                "name": "08. Sərhəd yoxlaması üçün maaş8000",
+                "request": {
+                  "url": {
+                    "path": [
+                      "employees",
+                      "{{txSuccessId}}"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "method": "PUT",
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"name\": \"TxBoundary\",\n  \"surname\": \"{{$guid}}\",\n  \"salary\": 8000,\n  \"departmentId\": 2\n}",
+                    "options": {
+                      "raw": {
+                        "language": "json"
+                      }
+                    }
+                  }
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "bc088803-23d6-4911-8bd7-3664a3faeb4a",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                      ],
+                      "_lastExecutionId": "696d6157-1de9-498a-88ef-6704d8783091"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "7c04408c-b262-416a-88cd-164ff071b5ef",
+                "name": "09. Dəqiq10000 qəbul olunur",
+                "request": {
+                  "url": {
+                    "path": [
+                      "employees",
+                      "{{txSuccessId}}",
+                      "transfer"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "method": "POST",
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"departmentId\": 1,\n  \"raisePercent\": 25\n}",
+                    "options": {
+                      "raw": {
+                        "language": "json"
+                      }
+                    }
+                  }
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "13d20f37-0dc4-4a7a-b892-a22dcc50848c",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                        "pm.test(\"Salary boundary10000\",()=>{const e=pm.response.json();pm.expect(e.salary).to.eql(10000);pm.expect(e.departmentId).to.eql(1);});"
+                      ],
+                      "_lastExecutionId": "24739b52-6d41-412d-8de0-06c3a6c905d6"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "b588bc7b-3c5e-4ec4-a8e3-768984a0c863",
+                "name": "10. Uğurlu test işçisini sil",
+                "request": {
+                  "url": {
+                    "path": [
+                      "employees",
+                      "{{txSuccessId}}"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "DELETE"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "ee11a8be-12f4-4932-8124-66115c58c031",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                      ],
+                      "_lastExecutionId": "6f5130e6-1c08-4a63-9bfd-6287afaa1db5"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "db430c38-d874-4121-a128-247343dc54de",
+                "name": "11. Rollback test işçisini sil",
+                "request": {
+                  "url": {
+                    "path": [
+                      "employees",
+                      "{{txFailureId}}"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "DELETE"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "ab30443a-a902-44f3-9a9a-9ed54ad1db6e",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                      ],
+                      "_lastExecutionId": "80264e6e-92b2-40ea-bf00-d72431cc04ca"
+                    }
+                  }
+                ]
+              }
+            ],
+            "event": []
+          }
+        ],
+        "event": []
+      }
+    ],
+    "event": [],
+    "variable": [
+      {
+        "type": "any",
+        "value": "http://localhost:8080/test-demo/api",
+        "key": "baseUrl"
+      }
+    ],
+    "info": {
+      "_postman_id": "34d08aff-b138-4698-a8ac-ec4fa0164bd0",
+      "name": "Task21 Transactions",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+      "description": {
+        "content": "Task21 transaction propagation yoxlamaları.",
+        "type": "text/plain"
+      }
+    }
+  },
+  "environment": {
+    "id": "9a081eec-8d27-4e7f-8747-651f1fe9a554",
+    "values": []
+  },
+  "globals": {
+    "id": "9ccb4e52-379e-41d3-beae-21edd8db2a1d",
+    "values": []
+  },
+  "run": {
+    "stats": {
+      "iterations": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "items": {
+        "total": 11,
+        "pending": 0,
+        "failed": 0
+      },
+      "scripts": {
+        "total": 11,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequests": {
+        "total": 11,
+        "pending": 0,
+        "failed": 0
+      },
+      "requests": {
+        "total": 11,
+        "pending": 0,
+        "failed": 0
+      },
+      "tests": {
+        "total": 11,
+        "pending": 0,
+        "failed": 0
+      },
+      "assertions": {
+        "total": 17,
+        "pending": 0,
+        "failed": 0
+      },
+      "testScripts": {
+        "total": 11,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequestScripts": {
+        "total": 0,
+        "pending": 0,
+        "failed": 0
+      }
+    },
+    "timings": {
+      "responseAverage": 61.09090909090909,
+      "responseMin": 8,
+      "responseMax": 356,
+      "responseSd": 94.77960515701152,
+      "dnsAverage": 0,
+      "dnsMin": 0,
+      "dnsMax": 0,
+      "dnsSd": 0,
+      "firstByteAverage": 0,
+      "firstByteMin": 0,
+      "firstByteMax": 0,
+      "firstByteSd": 0,
+      "started": 1793513255968,
+      "completed": 1793513257534
+    },
+    "executions": [
+      {
+        "cursor": {
+          "position": 0,
+          "iteration": 0,
+          "length": 11,
+          "cycles": 1,
+          "empty": false,
+          "eof": false,
+          "bof": true,
+          "cr": false,
+          "ref": "5920046d-ede3-4fe8-b29d-32d0851f22a9",
+          "httpRequestId": "baf78464-3b81-4db7-b20d-1b6feff7aa56"
+        },
+        "item": {
+          "id": "c60e6f2d-a5d1-4f0f-9c53-87979c0b56c5",
+          "name": "01. Transfer üçün işçi yarat",
+          "request": {
+            "url": {
+              "path": [
+                "employees"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"TxCheck\",\n  \"surname\": \"{{$guid}}\",\n  \"salary\": 1000,\n  \"departmentId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "f9b5b216-1e86-4520-8f12-52025d6f9e5f",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "pm.collectionVariables.set(\"txSuccessId\",pm.response.json().id);"
+                ],
+                "_lastExecutionId": "954eea36-c907-4220-b571-afd242dc881c"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "employees"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "5c1774f3-b594-486a-9970-6077ee92c36a",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "115",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"name\": \"TxCheck\",\n  \"surname\": \"0cd4a751-777c-4878-9dcf-646803ebe89b\",\n  \"salary\": 1000,\n  \"departmentId\": 1\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "0c59e863-e175-4a81-b218-1c402d6ecf9d",
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "137"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 06:07:36 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              49,
+              51,
+              44,
+              34,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              84,
+              120,
+              67,
+              104,
+              101,
+              99,
+              107,
+              34,
+              44,
+              34,
+              115,
+              117,
+              114,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              48,
+              99,
+              100,
+              52,
+              97,
+              55,
+              53,
+              49,
+              45,
+              55,
+              55,
+              55,
+              99,
+              45,
+              52,
+              56,
+              55,
+              56,
+              45,
+              57,
+              100,
+              99,
+              102,
+              45,
+              54,
+              52,
+              54,
+              56,
+              48,
+              51,
+              101,
+              98,
+              101,
+              56,
+              57,
+              98,
+              34,
+              44,
+              34,
+              115,
+              97,
+              108,
+              97,
+              114,
+              121,
+              34,
+              58,
+              49,
+              48,
+              48,
+              48,
+              44,
+              34,
+              100,
+              101,
+              112,
+              97,
+              114,
+              116,
+              109,
+              101,
+              110,
+              116,
+              73,
+              100,
+              34,
+              58,
+              49,
+              44,
+              34,
+              100,
+              101,
+              112,
+              97,
+              114,
+              116,
+              109,
+              101,
+              110,
+              116,
+              78,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              68,
+              101,
+              118,
+              101,
+              108,
+              111,
+              112,
+              109,
+              101,
+              110,
+              116,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 356,
+          "responseSize": 137
+        },
+        "id": "c60e6f2d-a5d1-4f0f-9c53-87979c0b56c5",
+        "assertions": [
+          {
+            "assertion": "HTTP 201",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "2ec4d55f-f71c-48be-91f7-69a48fe568b6",
+          "length": 11,
+          "cycles": 1,
+          "position": 1,
+          "iteration": 0,
+          "httpRequestId": "cb790c9d-83e0-433a-98f7-20ee77ee9837"
+        },
+        "item": {
+          "id": "1a3f14c8-416e-447f-bdf2-4344bfca8c36",
+          "name": "02. REQUIRED uğurlu transfer",
+          "request": {
+            "url": {
+              "path": [
+                "employees",
+                "{{txSuccessId}}",
+                "transfer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"departmentId\": 2,\n  \"raisePercent\": 15\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "1ea07bcb-c150-45ed-9a9c-a39de980dbbc",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Salary1150 and department2\",()=>{const e=pm.response.json();pm.expect(e.salary).to.eql(1150);pm.expect(e.departmentId).to.eql(2);});"
+                ],
+                "_lastExecutionId": "7c29aa28-da7e-4906-ae1b-bbf982236765"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "employees",
+              "13",
+              "transfer"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "ee29a0d3-d690-4167-80a1-48f2525d6e96",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "45",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"departmentId\": 2,\n  \"raisePercent\": 15\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "321f436a-0853-425c-9378-4c2f4edbe458",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "136"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 06:07:36 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              49,
+              51,
+              44,
+              34,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              84,
+              120,
+              67,
+              104,
+              101,
+              99,
+              107,
+              34,
+              44,
+              34,
+              115,
+              117,
+              114,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              48,
+              99,
+              100,
+              52,
+              97,
+              55,
+              53,
+              49,
+              45,
+              55,
+              55,
+              55,
+              99,
+              45,
+              52,
+              56,
+              55,
+              56,
+              45,
+              57,
+              100,
+              99,
+              102,
+              45,
+              54,
+              52,
+              54,
+              56,
+              48,
+              51,
+              101,
+              98,
+              101,
+              56,
+              57,
+              98,
+              34,
+              44,
+              34,
+              115,
+              97,
+              108,
+              97,
+              114,
+              121,
+              34,
+              58,
+              49,
+              49,
+              53,
+              48,
+              46,
+              48,
+              48,
+              44,
+              34,
+              100,
+              101,
+              112,
+              97,
+              114,
+              116,
+              109,
+              101,
+              110,
+              116,
+              73,
+              100,
+              34,
+              58,
+              50,
+              44,
+              34,
+              100,
+              101,
+              112,
+              97,
+              114,
+              116,
+              109,
+              101,
+              110,
+              116,
+              78,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              70,
+              105,
+              110,
+              97,
+              110,
+              99,
+              101,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 63,
+          "responseSize": 136
+        },
+        "id": "1a3f14c8-416e-447f-bdf2-4344bfca8c36",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Salary1150 and department2",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "ee5a0338-e9fb-4cc1-9008-4b1fe880f303",
+          "length": 11,
+          "cycles": 1,
+          "position": 2,
+          "iteration": 0,
+          "httpRequestId": "fe014dbc-cbd0-45e5-98d3-74742a8ea3fd"
+        },
+        "item": {
+          "id": "5454e808-1229-4f9e-8a72-c999f2712a3f",
+          "name": "03. Commit-dən sonra işçini oxu",
+          "request": {
+            "url": {
+              "path": [
+                "employees",
+                "{{txSuccessId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "9676e265-34b5-4179-a9bc-db0ecce32cf2",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Both changes committed\",()=>{const e=pm.response.json();pm.expect(e.salary).to.eql(1150);pm.expect(e.departmentId).to.eql(2);});"
+                ],
+                "_lastExecutionId": "37bba53f-78fd-421d-98b9-56a8a3f96bc4"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "employees",
+              "13"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "2f028d58-fee6-45f9-8001-813ceb5fb884",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "7810282a-41da-4f6c-bfdc-c6a14a05587b",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "136"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 06:07:36 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              49,
+              51,
+              44,
+              34,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              84,
+              120,
+              67,
+              104,
+              101,
+              99,
+              107,
+              34,
+              44,
+              34,
+              115,
+              117,
+              114,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              48,
+              99,
+              100,
+              52,
+              97,
+              55,
+              53,
+              49,
+              45,
+              55,
+              55,
+              55,
+              99,
+              45,
+              52,
+              56,
+              55,
+              56,
+              45,
+              57,
+              100,
+              99,
+              102,
+              45,
+              54,
+              52,
+              54,
+              56,
+              48,
+              51,
+              101,
+              98,
+              101,
+              56,
+              57,
+              98,
+              34,
+              44,
+              34,
+              115,
+              97,
+              108,
+              97,
+              114,
+              121,
+              34,
+              58,
+              49,
+              49,
+              53,
+              48,
+              46,
+              48,
+              48,
+              44,
+              34,
+              100,
+              101,
+              112,
+              97,
+              114,
+              116,
+              109,
+              101,
+              110,
+              116,
+              73,
+              100,
+              34,
+              58,
+              50,
+              44,
+              34,
+              100,
+              101,
+              112,
+              97,
+              114,
+              116,
+              109,
+              101,
+              110,
+              116,
+              78,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              70,
+              105,
+              110,
+              97,
+              110,
+              99,
+              101,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 11,
+          "responseSize": 136
+        },
+        "id": "5454e808-1229-4f9e-8a72-c999f2712a3f",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Both changes committed",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "83439f19-b035-4947-9f29-7d1c1c2b0e63",
+          "length": 11,
+          "cycles": 1,
+          "position": 3,
+          "iteration": 0,
+          "httpRequestId": "3aa2028f-6c81-4aca-bd37-e828d43da03e"
+        },
+        "item": {
+          "id": "15823ab8-5001-4f56-9b38-9143641cf063",
+          "name": "04. Rollback üçün işçi yarat",
+          "request": {
+            "url": {
+              "path": [
+                "employees"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"TxRollback\",\n  \"surname\": \"{{$guid}}\",\n  \"salary\": 9000,\n  \"departmentId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "d2d9d62b-a8db-433f-adec-bed492bb37b9",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "pm.collectionVariables.set(\"txFailureId\",pm.response.json().id);"
+                ],
+                "_lastExecutionId": "f26ac118-fcf1-44d2-b2d9-0dbf8e8f1d10"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "employees"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "8e8f504a-12b1-4b8d-9b9a-85cba7a5a9d4",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "118",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"name\": \"TxRollback\",\n  \"surname\": \"40118f39-3bbf-4fab-a3c7-11e3807bb1a2\",\n  \"salary\": 9000,\n  \"departmentId\": 1\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "1e65fbcd-0562-4987-b0e6-1e4cca27905f",
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "140"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 06:07:36 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              49,
+              52,
+              44,
+              34,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              84,
+              120,
+              82,
+              111,
+              108,
+              108,
+              98,
+              97,
+              99,
+              107,
+              34,
+              44,
+              34,
+              115,
+              117,
+              114,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              52,
+              48,
+              49,
+              49,
+              56,
+              102,
+              51,
+              57,
+              45,
+              51,
+              98,
+              98,
+              102,
+              45,
+              52,
+              102,
+              97,
+              98,
+              45,
+              97,
+              51,
+              99,
+              55,
+              45,
+              49,
+              49,
+              101,
+              51,
+              56,
+              48,
+              55,
+              98,
+              98,
+              49,
+              97,
+              50,
+              34,
+              44,
+              34,
+              115,
+              97,
+              108,
+              97,
+              114,
+              121,
+              34,
+              58,
+              57,
+              48,
+              48,
+              48,
+              44,
+              34,
+              100,
+              101,
+              112,
+              97,
+              114,
+              116,
+              109,
+              101,
+              110,
+              116,
+              73,
+              100,
+              34,
+              58,
+              49,
+              44,
+              34,
+              100,
+              101,
+              112,
+              97,
+              114,
+              116,
+              109,
+              101,
+              110,
+              116,
+              78,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              68,
+              101,
+              118,
+              101,
+              108,
+              111,
+              112,
+              109,
+              101,
+              110,
+              116,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 38,
+          "responseSize": 140
+        },
+        "id": "15823ab8-5001-4f56-9b38-9143641cf063",
+        "assertions": [
+          {
+            "assertion": "HTTP 201",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "2c98c524-1f16-42eb-8703-8665c7127c30",
+          "length": 11,
+          "cycles": 1,
+          "position": 4,
+          "iteration": 0,
+          "httpRequestId": "003a51a3-d229-4d39-b806-34afda05afc3"
+        },
+        "item": {
+          "id": "d22cf7d9-bc9c-4e9e-a79f-40babb2aacaa",
+          "name": "05. Əvvəlki departament və maaş",
+          "request": {
+            "url": {
+              "path": [
+                "employees",
+                "{{txFailureId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "8768410d-c719-4cd2-aa01-d79d34e92bc7",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Before: department1 salary9000\",()=>{const e=pm.response.json();pm.expect(e.departmentId).to.eql(1);pm.expect(e.salary).to.eql(9000);});"
+                ],
+                "_lastExecutionId": "c8637ad3-8e40-41cf-9553-4c565f359102"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "employees",
+              "14"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "8713c121-9496-4a38-945c-6862338a3149",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "34b213a6-b328-401c-ad5d-8d2e83ed52f3",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "143"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 06:07:36 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              49,
+              52,
+              44,
+              34,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              84,
+              120,
+              82,
+              111,
+              108,
+              108,
+              98,
+              97,
+              99,
+              107,
+              34,
+              44,
+              34,
+              115,
+              117,
+              114,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              52,
+              48,
+              49,
+              49,
+              56,
+              102,
+              51,
+              57,
+              45,
+              51,
+              98,
+              98,
+              102,
+              45,
+              52,
+              102,
+              97,
+              98,
+              45,
+              97,
+              51,
+              99,
+              55,
+              45,
+              49,
+              49,
+              101,
+              51,
+              56,
+              48,
+              55,
+              98,
+              98,
+              49,
+              97,
+              50,
+              34,
+              44,
+              34,
+              115,
+              97,
+              108,
+              97,
+              114,
+              121,
+              34,
+              58,
+              57,
+              48,
+              48,
+              48,
+              46,
+              48,
+              48,
+              44,
+              34,
+              100,
+              101,
+              112,
+              97,
+              114,
+              116,
+              109,
+              101,
+              110,
+              116,
+              73,
+              100,
+              34,
+              58,
+              49,
+              44,
+              34,
+              100,
+              101,
+              112,
+              97,
+              114,
+              116,
+              109,
+              101,
+              110,
+              116,
+              78,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              68,
+              101,
+              118,
+              101,
+              108,
+              111,
+              112,
+              109,
+              101,
+              110,
+              116,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 8,
+          "responseSize": 143
+        },
+        "id": "d22cf7d9-bc9c-4e9e-a79f-40babb2aacaa",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Before: department1 salary9000",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "4f24b4e6-25cf-4b3c-a63c-9bd7799631fe",
+          "length": 11,
+          "cycles": 1,
+          "position": 5,
+          "iteration": 0,
+          "httpRequestId": "001102d3-9e33-403c-9884-ab8d88bc3d4e"
+        },
+        "item": {
+          "id": "b5d614c7-0d0d-47d9-bfc1-f72ff1ea320f",
+          "name": "06. Limitdən yuxarı transfer",
+          "request": {
+            "url": {
+              "path": [
+                "employees",
+                "{{txFailureId}}",
+                "transfer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"departmentId\": 2,\n  \"raisePercent\": 15\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "d496b6a5-b93b-485d-84de-9fcd37eb75b0",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));",
+                  "pm.test(\"Salary limit error\",()=>pm.expect(pm.response.json().detail).to.eql(\"Salary cannot exceed 10000\"));"
+                ],
+                "_lastExecutionId": "da9ebb45-ffd0-4e38-9dc7-f385ebd719d7"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "employees",
+              "14",
+              "transfer"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "953d6033-92af-4658-8881-f6ac856d4ede",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "45",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"departmentId\": 2,\n  \"raisePercent\": 15\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "9dffbaca-70e7-4eed-b5d1-e31adfe05b18",
+          "status": "Conflict",
+          "code": 409,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 06:07:36 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              100,
+              101,
+              116,
+              97,
+              105,
+              108,
+              34,
+              58,
+              34,
+              83,
+              97,
+              108,
+              97,
+              114,
+              121,
+              32,
+              99,
+              97,
+              110,
+              110,
+              111,
+              116,
+              32,
+              101,
+              120,
+              99,
+              101,
+              101,
+              100,
+              32,
+              49,
+              48,
+              48,
+              48,
+              48,
+              34,
+              44,
+              34,
+              105,
+              110,
+              115,
+              116,
+              97,
+              110,
+              99,
+              101,
+              34,
+              58,
+              34,
+              47,
+              116,
+              101,
+              115,
+              116,
+              45,
+              100,
+              101,
+              109,
+              111,
+              47,
+              97,
+              112,
+              105,
+              47,
+              101,
+              109,
+              112,
+              108,
+              111,
+              121,
+              101,
+              101,
+              115,
+              47,
+              49,
+              52,
+              47,
+              116,
+              114,
+              97,
+              110,
+              115,
+              102,
+              101,
+              114,
+              34,
+              44,
+              34,
+              115,
+              116,
+              97,
+              116,
+              117,
+              115,
+              34,
+              58,
+              52,
+              48,
+              57,
+              44,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              34,
+              67,
+              111,
+              110,
+              102,
+              108,
+              105,
+              99,
+              116,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 29,
+          "responseSize": 121
+        },
+        "id": "b5d614c7-0d0d-47d9-bfc1-f72ff1ea320f",
+        "assertions": [
+          {
+            "assertion": "HTTP 409",
+            "skipped": false
+          },
+          {
+            "assertion": "Salary limit error",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "8b87d35c-0984-446d-af84-59541753bbd7",
+          "length": 11,
+          "cycles": 1,
+          "position": 6,
+          "iteration": 0,
+          "httpRequestId": "63550427-4376-4394-9c46-6d48be9cda17"
+        },
+        "item": {
+          "id": "a67e8ce9-5de5-47f1-9e4d-ef8260171a66",
+          "name": "07. Rollback-dən sonra köhnə departament",
+          "request": {
+            "url": {
+              "path": [
+                "employees",
+                "{{txFailureId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "44e94d10-56a0-4385-ad62-e0aeaa5ccbb8",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Rollback: department1 salary9000\",()=>{const e=pm.response.json();pm.expect(e.departmentId).to.eql(1);pm.expect(e.salary).to.eql(9000);});"
+                ],
+                "_lastExecutionId": "f81efee1-9016-468c-97fe-92135e9baf7f"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "employees",
+              "14"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "79907cb0-b259-4563-8d2f-2a6ab4afc8db",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "e53dfb79-8684-4e2a-8da6-66296fa9da63",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "143"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 06:07:36 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              49,
+              52,
+              44,
+              34,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              84,
+              120,
+              82,
+              111,
+              108,
+              108,
+              98,
+              97,
+              99,
+              107,
+              34,
+              44,
+              34,
+              115,
+              117,
+              114,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              52,
+              48,
+              49,
+              49,
+              56,
+              102,
+              51,
+              57,
+              45,
+              51,
+              98,
+              98,
+              102,
+              45,
+              52,
+              102,
+              97,
+              98,
+              45,
+              97,
+              51,
+              99,
+              55,
+              45,
+              49,
+              49,
+              101,
+              51,
+              56,
+              48,
+              55,
+              98,
+              98,
+              49,
+              97,
+              50,
+              34,
+              44,
+              34,
+              115,
+              97,
+              108,
+              97,
+              114,
+              121,
+              34,
+              58,
+              57,
+              48,
+              48,
+              48,
+              46,
+              48,
+              48,
+              44,
+              34,
+              100,
+              101,
+              112,
+              97,
+              114,
+              116,
+              109,
+              101,
+              110,
+              116,
+              73,
+              100,
+              34,
+              58,
+              49,
+              44,
+              34,
+              100,
+              101,
+              112,
+              97,
+              114,
+              116,
+              109,
+              101,
+              110,
+              116,
+              78,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              68,
+              101,
+              118,
+              101,
+              108,
+              111,
+              112,
+              109,
+              101,
+              110,
+              116,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 8,
+          "responseSize": 143
+        },
+        "id": "a67e8ce9-5de5-47f1-9e4d-ef8260171a66",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Rollback: department1 salary9000",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "d7f9ce89-bf8a-4bd7-bb84-ea20caf14eeb",
+          "length": 11,
+          "cycles": 1,
+          "position": 7,
+          "iteration": 0,
+          "httpRequestId": "5a7bf636-533e-4124-b9a9-b91ba1c0f2fa"
+        },
+        "item": {
+          "id": "06e23462-a2d7-412c-88d9-884e8747fb04",
+          "name": "08. Sərhəd yoxlaması üçün maaş8000",
+          "request": {
+            "url": {
+              "path": [
+                "employees",
+                "{{txSuccessId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"TxBoundary\",\n  \"surname\": \"{{$guid}}\",\n  \"salary\": 8000,\n  \"departmentId\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "bc088803-23d6-4911-8bd7-3664a3faeb4a",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                ],
+                "_lastExecutionId": "696d6157-1de9-498a-88ef-6704d8783091"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "employees",
+              "13"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "cbba8f21-4d07-4eae-99e5-5b5925a99fe8",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "118",
+              "system": true
+            }
+          ],
+          "method": "PUT",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"name\": \"TxBoundary\",\n  \"surname\": \"d12c0254-2664-426c-a8c1-fbad91b36120\",\n  \"salary\": 8000,\n  \"departmentId\": 2\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "aeb383d9-83b3-4ca6-bea9-a66e65b4175f",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "136"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 06:07:37 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              49,
+              51,
+              44,
+              34,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              84,
+              120,
+              66,
+              111,
+              117,
+              110,
+              100,
+              97,
+              114,
+              121,
+              34,
+              44,
+              34,
+              115,
+              117,
+              114,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              100,
+              49,
+              50,
+              99,
+              48,
+              50,
+              53,
+              52,
+              45,
+              50,
+              54,
+              54,
+              52,
+              45,
+              52,
+              50,
+              54,
+              99,
+              45,
+              97,
+              56,
+              99,
+              49,
+              45,
+              102,
+              98,
+              97,
+              100,
+              57,
+              49,
+              98,
+              51,
+              54,
+              49,
+              50,
+              48,
+              34,
+              44,
+              34,
+              115,
+              97,
+              108,
+              97,
+              114,
+              121,
+              34,
+              58,
+              56,
+              48,
+              48,
+              48,
+              44,
+              34,
+              100,
+              101,
+              112,
+              97,
+              114,
+              116,
+              109,
+              101,
+              110,
+              116,
+              73,
+              100,
+              34,
+              58,
+              50,
+              44,
+              34,
+              100,
+              101,
+              112,
+              97,
+              114,
+              116,
+              109,
+              101,
+              110,
+              116,
+              78,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              70,
+              105,
+              110,
+              97,
+              110,
+              99,
+              101,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 48,
+          "responseSize": 136
+        },
+        "id": "06e23462-a2d7-412c-88d9-884e8747fb04",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "37599534-f7a8-49a1-8800-a97fd41601ee",
+          "length": 11,
+          "cycles": 1,
+          "position": 8,
+          "iteration": 0,
+          "httpRequestId": "4f164fb7-48fd-457b-9759-7b330b7959df"
+        },
+        "item": {
+          "id": "7c04408c-b262-416a-88cd-164ff071b5ef",
+          "name": "09. Dəqiq10000 qəbul olunur",
+          "request": {
+            "url": {
+              "path": [
+                "employees",
+                "{{txSuccessId}}",
+                "transfer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"departmentId\": 1,\n  \"raisePercent\": 25\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "13d20f37-0dc4-4a7a-b892-a22dcc50848c",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Salary boundary10000\",()=>{const e=pm.response.json();pm.expect(e.salary).to.eql(10000);pm.expect(e.departmentId).to.eql(1);});"
+                ],
+                "_lastExecutionId": "24739b52-6d41-412d-8de0-06c3a6c905d6"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "employees",
+              "13",
+              "transfer"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "f51ec4d9-0cab-456a-8066-28b97877f563",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "45",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"departmentId\": 1,\n  \"raisePercent\": 25\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "578f8090-be59-49f9-973f-7e0b3944f044",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "144"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 06:07:37 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              49,
+              51,
+              44,
+              34,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              84,
+              120,
+              66,
+              111,
+              117,
+              110,
+              100,
+              97,
+              114,
+              121,
+              34,
+              44,
+              34,
+              115,
+              117,
+              114,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              100,
+              49,
+              50,
+              99,
+              48,
+              50,
+              53,
+              52,
+              45,
+              50,
+              54,
+              54,
+              52,
+              45,
+              52,
+              50,
+              54,
+              99,
+              45,
+              97,
+              56,
+              99,
+              49,
+              45,
+              102,
+              98,
+              97,
+              100,
+              57,
+              49,
+              98,
+              51,
+              54,
+              49,
+              50,
+              48,
+              34,
+              44,
+              34,
+              115,
+              97,
+              108,
+              97,
+              114,
+              121,
+              34,
+              58,
+              49,
+              48,
+              48,
+              48,
+              48,
+              46,
+              48,
+              48,
+              44,
+              34,
+              100,
+              101,
+              112,
+              97,
+              114,
+              116,
+              109,
+              101,
+              110,
+              116,
+              73,
+              100,
+              34,
+              58,
+              49,
+              44,
+              34,
+              100,
+              101,
+              112,
+              97,
+              114,
+              116,
+              109,
+              101,
+              110,
+              116,
+              78,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              68,
+              101,
+              118,
+              101,
+              108,
+              111,
+              112,
+              109,
+              101,
+              110,
+              116,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 30,
+          "responseSize": 144
+        },
+        "id": "7c04408c-b262-416a-88cd-164ff071b5ef",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Salary boundary10000",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "65fb63b9-54f6-4be0-b501-7c51f9e1d3e6",
+          "length": 11,
+          "cycles": 1,
+          "position": 9,
+          "iteration": 0,
+          "httpRequestId": "7e6cd277-cdcf-4248-bf6a-a3dd474cc1d8"
+        },
+        "item": {
+          "id": "b588bc7b-3c5e-4ec4-a8e3-768984a0c863",
+          "name": "10. Uğurlu test işçisini sil",
+          "request": {
+            "url": {
+              "path": [
+                "employees",
+                "{{txSuccessId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "DELETE"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "ee11a8be-12f4-4932-8124-66115c58c031",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                ],
+                "_lastExecutionId": "6f5130e6-1c08-4a63-9bfd-6287afaa1db5"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "employees",
+              "13"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "91180c0b-a90c-4ac4-b14a-650b873a44d0",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "DELETE"
+        },
+        "response": {
+          "id": "130596e8-1f70-4791-a026-420eb1ffc283",
+          "status": "No Content",
+          "code": 204,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 06:07:37 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": []
+          },
+          "cookie": [],
+          "responseTime": 49,
+          "responseSize": 0
+        },
+        "id": "b588bc7b-3c5e-4ec4-a8e3-768984a0c863",
+        "assertions": [
+          {
+            "assertion": "HTTP 204",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "83481c92-f4cc-43d7-bdbf-5d7eab84115c",
+          "length": 11,
+          "cycles": 1,
+          "position": 10,
+          "iteration": 0,
+          "httpRequestId": "8e694f33-983a-4174-80d4-60169df12f34"
+        },
+        "item": {
+          "id": "db430c38-d874-4121-a128-247343dc54de",
+          "name": "11. Rollback test işçisini sil",
+          "request": {
+            "url": {
+              "path": [
+                "employees",
+                "{{txFailureId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "DELETE"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "ab30443a-a902-44f3-9a9a-9ed54ad1db6e",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                ],
+                "_lastExecutionId": "80264e6e-92b2-40ea-bf00-d72431cc04ca"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "employees",
+              "14"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "278cfeb1-d038-40d7-a61b-47d82f023feb",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "DELETE"
+        },
+        "response": {
+          "id": "bfb46fc3-6a40-42e5-997b-d64790b3be89",
+          "status": "No Content",
+          "code": 204,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 06:07:37 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": []
+          },
+          "cookie": [],
+          "responseTime": 32,
+          "responseSize": 0
+        },
+        "id": "db430c38-d874-4121-a128-247343dc54de",
+        "assertions": [
+          {
+            "assertion": "HTTP 204",
+            "skipped": false
+          }
+        ]
+      }
+    ],
+    "transfers": {
+      "responseTotal": 1236
+    },
+    "failures": [],
+    "error": null
+  }
+}

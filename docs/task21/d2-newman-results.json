@@ -1,0 +1,2846 @@
+{
+  "collection": {
+    "item": [
+      {
+        "id": "a2a8952f-ab49-4081-a014-2f73dca2d149",
+        "name": "Isolation",
+        "item": [
+          {
+            "id": "ae1b8719-e152-4453-8b57-625529c803ca",
+            "name": "D1 salary report",
+            "description": {
+              "content": "Bu qovluq ardıcıl HTTP smoke/validation yoxlamasıdır. Paralel update fərqi ayrıca docs/task21/d1-parallel-results.json ilə sübut olunub; bu ardıcıl run özü concurrency sübutu deyil.",
+              "type": "text/plain"
+            },
+            "item": [
+              {
+                "id": "c62732cd-93ce-4f9a-a03b-20611130c267",
+                "name": "READ_COMMITTED",
+                "request": {
+                  "url": {
+                    "path": [
+                      "isolation",
+                      "departments",
+                      "1",
+                      "salary-report"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [
+                      {
+                        "key": "isolation",
+                        "value": "READ_COMMITTED"
+                      },
+                      {
+                        "key": "delayMs",
+                        "value": "0"
+                      }
+                    ],
+                    "variable": []
+                  },
+                  "method": "GET"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "d3438284-71f9-4d8a-b2a3-568f42c68f64",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                        "pm.test(\"Report isolation\",()=>pm.expect(pm.response.json().isolation).to.eql(\"READ_COMMITTED\"));",
+                        "pm.test(\"No concurrent writer: averages equal\",()=>{const r=pm.response.json();pm.expect(r.firstAvg).to.eql(r.secondAvg);});"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "fc2fb9eb-34ab-4424-8552-448353cc478b",
+                "name": "REPEATABLE_READ",
+                "request": {
+                  "url": {
+                    "path": [
+                      "isolation",
+                      "departments",
+                      "1",
+                      "salary-report"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [
+                      {
+                        "key": "isolation",
+                        "value": "REPEATABLE_READ"
+                      },
+                      {
+                        "key": "delayMs",
+                        "value": "0"
+                      }
+                    ],
+                    "variable": []
+                  },
+                  "method": "GET"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "207dde97-efcb-4866-930a-530f74b6bd14",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                        "pm.test(\"Report isolation\",()=>pm.expect(pm.response.json().isolation).to.eql(\"REPEATABLE_READ\"));",
+                        "pm.test(\"No concurrent writer: averages equal\",()=>{const r=pm.response.json();pm.expect(r.firstAvg).to.eql(r.secondAvg);});"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "37618c36-8561-401a-b4b4-e1f691398a21",
+                "name": "D1 unsupported SERIALIZABLE",
+                "request": {
+                  "url": {
+                    "path": [
+                      "isolation",
+                      "departments",
+                      "1",
+                      "salary-report"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [
+                      {
+                        "key": "isolation",
+                        "value": "SERIALIZABLE"
+                      },
+                      {
+                        "key": "delayMs",
+                        "value": "0"
+                      }
+                    ],
+                    "variable": []
+                  },
+                  "method": "GET"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "90716b88-2468-4676-b471-f3da5883819c",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "c9136f8b-31b5-406d-aa03-82c1371dc07a",
+                "name": "Negative delay",
+                "request": {
+                  "url": {
+                    "path": [
+                      "isolation",
+                      "departments",
+                      "1",
+                      "salary-report"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [
+                      {
+                        "key": "isolation",
+                        "value": "READ_COMMITTED"
+                      },
+                      {
+                        "key": "delayMs",
+                        "value": "-1"
+                      }
+                    ],
+                    "variable": []
+                  },
+                  "method": "GET"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "95a08daf-1e88-4d25-94f4-e9f26378bfad",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "event": []
+          },
+          {
+            "id": "c4e98f0d-bfbf-491e-a277-47e19eb2f4aa",
+            "name": "D2 salary raise",
+            "description": {
+              "content": "Ardıcıl HTTP smoke və validation yoxlaması. Lost update və409 paralel sınağı ayrıca d2-parallel-results.json-da saxlanılıb.",
+              "type": "text/plain"
+            },
+            "item": [
+              {
+                "id": "ed32b36b-95aa-4f43-88fe-ff020d39711e",
+                "name": "01. D2 test employee",
+                "request": {
+                  "url": {
+                    "path": [
+                      "employees"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "method": "POST",
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"name\": \"D2Postman\",\n  \"surname\": \"{{$guid}}\",\n  \"salary\": 1000,\n  \"departmentId\": 1\n}",
+                    "options": {
+                      "raw": {
+                        "language": "json"
+                      }
+                    }
+                  }
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "57c0c2ec-940f-431e-8b15-67f694a7d6fd",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 201\",()=>pm.response.to.have.status(201));",
+                        "pm.collectionVariables.set(\"d2EmployeeId\",pm.response.json().id);"
+                      ],
+                      "_lastExecutionId": "f37bfe74-9fdd-4026-b177-4ce37d8981c6"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "72cea913-8e50-4d26-abfb-2772bdd11d2c",
+                "name": "02. Sequential READ_COMMITTED raise",
+                "request": {
+                  "url": {
+                    "path": [
+                      "isolation",
+                      "employees",
+                      "{{d2EmployeeId}}",
+                      "raise"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [
+                      {
+                        "key": "amount",
+                        "value": "100"
+                      },
+                      {
+                        "key": "isolation",
+                        "value": "READ_COMMITTED"
+                      },
+                      {
+                        "key": "delayMs",
+                        "value": "0"
+                      }
+                    ],
+                    "variable": []
+                  },
+                  "method": "POST"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "d0e841e5-2a6f-42a4-bea0-be7eb210f294",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                        "pm.test(\"Salary1100\",()=>pm.expect(pm.response.json().newSalary).to.eql(1100));"
+                      ],
+                      "_lastExecutionId": "275a027d-292f-42e9-b04f-c8b08a74721c"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "f3aa05b3-0748-4294-a7a6-618d664fa894",
+                "name": "03. Sequential REPEATABLE_READ raise",
+                "request": {
+                  "url": {
+                    "path": [
+                      "isolation",
+                      "employees",
+                      "{{d2EmployeeId}}",
+                      "raise"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [
+                      {
+                        "key": "amount",
+                        "value": "100"
+                      },
+                      {
+                        "key": "isolation",
+                        "value": "REPEATABLE_READ"
+                      },
+                      {
+                        "key": "delayMs",
+                        "value": "0"
+                      }
+                    ],
+                    "variable": []
+                  },
+                  "method": "POST"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "919898f1-6ca8-431c-b852-d1bc05c49757",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                        "pm.test(\"Salary1200\",()=>pm.expect(pm.response.json().newSalary).to.eql(1200));"
+                      ],
+                      "_lastExecutionId": "443e0f98-996a-40a9-84ee-d1ddf84644d4"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "52937ccc-1e74-474b-a1f3-e819a08fd68a",
+                "name": "04. Unsupported SERIALIZABLE",
+                "request": {
+                  "url": {
+                    "path": [
+                      "isolation",
+                      "employees",
+                      "{{d2EmployeeId}}",
+                      "raise"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [
+                      {
+                        "key": "amount",
+                        "value": "100"
+                      },
+                      {
+                        "key": "isolation",
+                        "value": "SERIALIZABLE"
+                      },
+                      {
+                        "key": "delayMs",
+                        "value": "0"
+                      }
+                    ],
+                    "variable": []
+                  },
+                  "method": "POST"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "8ada4484-b311-4f20-9924-bdb1e9f7e546",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                      ],
+                      "_lastExecutionId": "f6b19c1e-ed25-42e0-b425-de63b1a33f90"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "bb2916c2-aba2-4679-a30d-c251d8860c4e",
+                "name": "05. Negative amount",
+                "request": {
+                  "url": {
+                    "path": [
+                      "isolation",
+                      "employees",
+                      "{{d2EmployeeId}}",
+                      "raise"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [
+                      {
+                        "key": "amount",
+                        "value": "-100"
+                      },
+                      {
+                        "key": "isolation",
+                        "value": "READ_COMMITTED"
+                      },
+                      {
+                        "key": "delayMs",
+                        "value": "0"
+                      }
+                    ],
+                    "variable": []
+                  },
+                  "method": "POST"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "5a870cfc-722d-44c7-bdc7-c0823718d66f",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                      ],
+                      "_lastExecutionId": "4f5a2ab2-a9fd-400a-86bc-8b652b930c04"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "82d18d06-4d9b-4b8a-8d3e-56e0cff60089",
+                "name": "06. Negative delay",
+                "request": {
+                  "url": {
+                    "path": [
+                      "isolation",
+                      "employees",
+                      "{{d2EmployeeId}}",
+                      "raise"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [
+                      {
+                        "key": "amount",
+                        "value": "100"
+                      },
+                      {
+                        "key": "isolation",
+                        "value": "READ_COMMITTED"
+                      },
+                      {
+                        "key": "delayMs",
+                        "value": "-1"
+                      }
+                    ],
+                    "variable": []
+                  },
+                  "method": "POST"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "79a79bb3-df32-4d01-933e-a3456076d5d4",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                      ],
+                      "_lastExecutionId": "08d799d4-339b-4be6-941f-314739267850"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "442b4cfa-5d07-4fc9-92d9-f242d1763470",
+                "name": "07. Final salary unchanged after rejected requests",
+                "request": {
+                  "url": {
+                    "path": [
+                      "employees",
+                      "{{d2EmployeeId}}"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "GET"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "a0f332fd-dd65-4b96-9d97-5f62d6c1a45f",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                        "pm.test(\"Final salary1200\",()=>pm.expect(pm.response.json().salary).to.eql(1200));"
+                      ],
+                      "_lastExecutionId": "951b6870-f7dd-4fd9-b723-86caecda9576"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "75826a91-cd77-49e4-81b6-ee7cfd5c9fdc",
+                "name": "08. Delete test employee",
+                "request": {
+                  "url": {
+                    "path": [
+                      "employees",
+                      "{{d2EmployeeId}}"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "DELETE"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "e3140174-852c-45e6-8589-ef1eb6ee55e4",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 204\",()=>pm.response.to.have.status(204));"
+                      ],
+                      "_lastExecutionId": "84d4bd47-d767-4fde-9aed-8685020b5acb"
+                    }
+                  }
+                ]
+              }
+            ],
+            "event": []
+          }
+        ],
+        "event": []
+      }
+    ],
+    "event": [],
+    "variable": [
+      {
+        "type": "any",
+        "value": "http://localhost:8080/test-demo/api",
+        "key": "baseUrl"
+      }
+    ],
+    "info": {
+      "_postman_id": "12aa56f8-ea74-43bf-8bcf-e9034797fbc8",
+      "name": "Task21 Isolation",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    }
+  },
+  "environment": {
+    "id": "d78fc1c0-9a9d-4ffc-82aa-ebe00f516e7d",
+    "values": []
+  },
+  "globals": {
+    "id": "52d1fa6f-425c-41a9-b77b-1c6516584001",
+    "values": []
+  },
+  "run": {
+    "stats": {
+      "iterations": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "items": {
+        "total": 8,
+        "pending": 0,
+        "failed": 0
+      },
+      "scripts": {
+        "total": 8,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequests": {
+        "total": 8,
+        "pending": 0,
+        "failed": 0
+      },
+      "requests": {
+        "total": 8,
+        "pending": 0,
+        "failed": 0
+      },
+      "tests": {
+        "total": 8,
+        "pending": 0,
+        "failed": 0
+      },
+      "assertions": {
+        "total": 11,
+        "pending": 0,
+        "failed": 0
+      },
+      "testScripts": {
+        "total": 8,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequestScripts": {
+        "total": 0,
+        "pending": 0,
+        "failed": 0
+      }
+    },
+    "timings": {
+      "responseAverage": 27.125,
+      "responseMin": 4,
+      "responseMax": 70,
+      "responseSd": 22.172265896836073,
+      "dnsAverage": 0,
+      "dnsMin": 0,
+      "dnsMax": 0,
+      "dnsSd": 0,
+      "firstByteAverage": 0,
+      "firstByteMin": 0,
+      "firstByteMax": 0,
+      "firstByteSd": 0,
+      "started": 1793561956561,
+      "completed": 1793561957388
+    },
+    "executions": [
+      {
+        "cursor": {
+          "position": 0,
+          "iteration": 0,
+          "length": 8,
+          "cycles": 1,
+          "empty": false,
+          "eof": false,
+          "bof": true,
+          "cr": false,
+          "ref": "e9e849b1-8ca0-4080-962d-918f3e7a5ce8",
+          "httpRequestId": "f4a52cc6-329d-4635-9f29-bb66c19c2f49"
+        },
+        "item": {
+          "id": "ed32b36b-95aa-4f43-88fe-ff020d39711e",
+          "name": "01. D2 test employee",
+          "request": {
+            "url": {
+              "path": [
+                "employees"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"D2Postman\",\n  \"surname\": \"{{$guid}}\",\n  \"salary\": 1000,\n  \"departmentId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "57c0c2ec-940f-431e-8b15-67f694a7d6fd",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\",()=>pm.response.to.have.status(201));",
+                  "pm.collectionVariables.set(\"d2EmployeeId\",pm.response.json().id);"
+                ],
+                "_lastExecutionId": "f37bfe74-9fdd-4026-b177-4ce37d8981c6"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "employees"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "b446db6f-0e15-4116-8a5b-36a9ac0d6964",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "117",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"name\": \"D2Postman\",\n  \"surname\": \"1ec49868-518a-4220-8f61-34cae51c3117\",\n  \"salary\": 1000,\n  \"departmentId\": 1\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "a5c93ef3-c855-437e-a9a6-fa887207ee6d",
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "139"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 19:39:16 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              49,
+              57,
+              44,
+              34,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              68,
+              50,
+              80,
+              111,
+              115,
+              116,
+              109,
+              97,
+              110,
+              34,
+              44,
+              34,
+              115,
+              117,
+              114,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              49,
+              101,
+              99,
+              52,
+              57,
+              56,
+              54,
+              56,
+              45,
+              53,
+              49,
+              56,
+              97,
+              45,
+              52,
+              50,
+              50,
+              48,
+              45,
+              56,
+              102,
+              54,
+              49,
+              45,
+              51,
+              52,
+              99,
+              97,
+              101,
+              53,
+              49,
+              99,
+              51,
+              49,
+              49,
+              55,
+              34,
+              44,
+              34,
+              115,
+              97,
+              108,
+              97,
+              114,
+              121,
+              34,
+              58,
+              49,
+              48,
+              48,
+              48,
+              44,
+              34,
+              100,
+              101,
+              112,
+              97,
+              114,
+              116,
+              109,
+              101,
+              110,
+              116,
+              73,
+              100,
+              34,
+              58,
+              49,
+              44,
+              34,
+              100,
+              101,
+              112,
+              97,
+              114,
+              116,
+              109,
+              101,
+              110,
+              116,
+              78,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              68,
+              101,
+              118,
+              101,
+              108,
+              111,
+              112,
+              109,
+              101,
+              110,
+              116,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 70,
+          "responseSize": 139
+        },
+        "id": "ed32b36b-95aa-4f43-88fe-ff020d39711e",
+        "assertions": [
+          {
+            "assertion": "HTTP 201",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "943222e0-98b4-4065-8904-8a757e6fdf74",
+          "length": 8,
+          "cycles": 1,
+          "position": 1,
+          "iteration": 0,
+          "httpRequestId": "eddd4d4b-dd34-408e-986e-481f7c123a48"
+        },
+        "item": {
+          "id": "72cea913-8e50-4d26-abfb-2772bdd11d2c",
+          "name": "02. Sequential READ_COMMITTED raise",
+          "request": {
+            "url": {
+              "path": [
+                "isolation",
+                "employees",
+                "{{d2EmployeeId}}",
+                "raise"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "amount",
+                  "value": "100"
+                },
+                {
+                  "key": "isolation",
+                  "value": "READ_COMMITTED"
+                },
+                {
+                  "key": "delayMs",
+                  "value": "0"
+                }
+              ],
+              "variable": []
+            },
+            "method": "POST"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "d0e841e5-2a6f-42a4-bea0-be7eb210f294",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                  "pm.test(\"Salary1100\",()=>pm.expect(pm.response.json().newSalary).to.eql(1100));"
+                ],
+                "_lastExecutionId": "275a027d-292f-42e9-b04f-c8b08a74721c"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "isolation",
+              "employees",
+              "19",
+              "raise"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [
+              {
+                "key": "amount",
+                "value": "100"
+              },
+              {
+                "key": "isolation",
+                "value": "READ_COMMITTED"
+              },
+              {
+                "key": "delayMs",
+                "value": "0"
+              }
+            ],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "68bedf00-abdf-469a-83f7-3012c1d62212",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "0",
+              "system": true
+            }
+          ],
+          "method": "POST"
+        },
+        "response": {
+          "id": "3d77bfc7-d43e-4c03-b4f3-35f370274e6a",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "86"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 19:39:16 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              101,
+              109,
+              112,
+              108,
+              111,
+              121,
+              101,
+              101,
+              73,
+              100,
+              34,
+              58,
+              49,
+              57,
+              44,
+              34,
+              111,
+              108,
+              100,
+              83,
+              97,
+              108,
+              97,
+              114,
+              121,
+              34,
+              58,
+              49,
+              48,
+              48,
+              48,
+              46,
+              48,
+              48,
+              44,
+              34,
+              110,
+              101,
+              119,
+              83,
+              97,
+              108,
+              97,
+              114,
+              121,
+              34,
+              58,
+              49,
+              49,
+              48,
+              48,
+              46,
+              48,
+              48,
+              44,
+              34,
+              105,
+              115,
+              111,
+              108,
+              97,
+              116,
+              105,
+              111,
+              110,
+              34,
+              58,
+              34,
+              82,
+              69,
+              65,
+              68,
+              95,
+              67,
+              79,
+              77,
+              77,
+              73,
+              84,
+              84,
+              69,
+              68,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 46,
+          "responseSize": 86
+        },
+        "id": "72cea913-8e50-4d26-abfb-2772bdd11d2c",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Salary1100",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "3e803b44-2a58-46a3-864f-e4d66fb992f0",
+          "length": 8,
+          "cycles": 1,
+          "position": 2,
+          "iteration": 0,
+          "httpRequestId": "1fba12ef-8252-4589-b988-a9de6c863687"
+        },
+        "item": {
+          "id": "f3aa05b3-0748-4294-a7a6-618d664fa894",
+          "name": "03. Sequential REPEATABLE_READ raise",
+          "request": {
+            "url": {
+              "path": [
+                "isolation",
+                "employees",
+                "{{d2EmployeeId}}",
+                "raise"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "amount",
+                  "value": "100"
+                },
+                {
+                  "key": "isolation",
+                  "value": "REPEATABLE_READ"
+                },
+                {
+                  "key": "delayMs",
+                  "value": "0"
+                }
+              ],
+              "variable": []
+            },
+            "method": "POST"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "919898f1-6ca8-431c-b852-d1bc05c49757",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                  "pm.test(\"Salary1200\",()=>pm.expect(pm.response.json().newSalary).to.eql(1200));"
+                ],
+                "_lastExecutionId": "443e0f98-996a-40a9-84ee-d1ddf84644d4"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "isolation",
+              "employees",
+              "19",
+              "raise"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [
+              {
+                "key": "amount",
+                "value": "100"
+              },
+              {
+                "key": "isolation",
+                "value": "REPEATABLE_READ"
+              },
+              {
+                "key": "delayMs",
+                "value": "0"
+              }
+            ],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "dbe855da-c280-4e05-8883-197f16305dc7",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "0",
+              "system": true
+            }
+          ],
+          "method": "POST"
+        },
+        "response": {
+          "id": "ae511da9-ae8b-4596-8104-9561cc03f06e",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "87"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 19:39:16 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              101,
+              109,
+              112,
+              108,
+              111,
+              121,
+              101,
+              101,
+              73,
+              100,
+              34,
+              58,
+              49,
+              57,
+              44,
+              34,
+              111,
+              108,
+              100,
+              83,
+              97,
+              108,
+              97,
+              114,
+              121,
+              34,
+              58,
+              49,
+              49,
+              48,
+              48,
+              46,
+              48,
+              48,
+              44,
+              34,
+              110,
+              101,
+              119,
+              83,
+              97,
+              108,
+              97,
+              114,
+              121,
+              34,
+              58,
+              49,
+              50,
+              48,
+              48,
+              46,
+              48,
+              48,
+              44,
+              34,
+              105,
+              115,
+              111,
+              108,
+              97,
+              116,
+              105,
+              111,
+              110,
+              34,
+              58,
+              34,
+              82,
+              69,
+              80,
+              69,
+              65,
+              84,
+              65,
+              66,
+              76,
+              69,
+              95,
+              82,
+              69,
+              65,
+              68,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 31,
+          "responseSize": 87
+        },
+        "id": "f3aa05b3-0748-4294-a7a6-618d664fa894",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Salary1200",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "09bc2808-5a72-49b6-a0de-35069c1b91f2",
+          "length": 8,
+          "cycles": 1,
+          "position": 3,
+          "iteration": 0,
+          "httpRequestId": "74e000e1-d9c5-4dbc-becb-d36d2cd0d380"
+        },
+        "item": {
+          "id": "52937ccc-1e74-474b-a1f3-e819a08fd68a",
+          "name": "04. Unsupported SERIALIZABLE",
+          "request": {
+            "url": {
+              "path": [
+                "isolation",
+                "employees",
+                "{{d2EmployeeId}}",
+                "raise"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "amount",
+                  "value": "100"
+                },
+                {
+                  "key": "isolation",
+                  "value": "SERIALIZABLE"
+                },
+                {
+                  "key": "delayMs",
+                  "value": "0"
+                }
+              ],
+              "variable": []
+            },
+            "method": "POST"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "8ada4484-b311-4f20-9924-bdb1e9f7e546",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                ],
+                "_lastExecutionId": "f6b19c1e-ed25-42e0-b425-de63b1a33f90"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "isolation",
+              "employees",
+              "19",
+              "raise"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [
+              {
+                "key": "amount",
+                "value": "100"
+              },
+              {
+                "key": "isolation",
+                "value": "SERIALIZABLE"
+              },
+              {
+                "key": "delayMs",
+                "value": "0"
+              }
+            ],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "79f4498e-82ce-4d84-a08d-33b59f6c5b95",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "0",
+              "system": true
+            }
+          ],
+          "method": "POST"
+        },
+        "response": {
+          "id": "14bdf5b8-89aa-485c-826f-14b6974f7632",
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 19:39:16 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              100,
+              101,
+              116,
+              97,
+              105,
+              108,
+              34,
+              58,
+              34,
+              83,
+              117,
+              112,
+              112,
+              111,
+              114,
+              116,
+              101,
+              100,
+              32,
+              105,
+              115,
+              111,
+              108,
+              97,
+              116,
+              105,
+              111,
+              110,
+              58,
+              32,
+              82,
+              69,
+              65,
+              68,
+              95,
+              67,
+              79,
+              77,
+              77,
+              73,
+              84,
+              84,
+              69,
+              68,
+              44,
+              32,
+              82,
+              69,
+              80,
+              69,
+              65,
+              84,
+              65,
+              66,
+              76,
+              69,
+              95,
+              82,
+              69,
+              65,
+              68,
+              34,
+              44,
+              34,
+              105,
+              110,
+              115,
+              116,
+              97,
+              110,
+              99,
+              101,
+              34,
+              58,
+              34,
+              47,
+              116,
+              101,
+              115,
+              116,
+              45,
+              100,
+              101,
+              109,
+              111,
+              47,
+              97,
+              112,
+              105,
+              47,
+              105,
+              115,
+              111,
+              108,
+              97,
+              116,
+              105,
+              111,
+              110,
+              47,
+              101,
+              109,
+              112,
+              108,
+              111,
+              121,
+              101,
+              101,
+              115,
+              47,
+              49,
+              57,
+              47,
+              114,
+              97,
+              105,
+              115,
+              101,
+              34,
+              44,
+              34,
+              115,
+              116,
+              97,
+              116,
+              117,
+              115,
+              34,
+              58,
+              52,
+              48,
+              48,
+              44,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              34,
+              66,
+              97,
+              100,
+              32,
+              82,
+              101,
+              113,
+              117,
+              101,
+              115,
+              116,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 4,
+          "responseSize": 157
+        },
+        "id": "52937ccc-1e74-474b-a1f3-e819a08fd68a",
+        "assertions": [
+          {
+            "assertion": "HTTP 400",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "e5f9de92-3cb9-4383-8c92-a3f167d5ae83",
+          "length": 8,
+          "cycles": 1,
+          "position": 4,
+          "iteration": 0,
+          "httpRequestId": "fa64ff56-9233-4432-a5b5-1096fe5a0caf"
+        },
+        "item": {
+          "id": "bb2916c2-aba2-4679-a30d-c251d8860c4e",
+          "name": "05. Negative amount",
+          "request": {
+            "url": {
+              "path": [
+                "isolation",
+                "employees",
+                "{{d2EmployeeId}}",
+                "raise"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "amount",
+                  "value": "-100"
+                },
+                {
+                  "key": "isolation",
+                  "value": "READ_COMMITTED"
+                },
+                {
+                  "key": "delayMs",
+                  "value": "0"
+                }
+              ],
+              "variable": []
+            },
+            "method": "POST"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "5a870cfc-722d-44c7-bdc7-c0823718d66f",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                ],
+                "_lastExecutionId": "4f5a2ab2-a9fd-400a-86bc-8b652b930c04"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "isolation",
+              "employees",
+              "19",
+              "raise"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [
+              {
+                "key": "amount",
+                "value": "-100"
+              },
+              {
+                "key": "isolation",
+                "value": "READ_COMMITTED"
+              },
+              {
+                "key": "delayMs",
+                "value": "0"
+              }
+            ],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "68264317-aa7a-4787-962b-919ec28022ee",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "0",
+              "system": true
+            }
+          ],
+          "method": "POST"
+        },
+        "response": {
+          "id": "c4582780-6645-462a-b851-96f697157db7",
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 19:39:17 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              100,
+              101,
+              116,
+              97,
+              105,
+              108,
+              34,
+              58,
+              34,
+              65,
+              109,
+              111,
+              117,
+              110,
+              116,
+              32,
+              109,
+              117,
+              115,
+              116,
+              32,
+              98,
+              101,
+              32,
+              112,
+              111,
+              115,
+              105,
+              116,
+              105,
+              118,
+              101,
+              34,
+              44,
+              34,
+              105,
+              110,
+              115,
+              116,
+              97,
+              110,
+              99,
+              101,
+              34,
+              58,
+              34,
+              47,
+              116,
+              101,
+              115,
+              116,
+              45,
+              100,
+              101,
+              109,
+              111,
+              47,
+              97,
+              112,
+              105,
+              47,
+              105,
+              115,
+              111,
+              108,
+              97,
+              116,
+              105,
+              111,
+              110,
+              47,
+              101,
+              109,
+              112,
+              108,
+              111,
+              121,
+              101,
+              101,
+              115,
+              47,
+              49,
+              57,
+              47,
+              114,
+              97,
+              105,
+              115,
+              101,
+              34,
+              44,
+              34,
+              115,
+              116,
+              97,
+              116,
+              117,
+              115,
+              34,
+              58,
+              52,
+              48,
+              48,
+              44,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              34,
+              66,
+              97,
+              100,
+              32,
+              82,
+              101,
+              113,
+              117,
+              101,
+              115,
+              116,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 9,
+          "responseSize": 128
+        },
+        "id": "bb2916c2-aba2-4679-a30d-c251d8860c4e",
+        "assertions": [
+          {
+            "assertion": "HTTP 400",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "8b439169-8ffe-44c4-a492-2046185e0fbf",
+          "length": 8,
+          "cycles": 1,
+          "position": 5,
+          "iteration": 0,
+          "httpRequestId": "50db92a5-197c-4bcf-adbf-0dc74066b007"
+        },
+        "item": {
+          "id": "82d18d06-4d9b-4b8a-8d3e-56e0cff60089",
+          "name": "06. Negative delay",
+          "request": {
+            "url": {
+              "path": [
+                "isolation",
+                "employees",
+                "{{d2EmployeeId}}",
+                "raise"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "amount",
+                  "value": "100"
+                },
+                {
+                  "key": "isolation",
+                  "value": "READ_COMMITTED"
+                },
+                {
+                  "key": "delayMs",
+                  "value": "-1"
+                }
+              ],
+              "variable": []
+            },
+            "method": "POST"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "79a79bb3-df32-4d01-933e-a3456076d5d4",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                ],
+                "_lastExecutionId": "08d799d4-339b-4be6-941f-314739267850"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "isolation",
+              "employees",
+              "19",
+              "raise"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [
+              {
+                "key": "amount",
+                "value": "100"
+              },
+              {
+                "key": "isolation",
+                "value": "READ_COMMITTED"
+              },
+              {
+                "key": "delayMs",
+                "value": "-1"
+              }
+            ],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "2def3e05-a3e1-4eab-9317-24c4e2eebffe",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "0",
+              "system": true
+            }
+          ],
+          "method": "POST"
+        },
+        "response": {
+          "id": "0debe91f-73ac-48bf-8f30-b29998722e2c",
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 19:39:17 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              100,
+              101,
+              116,
+              97,
+              105,
+              108,
+              34,
+              58,
+              34,
+              68,
+              101,
+              108,
+              97,
+              121,
+              32,
+              109,
+              117,
+              115,
+              116,
+              32,
+              98,
+              101,
+              32,
+              98,
+              101,
+              116,
+              119,
+              101,
+              101,
+              110,
+              32,
+              48,
+              32,
+              97,
+              110,
+              100,
+              32,
+              49,
+              53,
+              48,
+              48,
+              48,
+              32,
+              109,
+              115,
+              34,
+              44,
+              34,
+              105,
+              110,
+              115,
+              116,
+              97,
+              110,
+              99,
+              101,
+              34,
+              58,
+              34,
+              47,
+              116,
+              101,
+              115,
+              116,
+              45,
+              100,
+              101,
+              109,
+              111,
+              47,
+              97,
+              112,
+              105,
+              47,
+              105,
+              115,
+              111,
+              108,
+              97,
+              116,
+              105,
+              111,
+              110,
+              47,
+              101,
+              109,
+              112,
+              108,
+              111,
+              121,
+              101,
+              101,
+              115,
+              47,
+              49,
+              57,
+              47,
+              114,
+              97,
+              105,
+              115,
+              101,
+              34,
+              44,
+              34,
+              115,
+              116,
+              97,
+              116,
+              117,
+              115,
+              34,
+              58,
+              52,
+              48,
+              48,
+              44,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              34,
+              66,
+              97,
+              100,
+              32,
+              82,
+              101,
+              113,
+              117,
+              101,
+              115,
+              116,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 8,
+          "responseSize": 141
+        },
+        "id": "82d18d06-4d9b-4b8a-8d3e-56e0cff60089",
+        "assertions": [
+          {
+            "assertion": "HTTP 400",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "6fa4052b-89b1-4702-8cb1-e723e1e4d59a",
+          "length": 8,
+          "cycles": 1,
+          "position": 6,
+          "iteration": 0,
+          "httpRequestId": "49002b88-e391-4053-96c4-10dea9312e72"
+        },
+        "item": {
+          "id": "442b4cfa-5d07-4fc9-92d9-f242d1763470",
+          "name": "07. Final salary unchanged after rejected requests",
+          "request": {
+            "url": {
+              "path": [
+                "employees",
+                "{{d2EmployeeId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "a0f332fd-dd65-4b96-9d97-5f62d6c1a45f",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                  "pm.test(\"Final salary1200\",()=>pm.expect(pm.response.json().salary).to.eql(1200));"
+                ],
+                "_lastExecutionId": "951b6870-f7dd-4fd9-b723-86caecda9576"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "employees",
+              "19"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "1307cfd9-d37f-4643-aff6-191a59a7f1a9",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "40e73681-2d9f-4d1c-9825-16ff59decd2f",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "142"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 19:39:17 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              49,
+              57,
+              44,
+              34,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              68,
+              50,
+              80,
+              111,
+              115,
+              116,
+              109,
+              97,
+              110,
+              34,
+              44,
+              34,
+              115,
+              117,
+              114,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              49,
+              101,
+              99,
+              52,
+              57,
+              56,
+              54,
+              56,
+              45,
+              53,
+              49,
+              56,
+              97,
+              45,
+              52,
+              50,
+              50,
+              48,
+              45,
+              56,
+              102,
+              54,
+              49,
+              45,
+              51,
+              52,
+              99,
+              97,
+              101,
+              53,
+              49,
+              99,
+              51,
+              49,
+              49,
+              55,
+              34,
+              44,
+              34,
+              115,
+              97,
+              108,
+              97,
+              114,
+              121,
+              34,
+              58,
+              49,
+              50,
+              48,
+              48,
+              46,
+              48,
+              48,
+              44,
+              34,
+              100,
+              101,
+              112,
+              97,
+              114,
+              116,
+              109,
+              101,
+              110,
+              116,
+              73,
+              100,
+              34,
+              58,
+              49,
+              44,
+              34,
+              100,
+              101,
+              112,
+              97,
+              114,
+              116,
+              109,
+              101,
+              110,
+              116,
+              78,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              68,
+              101,
+              118,
+              101,
+              108,
+              111,
+              112,
+              109,
+              101,
+              110,
+              116,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 9,
+          "responseSize": 142
+        },
+        "id": "442b4cfa-5d07-4fc9-92d9-f242d1763470",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Final salary1200",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "ff89b769-5195-49a6-b203-1a193ff93e3c",
+          "length": 8,
+          "cycles": 1,
+          "position": 7,
+          "iteration": 0,
+          "httpRequestId": "deb22c96-c794-46a7-86c7-402f966106b8"
+        },
+        "item": {
+          "id": "75826a91-cd77-49e4-81b6-ee7cfd5c9fdc",
+          "name": "08. Delete test employee",
+          "request": {
+            "url": {
+              "path": [
+                "employees",
+                "{{d2EmployeeId}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "DELETE"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "e3140174-852c-45e6-8589-ef1eb6ee55e4",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\",()=>pm.response.to.have.status(204));"
+                ],
+                "_lastExecutionId": "84d4bd47-d767-4fde-9aed-8685020b5acb"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "employees",
+              "19"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "fd4ea36b-1231-4178-96ab-15520683ae33",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "DELETE"
+        },
+        "response": {
+          "id": "f35086c5-d28f-4fe0-8b30-2b3386c38599",
+          "status": "No Content",
+          "code": 204,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 19:39:17 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": []
+          },
+          "cookie": [],
+          "responseTime": 40,
+          "responseSize": 0
+        },
+        "id": "75826a91-cd77-49e4-81b6-ee7cfd5c9fdc",
+        "assertions": [
+          {
+            "assertion": "HTTP 204",
+            "skipped": false
+          }
+        ]
+      }
+    ],
+    "transfers": {
+      "responseTotal": 880
+    },
+    "failures": [],
+    "error": null
+  }
+}

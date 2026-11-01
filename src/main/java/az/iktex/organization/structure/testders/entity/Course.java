@@ -5,12 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "courses", uniqueConstraints = @UniqueConstraint(name = "uk_course_title", columnNames = "title"))
+@Cacheable
+@Cache(
+        usage = CacheConcurrencyStrategy.READ_WRITE,
+        region = "courses"
+)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -30,6 +37,9 @@ public class Course {
 
     @Column(name = "teacher", nullable = false, length = 50)
     private String teacher;
+
+    @Column(name = "capacity", nullable = false)
+    private Integer capacity = 30;
 
     // Kurs silinəndə tələbələr silinməməlidir, ona görə cascade yoxdur.
     @ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)

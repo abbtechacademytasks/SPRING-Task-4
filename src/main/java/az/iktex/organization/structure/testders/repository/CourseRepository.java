@@ -2,6 +2,7 @@ package az.iktex.organization.structure.testders.repository;
 
 import az.iktex.organization.structure.testders.entity.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -16,6 +17,10 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
     List<Course> findAllByTeacher(String teacher);
 
     // JPQL
+    @Modifying(flushAutomatically = true, clearAutomatically = true)
+    @Query("update Course c set c.credit = :credit where c.id = :id")
+    int updateCredit(@Param("id") Long id, @Param("credit") Integer credit);
+
     @Query("""
             select c from Course c
             left join fetch c.students

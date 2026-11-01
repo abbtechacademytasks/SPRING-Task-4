@@ -1,0 +1,108 @@
+newman
+
+Task21 Bonus - Nested and Retry
+
+→ Create Occupant
+  POST http://localhost:8083/test-demo/api/students [201 Created, 268B, 66ms]
+  √  HTTP 201
+
+→ Create Candidate
+  POST http://localhost:8083/test-demo/api/students [201 Created, 269B, 35ms]
+  √  HTTP 201
+
+→ Create Rollback
+  POST http://localhost:8083/test-demo/api/students [201 Created, 268B, 27ms]
+  √  HTTP 201
+
+→ Create Open course
+  POST http://localhost:8083/test-demo/api/courses [201 Created, 251B, 37ms]
+  √  HTTP 201
+
+→ Create Rollback course
+  POST http://localhost:8083/test-demo/api/courses [201 Created, 255B, 32ms]
+  √  HTTP 201
+
+→ Fill the one-seat fixture
+  POST http://localhost:8083/test-demo/api/students/22/courses/1 [201 Created, 128B, 50ms]
+  √  HTTP 201
+
+→ Bulk - skip full course
+  POST http://localhost:8083/test-demo/api/students/23/courses/bulk [200 OK, 217B, 38ms]
+  √  HTTP 200
+  √  Available course committed
+  √  Full course skipped
+
+→ Read committed membership
+  GET http://localhost:8083/test-demo/api/students/23 [200 OK, 352B, 8ms]
+  √  HTTP 200
+  √  Only available membership
+
+→ Bulk - later error rolls back outer transaction
+  POST http://localhost:8083/test-demo/api/students/24/courses/bulk [404 Not Found, 315B, 18ms]
+  √  HTTP 404
+
+→ No membership after outer rollback
+  GET http://localhost:8083/test-demo/api/students/24 [200 OK, 261B, 9ms]
+  √  HTTP 200
+  √  Successful nested work also rolled back
+
+→ Empty list rejected
+  POST http://localhost:8083/test-demo/api/students/23/courses/bulk [400 Bad Request, 302B, 6ms]
+  √  HTTP 400
+
+→ Create salary fixture
+  POST http://localhost:8083/test-demo/api/employees [201 Created, 303B, 34ms]
+  √  HTTP 201
+
+→ Retry-enabled salary operation
+  POST http://localhost:8083/test-demo/api/isolation/employees/17/raise?amount=100&isolation=REPEATABLE_READ&delayMs=0&retry=true [200 OK, 243B, 40ms]
+  √  HTTP 200
+  √  Salary updated
+
+→ Retry isolation guard
+  POST http://localhost:8083/test-demo/api/isolation/employees/17/raise?amount=100&isolation=READ_COMMITTED&delayMs=0&retry=true [400 Bad Request, 294B, 3ms]
+  √  HTTP 400
+
+→ Cleanup candidate
+  DELETE http://localhost:8083/test-demo/api/students/23 [204 No Content, 112B, 40ms]
+  √  HTTP 204
+
+→ Cleanup occupant
+  DELETE http://localhost:8083/test-demo/api/students/22 [204 No Content, 112B, 47ms]
+  √  HTTP 204
+
+→ Cleanup rollbackStudent
+  DELETE http://localhost:8083/test-demo/api/students/24 [204 No Content, 112B, 32ms]
+  √  HTTP 204
+
+→ Cleanup retryEmployee
+  DELETE http://localhost:8083/test-demo/api/employees/17 [204 No Content, 112B, 38ms]
+  √  HTTP 204
+
+→ Cleanup openCourse
+  DELETE http://localhost:8083/test-demo/api/courses/13 [204 No Content, 112B, 34ms]
+  √  HTTP 204
+
+→ Cleanup rollbackCourse
+  DELETE http://localhost:8083/test-demo/api/courses/14 [204 No Content, 112B, 42ms]
+  √  HTTP 204
+
+┌─────────────────────────┬──────────────────┬──────────────────┐
+│                         │         executed │           failed │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│              iterations │                1 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│                requests │               20 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│            test-scripts │               20 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│      prerequest-scripts │               20 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│              assertions │               25 │                0 │
+├─────────────────────────┴──────────────────┴──────────────────┤
+│ total run duration: 2.2s                                      │
+├───────────────────────────────────────────────────────────────┤
+│ total data received: 1.52kB (approx)                          │
+├───────────────────────────────────────────────────────────────┤
+│ average response time: 31ms [min: 3ms, max: 66ms, s.d.: 15ms] │
+└───────────────────────────────────────────────────────────────┘

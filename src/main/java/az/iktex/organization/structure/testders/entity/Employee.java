@@ -10,6 +10,7 @@ import org.hibernate.annotations.Check;
 import java.math.BigDecimal;
 
 @Entity
+// Maaş tez-tez və paralel tranzaksiyalarda dəyişir, ona görə L2 cache istifadə olunmur.
 @Table(name = "employees")
 @Check(name = "chk_employee_salary", constraints = "salary > 0")
 @Getter

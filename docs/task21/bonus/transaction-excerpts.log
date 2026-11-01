@@ -1,0 +1,46 @@
+2026-11-02T01:58:55.034+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-4] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.raiseRepeatableRead]: PROPAGATION_REQUIRED,ISOLATION_REPEATABLE_READ
+2026-11-02T01:58:55.904+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-6] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable]: PROPAGATION_REQUIRED,ISOLATION_SERIALIZABLE
+2026-11-02T01:58:56.124+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-7] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable]: PROPAGATION_REQUIRED,ISOLATION_SERIALIZABLE
+2026-11-02T01:58:56.356+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-1] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable]: PROPAGATION_REQUIRED,ISOLATION_SERIALIZABLE
+2026-11-02T01:58:56.465+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-2] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable]: PROPAGATION_REQUIRED,ISOLATION_SERIALIZABLE
+2026-11-02T01:59:30.371+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-6] o.s.jdbc.support.JdbcTransactionManager  : Creating nested transaction with name [az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll]
+2026-11-02T01:59:30.377+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-6] o.s.jdbc.support.JdbcTransactionManager  : Releasing transaction savepoint
+2026-11-02T01:59:30.377+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-6] o.s.jdbc.support.JdbcTransactionManager  : Creating nested transaction with name [az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll]
+2026-11-02T01:59:30.382+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-6] o.s.jdbc.support.JdbcTransactionManager  : Rolling back transaction to savepoint
+2026-11-02T01:59:30.384+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-6] o.s.jdbc.support.JdbcTransactionManager  : Creating nested transaction with name [az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll]
+2026-11-02T01:59:30.387+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-6] o.s.jdbc.support.JdbcTransactionManager  : Releasing transaction savepoint
+2026-11-02T01:59:31.022+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-9] o.s.jdbc.support.JdbcTransactionManager  : Creating nested transaction with name [az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll]
+2026-11-02T01:59:31.027+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-9] o.s.jdbc.support.JdbcTransactionManager  : Releasing transaction savepoint
+2026-11-02T01:59:31.028+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-9] o.s.jdbc.support.JdbcTransactionManager  : Creating nested transaction with name [az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll]
+2026-11-02T01:59:31.030+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-9] o.s.jdbc.support.JdbcTransactionManager  : Rolling back transaction to savepoint
+Retry salary: attempt=1
+Retry salary: attempt=1
+2026-11-02T01:59:31.423+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-6] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.raiseRepeatableRead]: PROPAGATION_REQUIRED,ISOLATION_REPEATABLE_READ
+2026-11-02T01:59:31.423+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-5] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.raiseRepeatableRead]: PROPAGATION_REQUIRED,ISOLATION_REPEATABLE_READ
+Retry salary: conflict, starting a new transaction
+Retry salary: attempt=2
+2026-11-02T01:59:34.485+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-5] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.raiseRepeatableRead]: PROPAGATION_REQUIRED,ISOLATION_REPEATABLE_READ
+Retry enrollment: attempt=1
+Retry enrollment: attempt=1
+2026-11-02T01:59:37.917+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-3] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable]: PROPAGATION_REQUIRED,ISOLATION_SERIALIZABLE
+2026-11-02T01:59:37.917+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-4] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable]: PROPAGATION_REQUIRED,ISOLATION_SERIALIZABLE
+Retry enrollment: conflict, starting a new transaction
+Retry enrollment: attempt=2
+2026-11-02T01:59:40.942+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-4] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable]: PROPAGATION_REQUIRED,ISOLATION_SERIALIZABLE
+Retry enrollment: conflict, starting a new transaction
+Retry enrollment: attempt=3
+2026-11-02T01:59:43.961+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-4] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable]: PROPAGATION_REQUIRED,ISOLATION_SERIALIZABLE
+2026-11-02T02:00:35.677+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-4] o.s.jdbc.support.JdbcTransactionManager  : Creating nested transaction with name [az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll]
+2026-11-02T02:00:35.681+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-4] o.s.jdbc.support.JdbcTransactionManager  : Rolling back transaction to savepoint
+2026-11-02T02:00:35.682+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-4] o.s.jdbc.support.JdbcTransactionManager  : Creating nested transaction with name [az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll]
+2026-11-02T02:00:35.686+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-4] o.s.jdbc.support.JdbcTransactionManager  : Releasing transaction savepoint
+2026-11-02T02:00:35.880+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-5] o.s.jdbc.support.JdbcTransactionManager  : Creating nested transaction with name [az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll]
+2026-11-02T02:00:35.884+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-5] o.s.jdbc.support.JdbcTransactionManager  : Releasing transaction savepoint
+2026-11-02T02:00:35.885+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-5] o.s.jdbc.support.JdbcTransactionManager  : Creating nested transaction with name [az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll]
+2026-11-02T02:00:35.888+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-5] o.s.jdbc.support.JdbcTransactionManager  : Rolling back transaction to savepoint
+Retry salary: attempt=1
+2026-11-02T02:00:36.281+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-1] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.raiseRepeatableRead]: PROPAGATION_REQUIRED,ISOLATION_REPEATABLE_READ
+2026-11-02T02:01:05.634+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-3] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.raiseRepeatableRead]: PROPAGATION_REQUIRED,ISOLATION_REPEATABLE_READ
+2026-11-02T02:01:05.645+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-5] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.raiseRepeatableRead]: PROPAGATION_REQUIRED,ISOLATION_REPEATABLE_READ
+2026-11-02T02:01:17.918+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-7] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable]: PROPAGATION_REQUIRED,ISOLATION_SERIALIZABLE
+2026-11-02T02:01:17.918+04:00 DEBUG 29320 --- [test-demo-api] [nio-8083-exec-6] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable]: PROPAGATION_REQUIRED,ISOLATION_SERIALIZABLE

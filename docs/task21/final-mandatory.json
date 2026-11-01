@@ -1,0 +1,9 @@
+{
+  "status": 409,
+  "body": {
+    "detail": "No existing transaction found for transaction marked with propagation 'mandatory'",
+    "instance": "/test-demo/api/tx-demo/reserve-seat/1",
+    "status": 409,
+    "title": "Conflict"
+  }
+}

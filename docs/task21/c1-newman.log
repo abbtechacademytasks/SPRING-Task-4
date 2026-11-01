@@ -1,0 +1,74 @@
+newman
+
+Task21 Transactions
+
+□ Transactions / C1 REQUIRED
+└ 01. Transfer üçün işçi yarat
+  POST http://localhost:8080/test-demo/api/employees [201 Created, 299B, 356ms]
+  √  HTTP 201
+
+└ 02. REQUIRED uğurlu transfer
+  POST http://localhost:8080/test-demo/api/employees/13/transfer [200 OK, 293B, 63ms]
+  √  HTTP 200
+  √  Salary1150 and department2
+
+└ 03. Commit-dən sonra işçini oxu
+  GET http://localhost:8080/test-demo/api/employees/13 [200 OK, 293B, 11ms]
+  √  HTTP 200
+  √  Both changes committed
+
+└ 04. Rollback üçün işçi yarat
+  POST http://localhost:8080/test-demo/api/employees [201 Created, 302B, 38ms]
+  √  HTTP 201
+
+└ 05. Əvvəlki departament və maaş
+  GET http://localhost:8080/test-demo/api/employees/14 [200 OK, 300B, 8ms]
+  √  HTTP 200
+  √  Before: department1 salary9000
+
+└ 06. Limitdən yuxarı transfer
+  POST http://localhost:8080/test-demo/api/employees/14/transfer [409 Conflict, 299B, 29ms]
+  √  HTTP 409
+  √  Salary limit error
+
+└ 07. Rollback-dən sonra köhnə departament
+  GET http://localhost:8080/test-demo/api/employees/14 [200 OK, 300B, 8ms]
+  √  HTTP 200
+  √  Rollback: department1 salary9000
+
+└ 08. Sərhəd yoxlaması üçün maaş8000
+  PUT http://localhost:8080/test-demo/api/employees/13 [200 OK, 293B, 48ms]
+  √  HTTP 200
+
+└ 09. Dəqiq10000 qəbul olunur
+  POST http://localhost:8080/test-demo/api/employees/13/transfer [200 OK, 301B, 30ms]
+  √  HTTP 200
+  √  Salary boundary10000
+
+└ 10. Uğurlu test işçisini sil
+  DELETE http://localhost:8080/test-demo/api/employees/13 [204 No Content, 112B, 49ms]
+  √  HTTP 204
+
+└ 11. Rollback test işçisini sil
+  DELETE http://localhost:8080/test-demo/api/employees/14 [204 No Content, 112B, 32ms]
+  √  HTTP 204
+
+┌─────────────────────────┬───────────────────┬──────────────────┐
+│                         │          executed │           failed │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│              iterations │                 1 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│                requests │                11 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│            test-scripts │                11 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│      prerequest-scripts │                 0 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│              assertions │                17 │                0 │
+├─────────────────────────┴───────────────────┴──────────────────┤
+│ total run duration: 1566ms                                     │
+├────────────────────────────────────────────────────────────────┤
+│ total data received: 1.24kB (approx)                           │
+├────────────────────────────────────────────────────────────────┤
+│ average response time: 61ms [min: 8ms, max: 356ms, s.d.: 94ms] │
+└────────────────────────────────────────────────────────────────┘

@@ -1,0 +1,27 @@
+[
+  {
+    "suite": "az.iktex.organization.structure.testders.BonusIntegrationTests",
+    "tests": 3,
+    "failures": 0
+  },
+  {
+    "suite": "az.iktex.organization.structure.testders.CacheIntegrationTests",
+    "tests": 4,
+    "failures": 0
+  },
+  {
+    "suite": "az.iktex.organization.structure.testders.IsolationRetryServiceTests",
+    "tests": 3,
+    "failures": 0
+  },
+  {
+    "suite": "az.iktex.organization.structure.testders.PropagationIntegrationTests",
+    "tests": 2,
+    "failures": 0
+  },
+  {
+    "suite": "az.iktex.organization.structure.testders.SchoolApplicationTests",
+    "tests": 1,
+    "failures": 0
+  }
+]

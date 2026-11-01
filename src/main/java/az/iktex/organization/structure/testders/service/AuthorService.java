@@ -11,6 +11,7 @@ import az.iktex.organization.structure.testders.repository.BookRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class AuthorService {
     private final AuthorMapper authorMapper;
     private final BookMapper bookMapper;
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public AuthorResponse create(AuthorRequest request) {
         if (authorRepository.existsByNameAndSurname(request.name(), request.surname())) {
             throw new IllegalStateException("Author name and surname already exist");
@@ -58,7 +59,7 @@ public class AuthorService {
         return bookMapper.toResponseList(bookRepository.findAllByAuthorId(authorId));
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public AuthorResponse update(Long id, AuthorRequest request) {
         Author author = authorRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Author not found: " + id));
@@ -69,7 +70,7 @@ public class AuthorService {
         return authorMapper.toResponse(author);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public void delete(Long id) {
         Author author = authorRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Author not found: " + id));

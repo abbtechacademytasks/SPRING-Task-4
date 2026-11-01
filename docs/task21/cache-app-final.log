@@ -1,0 +1,2485 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.2)
+
+2026-10-31T01:40:06.836+04:00  INFO 39464 --- [test-demo-api] [           main] a.i.o.s.testders.SchoolApplication       : Starting SchoolApplication v0.0.1-SNAPSHOT using Java 25.0.4.1 with PID 39464 (C:\Users\USER\Desktop\ABB Tech Academy\SPRING-Task-4\build\libs\test-ders-0.0.1-SNAPSHOT.jar started by USER in C:\Users\USER\Desktop\ABB Tech Academy\SPRING-Task-4)
+2026-10-31T01:40:06.839+04:00  INFO 39464 --- [test-demo-api] [           main] a.i.o.s.testders.SchoolApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-10-31T01:40:07.435+04:00  INFO 39464 --- [test-demo-api] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-31T01:40:07.496+04:00  INFO 39464 --- [test-demo-api] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 49 ms. Found 9 JPA repository interfaces.
+2026-10-31T01:40:08.094+04:00  INFO 39464 --- [test-demo-api] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-10-31T01:40:08.107+04:00  INFO 39464 --- [test-demo-api] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-31T01:40:08.107+04:00  INFO 39464 --- [test-demo-api] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.27]
+2026-10-31T01:40:08.142+04:00  INFO 39464 --- [test-demo-api] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1255 ms
+2026-10-31T01:40:08.334+04:00  INFO 39464 --- [test-demo-api] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-31T01:40:08.476+04:00  INFO 39464 --- [test-demo-api] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2eda4eeb
+2026-10-31T01:40:08.477+04:00  INFO 39464 --- [test-demo-api] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-31T01:40:08.602+04:00  INFO 39464 --- [test-demo-api] [           main] liquibase.database                       : Set default schema name to public
+2026-10-31T01:40:09.863+04:00  INFO 39464 --- [test-demo-api] [           main] liquibase.changelog                      : Reading from public.databasechangelog
+2026-10-31T01:40:10.041+04:00  INFO 39464 --- [test-demo-api] [           main] liquibase.ui                             : Database is up to date, no changesets to execute
+2026-10-31T01:40:10.044+04:00  INFO 39464 --- [test-demo-api] [           main] liquibase.changelog                      : Reading from public.databasechangelog
+2026-10-31T01:40:10.062+04:00  INFO 39464 --- [test-demo-api] [           main] liquibase.util                           : UPDATE SUMMARY
+2026-10-31T01:40:10.062+04:00  INFO 39464 --- [test-demo-api] [           main] liquibase.util                           : Run:                          0
+2026-10-31T01:40:10.063+04:00  INFO 39464 --- [test-demo-api] [           main] liquibase.util                           : Previously run:              32
+2026-10-31T01:40:10.063+04:00  INFO 39464 --- [test-demo-api] [           main] liquibase.util                           : Filtered out:                 0
+2026-10-31T01:40:10.063+04:00  INFO 39464 --- [test-demo-api] [           main] liquibase.util                           : -------------------------------
+2026-10-31T01:40:10.063+04:00  INFO 39464 --- [test-demo-api] [           main] liquibase.util                           : Total change sets:           32
+2026-10-31T01:40:10.064+04:00  INFO 39464 --- [test-demo-api] [           main] liquibase.util                           : Update summary generated
+2026-10-31T01:40:10.065+04:00  INFO 39464 --- [test-demo-api] [           main] liquibase.command                        : Command execution complete
+2026-10-31T01:40:10.165+04:00  INFO 39464 --- [test-demo-api] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-31T01:40:10.215+04:00  INFO 39464 --- [test-demo-api] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.13.Final
+2026-10-31T01:40:10.238+04:00  INFO 39464 --- [test-demo-api] [           main] org.hibernate.orm.cache                  : HHH90001028: Second-level cache region factory [org.hibernate.cache.jcache.internal.JCacheRegionFactory]
+2026-10-31T01:40:10.576+04:00  INFO 39464 --- [test-demo-api] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-31T01:40:10.633+04:00  INFO 39464 --- [test-demo-api] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/school_task21_db]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.15
+	Default catalog/schema: school_task21_db/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.ehcache.impl.internal.concurrent.ThreadLocalRandomUtil (jar:nested:/C:/Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/libs/test-ders-0.0.1-SNAPSHOT.jar/!BOOT-INF/lib/ehcache-3.10.8-jakarta.jar!/)
+WARNING: Please consider reporting this to the maintainers of class org.ehcache.impl.internal.concurrent.ThreadLocalRandomUtil
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+2026-10-31T01:40:11.279+04:00  INFO 39464 --- [test-demo-api] [           main] org.ehcache.core.EhcacheManager          : Cache 'courses' created in EhcacheManager.
+2026-10-31T01:40:11.280+04:00  INFO 39464 --- [test-demo-api] [           main] org.ehcache.core.EhcacheManager          : Cache 'book-authorBooks' created in EhcacheManager.
+2026-10-31T01:40:11.282+04:00  INFO 39464 --- [test-demo-api] [           main] org.ehcache.core.EhcacheManager          : Cache 'books' created in EhcacheManager.
+2026-10-31T01:40:11.284+04:00  INFO 39464 --- [test-demo-api] [           main] org.ehcache.core.EhcacheManager          : Cache 'author-authorBooks' created in EhcacheManager.
+2026-10-31T01:40:11.286+04:00  INFO 39464 --- [test-demo-api] [           main] org.ehcache.core.EhcacheManager          : Cache 'default-query-results-region' created in EhcacheManager.
+2026-10-31T01:40:11.288+04:00  INFO 39464 --- [test-demo-api] [           main] org.ehcache.core.EhcacheManager          : Cache 'default-update-timestamps-region' created in EhcacheManager.
+2026-10-31T01:40:11.289+04:00  INFO 39464 --- [test-demo-api] [           main] org.ehcache.core.EhcacheManager          : Cache 'departments' created in EhcacheManager.
+2026-10-31T01:40:11.291+04:00  INFO 39464 --- [test-demo-api] [           main] org.ehcache.core.EhcacheManager          : Cache 'author-books' created in EhcacheManager.
+2026-10-31T01:40:11.292+04:00  INFO 39464 --- [test-demo-api] [           main] org.ehcache.core.EhcacheManager          : Cache 'authors' created in EhcacheManager.
+2026-10-31T01:40:11.397+04:00  INFO 39464 --- [test-demo-api] [           main] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=jar.nested./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/libs/test-ders-0.0.1-SNAPSHOT.jar/!BOOT-INF/classes/!/ehcache.xml,Cache=courses
+2026-10-31T01:40:11.399+04:00  INFO 39464 --- [test-demo-api] [           main] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=jar.nested./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/libs/test-ders-0.0.1-SNAPSHOT.jar/!BOOT-INF/classes/!/ehcache.xml,Cache=book-authorBooks
+2026-10-31T01:40:11.399+04:00  INFO 39464 --- [test-demo-api] [           main] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=jar.nested./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/libs/test-ders-0.0.1-SNAPSHOT.jar/!BOOT-INF/classes/!/ehcache.xml,Cache=books
+2026-10-31T01:40:11.400+04:00  INFO 39464 --- [test-demo-api] [           main] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=jar.nested./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/libs/test-ders-0.0.1-SNAPSHOT.jar/!BOOT-INF/classes/!/ehcache.xml,Cache=author-authorBooks
+2026-10-31T01:40:11.400+04:00  INFO 39464 --- [test-demo-api] [           main] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=jar.nested./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/libs/test-ders-0.0.1-SNAPSHOT.jar/!BOOT-INF/classes/!/ehcache.xml,Cache=default-query-results-region
+2026-10-31T01:40:11.401+04:00  INFO 39464 --- [test-demo-api] [           main] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=jar.nested./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/libs/test-ders-0.0.1-SNAPSHOT.jar/!BOOT-INF/classes/!/ehcache.xml,Cache=default-update-timestamps-region
+2026-10-31T01:40:11.401+04:00  INFO 39464 --- [test-demo-api] [           main] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=jar.nested./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/libs/test-ders-0.0.1-SNAPSHOT.jar/!BOOT-INF/classes/!/ehcache.xml,Cache=departments
+2026-10-31T01:40:11.401+04:00  INFO 39464 --- [test-demo-api] [           main] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=jar.nested./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/libs/test-ders-0.0.1-SNAPSHOT.jar/!BOOT-INF/classes/!/ehcache.xml,Cache=author-books
+2026-10-31T01:40:11.402+04:00  INFO 39464 --- [test-demo-api] [           main] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=jar.nested./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/libs/test-ders-0.0.1-SNAPSHOT.jar/!BOOT-INF/classes/!/ehcache.xml,Cache=authors
+2026-10-31T01:40:12.046+04:00  INFO 39464 --- [test-demo-api] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-31T01:40:12.080+04:00  INFO 39464 --- [test-demo-api] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-31T01:40:12.150+04:00  INFO 39464 --- [test-demo-api] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-31T01:40:13.383+04:00  INFO 39464 --- [test-demo-api] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/test-demo'
+2026-10-31T01:40:13.389+04:00  INFO 39464 --- [test-demo-api] [           main] a.i.o.s.testders.SchoolApplication       : Started SchoolApplication in 6.986 seconds (process running for 7.462)
+2026-10-31T01:40:45.997+04:00  INFO 39464 --- [test-demo-api] [nio-8080-exec-3] o.a.c.c.C.[.[localhost].[/test-demo]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-31T01:40:45.997+04:00  INFO 39464 --- [test-demo-api] [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-10-31T01:40:45.998+04:00  INFO 39464 --- [test-demo-api] [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        users
+        (email, gender_id, name, surname) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.gender_id,
+        u1_0.name,
+        p1_0.id,
+        p1_0.country,
+        p1_0.issue_date,
+        p1_0.serial_number,
+        p1_0.user_id,
+        u1_0.surname 
+    from
+        users u1_0 
+    left join
+        passports p1_0 
+            on u1_0.id=p1_0.user_id 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.gender_id,
+        u1_0.name,
+        p1_0.id,
+        p1_0.country,
+        p1_0.issue_date,
+        p1_0.serial_number,
+        p1_0.user_id,
+        u1_0.surname 
+    from
+        users u1_0 
+    left join
+        passports p1_0 
+            on u1_0.id=p1_0.user_id 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        p1_0.id 
+    from
+        passports p1_0 
+    where
+        p1_0.serial_number=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        passports
+        (country, issue_date, serial_number, user_id) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.gender_id,
+        u1_0.name,
+        p1_0.id,
+        p1_0.country,
+        p1_0.issue_date,
+        p1_0.serial_number,
+        p1_0.user_id,
+        u1_0.surname 
+    from
+        users u1_0 
+    left join
+        passports p1_0 
+            on u1_0.id=p1_0.user_id 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.gender_id,
+        u1_0.name,
+        p1_0.id,
+        p1_0.country,
+        p1_0.issue_date,
+        p1_0.serial_number,
+        p1_0.user_id,
+        u1_0.surname 
+    from
+        users u1_0 
+    left join
+        passports p1_0 
+            on u1_0.id=p1_0.user_id 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.gender_id,
+        u1_0.name,
+        p1_0.id,
+        p1_0.country,
+        p1_0.issue_date,
+        p1_0.serial_number,
+        p1_0.user_id,
+        u1_0.surname 
+    from
+        users u1_0 
+    left join
+        passports p1_0 
+            on u1_0.id=p1_0.user_id 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        users
+        (email, gender_id, name, surname) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.gender_id,
+        u1_0.name,
+        p1_0.id,
+        p1_0.country,
+        p1_0.issue_date,
+        p1_0.serial_number,
+        p1_0.user_id,
+        u1_0.surname 
+    from
+        users u1_0 
+    left join
+        passports p1_0 
+            on u1_0.id=p1_0.user_id 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        p1_0.id 
+    from
+        passports p1_0 
+    where
+        p1_0.serial_number=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.gender_id,
+        u1_0.name,
+        p1_0.id,
+        p1_0.country,
+        p1_0.issue_date,
+        p1_0.serial_number,
+        p1_0.user_id,
+        u1_0.surname 
+    from
+        users u1_0 
+    left join
+        passports p1_0 
+            on u1_0.id=p1_0.user_id
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.gender_id,
+        u1_0.name,
+        p1_0.id,
+        p1_0.country,
+        p1_0.issue_date,
+        p1_0.serial_number,
+        p1_0.user_id,
+        u1_0.surname 
+    from
+        users u1_0 
+    left join
+        passports p1_0 
+            on u1_0.id=p1_0.user_id 
+    where
+        u1_0.gender_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.gender_id,
+        u1_0.name,
+        p1_0.id,
+        p1_0.country,
+        p1_0.issue_date,
+        p1_0.serial_number,
+        p1_0.user_id,
+        u1_0.surname 
+    from
+        users u1_0 
+    left join
+        passports p1_0 
+            on u1_0.id=p1_0.user_id 
+    where
+        u1_0.email=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.gender_id,
+        u1_0.name,
+        u1_0.surname 
+    from
+        users u1_0 
+    left join
+        passports p1_0 
+            on u1_0.id=p1_0.user_id 
+    where
+        p1_0.id is null
+Hibernate: 
+    select
+        p1_0.id,
+        p1_0.country,
+        p1_0.issue_date,
+        p1_0.serial_number,
+        p1_0.user_id 
+    from
+        passports p1_0 
+    where
+        p1_0.user_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.gender_id,
+        u1_0.name,
+        p1_0.id,
+        p1_0.country,
+        p1_0.issue_date,
+        p1_0.serial_number,
+        p1_0.user_id,
+        u1_0.surname 
+    from
+        users u1_0 
+    left join
+        passports p1_0 
+            on u1_0.id=p1_0.user_id 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+        and u1_0.id<>? 
+    fetch
+        first ? rows only
+Hibernate: 
+    update
+        users 
+    set
+        email=?,
+        gender_id=?,
+        name=?,
+        surname=? 
+    where
+        id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.gender_id,
+        u1_0.name,
+        p1_0.id,
+        p1_0.country,
+        p1_0.issue_date,
+        p1_0.serial_number,
+        p1_0.user_id,
+        u1_0.surname 
+    from
+        users u1_0 
+    left join
+        passports p1_0 
+            on u1_0.id=p1_0.user_id 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.gender_id,
+        u1_0.name,
+        p1_0.id,
+        p1_0.country,
+        p1_0.issue_date,
+        p1_0.serial_number,
+        p1_0.user_id,
+        u1_0.surname 
+    from
+        users u1_0 
+    left join
+        passports p1_0 
+            on u1_0.id=p1_0.user_id 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+        and u1_0.id<>? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.gender_id,
+        u1_0.name,
+        p1_0.id,
+        p1_0.country,
+        p1_0.issue_date,
+        p1_0.serial_number,
+        p1_0.user_id,
+        u1_0.surname 
+    from
+        users u1_0 
+    left join
+        passports p1_0 
+            on u1_0.id=p1_0.user_id 
+    where
+        u1_0.id=?
+Hibernate: 
+    delete 
+    from
+        passports 
+    where
+        id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.gender_id,
+        u1_0.name,
+        p1_0.id,
+        p1_0.country,
+        p1_0.issue_date,
+        p1_0.serial_number,
+        p1_0.user_id,
+        u1_0.surname 
+    from
+        users u1_0 
+    left join
+        passports p1_0 
+            on u1_0.id=p1_0.user_id 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.gender_id,
+        u1_0.name,
+        p1_0.id,
+        p1_0.country,
+        p1_0.issue_date,
+        p1_0.serial_number,
+        p1_0.user_id,
+        u1_0.surname 
+    from
+        users u1_0 
+    left join
+        passports p1_0 
+            on u1_0.id=p1_0.user_id 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.gender_id,
+        u1_0.name,
+        p1_0.id,
+        p1_0.country,
+        p1_0.issue_date,
+        p1_0.serial_number,
+        p1_0.user_id,
+        u1_0.surname 
+    from
+        users u1_0 
+    left join
+        passports p1_0 
+            on u1_0.id=p1_0.user_id 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        p1_0.id 
+    from
+        passports p1_0 
+    where
+        p1_0.serial_number=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        passports
+        (country, issue_date, serial_number, user_id) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.gender_id,
+        u1_0.name,
+        p1_0.id,
+        p1_0.country,
+        p1_0.issue_date,
+        p1_0.serial_number,
+        p1_0.user_id,
+        u1_0.surname 
+    from
+        users u1_0 
+    left join
+        passports p1_0 
+            on u1_0.id=p1_0.user_id 
+    where
+        u1_0.id=?
+Hibernate: 
+    delete 
+    from
+        passports 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.gender_id,
+        u1_0.name,
+        p1_0.id,
+        p1_0.country,
+        p1_0.issue_date,
+        p1_0.serial_number,
+        p1_0.user_id,
+        u1_0.surname 
+    from
+        users u1_0 
+    left join
+        passports p1_0 
+            on u1_0.id=p1_0.user_id 
+    where
+        u1_0.id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.gender_id,
+        u1_0.name,
+        p1_0.id,
+        p1_0.country,
+        p1_0.issue_date,
+        p1_0.serial_number,
+        p1_0.user_id,
+        u1_0.surname 
+    from
+        users u1_0 
+    left join
+        passports p1_0 
+            on u1_0.id=p1_0.user_id 
+    where
+        u1_0.id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    select
+        d1_0.id 
+    from
+        departments d1_0 
+    where
+        d1_0.name=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        departments
+        (location, name, phone) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    select
+        d1_0.id 
+    from
+        departments d1_0 
+    where
+        d1_0.name=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        departments
+        (location, name, phone) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    select
+        d1_0.id 
+    from
+        departments d1_0 
+    where
+        d1_0.name=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.location,
+        d1_0.name,
+        d1_0.phone 
+    from
+        departments d1_0
+Hibernate: 
+    select
+        d1_0.id,
+        d1_0.location,
+        d1_0.name,
+        d1_0.phone 
+    from
+        departments d1_0 
+    where
+        not exists(select
+            1 from employees e1_0 
+        where
+            d1_0.id=e1_0.department_id)
+Hibernate: 
+    select
+        e1_0.id 
+    from
+        employees e1_0 
+    where
+        e1_0.name=? 
+        and e1_0.surname=? 
+        and e1_0.department_id=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        employees
+        (department_id, name, salary, surname) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    select
+        e1_0.id 
+    from
+        employees e1_0 
+    where
+        e1_0.name=? 
+        and e1_0.surname=? 
+        and e1_0.department_id=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        employees
+        (department_id, name, salary, surname) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    select
+        e1_0.id 
+    from
+        employees e1_0 
+    where
+        e1_0.name=? 
+        and e1_0.surname=? 
+        and e1_0.department_id=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        e1_0.id,
+        e1_0.department_id,
+        d1_0.id,
+        d1_0.location,
+        d1_0.name,
+        d1_0.phone,
+        e1_0.name,
+        e1_0.salary,
+        e1_0.surname 
+    from
+        employees e1_0 
+    join
+        departments d1_0 
+            on d1_0.id=e1_0.department_id 
+    where
+        e1_0.id=?
+Hibernate: 
+    select
+        d1_0.id,
+        e1_0.department_id,
+        e1_0.id,
+        e1_0.name,
+        e1_0.salary,
+        e1_0.surname,
+        d1_0.location,
+        d1_0.name,
+        d1_0.phone 
+    from
+        departments d1_0 
+    left join
+        employees e1_0 
+            on d1_0.id=e1_0.department_id 
+    where
+        d1_0.id=?
+Hibernate: 
+    select
+        count(*) 
+    from
+        departments d1_0 
+    where
+        d1_0.id=?
+Hibernate: 
+    select
+        e1_0.id,
+        e1_0.department_id,
+        d1_0.id,
+        d1_0.location,
+        d1_0.name,
+        d1_0.phone,
+        e1_0.name,
+        e1_0.salary,
+        e1_0.surname 
+    from
+        employees e1_0 
+    join
+        departments d1_0 
+            on d1_0.id=e1_0.department_id 
+    where
+        d1_0.id=?
+Hibernate: 
+    select
+        count(*) 
+    from
+        departments d1_0 
+    where
+        d1_0.id=?
+Hibernate: 
+    select
+        avg(e1_0.salary) 
+    from
+        employees e1_0 
+    where
+        e1_0.department_id=?
+Hibernate: 
+    select
+        e1_0.id,
+        e1_0.department_id,
+        d1_0.id,
+        d1_0.location,
+        d1_0.name,
+        d1_0.phone,
+        e1_0.name,
+        e1_0.salary,
+        e1_0.surname 
+    from
+        employees e1_0 
+    join
+        departments d1_0 
+            on d1_0.id=e1_0.department_id 
+    where
+        e1_0.salary between ? and ?
+Hibernate: 
+    select
+        count(e1_0.id)>0 
+    from
+        employees e1_0 
+    where
+        e1_0.department_id=?
+Hibernate: 
+    select
+        e1_0.id,
+        e1_0.department_id,
+        d1_0.id,
+        d1_0.location,
+        d1_0.name,
+        d1_0.phone,
+        e1_0.name,
+        e1_0.salary,
+        e1_0.surname 
+    from
+        employees e1_0 
+    join
+        departments d1_0 
+            on d1_0.id=e1_0.department_id 
+    where
+        e1_0.id=?
+Hibernate: 
+    select
+        e1_0.id 
+    from
+        employees e1_0 
+    where
+        e1_0.name=? 
+        and e1_0.surname=? 
+        and e1_0.department_id=? 
+        and e1_0.id<>? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        e1_0.id,
+        e1_0.department_id,
+        d1_0.id,
+        d1_0.location,
+        d1_0.name,
+        d1_0.phone,
+        e1_0.name,
+        e1_0.salary,
+        e1_0.surname 
+    from
+        employees e1_0 
+    join
+        departments d1_0 
+            on d1_0.id=e1_0.department_id 
+    where
+        e1_0.id=?
+Hibernate: 
+    select
+        e1_0.id 
+    from
+        employees e1_0 
+    where
+        e1_0.name=? 
+        and e1_0.surname=? 
+        and e1_0.department_id=? 
+        and e1_0.id<>? 
+    fetch
+        first ? rows only
+Hibernate: 
+    update
+        employees 
+    set
+        department_id=?,
+        name=?,
+        salary=?,
+        surname=? 
+    where
+        id=?
+Hibernate: 
+    select
+        e1_0.id,
+        e1_0.department_id,
+        d1_0.id,
+        d1_0.location,
+        d1_0.name,
+        d1_0.phone,
+        e1_0.name,
+        e1_0.salary,
+        e1_0.surname 
+    from
+        employees e1_0 
+    join
+        departments d1_0 
+            on d1_0.id=e1_0.department_id 
+    where
+        e1_0.id=?
+Hibernate: 
+    select
+        d1_0.id 
+    from
+        departments d1_0 
+    where
+        d1_0.name=? 
+        and d1_0.id<>? 
+    fetch
+        first ? rows only
+Hibernate: 
+    update
+        departments 
+    set
+        location=?,
+        name=?,
+        phone=? 
+    where
+        id=?
+Hibernate: 
+    select
+        e1_0.id,
+        e1_0.department_id,
+        e1_0.name,
+        e1_0.salary,
+        e1_0.surname 
+    from
+        employees e1_0 
+    where
+        e1_0.id=?
+Hibernate: 
+    delete 
+    from
+        employees 
+    where
+        id=?
+Hibernate: 
+    select
+        count(e1_0.id)>0 
+    from
+        employees e1_0 
+    where
+        e1_0.department_id=?
+Hibernate: 
+    select
+        e1_0.department_id,
+        e1_0.id,
+        e1_0.name,
+        e1_0.salary,
+        e1_0.surname 
+    from
+        employees e1_0 
+    where
+        e1_0.department_id=?
+Hibernate: 
+    delete 
+    from
+        departments 
+    where
+        id=?
+Hibernate: 
+    select
+        e1_0.id,
+        e1_0.department_id,
+        d1_0.id,
+        d1_0.location,
+        d1_0.name,
+        d1_0.phone,
+        e1_0.name,
+        e1_0.salary,
+        e1_0.surname 
+    from
+        employees e1_0 
+    join
+        departments d1_0 
+            on d1_0.id=e1_0.department_id 
+    where
+        e1_0.id=?
+Hibernate: 
+    select
+        e1_0.id,
+        e1_0.department_id,
+        e1_0.name,
+        e1_0.salary,
+        e1_0.surname 
+    from
+        employees e1_0 
+    where
+        e1_0.id=?
+Hibernate: 
+    delete 
+    from
+        employees 
+    where
+        id=?
+Hibernate: 
+    select
+        count(e1_0.id)>0 
+    from
+        employees e1_0 
+    where
+        e1_0.department_id=?
+Hibernate: 
+    select
+        e1_0.department_id,
+        e1_0.id,
+        e1_0.name,
+        e1_0.salary,
+        e1_0.surname 
+    from
+        employees e1_0 
+    where
+        e1_0.department_id=?
+Hibernate: 
+    delete 
+    from
+        departments 
+    where
+        id=?
+Hibernate: 
+    insert 
+    into
+        students
+        (age, name, surname) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        students
+        (age, name, surname) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    select
+        c1_0.id 
+    from
+        courses c1_0 
+    where
+        c1_0.title=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        courses
+        (capacity, credit, teacher, title) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    select
+        c1_0.id 
+    from
+        courses c1_0 
+    where
+        c1_0.title=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        courses
+        (capacity, credit, teacher, title) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    select
+        c1_0.id 
+    from
+        courses c1_0 
+    where
+        c1_0.title=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.age,
+        s1_0.name,
+        s1_0.surname 
+    from
+        students s1_0 
+    where
+        not exists(select
+            1 from student_course c1_0 
+        where
+            s1_0.id=c1_0.student_id)
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.age,
+        c1_0.student_id,
+        c1_1.id,
+        c1_1.capacity,
+        c1_1.credit,
+        c1_1.teacher,
+        c1_1.title,
+        s1_0.name,
+        s1_0.surname 
+    from
+        students s1_0 
+    left join
+        student_course c1_0 
+            on s1_0.id=c1_0.student_id 
+    left join
+        courses c1_1 
+            on c1_1.id=c1_0.course_id 
+    where
+        s1_0.id=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.capacity,
+        c1_0.credit,
+        c1_0.teacher,
+        c1_0.title 
+    from
+        courses c1_0 
+    where
+        c1_0.id=?
+Hibernate: 
+    select
+        s1_0.id 
+    from
+        students s1_0 
+    left join
+        student_course c1_0 
+            on s1_0.id=c1_0.student_id 
+    where
+        s1_0.id=? 
+        and c1_0.course_id=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        s1_0.course_id,
+        s1_1.id,
+        s1_1.age,
+        s1_1.name,
+        s1_1.surname 
+    from
+        student_course s1_0 
+    join
+        students s1_1 
+            on s1_1.id=s1_0.student_id 
+    where
+        s1_0.course_id=?
+Hibernate: 
+    insert 
+    into
+        student_course
+        (student_id, course_id) 
+    values
+        (?, ?)
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.age,
+        c1_0.student_id,
+        c1_1.id,
+        c1_1.capacity,
+        c1_1.credit,
+        c1_1.teacher,
+        c1_1.title,
+        s1_0.name,
+        s1_0.surname 
+    from
+        students s1_0 
+    left join
+        student_course c1_0 
+            on s1_0.id=c1_0.student_id 
+    left join
+        courses c1_1 
+            on c1_1.id=c1_0.course_id 
+    where
+        s1_0.id=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.capacity,
+        c1_0.credit,
+        c1_0.teacher,
+        c1_0.title 
+    from
+        courses c1_0 
+    where
+        c1_0.id=?
+Hibernate: 
+    select
+        s1_0.id 
+    from
+        students s1_0 
+    left join
+        student_course c1_0 
+            on s1_0.id=c1_0.student_id 
+    where
+        s1_0.id=? 
+        and c1_0.course_id=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        s1_0.course_id,
+        s1_1.id,
+        s1_1.age,
+        s1_1.name,
+        s1_1.surname 
+    from
+        student_course s1_0 
+    join
+        students s1_1 
+            on s1_1.id=s1_0.student_id 
+    where
+        s1_0.course_id=?
+Hibernate: 
+    insert 
+    into
+        student_course
+        (student_id, course_id) 
+    values
+        (?, ?)
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.age,
+        c1_0.student_id,
+        c1_1.id,
+        c1_1.capacity,
+        c1_1.credit,
+        c1_1.teacher,
+        c1_1.title,
+        s1_0.name,
+        s1_0.surname 
+    from
+        students s1_0 
+    left join
+        student_course c1_0 
+            on s1_0.id=c1_0.student_id 
+    left join
+        courses c1_1 
+            on c1_1.id=c1_0.course_id 
+    where
+        s1_0.id=?
+Hibernate: 
+    select
+        s1_0.id 
+    from
+        students s1_0 
+    left join
+        student_course c1_0 
+            on s1_0.id=c1_0.student_id 
+    where
+        s1_0.id=? 
+        and c1_0.course_id=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        s1_0.course_id,
+        s1_1.id,
+        s1_1.age,
+        s1_1.name,
+        s1_1.surname 
+    from
+        student_course s1_0 
+    join
+        students s1_1 
+            on s1_1.id=s1_0.student_id 
+    where
+        s1_0.course_id=?
+Hibernate: 
+    insert 
+    into
+        student_course
+        (student_id, course_id) 
+    values
+        (?, ?)
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.age,
+        c1_0.student_id,
+        c1_1.id,
+        c1_1.capacity,
+        c1_1.credit,
+        c1_1.teacher,
+        c1_1.title,
+        s1_0.name,
+        s1_0.surname 
+    from
+        students s1_0 
+    left join
+        student_course c1_0 
+            on s1_0.id=c1_0.student_id 
+    left join
+        courses c1_1 
+            on c1_1.id=c1_0.course_id 
+    where
+        s1_0.id=?
+Hibernate: 
+    select
+        s1_0.id 
+    from
+        students s1_0 
+    left join
+        student_course c1_0 
+            on s1_0.id=c1_0.student_id 
+    where
+        s1_0.id=? 
+        and c1_0.course_id=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.age,
+        c1_0.student_id,
+        c1_1.id,
+        c1_1.capacity,
+        c1_1.credit,
+        c1_1.teacher,
+        c1_1.title,
+        s1_0.name,
+        s1_0.surname 
+    from
+        students s1_0 
+    left join
+        student_course c1_0 
+            on s1_0.id=c1_0.student_id 
+    left join
+        courses c1_1 
+            on c1_1.id=c1_0.course_id 
+    where
+        s1_0.id=?
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.age,
+        s1_0.name,
+        s1_0.surname 
+    from
+        students s1_0
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.capacity,
+        c1_0.credit,
+        c1_0.teacher,
+        c1_0.title 
+    from
+        courses c1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        students s1_0 
+    where
+        s1_0.id=?
+Hibernate: 
+    select
+        c1_1.id,
+        c1_1.capacity,
+        c1_1.credit,
+        c1_1.teacher,
+        c1_1.title 
+    from
+        students s1_0 
+    join
+        student_course c1_0 
+            on s1_0.id=c1_0.student_id 
+    join
+        courses c1_1 
+            on c1_1.id=c1_0.course_id 
+    where
+        s1_0.id=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.capacity,
+        c1_0.credit,
+        s1_0.course_id,
+        s1_1.id,
+        s1_1.age,
+        s1_1.name,
+        s1_1.surname,
+        c1_0.teacher,
+        c1_0.title 
+    from
+        courses c1_0 
+    left join
+        student_course s1_0 
+            on c1_0.id=s1_0.course_id 
+    left join
+        students s1_1 
+            on s1_1.id=s1_0.student_id 
+    where
+        c1_0.id=?
+Hibernate: 
+    select
+        count(*) 
+    from
+        courses c1_0 
+    where
+        c1_0.id=?
+Hibernate: 
+    select
+        (select
+            count(*) 
+        from
+            student_course s1_0 
+        where
+            c1_0.id=s1_0.course_id) 
+    from
+        courses c1_0 
+    where
+        c1_0.id=?
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.age,
+        s1_0.name,
+        s1_0.surname 
+    from
+        students s1_0 
+    where
+        s1_0.id=?
+Hibernate: 
+    update
+        students 
+    set
+        age=?,
+        name=?,
+        surname=? 
+    where
+        id=?
+Hibernate: 
+    select
+        c1_0.id 
+    from
+        courses c1_0 
+    where
+        c1_0.title=? 
+        and c1_0.id<>? 
+    fetch
+        first ? rows only
+Hibernate: 
+    update
+        courses 
+    set
+        capacity=?,
+        credit=?,
+        teacher=?,
+        title=? 
+    where
+        id=?
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.age,
+        c1_0.student_id,
+        c1_1.id,
+        c1_1.capacity,
+        c1_1.credit,
+        c1_1.teacher,
+        c1_1.title,
+        s1_0.name,
+        s1_0.surname 
+    from
+        students s1_0 
+    left join
+        student_course c1_0 
+            on s1_0.id=c1_0.student_id 
+    left join
+        courses c1_1 
+            on c1_1.id=c1_0.course_id 
+    where
+        s1_0.id=?
+Hibernate: 
+    select
+        s1_0.id 
+    from
+        students s1_0 
+    left join
+        student_course c1_0 
+            on s1_0.id=c1_0.student_id 
+    where
+        s1_0.id=? 
+        and c1_0.course_id=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        s1_0.course_id,
+        s1_1.id,
+        s1_1.age,
+        s1_1.name,
+        s1_1.surname 
+    from
+        student_course s1_0 
+    join
+        students s1_1 
+            on s1_1.id=s1_0.student_id 
+    where
+        s1_0.course_id=?
+Hibernate: 
+    delete 
+    from
+        student_course 
+    where
+        student_id=? 
+        and course_id=?
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.age,
+        c1_0.student_id,
+        c1_1.id,
+        c1_1.capacity,
+        c1_1.credit,
+        c1_1.teacher,
+        c1_1.title,
+        s1_0.name,
+        s1_0.surname 
+    from
+        students s1_0 
+    left join
+        student_course c1_0 
+            on s1_0.id=c1_0.student_id 
+    left join
+        courses c1_1 
+            on c1_1.id=c1_0.course_id 
+    where
+        s1_0.id=?
+Hibernate: 
+    select
+        s1_0.id 
+    from
+        students s1_0 
+    left join
+        student_course c1_0 
+            on s1_0.id=c1_0.student_id 
+    where
+        s1_0.id=? 
+        and c1_0.course_id=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.age,
+        c1_0.student_id,
+        c1_1.id,
+        c1_1.capacity,
+        c1_1.credit,
+        c1_1.teacher,
+        c1_1.title,
+        s1_0.name,
+        s1_0.surname 
+    from
+        students s1_0 
+    left join
+        student_course c1_0 
+            on s1_0.id=c1_0.student_id 
+    left join
+        courses c1_1 
+            on c1_1.id=c1_0.course_id 
+    where
+        s1_0.id=?
+Hibernate: 
+    select
+        s1_0.id 
+    from
+        students s1_0 
+    left join
+        student_course c1_0 
+            on s1_0.id=c1_0.student_id 
+    where
+        s1_0.id=? 
+        and c1_0.course_id=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        s1_0.course_id,
+        s1_1.id,
+        s1_1.age,
+        s1_1.name,
+        s1_1.surname 
+    from
+        student_course s1_0 
+    join
+        students s1_1 
+            on s1_1.id=s1_0.student_id 
+    where
+        s1_0.course_id=?
+Hibernate: 
+    insert 
+    into
+        student_course
+        (student_id, course_id) 
+    values
+        (?, ?)
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.capacity,
+        c1_0.credit,
+        s1_0.course_id,
+        s1_1.id,
+        s1_1.age,
+        s1_1.name,
+        s1_1.surname,
+        c1_0.teacher,
+        c1_0.title 
+    from
+        courses c1_0 
+    left join
+        student_course s1_0 
+            on c1_0.id=s1_0.course_id 
+    left join
+        students s1_1 
+            on s1_1.id=s1_0.student_id 
+    where
+        c1_0.id=?
+Hibernate: 
+    select
+        c1_0.student_id,
+        c1_1.id,
+        c1_1.capacity,
+        c1_1.credit,
+        c1_1.teacher,
+        c1_1.title 
+    from
+        student_course c1_0 
+    join
+        courses c1_1 
+            on c1_1.id=c1_0.course_id 
+    where
+        c1_0.student_id=?
+Hibernate: 
+    select
+        c1_0.student_id,
+        c1_1.id,
+        c1_1.capacity,
+        c1_1.credit,
+        c1_1.teacher,
+        c1_1.title 
+    from
+        student_course c1_0 
+    join
+        courses c1_1 
+            on c1_1.id=c1_0.course_id 
+    where
+        c1_0.student_id=?
+Hibernate: 
+    delete 
+    from
+        student_course 
+    where
+        student_id=?
+Hibernate: 
+    delete 
+    from
+        student_course 
+    where
+        student_id=? 
+        and course_id=?
+Hibernate: 
+    delete 
+    from
+        courses 
+    where
+        id=?
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.age,
+        c1_0.student_id,
+        c1_1.id,
+        c1_1.capacity,
+        c1_1.credit,
+        c1_1.teacher,
+        c1_1.title,
+        s1_0.name,
+        s1_0.surname 
+    from
+        students s1_0 
+    left join
+        student_course c1_0 
+            on s1_0.id=c1_0.student_id 
+    left join
+        courses c1_1 
+            on c1_1.id=c1_0.course_id 
+    where
+        s1_0.id=?
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.age,
+        c1_0.student_id,
+        c1_1.id,
+        c1_1.capacity,
+        c1_1.credit,
+        c1_1.teacher,
+        c1_1.title,
+        s1_0.name,
+        s1_0.surname 
+    from
+        students s1_0 
+    left join
+        student_course c1_0 
+            on s1_0.id=c1_0.student_id 
+    left join
+        courses c1_1 
+            on c1_1.id=c1_0.course_id 
+    where
+        s1_0.id=?
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.age,
+        s1_0.name,
+        s1_0.surname 
+    from
+        students s1_0 
+    where
+        s1_0.id=?
+Hibernate: 
+    delete 
+    from
+        student_course 
+    where
+        student_id=?
+Hibernate: 
+    delete 
+    from
+        students 
+    where
+        id=?
+Hibernate: 
+    select
+        count(*) 
+    from
+        courses c1_0 
+    where
+        c1_0.id=?
+Hibernate: 
+    select
+        (select
+            count(*) 
+        from
+            student_course s1_0 
+        where
+            c1_0.id=s1_0.course_id) 
+    from
+        courses c1_0 
+    where
+        c1_0.id=?
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.age,
+        s1_0.name,
+        s1_0.surname 
+    from
+        students s1_0 
+    where
+        s1_0.id=?
+Hibernate: 
+    delete 
+    from
+        student_course 
+    where
+        student_id=?
+Hibernate: 
+    delete 
+    from
+        students 
+    where
+        id=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.capacity,
+        c1_0.credit,
+        s1_0.course_id,
+        s1_1.id,
+        s1_1.age,
+        s1_1.name,
+        s1_1.surname,
+        c1_0.teacher,
+        c1_0.title 
+    from
+        courses c1_0 
+    left join
+        student_course s1_0 
+            on c1_0.id=s1_0.course_id 
+    left join
+        students s1_1 
+            on s1_1.id=s1_0.student_id 
+    where
+        c1_0.id=?
+Hibernate: 
+    delete 
+    from
+        courses 
+    where
+        id=?
+Hibernate: 
+    select
+        a1_0.id 
+    from
+        authors a1_0 
+    where
+        a1_0.name=? 
+        and a1_0.surname=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        authors
+        (country, name, surname) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    select
+        a1_0.id 
+    from
+        authors a1_0 
+    where
+        a1_0.name=? 
+        and a1_0.surname=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        authors
+        (country, name, surname) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    select
+        a1_0.id 
+    from
+        authors a1_0 
+    where
+        a1_0.name=? 
+        and a1_0.surname=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        b1_0.id 
+    from
+        books b1_0 
+    where
+        b1_0.title=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        books
+        (page_count, price, title) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    select
+        b1_0.id 
+    from
+        books b1_0 
+    where
+        b1_0.title=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        books
+        (page_count, price, title) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    select
+        b1_0.id 
+    from
+        books b1_0 
+    where
+        b1_0.title=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.country,
+        a1_0.name,
+        a1_0.surname 
+    from
+        authors a1_0 
+    where
+        a1_0.id=?
+Hibernate: 
+    select
+        b1_0.id,
+        b1_0.page_count,
+        b1_0.price,
+        b1_0.title 
+    from
+        books b1_0 
+    where
+        b1_0.id=?
+Hibernate: 
+    select
+        ab1_0.id 
+    from
+        author_book ab1_0 
+    where
+        ab1_0.author_id=? 
+        and ab1_0.book_id=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        author_book
+        (author_id, book_id) 
+    values
+        (?, ?)
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.country,
+        a1_0.name,
+        a1_0.surname 
+    from
+        authors a1_0 
+    where
+        a1_0.id=?
+Hibernate: 
+    select
+        ab1_0.id 
+    from
+        author_book ab1_0 
+    where
+        ab1_0.author_id=? 
+        and ab1_0.book_id=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        author_book
+        (author_id, book_id) 
+    values
+        (?, ?)
+Hibernate: 
+    select
+        b1_0.id,
+        b1_0.page_count,
+        b1_0.price,
+        b1_0.title 
+    from
+        books b1_0 
+    where
+        b1_0.id=?
+Hibernate: 
+    select
+        ab1_0.id 
+    from
+        author_book ab1_0 
+    where
+        ab1_0.author_id=? 
+        and ab1_0.book_id=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        author_book
+        (author_id, book_id) 
+    values
+        (?, ?)
+Hibernate: 
+    select
+        ab1_0.id 
+    from
+        author_book ab1_0 
+    where
+        ab1_0.author_id=? 
+        and ab1_0.book_id=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        b1_0.id,
+        ab1_0.book_id,
+        ab1_0.id,
+        ab1_0.author_id,
+        a1_0.id,
+        a1_0.country,
+        a1_0.name,
+        a1_0.surname,
+        b1_0.page_count,
+        b1_0.price,
+        b1_0.title 
+    from
+        books b1_0 
+    left join
+        author_book ab1_0 
+            on b1_0.id=ab1_0.book_id 
+    left join
+        authors a1_0 
+            on a1_0.id=ab1_0.author_id 
+    where
+        b1_0.id=?
+Hibernate: 
+    select
+        b1_0.id,
+        b1_0.page_count,
+        b1_0.price,
+        b1_0.title 
+    from
+        books b1_0
+Hibernate: 
+    select
+        b1_0.id,
+        b1_0.page_count,
+        b1_0.price,
+        b1_0.title 
+    from
+        books b1_0 
+    where
+        upper(b1_0.title) like upper(?) escape '\'
+Hibernate: 
+    select
+        b1_0.id,
+        b1_0.page_count,
+        b1_0.price,
+        b1_0.title 
+    from
+        books b1_0 
+    where
+        b1_0.price<=? 
+    order by
+        b1_0.price
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.country,
+        a1_0.name,
+        a1_0.surname 
+    from
+        authors a1_0
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.country,
+        a1_0.name,
+        a1_0.surname 
+    from
+        authors a1_0 
+    where
+        a1_0.country=?
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.country,
+        a1_0.name,
+        a1_0.surname 
+    from
+        authors a1_0 
+    where
+        not exists(select
+            1 from author_book ab1_0 
+        where
+            a1_0.id=ab1_0.author_id)
+Hibernate: 
+    select
+        count(*) 
+    from
+        authors a1_0 
+    where
+        a1_0.id=?
+Hibernate: 
+    select
+        b1_0.id,
+        b1_0.page_count,
+        b1_0.price,
+        b1_0.title 
+    from
+        author_book ab1_0 
+    join
+        books b1_0 
+            on b1_0.id=ab1_0.book_id 
+    where
+        ab1_0.author_id=?
+Hibernate: 
+    select
+        a1_0.id 
+    from
+        authors a1_0 
+    where
+        a1_0.name=? 
+        and a1_0.surname=? 
+        and a1_0.id<>? 
+    fetch
+        first ? rows only
+Hibernate: 
+    update
+        authors 
+    set
+        country=?,
+        name=?,
+        surname=? 
+    where
+        id=?
+Hibernate: 
+    select
+        b1_0.id 
+    from
+        books b1_0 
+    where
+        b1_0.title=? 
+        and b1_0.id<>? 
+    fetch
+        first ? rows only
+Hibernate: 
+    update
+        books 
+    set
+        page_count=?,
+        price=?,
+        title=? 
+    where
+        id=?
+Hibernate: 
+    select
+        ab1_0.id,
+        ab1_0.author_id,
+        ab1_0.book_id 
+    from
+        author_book ab1_0 
+    where
+        ab1_0.author_id=? 
+        and ab1_0.book_id=?
+Hibernate: 
+    select
+        ab1_0.author_id,
+        ab1_0.id,
+        ab1_0.book_id 
+    from
+        author_book ab1_0 
+    where
+        ab1_0.author_id=?
+Hibernate: 
+    select
+        b1_0.id,
+        b1_0.page_count,
+        b1_0.price,
+        b1_0.title 
+    from
+        books b1_0 
+    where
+        b1_0.id=?
+Hibernate: 
+    delete 
+    from
+        author_book 
+    where
+        id=?
+Hibernate: 
+    select
+        ab1_0.id,
+        ab1_0.author_id,
+        ab1_0.book_id 
+    from
+        author_book ab1_0 
+    where
+        ab1_0.author_id=? 
+        and ab1_0.book_id=?
+Hibernate: 
+    select
+        b1_0.id,
+        ab1_0.book_id,
+        ab1_0.id,
+        ab1_0.author_id,
+        a1_0.id,
+        a1_0.country,
+        a1_0.name,
+        a1_0.surname,
+        b1_0.page_count,
+        b1_0.price,
+        b1_0.title 
+    from
+        books b1_0 
+    left join
+        author_book ab1_0 
+            on b1_0.id=ab1_0.book_id 
+    left join
+        authors a1_0 
+            on a1_0.id=ab1_0.author_id 
+    where
+        b1_0.id=?
+Hibernate: 
+    select
+        ab1_0.id 
+    from
+        author_book ab1_0 
+    where
+        ab1_0.author_id=? 
+        and ab1_0.book_id=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        author_book
+        (author_id, book_id) 
+    values
+        (?, ?)
+Hibernate: 
+    select
+        ab1_0.author_id,
+        ab1_0.id,
+        ab1_0.book_id 
+    from
+        author_book ab1_0 
+    where
+        ab1_0.author_id=?
+Hibernate: 
+    delete 
+    from
+        author_book 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        author_book 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        authors 
+    where
+        id=?
+Hibernate: 
+    select
+        b1_0.id,
+        ab1_0.book_id,
+        ab1_0.id,
+        ab1_0.author_id,
+        a1_0.id,
+        a1_0.country,
+        a1_0.name,
+        a1_0.surname,
+        b1_0.page_count,
+        b1_0.price,
+        b1_0.title 
+    from
+        books b1_0 
+    left join
+        author_book ab1_0 
+            on b1_0.id=ab1_0.book_id 
+    left join
+        authors a1_0 
+            on a1_0.id=ab1_0.author_id 
+    where
+        b1_0.id=?
+Hibernate: 
+    select
+        b1_0.id,
+        ab1_0.book_id,
+        ab1_0.id,
+        ab1_0.author_id,
+        a1_0.id,
+        a1_0.country,
+        a1_0.name,
+        a1_0.surname,
+        b1_0.page_count,
+        b1_0.price,
+        b1_0.title 
+    from
+        books b1_0 
+    left join
+        author_book ab1_0 
+            on b1_0.id=ab1_0.book_id 
+    left join
+        authors a1_0 
+            on a1_0.id=ab1_0.author_id 
+    where
+        b1_0.id=?
+Hibernate: 
+    delete 
+    from
+        author_book 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        books 
+    where
+        id=?
+Hibernate: 
+    select
+        ab1_0.author_id,
+        ab1_0.id,
+        ab1_0.book_id 
+    from
+        author_book ab1_0 
+    where
+        ab1_0.author_id=?
+Hibernate: 
+    delete 
+    from
+        authors 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        books 
+    where
+        id=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.capacity,
+        c1_0.credit,
+        c1_0.teacher,
+        c1_0.title 
+    from
+        courses c1_0 
+    where
+        c1_0.id=?
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.capacity,
+        c1_0.credit,
+        c1_0.teacher,
+        c1_0.title 
+    from
+        courses c1_0 
+    where
+        c1_0.id=?
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.country,
+        a1_0.name,
+        a1_0.surname 
+    from
+        authors a1_0 
+    where
+        a1_0.country=?
+Hibernate: 
+    select
+        a1_0.id 
+    from
+        authors a1_0 
+    where
+        a1_0.name=? 
+        and a1_0.surname=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        authors
+        (country, name, surname) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    select
+        a1_0.id,
+        a1_0.country,
+        a1_0.name,
+        a1_0.surname 
+    from
+        authors a1_0 
+    where
+        a1_0.country=?
+Hibernate: 
+    select
+        b1_0.id 
+    from
+        books b1_0 
+    where
+        b1_0.title=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    insert 
+    into
+        books
+        (page_count, price, title) 
+    values
+        (?, ?, ?)
+Hibernate: 
+    select
+        b1_0.id,
+        ab1_0.book_id,
+        ab1_0.id,
+        ab1_0.author_id,
+        a1_0.id,
+        a1_0.country,
+        a1_0.name,
+        a1_0.surname,
+        b1_0.page_count,
+        b1_0.price,
+        b1_0.title 
+    from
+        books b1_0 
+    left join
+        author_book ab1_0 
+            on b1_0.id=ab1_0.book_id 
+    left join
+        authors a1_0 
+            on a1_0.id=ab1_0.author_id 
+    where
+        b1_0.id=?
+Hibernate: 
+    select
+        b1_0.id 
+    from
+        books b1_0 
+    where
+        b1_0.title=? 
+        and b1_0.id<>? 
+    fetch
+        first ? rows only
+Hibernate: 
+    update
+        books 
+    set
+        page_count=?,
+        price=?,
+        title=? 
+    where
+        id=?
+Hibernate: 
+    select
+        b1_0.id,
+        ab1_0.book_id,
+        ab1_0.id,
+        ab1_0.author_id,
+        a1_0.id,
+        a1_0.country,
+        a1_0.name,
+        a1_0.surname,
+        b1_0.page_count,
+        b1_0.price,
+        b1_0.title 
+    from
+        books b1_0 
+    left join
+        author_book ab1_0 
+            on b1_0.id=ab1_0.book_id 
+    left join
+        authors a1_0 
+            on a1_0.id=ab1_0.author_id 
+    where
+        b1_0.id=?
+Hibernate: 
+    delete 
+    from
+        books 
+    where
+        id=?
+Hibernate: 
+    select
+        ab1_0.author_id,
+        ab1_0.id,
+        ab1_0.book_id 
+    from
+        author_book ab1_0 
+    where
+        ab1_0.author_id=?
+Hibernate: 
+    delete 
+    from
+        authors 
+    where
+        id=?

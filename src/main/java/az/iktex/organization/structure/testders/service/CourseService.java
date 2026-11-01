@@ -12,6 +12,7 @@ import az.iktex.organization.structure.testders.repository.StudentRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class CourseService {
     private final CourseMapper courseMapper;
     private final StudentMapper studentMapper;
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public CourseResponse create(CourseRequest request) {
         if (courseRepository.existsByTitle(request.title())) {
             throw new IllegalStateException("Course title already exists");
@@ -67,7 +68,7 @@ public class CourseService {
         return courseRepository.countStudentsByCourseId(id);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public CourseResponse update(Long id, CourseRequest request) {
         Course course = courseRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Course not found: " + id));
@@ -78,7 +79,7 @@ public class CourseService {
         return courseMapper.toResponse(course);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public void delete(Long id) {
         Course course = courseRepository.findByIdWithStudents(id)
                 .orElseThrow(() ->

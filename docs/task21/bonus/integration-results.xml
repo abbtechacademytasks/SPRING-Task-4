@@ -1,0 +1,784 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="az.iktex.organization.structure.testders.BonusIntegrationTests" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-01T21:56:59.719Z" hostname="DESKTOP-48H8PIP" time="15.721">
+  <properties/>
+  <testcase name="unexpectedFailureRollsBackEvenSuccessfulNestedEnrollment()" classname="az.iktex.organization.structure.testders.BonusIntegrationTests" time="0.463"/>
+  <testcase name="fullCourseInsertIsRolledBackToSavepointAndOtherCoursesCommit(CapturedOutput)" classname="az.iktex.organization.structure.testders.BonusIntegrationTests" time="0.552"/>
+  <testcase name="concurrentSalaryConflictRetriesAfterRollbackAndPreservesBothIncrements(CapturedOutput)" classname="az.iktex.organization.structure.testders.BonusIntegrationTests" time="6.177"/>
+  <system-out><![CDATA[01:56:59.920 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [az.iktex.organization.structure.testders.BonusIntegrationTests]: BonusIntegrationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+01:57:00.072 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration az.iktex.organization.structure.testders.SchoolApplication for test class az.iktex.organization.structure.testders.BonusIntegrationTests
+01:57:00.171 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [az.iktex.organization.structure.testders.BonusIntegrationTests]: BonusIntegrationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+01:57:00.173 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration az.iktex.organization.structure.testders.SchoolApplication for test class az.iktex.organization.structure.testders.BonusIntegrationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.2)
+
+2026-11-02T01:57:00.590+04:00  INFO 24032 --- [test-demo-api] [    Test worker] a.i.o.s.testders.BonusIntegrationTests   : Starting BonusIntegrationTests using Java 25.0.4.1 with PID 24032 (started by USER in C:\Users\USER\Desktop\ABB Tech Academy\SPRING-Task-4)
+2026-11-02T01:57:00.592+04:00  INFO 24032 --- [test-demo-api] [    Test worker] a.i.o.s.testders.BonusIntegrationTests   : No active profile set, falling back to 1 default profile: "default"
+2026-11-02T01:57:01.243+04:00  INFO 24032 --- [test-demo-api] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-02T01:57:01.325+04:00  INFO 24032 --- [test-demo-api] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 70 ms. Found 10 JPA repository interfaces.
+2026-11-02T01:57:01.876+04:00  INFO 24032 --- [test-demo-api] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-02T01:57:02.073+04:00  INFO 24032 --- [test-demo-api] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@fcd0e8d
+2026-11-02T01:57:02.074+04:00  INFO 24032 --- [test-demo-api] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-02T01:57:02.226+04:00  INFO 24032 --- [test-demo-api] [    Test worker] liquibase.database                       : Set default schema name to public
+2026-11-02T01:57:03.603+04:00  INFO 24032 --- [test-demo-api] [    Test worker] liquibase.changelog                      : Reading from public.databasechangelog
+2026-11-02T01:57:03.766+04:00  INFO 24032 --- [test-demo-api] [    Test worker] liquibase.ui                             : Database is up to date, no changesets to execute
+2026-11-02T01:57:03.769+04:00  INFO 24032 --- [test-demo-api] [    Test worker] liquibase.changelog                      : Reading from public.databasechangelog
+2026-11-02T01:57:03.784+04:00  INFO 24032 --- [test-demo-api] [    Test worker] liquibase.util                           : UPDATE SUMMARY
+2026-11-02T01:57:03.784+04:00  INFO 24032 --- [test-demo-api] [    Test worker] liquibase.util                           : Run:                          0
+2026-11-02T01:57:03.785+04:00  INFO 24032 --- [test-demo-api] [    Test worker] liquibase.util                           : Previously run:              32
+2026-11-02T01:57:03.785+04:00  INFO 24032 --- [test-demo-api] [    Test worker] liquibase.util                           : Filtered out:                 0
+2026-11-02T01:57:03.785+04:00  INFO 24032 --- [test-demo-api] [    Test worker] liquibase.util                           : -------------------------------
+2026-11-02T01:57:03.785+04:00  INFO 24032 --- [test-demo-api] [    Test worker] liquibase.util                           : Total change sets:           32
+2026-11-02T01:57:03.786+04:00  INFO 24032 --- [test-demo-api] [    Test worker] liquibase.util                           : Update summary generated
+2026-11-02T01:57:03.787+04:00  INFO 24032 --- [test-demo-api] [    Test worker] liquibase.command                        : Command execution complete
+2026-11-02T01:57:03.922+04:00  INFO 24032 --- [test-demo-api] [    Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-11-02T01:57:04.018+04:00  INFO 24032 --- [test-demo-api] [    Test worker] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.13.Final
+2026-11-02T01:57:04.047+04:00  INFO 24032 --- [test-demo-api] [    Test worker] org.hibernate.orm.cache                  : HHH90001028: Second-level cache region factory [org.hibernate.cache.jcache.internal.JCacheRegionFactory]
+2026-11-02T01:57:04.586+04:00  INFO 24032 --- [test-demo-api] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-02T01:57:04.676+04:00  INFO 24032 --- [test-demo-api] [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/school_task21_cache_checks]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.15
+	Default catalog/schema: school_task21_cache_checks/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-11-02T01:57:05.518+04:00  INFO 24032 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'courses' created in EhcacheManager.
+2026-11-02T01:57:05.520+04:00  INFO 24032 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'book-authorBooks' created in EhcacheManager.
+2026-11-02T01:57:05.521+04:00  INFO 24032 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'books' created in EhcacheManager.
+2026-11-02T01:57:05.522+04:00  INFO 24032 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'author-authorBooks' created in EhcacheManager.
+2026-11-02T01:57:05.523+04:00  INFO 24032 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'default-query-results-region' created in EhcacheManager.
+2026-11-02T01:57:05.525+04:00  INFO 24032 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'default-update-timestamps-region' created in EhcacheManager.
+2026-11-02T01:57:05.526+04:00  INFO 24032 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'departments' created in EhcacheManager.
+2026-11-02T01:57:05.527+04:00  INFO 24032 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'author-books' created in EhcacheManager.
+2026-11-02T01:57:05.528+04:00  INFO 24032 --- [test-demo-api] [    Test worker] org.ehcache.core.EhcacheManager          : Cache 'authors' created in EhcacheManager.
+2026-11-02T01:57:05.624+04:00  INFO 24032 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=courses
+2026-11-02T01:57:05.626+04:00  INFO 24032 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=book-authorBooks
+2026-11-02T01:57:05.627+04:00  INFO 24032 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=books
+2026-11-02T01:57:05.627+04:00  INFO 24032 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=author-authorBooks
+2026-11-02T01:57:05.627+04:00  INFO 24032 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=default-query-results-region
+2026-11-02T01:57:05.628+04:00  INFO 24032 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=default-update-timestamps-region
+2026-11-02T01:57:05.628+04:00  INFO 24032 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=departments
+2026-11-02T01:57:05.629+04:00  INFO 24032 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=author-books
+2026-11-02T01:57:05.629+04:00  INFO 24032 --- [test-demo-api] [    Test worker] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/resources/main/ehcache.xml,Cache=authors
+2026-11-02T01:57:06.480+04:00  INFO 24032 --- [test-demo-api] [    Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-02T01:57:06.531+04:00  INFO 24032 --- [test-demo-api] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-02T01:57:06.614+04:00  INFO 24032 --- [test-demo-api] [    Test worker] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-02T01:57:07.293+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.AuthorService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.303+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.AuthorService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.304+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.AuthorService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.304+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.AuthorService.getAll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.304+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.AuthorService.getById' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.304+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.AuthorService.getAllWithoutBooks' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.304+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.AuthorService.getBooks' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.345+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.BookService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.346+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.BookService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.346+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.BookService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.346+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.BookService.getAll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.346+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.BookService.getById' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.347+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.BookService.addAuthor' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.347+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.BookService.removeAuthor' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.347+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.BookService.getCheaperThan' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.433+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.CourseService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.434+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.CourseService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.434+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.CourseService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.434+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.CourseService.getAll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.435+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.CourseService.getById' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.435+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.CourseService.getStudents' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.435+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.CourseService.getStudentCount' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.435+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.CourseService.getByStudent' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.497+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.DepartmentService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.498+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.DepartmentService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.499+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.DepartmentService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.499+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.DepartmentService.getAll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.499+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.DepartmentService.getById' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.499+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.DepartmentService.getAllWithoutEmployees' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.534+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.SalaryService.raise' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.550+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.AuditLogService.log' with attribute: PROPAGATION_REQUIRES_NEW,ISOLATION_DEFAULT
+2026-11-02T01:57:07.556+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EmployeeService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.557+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EmployeeService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.558+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EmployeeService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.558+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EmployeeService.transfer' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.558+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EmployeeService.getById' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.558+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EmployeeService.getAverageSalary' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.559+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EmployeeService.getBySalaryRange' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.559+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EmployeeService.getByDepartment' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.564+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.IsolationDemoService.raiseRepeatableRead' with attribute: PROPAGATION_REQUIRED,ISOLATION_REPEATABLE_READ
+2026-11-02T01:57:07.565+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.IsolationDemoService.enrollSerializable' with attribute: PROPAGATION_REQUIRED,ISOLATION_SERIALIZABLE
+2026-11-02T01:57:07.565+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.IsolationDemoService.averageReadCommitted' with attribute: PROPAGATION_REQUIRED,ISOLATION_READ_COMMITTED,readOnly
+2026-11-02T01:57:07.565+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.IsolationDemoService.raiseReadCommitted' with attribute: PROPAGATION_REQUIRED,ISOLATION_READ_COMMITTED
+2026-11-02T01:57:07.566+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.IsolationDemoService.enrollRepeatableRead' with attribute: PROPAGATION_REQUIRED,ISOLATION_REPEATABLE_READ
+2026-11-02T01:57:07.566+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.IsolationDemoService.averageRepeatableRead' with attribute: PROPAGATION_REQUIRED,ISOLATION_REPEATABLE_READ,readOnly
+2026-11-02T01:57:07.571+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.IsolationRetryService.raise' with attribute: PROPAGATION_NOT_SUPPORTED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.572+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.IsolationRetryService.enroll' with attribute: PROPAGATION_NOT_SUPPORTED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.580+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EnrollmentService.reserveSeat' with attribute: PROPAGATION_MANDATORY,ISOLATION_DEFAULT
+2026-11-02T01:57:07.585+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.StudentService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.585+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.StudentService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.585+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.StudentService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.586+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.StudentService.getAll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.586+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.StudentService.getById' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.586+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.StudentService.enroll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.586+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.StudentService.unenroll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.586+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.StudentService.getAllWithoutCourses' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.604+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll' with attribute: PROPAGATION_NESTED,ISOLATION_DEFAULT; 'nestedTransactionManager'
+2026-11-02T01:57:07.607+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.BulkEnrollmentService.enroll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT; 'nestedTransactionManager'
+2026-11-02T01:57:07.651+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.651+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.652+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.652+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.getAll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.652+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.getById' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.652+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.getAllWithoutPassport' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.652+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.addPassport' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.652+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.getPassport' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:07.652+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.deletePassport' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-02T01:57:07.652+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.getByEmail' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:08.227+04:00  INFO 24032 --- [test-demo-api] [    Test worker] a.i.o.s.testders.BonusIntegrationTests   : Started BonusIntegrationTests in 7.979 seconds (process running for 9.416)
+2026-11-02T01:57:08.600+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.jdbc.support.JdbcTransactionManager  : Creating new transaction with name [az.iktex.organization.structure.testders.service.BulkEnrollmentService.enroll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT; 'nestedTransactionManager'
+2026-11-02T01:57:08.601+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.jdbc.support.JdbcTransactionManager  : Acquired Connection [HikariProxyConnection@2092934045 wrapping org.postgresql.jdbc.PgConnection@fcd0e8d] for JDBC transaction
+2026-11-02T01:57:08.603+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.jdbc.support.JdbcTransactionManager  : Switching JDBC Connection [HikariProxyConnection@2092934045 wrapping org.postgresql.jdbc.PgConnection@fcd0e8d] to manual commit
+2026-11-02T01:57:08.603+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.BulkEnrollmentService.enroll]
+2026-11-02T01:57:08.606+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.jdbc.support.JdbcTransactionManager  : Creating nested transaction with name [az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll]
+2026-11-02T01:57:08.609+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll]
+2026-11-02T01:57:08.615+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll]
+2026-11-02T01:57:08.615+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.jdbc.support.JdbcTransactionManager  : Releasing transaction savepoint
+2026-11-02T01:57:08.617+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.jdbc.support.JdbcTransactionManager  : Creating nested transaction with name [az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll]
+2026-11-02T01:57:08.618+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll]
+2026-11-02T01:57:08.620+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll] after exception: jakarta.persistence.EntityNotFoundException: Course not found: 9223372036854775807
+2026-11-02T01:57:08.620+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : MethodRollbackEvent: az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll [jakarta.persistence.EntityNotFoundException: Course not found: 9223372036854775807]
+
+jakarta.persistence.EntityNotFoundException: Course not found: 9223372036854775807
+	at az.iktex.organization.structure.testders.service.NestedEnrollmentService.lambda$enroll$0(NestedEnrollmentService.java:19) ~[main/:na]
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403) ~[na:na]
+	at az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll(NestedEnrollmentService.java:19) ~[main/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:714) ~[spring-aop-7.0.10.jar:7.0.10]
+	at az.iktex.organization.structure.testders.service.NestedEnrollmentService$$SpringCGLIB$$0.enroll(<generated>) ~[main/:na]
+	at az.iktex.organization.structure.testders.service.BulkEnrollmentService.enroll(BulkEnrollmentService.java:37) ~[main/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:714) ~[spring-aop-7.0.10.jar:7.0.10]
+	at az.iktex.organization.structure.testders.service.BulkEnrollmentService$$SpringCGLIB$$0.enroll(<generated>) ~[main/:na]
+	at az.iktex.organization.structure.testders.BonusIntegrationTests.lambda$unexpectedFailureRollsBackEvenSuccessfulNestedEnrollment$0(BonusIntegrationTests.java:73) ~[test/:na]
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:54) ~[junit-jupiter-api-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35) ~[junit-jupiter-api-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223) ~[junit-jupiter-api-6.0.3.jar:6.0.3]
+	at az.iktex.organization.structure.testders.BonusIntegrationTests.unexpectedFailureRollsBackEvenSuccessfulNestedEnrollment(BonusIntegrationTests.java:72) ~[test/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:701) ~[junit-platform-commons-6.0.3.jar:6.0.3]
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:502) ~[junit-platform-commons-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.support.MethodReflectionUtils.invoke(MethodReflectionUtils.java:45) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:61) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:124) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:163) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:148) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:123) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:105) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:99) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:66) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:47) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:39) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:104) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:98) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invokeVoid(InterceptingExecutableInvoker.java:71) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$0(TestMethodTestDescriptor.java:219) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:215) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:157) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:176) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:36) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:52) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:58) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:246) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:218) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:179) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:66) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:157) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:65) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:125) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:93) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$0(InterceptingLauncher.java:41) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:40) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor$CollectThenExecuteTestDefinitionConsumer.processAllTestDefinitions(JUnitPlatformTestDefinitionProcessor.java:206) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor$CollectThenExecuteTestDefinitionConsumer.access$000(JUnitPlatformTestDefinitionProcessor.java:123) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor.stop(JUnitPlatformTestDefinitionProcessor.java:117) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.SuiteTestDefinitionProcessor.stop(SuiteTestDefinitionProcessor.java:63) ~[na:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.gradle.internal.dispatch.MethodInvocation.invokeOn(MethodInvocation.java:77) ~[na:na]
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:28) ~[na:na]
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:19) ~[na:na]
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33) ~[na:na]
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:88) ~[na:na]
+	at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:195) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:126) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63) ~[na:na]
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56) ~[na:na]
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:122) ~[na:na]
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:72) ~[na:na]
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
+
+2026-11-02T01:57:08.630+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.jdbc.support.JdbcTransactionManager  : Rolling back transaction to savepoint
+2026-11-02T01:57:08.633+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.BulkEnrollmentService.enroll] after exception: jakarta.persistence.EntityNotFoundException: Course not found: 9223372036854775807
+2026-11-02T01:57:08.633+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : MethodRollbackEvent: az.iktex.organization.structure.testders.service.BulkEnrollmentService.enroll [jakarta.persistence.EntityNotFoundException: Course not found: 9223372036854775807]
+
+jakarta.persistence.EntityNotFoundException: Course not found: 9223372036854775807
+	at az.iktex.organization.structure.testders.service.NestedEnrollmentService.lambda$enroll$0(NestedEnrollmentService.java:19) ~[main/:na]
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403) ~[na:na]
+	at az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll(NestedEnrollmentService.java:19) ~[main/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:714) ~[spring-aop-7.0.10.jar:7.0.10]
+	at az.iktex.organization.structure.testders.service.NestedEnrollmentService$$SpringCGLIB$$0.enroll(<generated>) ~[main/:na]
+	at az.iktex.organization.structure.testders.service.BulkEnrollmentService.enroll(BulkEnrollmentService.java:37) ~[main/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:714) ~[spring-aop-7.0.10.jar:7.0.10]
+	at az.iktex.organization.structure.testders.service.BulkEnrollmentService$$SpringCGLIB$$0.enroll(<generated>) ~[main/:na]
+	at az.iktex.organization.structure.testders.BonusIntegrationTests.lambda$unexpectedFailureRollsBackEvenSuccessfulNestedEnrollment$0(BonusIntegrationTests.java:73) ~[test/:na]
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:54) ~[junit-jupiter-api-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35) ~[junit-jupiter-api-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223) ~[junit-jupiter-api-6.0.3.jar:6.0.3]
+	at az.iktex.organization.structure.testders.BonusIntegrationTests.unexpectedFailureRollsBackEvenSuccessfulNestedEnrollment(BonusIntegrationTests.java:72) ~[test/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:701) ~[junit-platform-commons-6.0.3.jar:6.0.3]
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:502) ~[junit-platform-commons-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.support.MethodReflectionUtils.invoke(MethodReflectionUtils.java:45) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:61) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:124) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:163) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:148) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:123) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:105) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:99) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:66) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:47) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:39) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:104) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:98) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invokeVoid(InterceptingExecutableInvoker.java:71) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$0(TestMethodTestDescriptor.java:219) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:215) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:157) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:176) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:36) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:52) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:58) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:246) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:218) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:179) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:66) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:157) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:65) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:125) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:93) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$0(InterceptingLauncher.java:41) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:40) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor$CollectThenExecuteTestDefinitionConsumer.processAllTestDefinitions(JUnitPlatformTestDefinitionProcessor.java:206) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor$CollectThenExecuteTestDefinitionConsumer.access$000(JUnitPlatformTestDefinitionProcessor.java:123) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor.stop(JUnitPlatformTestDefinitionProcessor.java:117) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.SuiteTestDefinitionProcessor.stop(SuiteTestDefinitionProcessor.java:63) ~[na:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.gradle.internal.dispatch.MethodInvocation.invokeOn(MethodInvocation.java:77) ~[na:na]
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:28) ~[na:na]
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:19) ~[na:na]
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33) ~[na:na]
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:88) ~[na:na]
+	at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:195) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:126) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63) ~[na:na]
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56) ~[na:na]
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:122) ~[na:na]
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:72) ~[na:na]
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
+
+2026-11-02T01:57:08.639+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.jdbc.support.JdbcTransactionManager  : Initiating transaction rollback
+2026-11-02T01:57:08.639+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.jdbc.support.JdbcTransactionManager  : Rolling back JDBC transaction on Connection [HikariProxyConnection@2092934045 wrapping org.postgresql.jdbc.PgConnection@fcd0e8d]
+2026-11-02T01:57:08.641+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.jdbc.support.JdbcTransactionManager  : Releasing JDBC Connection [HikariProxyConnection@2092934045 wrapping org.postgresql.jdbc.PgConnection@fcd0e8d] after transaction
+BONUS NESTED: later missing course rolls back the whole outer transaction
+2026-11-02T01:57:08.883+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.jdbc.support.JdbcTransactionManager  : Creating new transaction with name [az.iktex.organization.structure.testders.service.BulkEnrollmentService.enroll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT; 'nestedTransactionManager'
+2026-11-02T01:57:08.883+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.jdbc.support.JdbcTransactionManager  : Acquired Connection [HikariProxyConnection@1984147009 wrapping org.postgresql.jdbc.PgConnection@fcd0e8d] for JDBC transaction
+2026-11-02T01:57:08.883+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.jdbc.support.JdbcTransactionManager  : Switching JDBC Connection [HikariProxyConnection@1984147009 wrapping org.postgresql.jdbc.PgConnection@fcd0e8d] to manual commit
+2026-11-02T01:57:08.883+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.BulkEnrollmentService.enroll]
+2026-11-02T01:57:08.884+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.jdbc.support.JdbcTransactionManager  : Creating nested transaction with name [az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll]
+2026-11-02T01:57:08.885+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll]
+2026-11-02T01:57:08.889+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll]
+2026-11-02T01:57:08.889+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.jdbc.support.JdbcTransactionManager  : Releasing transaction savepoint
+2026-11-02T01:57:08.890+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.jdbc.support.JdbcTransactionManager  : Creating nested transaction with name [az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll]
+2026-11-02T01:57:08.891+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll]
+2026-11-02T01:57:08.895+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll] after exception: az.iktex.organization.structure.testders.exception.CourseFullException: Course is full: 16
+2026-11-02T01:57:08.895+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : MethodRollbackEvent: az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll [az.iktex.organization.structure.testders.exception.CourseFullException: Course is full: 16]
+
+az.iktex.organization.structure.testders.exception.CourseFullException: Course is full: 16
+	at az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll(NestedEnrollmentService.java:27) ~[main/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:714) ~[spring-aop-7.0.10.jar:7.0.10]
+	at az.iktex.organization.structure.testders.service.NestedEnrollmentService$$SpringCGLIB$$0.enroll(<generated>) ~[main/:na]
+	at az.iktex.organization.structure.testders.service.BulkEnrollmentService.enroll(BulkEnrollmentService.java:37) ~[main/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:714) ~[spring-aop-7.0.10.jar:7.0.10]
+	at az.iktex.organization.structure.testders.service.BulkEnrollmentService$$SpringCGLIB$$0.enroll(<generated>) ~[main/:na]
+	at az.iktex.organization.structure.testders.BonusIntegrationTests.fullCourseInsertIsRolledBackToSavepointAndOtherCoursesCommit(BonusIntegrationTests.java:50) ~[test/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:701) ~[junit-platform-commons-6.0.3.jar:6.0.3]
+	at org.junit.platform.commons.support.ReflectionSupport.invokeMethod(ReflectionSupport.java:502) ~[junit-platform-commons-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.support.MethodReflectionUtils.invoke(MethodReflectionUtils.java:45) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:61) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:124) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:163) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:148) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:123) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:105) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:99) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:66) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:47) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:39) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:104) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:98) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invokeVoid(InterceptingExecutableInvoker.java:71) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$0(TestMethodTestDescriptor.java:219) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:215) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:157) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:70) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:176) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:36) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:52) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:58) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:246) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:218) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:179) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:66) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:157) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:65) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:125) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:93) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$0(InterceptingLauncher.java:41) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:40) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:48) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor$CollectThenExecuteTestDefinitionConsumer.processAllTestDefinitions(JUnitPlatformTestDefinitionProcessor.java:206) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor$CollectThenExecuteTestDefinitionConsumer.access$000(JUnitPlatformTestDefinitionProcessor.java:123) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestDefinitionProcessor.stop(JUnitPlatformTestDefinitionProcessor.java:117) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.SuiteTestDefinitionProcessor.stop(SuiteTestDefinitionProcessor.java:63) ~[na:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.gradle.internal.dispatch.MethodInvocation.invokeOn(MethodInvocation.java:77) ~[na:na]
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:28) ~[na:na]
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:19) ~[na:na]
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33) ~[na:na]
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:88) ~[na:na]
+	at jdk.proxy1/jdk.proxy1.$Proxy4.stop(Unknown Source) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:195) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:126) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:103) ~[na:na]
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:63) ~[na:na]
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56) ~[na:na]
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:122) ~[na:na]
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:72) ~[na:na]
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
+
+2026-11-02T01:57:08.901+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.jdbc.support.JdbcTransactionManager  : Rolling back transaction to savepoint
+2026-11-02T01:57:08.903+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.jdbc.support.JdbcTransactionManager  : Creating nested transaction with name [az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll]
+2026-11-02T01:57:08.904+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll]
+2026-11-02T01:57:08.909+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.NestedEnrollmentService.enroll]
+2026-11-02T01:57:08.909+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.jdbc.support.JdbcTransactionManager  : Releasing transaction savepoint
+2026-11-02T01:57:08.910+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.BulkEnrollmentService.enroll]
+2026-11-02T01:57:08.910+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.jdbc.support.JdbcTransactionManager  : Initiating transaction commit
+2026-11-02T01:57:08.911+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.jdbc.support.JdbcTransactionManager  : Committing JDBC transaction on Connection [HikariProxyConnection@1984147009 wrapping org.postgresql.jdbc.PgConnection@fcd0e8d]
+2026-11-02T01:57:08.932+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.jdbc.support.JdbcTransactionManager  : Releasing JDBC Connection [HikariProxyConnection@1984147009 wrapping org.postgresql.jdbc.PgConnection@fcd0e8d] after transaction
+2026-11-02T01:57:08.936+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.StudentService.getById]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-02T01:57:08.937+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(610785691<open>)] for JPA transaction
+2026-11-02T01:57:08.940+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@4923c437]
+2026-11-02T01:57:08.940+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.StudentService.getById]
+2026-11-02T01:57:08.941+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByIdWithCourses]: This method is not transactional.
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.age,
+        c1_0.student_id,
+        c1_1.id,
+        c1_1.capacity,
+        c1_1.credit,
+        c1_1.teacher,
+        c1_1.title,
+        s1_0.name,
+        s1_0.surname 
+    from
+        students s1_0 
+    left join
+        student_course c1_0 
+            on s1_0.id=c1_0.student_id 
+    left join
+        courses c1_1 
+            on c1_1.id=c1_0.course_id 
+    where
+        s1_0.id=?
+2026-11-02T01:57:09.062+04:00 TRACE 24032 --- [test-demo-api] [    Test worker] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.StudentService.getById]
+2026-11-02T01:57:09.062+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-02T01:57:09.062+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(610785691<open>)]
+2026-11-02T01:57:09.065+04:00 DEBUG 24032 --- [test-demo-api] [    Test worker] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager after transaction
+BONUS NESTED: successful links=2; full-course tentative insert rolled back; savepoint confirmed
+2026-11-02T01:57:09.289+04:00 TRACE 24032 --- [test-demo-api] [pool-2-thread-2] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.IsolationRetryService.raise]
+2026-11-02T01:57:09.289+04:00 TRACE 24032 --- [test-demo-api] [pool-2-thread-1] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.IsolationRetryService.raise]
+Retry salary: attempt=1
+Retry salary: attempt=1
+2026-11-02T01:57:09.292+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-2] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.raiseRepeatableRead]: PROPAGATION_REQUIRED,ISOLATION_REPEATABLE_READ
+2026-11-02T01:57:09.292+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-1] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.raiseRepeatableRead]: PROPAGATION_REQUIRED,ISOLATION_REPEATABLE_READ
+2026-11-02T01:57:09.292+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-2] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(1798755815<open>)] for JPA transaction
+2026-11-02T01:57:09.292+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-1] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(808869579<open>)] for JPA transaction
+2026-11-02T01:57:09.294+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-2] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@538955c2]
+2026-11-02T01:57:09.295+04:00 TRACE 24032 --- [test-demo-api] [pool-2-thread-2] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.IsolationDemoService.raiseRepeatableRead]
+2026-11-02T01:57:09.295+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-1] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@23664c3b]
+2026-11-02T01:57:09.295+04:00 TRACE 24032 --- [test-demo-api] [pool-2-thread-1] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.IsolationDemoService.raiseRepeatableRead]
+2026-11-02T01:57:09.297+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-2] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1798755815<open>)] for JPA transaction
+2026-11-02T01:57:09.297+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(808869579<open>)] for JPA transaction
+2026-11-02T01:57:09.297+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-2] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-02T01:57:09.297+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-02T01:57:09.297+04:00 TRACE 24032 --- [test-demo-api] [pool-2-thread-2] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2026-11-02T01:57:09.297+04:00 TRACE 24032 --- [test-demo-api] [pool-2-thread-1] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+Hibernate: 
+    select
+        e1_0.id,
+        e1_0.department_id,
+        e1_0.name,
+        e1_0.salary,
+        e1_0.surname 
+    from
+        employees e1_0 
+    where
+        e1_0.id=?
+Hibernate: 
+    select
+        e1_0.id,
+        e1_0.department_id,
+        e1_0.name,
+        e1_0.salary,
+        e1_0.surname 
+    from
+        employees e1_0 
+    where
+        e1_0.id=?
+2026-11-02T01:57:09.313+04:00 TRACE 24032 --- [test-demo-api] [pool-2-thread-2] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2026-11-02T01:57:09.313+04:00 TRACE 24032 --- [test-demo-api] [pool-2-thread-1] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2026-11-02T01:57:12.314+04:00 TRACE 24032 --- [test-demo-api] [pool-2-thread-2] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.IsolationDemoService.raiseRepeatableRead]
+2026-11-02T01:57:12.314+04:00 TRACE 24032 --- [test-demo-api] [pool-2-thread-1] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.IsolationDemoService.raiseRepeatableRead]
+2026-11-02T01:57:12.314+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-2] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-02T01:57:12.314+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-1] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-02T01:57:12.314+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-1] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(808869579<open>)]
+2026-11-02T01:57:12.314+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-2] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1798755815<open>)]
+Hibernate: 
+    update
+        employees 
+    set
+        department_id=?,
+        name=?,
+        salary=?,
+        surname=? 
+    where
+        id=?
+Hibernate: 
+    update
+        employees 
+    set
+        department_id=?,
+        name=?,
+        salary=?,
+        surname=? 
+    where
+        id=?
+2026-11-02T01:57:12.373+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-2] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager after transaction
+2026-11-02T01:57:12.373+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-2] o.s.orm.jpa.JpaTransactionManager        : Resuming suspended transaction after completion of inner transaction
+2026-11-02T01:57:12.373+04:00 TRACE 24032 --- [test-demo-api] [pool-2-thread-2] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.IsolationRetryService.raise]
+2026-11-02T01:57:12.374+04:00  WARN 24032 --- [test-demo-api] [pool-2-thread-1] org.hibernate.orm.jdbc.error             : HHH000247: ErrorCode: 0, SQLState: 40001
+2026-11-02T01:57:12.375+04:00  WARN 24032 --- [test-demo-api] [pool-2-thread-1] org.hibernate.orm.jdbc.error             : ERROR: could not serialize access due to concurrent update
+2026-11-02T01:57:12.381+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-1] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction rollback after commit exception
+
+org.springframework.dao.CannotAcquireLockException: could not execute statement [ERROR: could not serialize access due to concurrent update] [update employees set department_id=?,name=?,salary=?,surname=? where id=?]; SQL [update employees set department_id=?,name=?,salary=?,surname=? where id=?]
+	at org.springframework.orm.jpa.hibernate.HibernateExceptionTranslator.convertHibernateAccessException(HibernateExceptionTranslator.java:160) ~[spring-orm-7.0.10.jar:7.0.10]
+	at org.springframework.orm.jpa.hibernate.HibernateExceptionTranslator.convertHibernateAccessException(HibernateExceptionTranslator.java:129) ~[spring-orm-7.0.10.jar:7.0.10]
+	at org.springframework.orm.jpa.hibernate.HibernateExceptionTranslator.translateExceptionIfPossible(HibernateExceptionTranslator.java:107) ~[spring-orm-7.0.10.jar:7.0.10]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:223) ~[spring-orm-7.0.10.jar:7.0.10]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:556) ~[spring-orm-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:794) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:757) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:687) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:408) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:714) ~[spring-aop-7.0.10.jar:7.0.10]
+	at az.iktex.organization.structure.testders.service.IsolationDemoService$$SpringCGLIB$$0.raiseRepeatableRead(<generated>) ~[main/:na]
+	at az.iktex.organization.structure.testders.service.IsolationRetryService.lambda$raise$0(IsolationRetryService.java:21) ~[main/:na]
+	at az.iktex.organization.structure.testders.service.IsolationRetryService.retry(IsolationRetryService.java:33) ~[main/:na]
+	at az.iktex.organization.structure.testders.service.IsolationRetryService.raise(IsolationRetryService.java:21) ~[main/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.10.jar:7.0.10]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:714) ~[spring-aop-7.0.10.jar:7.0.10]
+	at az.iktex.organization.structure.testders.service.IsolationRetryService$$SpringCGLIB$$0.raise(<generated>) ~[main/:na]
+	at az.iktex.organization.structure.testders.BonusIntegrationTests.lambda$concurrentSalaryConflictRetriesAfterRollbackAndPreservesBothIncrements$0(BonusIntegrationTests.java:89) ~[test/:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[na:na]
+Caused by: org.hibernate.exception.LockAcquisitionException: could not execute statement [ERROR: could not serialize access due to concurrent update] [update employees set department_id=?,name=?,salary=?,surname=? where id=?]
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:52) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:34) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:115) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:189) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.performNonBatchedMutation(AbstractMutationExecutor.java:147) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorSingleNonBatched.performNonBatchedOperations(MutationExecutorSingleNonBatched.java:53) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.execute(AbstractMutationExecutor.java:67) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	at org.hibernate.persister.entity.mutation.UpdateCoordinatorStandard.doStaticUpdate(UpdateCoordinatorStandard.java:871) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	at org.hibernate.persister.entity.mutation.UpdateCoordinatorStandard.performUpdate(UpdateCoordinatorStandard.java:343) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	at org.hibernate.persister.entity.mutation.UpdateCoordinatorStandard.update(UpdateCoordinatorStandard.java:258) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	at org.hibernate.action.internal.EntityUpdateAction.execute(EntityUpdateAction.java:163) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:634) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:505) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	at org.hibernate.event.internal.AbstractFlushingEventListener.performExecutions(AbstractFlushingEventListener.java:386) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:40) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:138) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	at org.hibernate.internal.SessionImpl.fireFlush(SessionImpl.java:1472) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:498) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:2104) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:2021) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:426) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:167) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commitNoRollbackOnly(JdbcResourceLocalTransactionCoordinatorImpl.java:252) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:242) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:89) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:552) ~[spring-orm-7.0.10.jar:7.0.10]
+	... 27 common frames omitted
+Caused by: org.postgresql.util.PSQLException: ERROR: could not serialize access due to concurrent update
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2993) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2656) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:446) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:533) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:449) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:197) ~[postgresql-42.7.14.jar:42.7.14]
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:158) ~[postgresql-42.7.14.jar:42.7.14]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-7.0.2.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-7.0.2.jar:na]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:185) ~[hibernate-core-7.4.13.Final.jar:7.4.13.Final]
+	... 49 common frames omitted
+
+2026-11-02T01:57:12.382+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-1] o.s.orm.jpa.JpaTransactionManager        : Rolling back JPA transaction on EntityManager [SessionImpl(808869579<open>)]
+2026-11-02T01:57:12.383+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-1] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager after transaction
+2026-11-02T01:57:12.383+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-1] o.s.orm.jpa.JpaTransactionManager        : Resuming suspended transaction after completion of inner transaction
+Retry salary: conflict, starting a new transaction
+Retry salary: attempt=2
+2026-11-02T01:57:12.383+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-1] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.IsolationDemoService.raiseRepeatableRead]: PROPAGATION_REQUIRED,ISOLATION_REPEATABLE_READ
+2026-11-02T01:57:12.383+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-1] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(289262530<open>)] for JPA transaction
+2026-11-02T01:57:12.385+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-1] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@671cfdd9]
+2026-11-02T01:57:12.385+04:00 TRACE 24032 --- [test-demo-api] [pool-2-thread-1] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.IsolationDemoService.raiseRepeatableRead]
+2026-11-02T01:57:12.385+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(289262530<open>)] for JPA transaction
+2026-11-02T01:57:12.386+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-02T01:57:12.386+04:00 TRACE 24032 --- [test-demo-api] [pool-2-thread-1] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+Hibernate: 
+    select
+        e1_0.id,
+        e1_0.department_id,
+        e1_0.name,
+        e1_0.salary,
+        e1_0.surname 
+    from
+        employees e1_0 
+    where
+        e1_0.id=?
+2026-11-02T01:57:12.387+04:00 TRACE 24032 --- [test-demo-api] [pool-2-thread-1] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2026-11-02T01:57:15.388+04:00 TRACE 24032 --- [test-demo-api] [pool-2-thread-1] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.IsolationDemoService.raiseRepeatableRead]
+2026-11-02T01:57:15.388+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-1] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-02T01:57:15.388+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-1] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(289262530<open>)]
+Hibernate: 
+    update
+        employees 
+    set
+        department_id=?,
+        name=?,
+        salary=?,
+        surname=? 
+    where
+        id=?
+2026-11-02T01:57:15.411+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-1] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager after transaction
+2026-11-02T01:57:15.411+04:00 DEBUG 24032 --- [test-demo-api] [pool-2-thread-1] o.s.orm.jpa.JpaTransactionManager        : Resuming suspended transaction after completion of inner transaction
+2026-11-02T01:57:15.411+04:00 TRACE 24032 --- [test-demo-api] [pool-2-thread-1] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.IsolationRetryService.raise]
+BONUS RETRY: two initial reads confirmed; serialization conflict retried; salary=1200
+]]></system-out>
+  <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (C:\Users\USER\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.18.15\de6980bb799c25bb1fe9e6c434201299cb5e694e\byte-buddy-agent-1.18.15.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+</testsuite>

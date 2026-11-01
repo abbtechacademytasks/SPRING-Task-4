@@ -12,6 +12,7 @@ public interface CourseMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "students", ignore = true)
+    @Mapping(target = "capacity", ignore = true)
     Course toEntity(CourseRequest request);
 
     CourseResponse toResponse(Course course);
@@ -20,5 +21,6 @@ public interface CourseMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "students", ignore = true)
+    @Mapping(target = "capacity", ignore = true)
     void updateEntity(CourseRequest request, @MappingTarget Course course);
 }

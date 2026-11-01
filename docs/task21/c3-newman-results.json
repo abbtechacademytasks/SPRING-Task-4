@@ -1,0 +1,3575 @@
+{
+  "collection": {
+    "item": [
+      {
+        "id": "b4b954f5-1388-4ccc-b363-a5e0be41c0b4",
+        "name": "Transactions",
+        "item": [
+          {
+            "id": "66c66b7c-0d30-4ea4-bf48-17bc99dfd7a7",
+            "name": "C1 REQUIRED",
+            "description": {
+              "content": "İki ayrı service bean bir tranzaksiyada. Maaş limiti keçəndə departament dəyişikliyi rollback olur. Seed departments1/2 lazımdır; test işçiləri sonda silinir.",
+              "type": "text/plain"
+            },
+            "item": [
+              {
+                "id": "d32701fd-4514-4d96-880c-581cadb80df9",
+                "name": "01. Transfer üçün işçi yarat",
+                "request": {
+                  "url": {
+                    "path": [
+                      "employees"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "method": "POST",
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"name\": \"TxCheck\",\n  \"surname\": \"{{$guid}}\",\n  \"salary\": 1000,\n  \"departmentId\": 1\n}",
+                    "options": {
+                      "raw": {
+                        "language": "json"
+                      }
+                    }
+                  }
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "d54d3101-667b-4d0f-a66b-e4904d0334d4",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                        "pm.collectionVariables.set(\"txSuccessId\",pm.response.json().id);"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "d7a879b1-7ff0-445a-bfa3-66c6abc7326d",
+                "name": "02. REQUIRED uğurlu transfer",
+                "request": {
+                  "url": {
+                    "path": [
+                      "employees",
+                      "{{txSuccessId}}",
+                      "transfer"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "method": "POST",
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"departmentId\": 2,\n  \"raisePercent\": 15\n}",
+                    "options": {
+                      "raw": {
+                        "language": "json"
+                      }
+                    }
+                  }
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "3bc9b7ca-6481-4261-b8db-81cd6150f3fa",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                        "pm.test(\"Salary1150 and department2\",()=>{const e=pm.response.json();pm.expect(e.salary).to.eql(1150);pm.expect(e.departmentId).to.eql(2);});"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "e25d63b5-f7f3-43b0-ba93-8cc71e763e33",
+                "name": "03. Commit-dən sonra işçini oxu",
+                "request": {
+                  "url": {
+                    "path": [
+                      "employees",
+                      "{{txSuccessId}}"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "GET"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "fb81ebf1-ecc1-410a-8de6-31dd82beb50f",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                        "pm.test(\"Both changes committed\",()=>{const e=pm.response.json();pm.expect(e.salary).to.eql(1150);pm.expect(e.departmentId).to.eql(2);});"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "40a3480f-d20a-4822-a9da-41eb6ef8eb6e",
+                "name": "04. Rollback üçün işçi yarat",
+                "request": {
+                  "url": {
+                    "path": [
+                      "employees"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "method": "POST",
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"name\": \"TxRollback\",\n  \"surname\": \"{{$guid}}\",\n  \"salary\": 9000,\n  \"departmentId\": 1\n}",
+                    "options": {
+                      "raw": {
+                        "language": "json"
+                      }
+                    }
+                  }
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "c3e62960-d399-4fc9-9137-16bdf9865fcd",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                        "pm.collectionVariables.set(\"txFailureId\",pm.response.json().id);"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "367c3f82-3d3a-4af7-9e42-9244d5e4a5be",
+                "name": "05. Əvvəlki departament və maaş",
+                "request": {
+                  "url": {
+                    "path": [
+                      "employees",
+                      "{{txFailureId}}"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "GET"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "b15a6d2c-57c5-460d-80b5-b8771134d88f",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                        "pm.test(\"Before: department1 salary9000\",()=>{const e=pm.response.json();pm.expect(e.departmentId).to.eql(1);pm.expect(e.salary).to.eql(9000);});"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "bff80ec1-ca85-4c16-b73c-e29212df36bc",
+                "name": "06. Limitdən yuxarı transfer",
+                "request": {
+                  "url": {
+                    "path": [
+                      "employees",
+                      "{{txFailureId}}",
+                      "transfer"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "method": "POST",
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"departmentId\": 2,\n  \"raisePercent\": 15\n}",
+                    "options": {
+                      "raw": {
+                        "language": "json"
+                      }
+                    }
+                  }
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "c66f8dcc-b53c-4d46-a5a0-cbb15647d080",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));",
+                        "pm.test(\"Salary limit error\",()=>pm.expect(pm.response.json().detail).to.eql(\"Salary cannot exceed 10000\"));"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "28223cca-1741-43eb-bce4-ddb9e37451cd",
+                "name": "07. Rollback-dən sonra köhnə departament",
+                "request": {
+                  "url": {
+                    "path": [
+                      "employees",
+                      "{{txFailureId}}"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "GET"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "de6a284b-a8bf-4cf2-8be6-6d54ffb6fef2",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                        "pm.test(\"Rollback: department1 salary9000\",()=>{const e=pm.response.json();pm.expect(e.departmentId).to.eql(1);pm.expect(e.salary).to.eql(9000);});"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "683c1e09-7b41-4468-8827-3158a895b3b4",
+                "name": "08. Sərhəd yoxlaması üçün maaş8000",
+                "request": {
+                  "url": {
+                    "path": [
+                      "employees",
+                      "{{txSuccessId}}"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "method": "PUT",
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"name\": \"TxBoundary\",\n  \"surname\": \"{{$guid}}\",\n  \"salary\": 8000,\n  \"departmentId\": 2\n}",
+                    "options": {
+                      "raw": {
+                        "language": "json"
+                      }
+                    }
+                  }
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "1d87e745-7a4f-4cb9-9738-985657a903f7",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "9f9042ec-a5bf-43b6-a378-f81bf180f319",
+                "name": "09. Dəqiq10000 qəbul olunur",
+                "request": {
+                  "url": {
+                    "path": [
+                      "employees",
+                      "{{txSuccessId}}",
+                      "transfer"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "method": "POST",
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"departmentId\": 1,\n  \"raisePercent\": 25\n}",
+                    "options": {
+                      "raw": {
+                        "language": "json"
+                      }
+                    }
+                  }
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "7cd870ab-33b9-4a77-bf91-57a0f9f0605a",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                        "pm.test(\"Salary boundary10000\",()=>{const e=pm.response.json();pm.expect(e.salary).to.eql(10000);pm.expect(e.departmentId).to.eql(1);});"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "b4ca887a-9118-4588-8db8-81ddb24ed8bb",
+                "name": "10. Uğurlu test işçisini sil",
+                "request": {
+                  "url": {
+                    "path": [
+                      "employees",
+                      "{{txSuccessId}}"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "DELETE"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "d8f43d7e-69cd-496e-86c3-5f13293dca5c",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "0a10e1ae-a962-4d09-8641-af3d97638b1a",
+                "name": "11. Rollback test işçisini sil",
+                "request": {
+                  "url": {
+                    "path": [
+                      "employees",
+                      "{{txFailureId}}"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "DELETE"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "77c6b625-a65a-478c-9be2-dc0c00683b8f",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "event": []
+          },
+          {
+            "id": "9ad35ecc-fcce-4c5a-aa6d-e0e92286fd1b",
+            "name": "C3 MANDATORY",
+            "description": {
+              "content": "Seed Course1 capacity1 və boş enrollment tələb edir. Yalnız yeni test tələbələri yaradılır və sonda silinir.",
+              "type": "text/plain"
+            },
+            "item": [
+              {
+                "id": "448cd7f6-d4bf-49fc-8d04-8506fa3c49b9",
+                "name": "01. MANDATORY tranzaksiyasız",
+                "request": {
+                  "url": {
+                    "path": [
+                      "tx-demo",
+                      "reserve-seat",
+                      "1"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "POST"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "fedace04-86b2-4357-bd94-e24e626eca7c",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 409\",()=>pm.response.to.have.status(409));",
+                        "pm.test(\"MANDATORY rejects missing transaction\",()=>pm.expect(pm.response.json().detail.toLowerCase()).to.include(\"mandatory\"));"
+                      ],
+                      "_lastExecutionId": "cfc1f13b-acc9-477d-83bc-16a702aceb40"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "0e28b4b2-e3c8-4244-83c7-12830f033e1c",
+                "name": "02. Mövcud olmayan ID də metodun içinə çatmır",
+                "request": {
+                  "url": {
+                    "path": [
+                      "tx-demo",
+                      "reserve-seat",
+                      "999999999"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "POST"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "2ef47627-2ece-41d2-8c24-164cb88c7194",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 409\",()=>pm.response.to.have.status(409));",
+                        "pm.test(\"MANDATORY rejects missing transaction\",()=>pm.expect(pm.response.json().detail.toLowerCase()).to.include(\"mandatory\"));"
+                      ],
+                      "_lastExecutionId": "38d5095e-fbf0-44de-b0bf-c7481af60334"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "f57515c9-840f-41da-9ebd-3ccabef796bf",
+                "name": "03. Capacity1 kurs əvvəl boşdur",
+                "request": {
+                  "url": {
+                    "path": [
+                      "courses",
+                      "1",
+                      "students",
+                      "count"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "GET"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "aff3528b-8a5e-41dd-828f-f340ab372a38",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                        "pm.test(\"Initial enrollment count0\",()=>pm.expect(pm.response.json()).to.eql(0));"
+                      ],
+                      "_lastExecutionId": "67eb0a26-66fd-467d-8355-f32a2d01271f"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "be5cc4d4-f11d-43a5-b07e-ba2a36bbba65",
+                "name": "04. Birinci test tələbəsi",
+                "request": {
+                  "url": {
+                    "path": [
+                      "students"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "method": "POST",
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"name\": \"MandatoryA\",\n  \"surname\": \"{{$guid}}\",\n  \"age\": 21\n}",
+                    "options": {
+                      "raw": {
+                        "language": "json"
+                      }
+                    }
+                  }
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "bd08109c-1302-474e-ab81-7ce2f0a61458",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 201\",()=>pm.response.to.have.status(201));",
+                        "pm.collectionVariables.set(\"mandatoryStudentA\",pm.response.json().id);"
+                      ],
+                      "_lastExecutionId": "4bb5591d-8b51-4bae-808a-6d6014954226"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "5c5882ec-52a1-453e-bd1b-d99b646dc1c9",
+                "name": "05. İkinci test tələbəsi",
+                "request": {
+                  "url": {
+                    "path": [
+                      "students"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "method": "POST",
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"name\": \"MandatoryB\",\n  \"surname\": \"{{$guid}}\",\n  \"age\": 22\n}",
+                    "options": {
+                      "raw": {
+                        "language": "json"
+                      }
+                    }
+                  }
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "0d934873-6846-4986-9f6e-0507bbd8d33a",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 201\",()=>pm.response.to.have.status(201));",
+                        "pm.collectionVariables.set(\"mandatoryStudentB\",pm.response.json().id);"
+                      ],
+                      "_lastExecutionId": "cb229ea0-f33f-46ce-a887-01c5655d1755"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "609fea3f-e055-4c3f-8802-46dce85c3254",
+                "name": "06. enroll REQUIRED içindən MANDATORY keçir",
+                "request": {
+                  "url": {
+                    "path": [
+                      "students",
+                      "{{mandatoryStudentA}}",
+                      "courses",
+                      "1"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "POST"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "54a030c6-2db8-4573-8482-307c0aa9c707",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 201\",()=>pm.response.to.have.status(201));"
+                      ],
+                      "_lastExecutionId": "f016c492-a13d-4b36-b6ec-007e27ac95a9"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "5374fe33-7255-43af-9a7d-30a675e47b24",
+                "name": "07. Kursda bir tələbə var",
+                "request": {
+                  "url": {
+                    "path": [
+                      "courses",
+                      "1",
+                      "students",
+                      "count"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "GET"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "391e3bd6-1604-4495-bf92-59f01862d9ec",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                        "pm.test(\"One occupied seat\",()=>pm.expect(pm.response.json()).to.eql(1));"
+                      ],
+                      "_lastExecutionId": "721e2b91-0fe0-4828-81b3-f54548b67436"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "d036a61f-77e8-4cb5-b3fe-92363cb7aebf",
+                "name": "08. Dolu kurs ikinci tələbəni qəbul etmir",
+                "request": {
+                  "url": {
+                    "path": [
+                      "students",
+                      "{{mandatoryStudentB}}",
+                      "courses",
+                      "1"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "POST"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "ab64dfd1-25e4-4f29-bb52-2990f69613b3",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 409\",()=>pm.response.to.have.status(409));",
+                        "pm.test(\"Course full\",()=>pm.expect(pm.response.json().detail).to.eql(\"Course is full\"));"
+                      ],
+                      "_lastExecutionId": "b8d61487-8edd-4ea1-b6fe-fb77382992a3"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "34108657-c34c-4cfb-a36b-a834c1113dc9",
+                "name": "09. İkinci tələbə qeydiyyatsız qalıb",
+                "request": {
+                  "url": {
+                    "path": [
+                      "students",
+                      "{{mandatoryStudentB}}"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "GET"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "a9d1ab67-ecdc-4998-bf49-496d3e4f39e2",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                        "pm.test(\"Rejected student has no courses\",()=>pm.expect(pm.response.json().courses).to.have.lengthOf(0));"
+                      ],
+                      "_lastExecutionId": "f697259f-d105-47cc-bf58-8d1ab6343f35"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "6bf7018b-6a4c-47c6-a852-4eed86ed20b9",
+                "name": "10. Birinci test tələbəsini sil",
+                "request": {
+                  "url": {
+                    "path": [
+                      "students",
+                      "{{mandatoryStudentA}}"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "DELETE"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "2ada7605-92a6-4f21-91af-46895ad2adf0",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 204\",()=>pm.response.to.have.status(204));"
+                      ],
+                      "_lastExecutionId": "9033f581-464a-493f-9b72-61130f04f008"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "9568409c-5723-4145-b5e4-633448b59d80",
+                "name": "11. İkinci test tələbəsini sil",
+                "request": {
+                  "url": {
+                    "path": [
+                      "students",
+                      "{{mandatoryStudentB}}"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "DELETE"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "403a58af-b1c6-44fb-aeaa-60e8881767fe",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 204\",()=>pm.response.to.have.status(204));"
+                      ],
+                      "_lastExecutionId": "e0ac6898-afb6-4ab1-afa4-9315252b097b"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "4cdb5348-d687-47bf-a202-c6e36ee70603",
+                "name": "12. Testdən sonra kurs yenə boşdur",
+                "request": {
+                  "url": {
+                    "path": [
+                      "courses",
+                      "1",
+                      "students",
+                      "count"
+                    ],
+                    "host": [
+                      "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                  },
+                  "method": "GET"
+                },
+                "response": [],
+                "event": [
+                  {
+                    "listen": "test",
+                    "script": {
+                      "id": "68b59fd3-c844-4347-b2fa-1c6d4c9da601",
+                      "type": "text/javascript",
+                      "exec": [
+                        "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                        "pm.test(\"Enrollment cleanup\",()=>pm.expect(pm.response.json()).to.eql(0));"
+                      ],
+                      "_lastExecutionId": "aa8f8904-83cc-49f8-9805-fc387fb716b0"
+                    }
+                  }
+                ]
+              }
+            ],
+            "event": []
+          }
+        ],
+        "event": []
+      }
+    ],
+    "event": [],
+    "variable": [
+      {
+        "type": "any",
+        "value": "http://localhost:8080/test-demo/api",
+        "key": "baseUrl"
+      }
+    ],
+    "info": {
+      "_postman_id": "8ae7fd4d-9007-40e9-86e9-8599ff1b9c2a",
+      "name": "Task21 Transactions",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+      "description": {
+        "content": "Task21 transaction propagation yoxlamaları.",
+        "type": "text/plain"
+      }
+    }
+  },
+  "environment": {
+    "id": "e95f2953-e5ce-41ae-b03f-e7c319044669",
+    "values": []
+  },
+  "globals": {
+    "id": "90aa8873-540f-4edb-aec6-e321480ae7c6",
+    "values": []
+  },
+  "run": {
+    "stats": {
+      "iterations": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "items": {
+        "total": 12,
+        "pending": 0,
+        "failed": 0
+      },
+      "scripts": {
+        "total": 12,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequests": {
+        "total": 12,
+        "pending": 0,
+        "failed": 0
+      },
+      "requests": {
+        "total": 12,
+        "pending": 0,
+        "failed": 0
+      },
+      "tests": {
+        "total": 12,
+        "pending": 0,
+        "failed": 0
+      },
+      "assertions": {
+        "total": 19,
+        "pending": 0,
+        "failed": 0
+      },
+      "testScripts": {
+        "total": 12,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequestScripts": {
+        "total": 0,
+        "pending": 0,
+        "failed": 0
+      }
+    },
+    "timings": {
+      "responseAverage": 65.33333333333333,
+      "responseMin": 5,
+      "responseMax": 185,
+      "responseSd": 62.585053238683834,
+      "dnsAverage": 0,
+      "dnsMin": 0,
+      "dnsMax": 0,
+      "dnsSd": 0,
+      "firstByteAverage": 0,
+      "firstByteMin": 0,
+      "firstByteMax": 0,
+      "firstByteSd": 0,
+      "started": 1793530846018,
+      "completed": 1793530847809
+    },
+    "executions": [
+      {
+        "cursor": {
+          "position": 0,
+          "iteration": 0,
+          "length": 12,
+          "cycles": 1,
+          "empty": false,
+          "eof": false,
+          "bof": true,
+          "cr": false,
+          "ref": "d0ea5b2f-4674-48ce-9d90-47ed960836d1",
+          "httpRequestId": "4df71ad7-2063-474d-b6bf-4233e5929150"
+        },
+        "item": {
+          "id": "448cd7f6-d4bf-49fc-8d04-8506fa3c49b9",
+          "name": "01. MANDATORY tranzaksiyasız",
+          "request": {
+            "url": {
+              "path": [
+                "tx-demo",
+                "reserve-seat",
+                "1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "fedace04-86b2-4357-bd94-e24e626eca7c",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 409\",()=>pm.response.to.have.status(409));",
+                  "pm.test(\"MANDATORY rejects missing transaction\",()=>pm.expect(pm.response.json().detail.toLowerCase()).to.include(\"mandatory\"));"
+                ],
+                "_lastExecutionId": "cfc1f13b-acc9-477d-83bc-16a702aceb40"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "tx-demo",
+              "reserve-seat",
+              "1"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "4f746d7b-9e95-46c9-98d2-b49364aa2e44",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "0",
+              "system": true
+            }
+          ],
+          "method": "POST"
+        },
+        "response": {
+          "id": "c83db598-b298-4e74-9a53-f9a82285f9ce",
+          "status": "Conflict",
+          "code": 409,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 11:00:46 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              100,
+              101,
+              116,
+              97,
+              105,
+              108,
+              34,
+              58,
+              34,
+              78,
+              111,
+              32,
+              101,
+              120,
+              105,
+              115,
+              116,
+              105,
+              110,
+              103,
+              32,
+              116,
+              114,
+              97,
+              110,
+              115,
+              97,
+              99,
+              116,
+              105,
+              111,
+              110,
+              32,
+              102,
+              111,
+              117,
+              110,
+              100,
+              32,
+              102,
+              111,
+              114,
+              32,
+              116,
+              114,
+              97,
+              110,
+              115,
+              97,
+              99,
+              116,
+              105,
+              111,
+              110,
+              32,
+              109,
+              97,
+              114,
+              107,
+              101,
+              100,
+              32,
+              119,
+              105,
+              116,
+              104,
+              32,
+              112,
+              114,
+              111,
+              112,
+              97,
+              103,
+              97,
+              116,
+              105,
+              111,
+              110,
+              32,
+              39,
+              109,
+              97,
+              110,
+              100,
+              97,
+              116,
+              111,
+              114,
+              121,
+              39,
+              34,
+              44,
+              34,
+              105,
+              110,
+              115,
+              116,
+              97,
+              110,
+              99,
+              101,
+              34,
+              58,
+              34,
+              47,
+              116,
+              101,
+              115,
+              116,
+              45,
+              100,
+              101,
+              109,
+              111,
+              47,
+              97,
+              112,
+              105,
+              47,
+              116,
+              120,
+              45,
+              100,
+              101,
+              109,
+              111,
+              47,
+              114,
+              101,
+              115,
+              101,
+              114,
+              118,
+              101,
+              45,
+              115,
+              101,
+              97,
+              116,
+              47,
+              49,
+              34,
+              44,
+              34,
+              115,
+              116,
+              97,
+              116,
+              117,
+              115,
+              34,
+              58,
+              52,
+              48,
+              57,
+              44,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              34,
+              67,
+              111,
+              110,
+              102,
+              108,
+              105,
+              99,
+              116,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 185,
+          "responseSize": 177
+        },
+        "id": "448cd7f6-d4bf-49fc-8d04-8506fa3c49b9",
+        "assertions": [
+          {
+            "assertion": "HTTP 409",
+            "skipped": false
+          },
+          {
+            "assertion": "MANDATORY rejects missing transaction",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "148eef3d-8ad6-4ea5-9b9a-4b0067f04edd",
+          "length": 12,
+          "cycles": 1,
+          "position": 1,
+          "iteration": 0,
+          "httpRequestId": "32d368a2-9606-47a9-b4dc-cc3867dbc69e"
+        },
+        "item": {
+          "id": "0e28b4b2-e3c8-4244-83c7-12830f033e1c",
+          "name": "02. Mövcud olmayan ID də metodun içinə çatmır",
+          "request": {
+            "url": {
+              "path": [
+                "tx-demo",
+                "reserve-seat",
+                "999999999"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "2ef47627-2ece-41d2-8c24-164cb88c7194",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 409\",()=>pm.response.to.have.status(409));",
+                  "pm.test(\"MANDATORY rejects missing transaction\",()=>pm.expect(pm.response.json().detail.toLowerCase()).to.include(\"mandatory\"));"
+                ],
+                "_lastExecutionId": "38d5095e-fbf0-44de-b0bf-c7481af60334"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "tx-demo",
+              "reserve-seat",
+              "999999999"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "a9644979-9cde-403b-9ed1-c911af4951aa",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "0",
+              "system": true
+            }
+          ],
+          "method": "POST"
+        },
+        "response": {
+          "id": "0201902b-32ce-47fa-b715-3d8857bccd16",
+          "status": "Conflict",
+          "code": 409,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 11:00:46 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              100,
+              101,
+              116,
+              97,
+              105,
+              108,
+              34,
+              58,
+              34,
+              78,
+              111,
+              32,
+              101,
+              120,
+              105,
+              115,
+              116,
+              105,
+              110,
+              103,
+              32,
+              116,
+              114,
+              97,
+              110,
+              115,
+              97,
+              99,
+              116,
+              105,
+              111,
+              110,
+              32,
+              102,
+              111,
+              117,
+              110,
+              100,
+              32,
+              102,
+              111,
+              114,
+              32,
+              116,
+              114,
+              97,
+              110,
+              115,
+              97,
+              99,
+              116,
+              105,
+              111,
+              110,
+              32,
+              109,
+              97,
+              114,
+              107,
+              101,
+              100,
+              32,
+              119,
+              105,
+              116,
+              104,
+              32,
+              112,
+              114,
+              111,
+              112,
+              97,
+              103,
+              97,
+              116,
+              105,
+              111,
+              110,
+              32,
+              39,
+              109,
+              97,
+              110,
+              100,
+              97,
+              116,
+              111,
+              114,
+              121,
+              39,
+              34,
+              44,
+              34,
+              105,
+              110,
+              115,
+              116,
+              97,
+              110,
+              99,
+              101,
+              34,
+              58,
+              34,
+              47,
+              116,
+              101,
+              115,
+              116,
+              45,
+              100,
+              101,
+              109,
+              111,
+              47,
+              97,
+              112,
+              105,
+              47,
+              116,
+              120,
+              45,
+              100,
+              101,
+              109,
+              111,
+              47,
+              114,
+              101,
+              115,
+              101,
+              114,
+              118,
+              101,
+              45,
+              115,
+              101,
+              97,
+              116,
+              47,
+              57,
+              57,
+              57,
+              57,
+              57,
+              57,
+              57,
+              57,
+              57,
+              34,
+              44,
+              34,
+              115,
+              116,
+              97,
+              116,
+              117,
+              115,
+              34,
+              58,
+              52,
+              48,
+              57,
+              44,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              34,
+              67,
+              111,
+              110,
+              102,
+              108,
+              105,
+              99,
+              116,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 5,
+          "responseSize": 185
+        },
+        "id": "0e28b4b2-e3c8-4244-83c7-12830f033e1c",
+        "assertions": [
+          {
+            "assertion": "HTTP 409",
+            "skipped": false
+          },
+          {
+            "assertion": "MANDATORY rejects missing transaction",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "b104e13f-bae5-4122-a1ff-e5d00d679245",
+          "length": 12,
+          "cycles": 1,
+          "position": 2,
+          "iteration": 0,
+          "httpRequestId": "e5d5d1fc-3f89-4e6b-bc58-8039e58ec787"
+        },
+        "item": {
+          "id": "f57515c9-840f-41da-9ebd-3ccabef796bf",
+          "name": "03. Capacity1 kurs əvvəl boşdur",
+          "request": {
+            "url": {
+              "path": [
+                "courses",
+                "1",
+                "students",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "aff3528b-8a5e-41dd-828f-f340ab372a38",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                  "pm.test(\"Initial enrollment count0\",()=>pm.expect(pm.response.json()).to.eql(0));"
+                ],
+                "_lastExecutionId": "67eb0a26-66fd-467d-8355-f32a2d01271f"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "courses",
+              "1",
+              "students",
+              "count"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "daa13b78-6cf4-457c-8349-2dd134ab732a",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "d9a83ec1-3d77-471d-8577-3b86ee1e46a8",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "1"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 11:00:46 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              48
+            ]
+          },
+          "cookie": [],
+          "responseTime": 167,
+          "responseSize": 1
+        },
+        "id": "f57515c9-840f-41da-9ebd-3ccabef796bf",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Initial enrollment count0",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "81839e47-e02d-4d48-9e14-a756e18f399b",
+          "length": 12,
+          "cycles": 1,
+          "position": 3,
+          "iteration": 0,
+          "httpRequestId": "b10bd4ba-7ef0-4369-a08c-33eea70f9234"
+        },
+        "item": {
+          "id": "be5cc4d4-f11d-43a5-b07e-ba2a36bbba65",
+          "name": "04. Birinci test tələbəsi",
+          "request": {
+            "url": {
+              "path": [
+                "students"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"MandatoryA\",\n  \"surname\": \"{{$guid}}\",\n  \"age\": 21\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "bd08109c-1302-474e-ab81-7ce2f0a61458",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\",()=>pm.response.to.have.status(201));",
+                  "pm.collectionVariables.set(\"mandatoryStudentA\",pm.response.json().id);"
+                ],
+                "_lastExecutionId": "4bb5591d-8b51-4bae-808a-6d6014954226"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "students"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "ab4edadc-fa49-4b25-a8e4-92da6f6ef1a7",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "92",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"name\": \"MandatoryA\",\n  \"surname\": \"65c428c2-0903-4f3e-987d-225720b9382f\",\n  \"age\": 21\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "48b47f62-711e-44e4-989e-a2cdecc9ff98",
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "102"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 11:00:46 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              49,
+              51,
+              44,
+              34,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              77,
+              97,
+              110,
+              100,
+              97,
+              116,
+              111,
+              114,
+              121,
+              65,
+              34,
+              44,
+              34,
+              115,
+              117,
+              114,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              54,
+              53,
+              99,
+              52,
+              50,
+              56,
+              99,
+              50,
+              45,
+              48,
+              57,
+              48,
+              51,
+              45,
+              52,
+              102,
+              51,
+              101,
+              45,
+              57,
+              56,
+              55,
+              100,
+              45,
+              50,
+              50,
+              53,
+              55,
+              50,
+              48,
+              98,
+              57,
+              51,
+              56,
+              50,
+              102,
+              34,
+              44,
+              34,
+              97,
+              103,
+              101,
+              34,
+              58,
+              50,
+              49,
+              44,
+              34,
+              99,
+              111,
+              117,
+              114,
+              115,
+              101,
+              115,
+              34,
+              58,
+              110,
+              117,
+              108,
+              108,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 124,
+          "responseSize": 102
+        },
+        "id": "be5cc4d4-f11d-43a5-b07e-ba2a36bbba65",
+        "assertions": [
+          {
+            "assertion": "HTTP 201",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "458954e5-9691-446c-9732-ba1fda2f32a3",
+          "length": 12,
+          "cycles": 1,
+          "position": 4,
+          "iteration": 0,
+          "httpRequestId": "c896c3f9-0411-45a2-a235-b6f75a37be52"
+        },
+        "item": {
+          "id": "5c5882ec-52a1-453e-bd1b-d99b646dc1c9",
+          "name": "05. İkinci test tələbəsi",
+          "request": {
+            "url": {
+              "path": [
+                "students"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"MandatoryB\",\n  \"surname\": \"{{$guid}}\",\n  \"age\": 22\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "0d934873-6846-4986-9f6e-0507bbd8d33a",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\",()=>pm.response.to.have.status(201));",
+                  "pm.collectionVariables.set(\"mandatoryStudentB\",pm.response.json().id);"
+                ],
+                "_lastExecutionId": "cb229ea0-f33f-46ce-a887-01c5655d1755"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "students"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "466cbfc3-17e1-405e-8541-f0678bcf9f5e",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "92",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"name\": \"MandatoryB\",\n  \"surname\": \"7db756f0-e4bf-4a43-9937-cbd2a01cd914\",\n  \"age\": 22\n}",
+            "options": {
+              "raw": {
+                "language": "json"
+              }
+            }
+          }
+        },
+        "response": {
+          "id": "a7af6fe0-a573-42cc-b5cd-46d7872bd3b5",
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "102"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 11:00:46 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              49,
+              52,
+              44,
+              34,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              77,
+              97,
+              110,
+              100,
+              97,
+              116,
+              111,
+              114,
+              121,
+              66,
+              34,
+              44,
+              34,
+              115,
+              117,
+              114,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              55,
+              100,
+              98,
+              55,
+              53,
+              54,
+              102,
+              48,
+              45,
+              101,
+              52,
+              98,
+              102,
+              45,
+              52,
+              97,
+              52,
+              51,
+              45,
+              57,
+              57,
+              51,
+              55,
+              45,
+              99,
+              98,
+              100,
+              50,
+              97,
+              48,
+              49,
+              99,
+              100,
+              57,
+              49,
+              52,
+              34,
+              44,
+              34,
+              97,
+              103,
+              101,
+              34,
+              58,
+              50,
+              50,
+              44,
+              34,
+              99,
+              111,
+              117,
+              114,
+              115,
+              101,
+              115,
+              34,
+              58,
+              110,
+              117,
+              108,
+              108,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 41,
+          "responseSize": 102
+        },
+        "id": "5c5882ec-52a1-453e-bd1b-d99b646dc1c9",
+        "assertions": [
+          {
+            "assertion": "HTTP 201",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "89ea8f42-464c-4e46-ba17-0dd6651bc3c9",
+          "length": 12,
+          "cycles": 1,
+          "position": 5,
+          "iteration": 0,
+          "httpRequestId": "05de8370-c9d4-43d1-b1d6-60a72bc440e7"
+        },
+        "item": {
+          "id": "609fea3f-e055-4c3f-8802-46dce85c3254",
+          "name": "06. enroll REQUIRED içindən MANDATORY keçir",
+          "request": {
+            "url": {
+              "path": [
+                "students",
+                "{{mandatoryStudentA}}",
+                "courses",
+                "1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "54a030c6-2db8-4573-8482-307c0aa9c707",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\",()=>pm.response.to.have.status(201));"
+                ],
+                "_lastExecutionId": "f016c492-a13d-4b36-b6ec-007e27ac95a9"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "students",
+              "13",
+              "courses",
+              "1"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "b8859bb0-c222-4894-b671-61a43817d22b",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "0",
+              "system": true
+            }
+          ],
+          "method": "POST"
+        },
+        "response": {
+          "id": "85950e27-353a-48bb-947b-fa57bde7d565",
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "Content-Length",
+              "value": "0"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 11:00:47 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": []
+          },
+          "cookie": [],
+          "responseTime": 120,
+          "responseSize": 0
+        },
+        "id": "609fea3f-e055-4c3f-8802-46dce85c3254",
+        "assertions": [
+          {
+            "assertion": "HTTP 201",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "d493c746-cde9-4e89-86e6-729aba503144",
+          "length": 12,
+          "cycles": 1,
+          "position": 6,
+          "iteration": 0,
+          "httpRequestId": "a0879222-7fa5-4d20-b491-e52ea196df01"
+        },
+        "item": {
+          "id": "5374fe33-7255-43af-9a7d-30a675e47b24",
+          "name": "07. Kursda bir tələbə var",
+          "request": {
+            "url": {
+              "path": [
+                "courses",
+                "1",
+                "students",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "391e3bd6-1604-4495-bf92-59f01862d9ec",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                  "pm.test(\"One occupied seat\",()=>pm.expect(pm.response.json()).to.eql(1));"
+                ],
+                "_lastExecutionId": "721e2b91-0fe0-4828-81b3-f54548b67436"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "courses",
+              "1",
+              "students",
+              "count"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "235218e2-c050-40e4-8f85-52a1963fda15",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "fd25e6d4-7257-4dc7-b3a9-9091d6947641",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "1"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 11:00:47 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              49
+            ]
+          },
+          "cookie": [],
+          "responseTime": 11,
+          "responseSize": 1
+        },
+        "id": "5374fe33-7255-43af-9a7d-30a675e47b24",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "One occupied seat",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "2de249eb-3e4a-446a-a68c-dfca37e442ba",
+          "length": 12,
+          "cycles": 1,
+          "position": 7,
+          "iteration": 0,
+          "httpRequestId": "c7578469-b32d-44f1-b13c-f5af6eca7c3a"
+        },
+        "item": {
+          "id": "d036a61f-77e8-4cb5-b3fe-92363cb7aebf",
+          "name": "08. Dolu kurs ikinci tələbəni qəbul etmir",
+          "request": {
+            "url": {
+              "path": [
+                "students",
+                "{{mandatoryStudentB}}",
+                "courses",
+                "1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "ab64dfd1-25e4-4f29-bb52-2990f69613b3",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 409\",()=>pm.response.to.have.status(409));",
+                  "pm.test(\"Course full\",()=>pm.expect(pm.response.json().detail).to.eql(\"Course is full\"));"
+                ],
+                "_lastExecutionId": "b8d61487-8edd-4ea1-b6fe-fb77382992a3"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "students",
+              "14",
+              "courses",
+              "1"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "856f77fc-58b9-42f9-a2e9-2630b3f072a1",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "0",
+              "system": true
+            }
+          ],
+          "method": "POST"
+        },
+        "response": {
+          "id": "72a7211d-4be5-467b-b24a-65e80d1a5127",
+          "status": "Conflict",
+          "code": 409,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/problem+json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 11:00:47 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              100,
+              101,
+              116,
+              97,
+              105,
+              108,
+              34,
+              58,
+              34,
+              67,
+              111,
+              117,
+              114,
+              115,
+              101,
+              32,
+              105,
+              115,
+              32,
+              102,
+              117,
+              108,
+              108,
+              34,
+              44,
+              34,
+              105,
+              110,
+              115,
+              116,
+              97,
+              110,
+              99,
+              101,
+              34,
+              58,
+              34,
+              47,
+              116,
+              101,
+              115,
+              116,
+              45,
+              100,
+              101,
+              109,
+              111,
+              47,
+              97,
+              112,
+              105,
+              47,
+              115,
+              116,
+              117,
+              100,
+              101,
+              110,
+              116,
+              115,
+              47,
+              49,
+              52,
+              47,
+              99,
+              111,
+              117,
+              114,
+              115,
+              101,
+              115,
+              47,
+              49,
+              34,
+              44,
+              34,
+              115,
+              116,
+              97,
+              116,
+              117,
+              115,
+              34,
+              58,
+              52,
+              48,
+              57,
+              44,
+              34,
+              116,
+              105,
+              116,
+              108,
+              101,
+              34,
+              58,
+              34,
+              67,
+              111,
+              110,
+              102,
+              108,
+              105,
+              99,
+              116,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 27,
+          "responseSize": 109
+        },
+        "id": "d036a61f-77e8-4cb5-b3fe-92363cb7aebf",
+        "assertions": [
+          {
+            "assertion": "HTTP 409",
+            "skipped": false
+          },
+          {
+            "assertion": "Course full",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "40f89e62-42e1-40d9-be90-d08bac1b8021",
+          "length": 12,
+          "cycles": 1,
+          "position": 8,
+          "iteration": 0,
+          "httpRequestId": "42f8195a-81a9-41b5-83ec-fd97317ae18f"
+        },
+        "item": {
+          "id": "34108657-c34c-4cfb-a36b-a834c1113dc9",
+          "name": "09. İkinci tələbə qeydiyyatsız qalıb",
+          "request": {
+            "url": {
+              "path": [
+                "students",
+                "{{mandatoryStudentB}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "a9d1ab67-ecdc-4998-bf49-496d3e4f39e2",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                  "pm.test(\"Rejected student has no courses\",()=>pm.expect(pm.response.json().courses).to.have.lengthOf(0));"
+                ],
+                "_lastExecutionId": "f697259f-d105-47cc-bf58-8d1ab6343f35"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "students",
+              "14"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "755b42b9-fdd6-4294-8142-6caebcfab331",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "aea91bc8-e02a-4d1e-a4d3-0f8e4944a133",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "100"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 11:00:47 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              49,
+              52,
+              44,
+              34,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              77,
+              97,
+              110,
+              100,
+              97,
+              116,
+              111,
+              114,
+              121,
+              66,
+              34,
+              44,
+              34,
+              115,
+              117,
+              114,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              55,
+              100,
+              98,
+              55,
+              53,
+              54,
+              102,
+              48,
+              45,
+              101,
+              52,
+              98,
+              102,
+              45,
+              52,
+              97,
+              52,
+              51,
+              45,
+              57,
+              57,
+              51,
+              55,
+              45,
+              99,
+              98,
+              100,
+              50,
+              97,
+              48,
+              49,
+              99,
+              100,
+              57,
+              49,
+              52,
+              34,
+              44,
+              34,
+              97,
+              103,
+              101,
+              34,
+              58,
+              50,
+              50,
+              44,
+              34,
+              99,
+              111,
+              117,
+              114,
+              115,
+              101,
+              115,
+              34,
+              58,
+              91,
+              93,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 13,
+          "responseSize": 100
+        },
+        "id": "34108657-c34c-4cfb-a36b-a834c1113dc9",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Rejected student has no courses",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "980ba9be-a946-4d86-9508-12d60ae90d33",
+          "length": 12,
+          "cycles": 1,
+          "position": 9,
+          "iteration": 0,
+          "httpRequestId": "893dbe96-4815-444a-ae17-cb9c2c74b682"
+        },
+        "item": {
+          "id": "6bf7018b-6a4c-47c6-a852-4eed86ed20b9",
+          "name": "10. Birinci test tələbəsini sil",
+          "request": {
+            "url": {
+              "path": [
+                "students",
+                "{{mandatoryStudentA}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "DELETE"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "2ada7605-92a6-4f21-91af-46895ad2adf0",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\",()=>pm.response.to.have.status(204));"
+                ],
+                "_lastExecutionId": "9033f581-464a-493f-9b72-61130f04f008"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "students",
+              "13"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "16aff880-af84-43f6-8648-282b5fbe1743",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "DELETE"
+        },
+        "response": {
+          "id": "126af8a3-30e0-42ba-81e9-2b66a203fc54",
+          "status": "No Content",
+          "code": 204,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 11:00:47 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": []
+          },
+          "cookie": [],
+          "responseTime": 52,
+          "responseSize": 0
+        },
+        "id": "6bf7018b-6a4c-47c6-a852-4eed86ed20b9",
+        "assertions": [
+          {
+            "assertion": "HTTP 204",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "c940d9ef-ea59-43df-aee4-2f2f9eed1ac9",
+          "length": 12,
+          "cycles": 1,
+          "position": 10,
+          "iteration": 0,
+          "httpRequestId": "2003e2b4-fb9d-4f4e-9293-3815dfde271d"
+        },
+        "item": {
+          "id": "9568409c-5723-4145-b5e4-633448b59d80",
+          "name": "11. İkinci test tələbəsini sil",
+          "request": {
+            "url": {
+              "path": [
+                "students",
+                "{{mandatoryStudentB}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "DELETE"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "403a58af-b1c6-44fb-aeaa-60e8881767fe",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\",()=>pm.response.to.have.status(204));"
+                ],
+                "_lastExecutionId": "e0ac6898-afb6-4ab1-afa4-9315252b097b"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "students",
+              "14"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "0eb95937-c1a8-405a-a8c7-6f4e06962b4d",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "DELETE"
+        },
+        "response": {
+          "id": "e8acc423-4fa1-4ac3-835a-7e187312638d",
+          "status": "No Content",
+          "code": 204,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 11:00:47 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": []
+          },
+          "cookie": [],
+          "responseTime": 28,
+          "responseSize": 0
+        },
+        "id": "9568409c-5723-4145-b5e4-633448b59d80",
+        "assertions": [
+          {
+            "assertion": "HTTP 204",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "679c6090-147f-4491-ae6e-8c4507718a15",
+          "length": 12,
+          "cycles": 1,
+          "position": 11,
+          "iteration": 0,
+          "httpRequestId": "2c5376ec-86a9-46e2-adc6-e60b3a826d77"
+        },
+        "item": {
+          "id": "4cdb5348-d687-47bf-a202-c6e36ee70603",
+          "name": "12. Testdən sonra kurs yenə boşdur",
+          "request": {
+            "url": {
+              "path": [
+                "courses",
+                "1",
+                "students",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "68b59fd3-c844-4347-b2fa-1c6d4c9da601",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                  "pm.test(\"Enrollment cleanup\",()=>pm.expect(pm.response.json()).to.eql(0));"
+                ],
+                "_lastExecutionId": "aa8f8904-83cc-49f8-9805-fc387fb716b0"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "test-demo",
+              "api",
+              "courses",
+              "1",
+              "students",
+              "count"
+            ],
+            "host": [
+              "localhost"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "8026eb4a-cf7e-4a99-b3b8-0edb3f500a2f",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "localhost:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "152faf12-3162-4b97-a4a8-aab771f06f74",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "1"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 01 Nov 2026 11:00:47 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              48
+            ]
+          },
+          "cookie": [],
+          "responseTime": 11,
+          "responseSize": 1
+        },
+        "id": "4cdb5348-d687-47bf-a202-c6e36ee70603",
+        "assertions": [
+          {
+            "assertion": "HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Enrollment cleanup",
+            "skipped": false
+          }
+        ]
+      }
+    ],
+    "transfers": {
+      "responseTotal": 778
+    },
+    "failures": [],
+    "error": null
+  }
+}

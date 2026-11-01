@@ -1,0 +1,1 @@
+{"detail":"Concurrent transaction conflict; retry the whole operation","instance":"/test-demo/api/isolation/courses/1/enroll/24","status":409,"title":"Conflict"}

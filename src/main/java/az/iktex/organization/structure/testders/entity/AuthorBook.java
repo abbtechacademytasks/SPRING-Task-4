@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 // Ayrı entity əlaqəyə əlavə sahələr artırmağa imkan verir.
 // Sadə JoinTable ilə müqayisədə daha çox kod və ayrıca entity tələb edir.
@@ -15,6 +17,11 @@ import lombok.Setter;
                 name = "uk_author_book",
                 columnNames = {"author_id", "book_id"}
         )
+)
+@Cacheable
+@Cache(
+        usage = CacheConcurrencyStrategy.READ_WRITE,
+        region = "author-books"
 )
 @Getter
 @Setter

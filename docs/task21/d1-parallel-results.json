@@ -1,0 +1,26 @@
+[
+  {
+    "isolation": "READ_COMMITTED",
+    "firstReadObservedInDatabase": true,
+    "writerCommittedBeforeReaderFinished": true,
+    "writerCommitMs": 399,
+    "reportCompletedMs": 5088,
+    "response": {
+      "firstAvg": 1000.0,
+      "secondAvg": 3000.0,
+      "isolation": "READ_COMMITTED"
+    }
+  },
+  {
+    "isolation": "REPEATABLE_READ",
+    "firstReadObservedInDatabase": true,
+    "writerCommittedBeforeReaderFinished": true,
+    "writerCommitMs": 253,
+    "reportCompletedMs": 5014,
+    "response": {
+      "firstAvg": 1000.0,
+      "secondAvg": 1000.0,
+      "isolation": "REPEATABLE_READ"
+    }
+  }
+]

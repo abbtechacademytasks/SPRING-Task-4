@@ -1,0 +1,768 @@
+databaseChangeLog:
+  - changeSet:
+      id: 100-1
+      author: VagifPashayev
+      context: dev
+      changes:
+        - insert:
+            tableName: departments
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 1
+              - column:
+                  name: name
+                  value: "Development"
+              - column:
+                  name: location
+                  value: "Baku"
+              - column:
+                  name: phone
+                  value: "0124000001"
+        - insert:
+            tableName: departments
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 2
+              - column:
+                  name: name
+                  value: "Finance"
+              - column:
+                  name: location
+                  value: "Baku"
+              - column:
+                  name: phone
+                  value: "0124000002"
+        - insert:
+            tableName: departments
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 3
+              - column:
+                  name: name
+                  value: "Support"
+              - column:
+                  name: location
+                  value: "Ganja"
+              - column:
+                  name: phone
+                  value: "0224000003"
+        - sql:
+            sql: >
+              SELECT setval(pg_get_serial_sequence('departments', 'id'),
+              COALESCE(MAX(id), 1), MAX(id) IS NOT NULL) FROM departments
+      rollback:
+        - delete:
+            tableName: departments
+            where: id IN (1, 2, 3)
+        - sql:
+            sql: >
+              SELECT setval(pg_get_serial_sequence('departments', 'id'),
+              COALESCE(MAX(id), 1), MAX(id) IS NOT NULL) FROM departments
+
+  - changeSet:
+      id: 100-2
+      author: VagifPashayev
+      context: dev
+      changes:
+        - insert:
+            tableName: employees
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 1
+              - column:
+                  name: name
+                  value: "Ali"
+              - column:
+                  name: surname
+                  value: "Aliyev"
+              - column:
+                  name: salary
+                  valueNumeric: 1000
+              - column:
+                  name: department_id
+                  valueNumeric: 1
+        - insert:
+            tableName: employees
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 2
+              - column:
+                  name: name
+                  value: "Leyla"
+              - column:
+                  name: surname
+                  value: "Mammadova"
+              - column:
+                  name: salary
+                  valueNumeric: 1500
+              - column:
+                  name: department_id
+                  valueNumeric: 1
+        - insert:
+            tableName: employees
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 3
+              - column:
+                  name: name
+                  value: "Murad"
+              - column:
+                  name: surname
+                  value: "Hasanov"
+              - column:
+                  name: salary
+                  valueNumeric: 2000
+              - column:
+                  name: department_id
+                  valueNumeric: 1
+        - insert:
+            tableName: employees
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 4
+              - column:
+                  name: name
+                  value: "Aysel"
+              - column:
+                  name: surname
+                  value: "Karimova"
+              - column:
+                  name: salary
+                  valueNumeric: 9000
+              - column:
+                  name: department_id
+                  valueNumeric: 2
+        - insert:
+            tableName: employees
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 5
+              - column:
+                  name: name
+                  value: "Nigar"
+              - column:
+                  name: surname
+                  value: "Huseynova"
+              - column:
+                  name: salary
+                  valueNumeric: 2500
+              - column:
+                  name: department_id
+                  valueNumeric: 2
+        - insert:
+            tableName: employees
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 6
+              - column:
+                  name: name
+                  value: "Orkhan"
+              - column:
+                  name: surname
+                  value: "Abbasov"
+              - column:
+                  name: salary
+                  valueNumeric: 3000
+              - column:
+                  name: department_id
+                  valueNumeric: 2
+        - insert:
+            tableName: employees
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 7
+              - column:
+                  name: name
+                  value: "Rauf"
+              - column:
+                  name: surname
+                  value: "Ibrahimov"
+              - column:
+                  name: salary
+                  valueNumeric: 1200
+              - column:
+                  name: department_id
+                  valueNumeric: 3
+        - insert:
+            tableName: employees
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 8
+              - column:
+                  name: name
+                  value: "Sabina"
+              - column:
+                  name: surname
+                  value: "Guliyeva"
+              - column:
+                  name: salary
+                  valueNumeric: 1800
+              - column:
+                  name: department_id
+                  valueNumeric: 3
+        - insert:
+            tableName: employees
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 9
+              - column:
+                  name: name
+                  value: "Kamran"
+              - column:
+                  name: surname
+                  value: "Jafarov"
+              - column:
+                  name: salary
+                  valueNumeric: 2200
+              - column:
+                  name: department_id
+                  valueNumeric: 3
+        - insert:
+            tableName: employees
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 10
+              - column:
+                  name: name
+                  value: "Lala"
+              - column:
+                  name: surname
+                  value: "Ismayilova"
+              - column:
+                  name: salary
+                  valueNumeric: 1600
+              - column:
+                  name: department_id
+                  valueNumeric: 3
+        - sql:
+            sql: >
+              SELECT setval(pg_get_serial_sequence('employees', 'id'),
+              COALESCE(MAX(id), 1), MAX(id) IS NOT NULL) FROM employees
+      rollback:
+        - delete:
+            tableName: employees
+            where: id IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+        - sql:
+            sql: >
+              SELECT setval(pg_get_serial_sequence('employees', 'id'),
+              COALESCE(MAX(id), 1), MAX(id) IS NOT NULL) FROM employees
+
+  - changeSet:
+      id: 100-3
+      author: VagifPashayev
+      context: dev
+      changes:
+        - insert:
+            tableName: courses
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 1
+              - column:
+                  name: title
+                  value: "Java Basics"
+              - column:
+                  name: credit
+                  valueNumeric: 5
+              - column:
+                  name: teacher
+                  value: "Ruslan"
+              - column:
+                  name: capacity
+                  valueNumeric: 1
+        - insert:
+            tableName: courses
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 2
+              - column:
+                  name: title
+                  value: "Spring Boot"
+              - column:
+                  name: credit
+                  valueNumeric: 6
+              - column:
+                  name: teacher
+                  value: "Ruslan"
+              - column:
+                  name: capacity
+                  valueNumeric: 30
+        - insert:
+            tableName: courses
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 3
+              - column:
+                  name: title
+                  value: "SQL"
+              - column:
+                  name: credit
+                  valueNumeric: 5
+              - column:
+                  name: teacher
+                  value: "Aysel"
+              - column:
+                  name: capacity
+                  valueNumeric: 30
+        - insert:
+            tableName: courses
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 4
+              - column:
+                  name: title
+                  value: "Algorithms"
+              - column:
+                  name: credit
+                  valueNumeric: 4
+              - column:
+                  name: teacher
+                  value: "Murad"
+              - column:
+                  name: capacity
+                  valueNumeric: 30
+        - insert:
+            tableName: courses
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 5
+              - column:
+                  name: title
+                  value: "Testing"
+              - column:
+                  name: credit
+                  valueNumeric: 3
+              - column:
+                  name: teacher
+                  value: "Leyla"
+              - column:
+                  name: capacity
+                  valueNumeric: 30
+        - sql:
+            sql: >
+              SELECT setval(pg_get_serial_sequence('courses', 'id'),
+              COALESCE(MAX(id), 1), MAX(id) IS NOT NULL) FROM courses
+      rollback:
+        - delete:
+            tableName: courses
+            where: id IN (1, 2, 3, 4, 5)
+        - sql:
+            sql: >
+              SELECT setval(pg_get_serial_sequence('courses', 'id'),
+              COALESCE(MAX(id), 1), MAX(id) IS NOT NULL) FROM courses
+
+  - changeSet:
+      id: 100-4
+      author: VagifPashayev
+      context: dev
+      changes:
+        - insert:
+            tableName: students
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 1
+              - column:
+                  name: name
+                  value: "Ana"
+              - column:
+                  name: surname
+                  value: "Aliyeva"
+              - column:
+                  name: age
+                  valueNumeric: 20
+        - insert:
+            tableName: students
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 2
+              - column:
+                  name: name
+                  value: "Boris"
+              - column:
+                  name: surname
+                  value: "Ivanov"
+              - column:
+                  name: age
+                  valueNumeric: 21
+        - insert:
+            tableName: students
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 3
+              - column:
+                  name: name
+                  value: "Cemal"
+              - column:
+                  name: surname
+                  value: "Hasanov"
+              - column:
+                  name: age
+                  valueNumeric: 22
+        - insert:
+            tableName: students
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 4
+              - column:
+                  name: name
+                  value: "Farid"
+              - column:
+                  name: surname
+                  value: "Mammadov"
+              - column:
+                  name: age
+                  valueNumeric: 20
+        - insert:
+            tableName: students
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 5
+              - column:
+                  name: name
+                  value: "Gunel"
+              - column:
+                  name: surname
+                  value: "Karimova"
+              - column:
+                  name: age
+                  valueNumeric: 23
+        - insert:
+            tableName: students
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 6
+              - column:
+                  name: name
+                  value: "Ilkin"
+              - column:
+                  name: surname
+                  value: "Huseynov"
+              - column:
+                  name: age
+                  valueNumeric: 21
+        - insert:
+            tableName: students
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 7
+              - column:
+                  name: name
+                  value: "Jala"
+              - column:
+                  name: surname
+                  value: "Abbasova"
+              - column:
+                  name: age
+                  valueNumeric: 20
+        - insert:
+            tableName: students
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 8
+              - column:
+                  name: name
+                  value: "Kenan"
+              - column:
+                  name: surname
+                  value: "Ibrahimov"
+              - column:
+                  name: age
+                  valueNumeric: 22
+        - insert:
+            tableName: students
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 9
+              - column:
+                  name: name
+                  value: "Laman"
+              - column:
+                  name: surname
+                  value: "Guliyeva"
+              - column:
+                  name: age
+                  valueNumeric: 21
+        - insert:
+            tableName: students
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 10
+              - column:
+                  name: name
+                  value: "Nurlan"
+              - column:
+                  name: surname
+                  value: "Jafarov"
+              - column:
+                  name: age
+                  valueNumeric: 23
+        - sql:
+            sql: >
+              SELECT setval(pg_get_serial_sequence('students', 'id'),
+              COALESCE(MAX(id), 1), MAX(id) IS NOT NULL) FROM students
+      rollback:
+        - delete:
+            tableName: students
+            where: id IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+        - sql:
+            sql: >
+              SELECT setval(pg_get_serial_sequence('students', 'id'),
+              COALESCE(MAX(id), 1), MAX(id) IS NOT NULL) FROM students
+
+  - changeSet:
+      id: 100-5
+      author: VagifPashayev
+      context: dev
+      changes:
+        - insert:
+            tableName: authors
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 1
+              - column:
+                  name: name
+                  value: "Anar"
+              - column:
+                  name: surname
+                  value: "Rzayev"
+              - column:
+                  name: country
+                  value: "Azerbaijan"
+        - insert:
+            tableName: authors
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 2
+              - column:
+                  name: name
+                  value: "Elchin"
+              - column:
+                  name: surname
+                  value: "Afandiyev"
+              - column:
+                  name: country
+                  value: "Azerbaijan"
+        - insert:
+            tableName: authors
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 3
+              - column:
+                  name: name
+                  value: "George"
+              - column:
+                  name: surname
+                  value: "Orwell"
+              - column:
+                  name: country
+                  value: "United Kingdom"
+        - insert:
+            tableName: authors
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 4
+              - column:
+                  name: name
+                  value: "Jane"
+              - column:
+                  name: surname
+                  value: "Austen"
+              - column:
+                  name: country
+                  value: "United Kingdom"
+        - insert:
+            tableName: authors
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 5
+              - column:
+                  name: name
+                  value: "Mark"
+              - column:
+                  name: surname
+                  value: "Twain"
+              - column:
+                  name: country
+                  value: "United States"
+        - sql:
+            sql: >
+              SELECT setval(pg_get_serial_sequence('authors', 'id'),
+              COALESCE(MAX(id), 1), MAX(id) IS NOT NULL) FROM authors
+      rollback:
+        - delete:
+            tableName: authors
+            where: id IN (1, 2, 3, 4, 5)
+        - sql:
+            sql: >
+              SELECT setval(pg_get_serial_sequence('authors', 'id'),
+              COALESCE(MAX(id), 1), MAX(id) IS NOT NULL) FROM authors
+
+  - changeSet:
+      id: 100-6
+      author: VagifPashayev
+      context: dev
+      changes:
+        - insert:
+            tableName: books
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 1
+              - column:
+                  name: title
+                  value: "Java Notes"
+              - column:
+                  name: price
+                  valueNumeric: 25
+              - column:
+                  name: page_count
+                  valueNumeric: 240
+        - insert:
+            tableName: books
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 2
+              - column:
+                  name: title
+                  value: "Spring Guide"
+              - column:
+                  name: price
+                  valueNumeric: 35
+              - column:
+                  name: page_count
+                  valueNumeric: 320
+        - insert:
+            tableName: books
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 3
+              - column:
+                  name: title
+                  value: "SQL Practice"
+              - column:
+                  name: price
+                  valueNumeric: 20
+              - column:
+                  name: page_count
+                  valueNumeric: 180
+        - insert:
+            tableName: books
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 4
+              - column:
+                  name: title
+                  value: "Database Design"
+              - column:
+                  name: price
+                  valueNumeric: 40
+              - column:
+                  name: page_count
+                  valueNumeric: 360
+        - insert:
+            tableName: books
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 5
+              - column:
+                  name: title
+                  value: "Algorithms Handbook"
+              - column:
+                  name: price
+                  valueNumeric: 45
+              - column:
+                  name: page_count
+                  valueNumeric: 420
+        - insert:
+            tableName: books
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 6
+              - column:
+                  name: title
+                  value: "Testing Basics"
+              - column:
+                  name: price
+                  valueNumeric: 15
+              - column:
+                  name: page_count
+                  valueNumeric: 160
+        - insert:
+            tableName: books
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 7
+              - column:
+                  name: title
+                  value: "Clean API"
+              - column:
+                  name: price
+                  valueNumeric: 30
+              - column:
+                  name: page_count
+                  valueNumeric: 280
+        - insert:
+            tableName: books
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 8
+              - column:
+                  name: title
+                  value: "Concurrency Notes"
+              - column:
+                  name: price
+                  valueNumeric: 50
+              - column:
+                  name: page_count
+                  valueNumeric: 400
+        - sql:
+            sql: >
+              SELECT setval(pg_get_serial_sequence('books', 'id'),
+              COALESCE(MAX(id), 1), MAX(id) IS NOT NULL) FROM books
+      rollback:
+        - delete:
+            tableName: books
+            where: id IN (1, 2, 3, 4, 5, 6, 7, 8)
+        - sql:
+            sql: >
+              SELECT setval(pg_get_serial_sequence('books', 'id'),
+              COALESCE(MAX(id), 1), MAX(id) IS NOT NULL) FROM books

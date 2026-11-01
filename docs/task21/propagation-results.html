@@ -1,0 +1,26 @@
+<!doctype html><html lang="az"><meta charset="utf-8"><title>Task21 · Propagation yoxlaması</title><style>body{margin:38px auto;max-width:1500px;padding:0 36px;font:20px/1.5 system-ui;color:#17233c;background:#f7f9fc}h1{font-size:34px;margin-bottom:8px}h2{font-size:26px;margin:28px 0 12px}.note{color:#52627c}table{border-collapse:collapse;width:100%;background:white;margin:12px 0 22px}th,td{padding:18px 22px;text-align:left;border:1px solid #ccd6e5}th{background:#e6edf8}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:17px/1.45 Consolas,monospace;background:white;border:1px solid #ccd6e5;padding:20px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.ok{color:#087345;font-weight:700}a{color:#235ba4}</style><h1>Task21 · Propagation yoxlaması</h1><p class="note">02.11.2026 · real HTTP və PostgreSQL nəticələri · hesabat görünüşü</p><div class="grid"><section><h2>C1 · Transfer rədd edildi</h2><pre>{
+  "status": 409,
+  "body": {
+    "detail": "Salary cannot exceed 10000",
+    "instance": "/test-demo/api/employees/26/transfer",
+    "status": 409,
+    "title": "Conflict"
+  }
+}</pre></section><section><h2>C1 · GET /employees/26</h2><pre>{
+  "id": 26,
+  "name": "FinalEvidence",
+  "surname": "6bdefeb1a6e74d72986d4d369d5a56f8",
+  "salary": 9000,
+  "departmentId": 1,
+  "departmentName": "Development"
+}</pre></section></div><h2>C2 · Əsas rollback-dən sonra audit_logs</h2><pre>  action  | entity_name | entity_id | status |          message           
+----------+-------------+-----------+--------+----------------------------
+ TRANSFER | Employee    |        26 | FAILED | Salary cannot exceed 10000
+(1 row)
+
+</pre><h2>C3 · Tranzaksiyasız MANDATORY → HTTP409</h2><pre>{
+  "detail": "No existing transaction found for transaction marked with propagation 'mandatory'",
+  "instance": "/test-demo/api/tx-demo/reserve-seat/1",
+  "status": 409,
+  "title": "Conflict"
+}</pre></html>

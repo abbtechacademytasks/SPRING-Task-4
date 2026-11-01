@@ -1,0 +1,25 @@
+  id   |               md5sum               | exectype 
+-------+------------------------------------+----------
+ 001-1 | 9:231f6a33b969c53d3caa0ee2c4f7618a | EXECUTED
+(1 row)
+
+ character_maximum_length 
+--------------------------
+                       50
+(1 row)
+
+ changesets 
+------------
+         32
+(1 row)
+
+ courses 
+---------
+       5
+(1 row)
+
+ locked 
+--------
+ f
+(1 row)
+

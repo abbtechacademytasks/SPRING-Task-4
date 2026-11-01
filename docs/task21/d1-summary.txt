@@ -1,0 +1,2 @@
+READ_COMMITTED: first=1000, second=3000, writer=399ms, reader=5088ms
+REPEATABLE_READ: first=1000, second=1000, writer=253ms, reader=5014ms

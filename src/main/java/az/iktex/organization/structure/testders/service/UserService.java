@@ -14,6 +14,7 @@ import az.iktex.organization.structure.testders.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class UserService {
     private final UserMapper userMapper;
     private final PassportMapper passportMapper;
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public UserResponse create(UserRequest request) {
         if (userRepository.existsByEmail(request.email())) {
             throw new IllegalStateException("Email already exists");
@@ -47,7 +48,7 @@ public class UserService {
         return userMapper.toResponse(user);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public UserResponse update(Long id, UserRequest request) {
         User user = userRepository.findByIdWithPassport(id)
                 .orElseThrow(() ->
@@ -62,7 +63,7 @@ public class UserService {
         return userMapper.toResponse(user);
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public void delete(Long id) {
         User user = userRepository.findByIdWithPassport(id)
                 .orElseThrow(() ->
@@ -93,7 +94,7 @@ public class UserService {
         );
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public PassportResponse addPassport(Long userId, PassportRequest request) {
         User user = userRepository.findByIdWithPassport(userId)
                 .orElseThrow(() ->
@@ -127,7 +128,7 @@ public class UserService {
         return passportMapper.toResponse(user.getPassport());
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public void deletePassport(Long userId) {
         User user = userRepository.findByIdWithPassport(userId)
                 .orElseThrow(() ->

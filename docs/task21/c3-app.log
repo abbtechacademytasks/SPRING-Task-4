@@ -1,0 +1,696 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.2)
+
+2026-11-01T15:00:29.335+04:00  INFO 46184 --- [test-demo-api] [           main] a.i.o.s.testders.SchoolApplication       : Starting SchoolApplication v0.0.1-SNAPSHOT using Java 25.0.4.1 with PID 46184 (C:\Users\USER\Desktop\ABB Tech Academy\SPRING-Task-4\build\libs\test-ders-0.0.1-SNAPSHOT.jar started by USER in C:\Users\USER\Desktop\ABB Tech Academy\SPRING-Task-4)
+2026-11-01T15:00:29.339+04:00  INFO 46184 --- [test-demo-api] [           main] a.i.o.s.testders.SchoolApplication       : No active profile set, falling back to 1 default profile: "default"
+2026-11-01T15:00:29.999+04:00  INFO 46184 --- [test-demo-api] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-01T15:00:30.079+04:00  INFO 46184 --- [test-demo-api] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 70 ms. Found 10 JPA repository interfaces.
+2026-11-01T15:00:30.640+04:00  INFO 46184 --- [test-demo-api] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-11-01T15:00:30.653+04:00  INFO 46184 --- [test-demo-api] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-11-01T15:00:30.653+04:00  INFO 46184 --- [test-demo-api] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.27]
+2026-11-01T15:00:30.688+04:00  INFO 46184 --- [test-demo-api] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1299 ms
+2026-11-01T15:00:30.869+04:00  INFO 46184 --- [test-demo-api] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-01T15:00:31.020+04:00  INFO 46184 --- [test-demo-api] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@401c4250
+2026-11-01T15:00:31.021+04:00  INFO 46184 --- [test-demo-api] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-01T15:00:31.179+04:00  INFO 46184 --- [test-demo-api] [           main] liquibase.database                       : Set default schema name to public
+2026-11-01T15:00:32.712+04:00  INFO 46184 --- [test-demo-api] [           main] liquibase.changelog                      : Reading from public.databasechangelog
+2026-11-01T15:00:32.887+04:00  INFO 46184 --- [test-demo-api] [           main] liquibase.ui                             : Database is up to date, no changesets to execute
+2026-11-01T15:00:32.889+04:00  INFO 46184 --- [test-demo-api] [           main] liquibase.changelog                      : Reading from public.databasechangelog
+2026-11-01T15:00:32.907+04:00  INFO 46184 --- [test-demo-api] [           main] liquibase.util                           : UPDATE SUMMARY
+2026-11-01T15:00:32.907+04:00  INFO 46184 --- [test-demo-api] [           main] liquibase.util                           : Run:                          0
+2026-11-01T15:00:32.907+04:00  INFO 46184 --- [test-demo-api] [           main] liquibase.util                           : Previously run:              32
+2026-11-01T15:00:32.907+04:00  INFO 46184 --- [test-demo-api] [           main] liquibase.util                           : Filtered out:                 0
+2026-11-01T15:00:32.907+04:00  INFO 46184 --- [test-demo-api] [           main] liquibase.util                           : -------------------------------
+2026-11-01T15:00:32.908+04:00  INFO 46184 --- [test-demo-api] [           main] liquibase.util                           : Total change sets:           32
+2026-11-01T15:00:32.908+04:00  INFO 46184 --- [test-demo-api] [           main] liquibase.util                           : Update summary generated
+2026-11-01T15:00:32.909+04:00  INFO 46184 --- [test-demo-api] [           main] liquibase.command                        : Command execution complete
+2026-11-01T15:00:32.992+04:00  INFO 46184 --- [test-demo-api] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-11-01T15:00:33.041+04:00  INFO 46184 --- [test-demo-api] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.13.Final
+2026-11-01T15:00:33.061+04:00  INFO 46184 --- [test-demo-api] [           main] org.hibernate.orm.cache                  : HHH90001028: Second-level cache region factory [org.hibernate.cache.jcache.internal.JCacheRegionFactory]
+2026-11-01T15:00:33.419+04:00  INFO 46184 --- [test-demo-api] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-01T15:00:33.490+04:00  INFO 46184 --- [test-demo-api] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/school_task21_db]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.15
+	Default catalog/schema: school_task21_db/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by org.ehcache.impl.internal.concurrent.ThreadLocalRandomUtil (jar:nested:/C:/Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/libs/test-ders-0.0.1-SNAPSHOT.jar/!BOOT-INF/lib/ehcache-3.10.8-jakarta.jar!/)
+WARNING: Please consider reporting this to the maintainers of class org.ehcache.impl.internal.concurrent.ThreadLocalRandomUtil
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+2026-11-01T15:00:34.124+04:00  INFO 46184 --- [test-demo-api] [           main] org.ehcache.core.EhcacheManager          : Cache 'courses' created in EhcacheManager.
+2026-11-01T15:00:34.124+04:00  INFO 46184 --- [test-demo-api] [           main] org.ehcache.core.EhcacheManager          : Cache 'book-authorBooks' created in EhcacheManager.
+2026-11-01T15:00:34.125+04:00  INFO 46184 --- [test-demo-api] [           main] org.ehcache.core.EhcacheManager          : Cache 'books' created in EhcacheManager.
+2026-11-01T15:00:34.127+04:00  INFO 46184 --- [test-demo-api] [           main] org.ehcache.core.EhcacheManager          : Cache 'author-authorBooks' created in EhcacheManager.
+2026-11-01T15:00:34.129+04:00  INFO 46184 --- [test-demo-api] [           main] org.ehcache.core.EhcacheManager          : Cache 'default-query-results-region' created in EhcacheManager.
+2026-11-01T15:00:34.130+04:00  INFO 46184 --- [test-demo-api] [           main] org.ehcache.core.EhcacheManager          : Cache 'default-update-timestamps-region' created in EhcacheManager.
+2026-11-01T15:00:34.132+04:00  INFO 46184 --- [test-demo-api] [           main] org.ehcache.core.EhcacheManager          : Cache 'departments' created in EhcacheManager.
+2026-11-01T15:00:34.133+04:00  INFO 46184 --- [test-demo-api] [           main] org.ehcache.core.EhcacheManager          : Cache 'author-books' created in EhcacheManager.
+2026-11-01T15:00:34.134+04:00  INFO 46184 --- [test-demo-api] [           main] org.ehcache.core.EhcacheManager          : Cache 'authors' created in EhcacheManager.
+2026-11-01T15:00:34.234+04:00  INFO 46184 --- [test-demo-api] [           main] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=jar.nested./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/libs/test-ders-0.0.1-SNAPSHOT.jar/!BOOT-INF/classes/!/ehcache.xml,Cache=courses
+2026-11-01T15:00:34.237+04:00  INFO 46184 --- [test-demo-api] [           main] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=jar.nested./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/libs/test-ders-0.0.1-SNAPSHOT.jar/!BOOT-INF/classes/!/ehcache.xml,Cache=book-authorBooks
+2026-11-01T15:00:34.237+04:00  INFO 46184 --- [test-demo-api] [           main] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=jar.nested./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/libs/test-ders-0.0.1-SNAPSHOT.jar/!BOOT-INF/classes/!/ehcache.xml,Cache=books
+2026-11-01T15:00:34.237+04:00  INFO 46184 --- [test-demo-api] [           main] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=jar.nested./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/libs/test-ders-0.0.1-SNAPSHOT.jar/!BOOT-INF/classes/!/ehcache.xml,Cache=author-authorBooks
+2026-11-01T15:00:34.238+04:00  INFO 46184 --- [test-demo-api] [           main] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=jar.nested./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/libs/test-ders-0.0.1-SNAPSHOT.jar/!BOOT-INF/classes/!/ehcache.xml,Cache=default-query-results-region
+2026-11-01T15:00:34.238+04:00  INFO 46184 --- [test-demo-api] [           main] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=jar.nested./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/libs/test-ders-0.0.1-SNAPSHOT.jar/!BOOT-INF/classes/!/ehcache.xml,Cache=default-update-timestamps-region
+2026-11-01T15:00:34.239+04:00  INFO 46184 --- [test-demo-api] [           main] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=jar.nested./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/libs/test-ders-0.0.1-SNAPSHOT.jar/!BOOT-INF/classes/!/ehcache.xml,Cache=departments
+2026-11-01T15:00:34.239+04:00  INFO 46184 --- [test-demo-api] [           main] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=jar.nested./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/libs/test-ders-0.0.1-SNAPSHOT.jar/!BOOT-INF/classes/!/ehcache.xml,Cache=author-books
+2026-11-01T15:00:34.240+04:00  INFO 46184 --- [test-demo-api] [           main] org.ehcache.jsr107.Eh107CacheManager     : Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=jar.nested./C./Users/USER/Desktop/ABB%20Tech%20Academy/SPRING-Task-4/build/libs/test-ders-0.0.1-SNAPSHOT.jar/!BOOT-INF/classes/!/ehcache.xml,Cache=authors
+2026-11-01T15:00:34.870+04:00  INFO 46184 --- [test-demo-api] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-01T15:00:34.915+04:00  INFO 46184 --- [test-demo-api] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-01T15:00:34.988+04:00  INFO 46184 --- [test-demo-api] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-01T15:00:35.587+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.AuthorService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.618+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.AuthorService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.618+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.AuthorService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.618+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.AuthorService.getAll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.618+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.AuthorService.getById' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.618+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.AuthorService.getAllWithoutBooks' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.619+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.AuthorService.getBooks' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.678+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.BookService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.679+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.BookService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.679+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.BookService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.679+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.BookService.getAll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.679+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.BookService.getById' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.679+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.BookService.removeAuthor' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.679+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.BookService.getCheaperThan' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.679+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.BookService.addAuthor' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.754+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.CourseService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.755+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.CourseService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.755+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.CourseService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.755+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.CourseService.getAll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.755+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.CourseService.getById' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.756+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.CourseService.getByStudent' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.756+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.CourseService.getStudents' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.756+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.CourseService.getStudentCount' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.810+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.DepartmentService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.811+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.DepartmentService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.811+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.DepartmentService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.812+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.DepartmentService.getAll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.812+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.DepartmentService.getById' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.812+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.DepartmentService.getAllWithoutEmployees' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.842+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.SalaryService.raise' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.857+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.AuditLogService.log' with attribute: PROPAGATION_REQUIRES_NEW,ISOLATION_DEFAULT
+2026-11-01T15:00:35.863+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EmployeeService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.864+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EmployeeService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.864+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EmployeeService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.864+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EmployeeService.transfer' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.864+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EmployeeService.getById' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.864+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EmployeeService.getBySalaryRange' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.864+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EmployeeService.getByDepartment' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.864+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EmployeeService.getAverageSalary' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.871+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.EnrollmentService.reserveSeat' with attribute: PROPAGATION_MANDATORY,ISOLATION_DEFAULT
+2026-11-01T15:00:35.877+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.StudentService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.878+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.StudentService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.879+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.StudentService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.879+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.StudentService.getAll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.879+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.StudentService.getById' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.879+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.StudentService.getAllWithoutCourses' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.879+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.StudentService.unenroll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.879+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.StudentService.enroll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.919+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.update' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.920+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.create' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.920+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.delete' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.920+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.getAll' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.920+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.getById' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.920+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.addPassport' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.920+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.deletePassport' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:35.920+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.getAllWithoutPassport' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.920+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.getPassport' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:35.921+04:00 TRACE 46184 --- [test-demo-api] [           main] t.a.AnnotationTransactionAttributeSource : Adding transactional method 'az.iktex.organization.structure.testders.service.UserService.getByEmail' with attribute: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:36.368+04:00  INFO 46184 --- [test-demo-api] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/test-demo'
+2026-11-01T15:00:36.374+04:00  INFO 46184 --- [test-demo-api] [           main] a.i.o.s.testders.SchoolApplication       : Started SchoolApplication in 7.52 seconds (process running for 8.04)
+2026-11-01T15:00:46.140+04:00  INFO 46184 --- [test-demo-api] [nio-8080-exec-1] o.a.c.c.C.[.[localhost].[/test-demo]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-11-01T15:00:46.140+04:00  INFO 46184 --- [test-demo-api] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-11-01T15:00:46.142+04:00  INFO 46184 --- [test-demo-api] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2026-11-01T15:00:46.464+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.CourseService.getStudentCount]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:46.465+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(1831357032<open>)] for JPA transaction
+2026-11-01T15:00:46.470+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@6b85cf30]
+2026-11-01T15:00:46.471+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-5] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.CourseService.getStudentCount]
+2026-11-01T15:00:46.473+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1831357032<open>)] for JPA transaction
+2026-11-01T15:00:46.473+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:46.473+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-5] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsById]
+Hibernate: 
+    select
+        count(*) 
+    from
+        courses c1_0 
+    where
+        c1_0.id=?
+2026-11-01T15:00:46.587+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-5] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsById]
+2026-11-01T15:00:46.588+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-5] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.countStudentsByCourseId]: This method is not transactional.
+Hibernate: 
+    select
+        (select
+            count(*) 
+        from
+            student_course s1_0 
+        where
+            c1_0.id=s1_0.course_id) 
+    from
+        courses c1_0 
+    where
+        c1_0.id=?
+2026-11-01T15:00:46.620+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-5] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.CourseService.getStudentCount]
+2026-11-01T15:00:46.620+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-01T15:00:46.621+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1831357032<open>)]
+2026-11-01T15:00:46.623+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-5] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager after transaction
+2026-11-01T15:00:46.749+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.StudentService.create]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:46.749+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(1966779773<open>)] for JPA transaction
+2026-11-01T15:00:46.750+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@3cb2fc19]
+2026-11-01T15:00:46.750+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-4] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.StudentService.create]
+2026-11-01T15:00:46.750+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1966779773<open>)] for JPA transaction
+2026-11-01T15:00:46.750+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:46.750+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-4] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+Hibernate: 
+    insert 
+    into
+        students
+        (age, name, surname) 
+    values
+        (?, ?, ?)
+2026-11-01T15:00:46.786+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-4] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2026-11-01T15:00:46.786+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-4] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.StudentService.create]
+2026-11-01T15:00:46.786+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-01T15:00:46.786+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1966779773<open>)]
+2026-11-01T15:00:46.826+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-4] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager after transaction
+2026-11-01T15:00:46.910+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.StudentService.create]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:46.911+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(491989147<open>)] for JPA transaction
+2026-11-01T15:00:46.911+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@1394d541]
+2026-11-01T15:00:46.911+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-6] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.StudentService.create]
+2026-11-01T15:00:46.911+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(491989147<open>)] for JPA transaction
+2026-11-01T15:00:46.911+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:46.911+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-6] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+Hibernate: 
+    insert 
+    into
+        students
+        (age, name, surname) 
+    values
+        (?, ?, ?)
+2026-11-01T15:00:46.914+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-6] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]
+2026-11-01T15:00:46.914+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-6] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.StudentService.create]
+2026-11-01T15:00:46.914+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-01T15:00:46.914+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(491989147<open>)]
+2026-11-01T15:00:46.946+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-6] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager after transaction
+2026-11-01T15:00:47.034+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.StudentService.enroll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:47.034+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(2019571105<open>)] for JPA transaction
+2026-11-01T15:00:47.034+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@192387bb]
+2026-11-01T15:00:47.034+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.StudentService.enroll]
+2026-11-01T15:00:47.035+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByIdWithCourses]: This method is not transactional.
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.age,
+        c1_0.student_id,
+        c1_1.id,
+        c1_1.capacity,
+        c1_1.credit,
+        c1_1.teacher,
+        c1_1.title,
+        s1_0.name,
+        s1_0.surname 
+    from
+        students s1_0 
+    left join
+        student_course c1_0 
+            on s1_0.id=c1_0.student_id 
+    left join
+        courses c1_1 
+            on c1_1.id=c1_0.course_id 
+    where
+        s1_0.id=?
+2026-11-01T15:00:47.058+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(2019571105<open>)] for JPA transaction
+2026-11-01T15:00:47.058+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:47.058+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+Hibernate: 
+    select
+        c1_0.id,
+        c1_0.capacity,
+        c1_0.credit,
+        c1_0.teacher,
+        c1_0.title 
+    from
+        courses c1_0 
+    where
+        c1_0.id=?
+2026-11-01T15:00:47.068+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2026-11-01T15:00:47.069+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsByIdAndCoursesId]: This method is not transactional.
+Hibernate: 
+    select
+        s1_0.id 
+    from
+        students s1_0 
+    left join
+        student_course c1_0 
+            on s1_0.id=c1_0.student_id 
+    where
+        s1_0.id=? 
+        and c1_0.course_id=? 
+    fetch
+        first ? rows only
+2026-11-01T15:00:47.093+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(2019571105<open>)] for JPA transaction
+2026-11-01T15:00:47.093+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:47.093+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.EnrollmentService.reserveSeat]
+2026-11-01T15:00:47.093+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(2019571105<open>)] for JPA transaction
+2026-11-01T15:00:47.093+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:47.093+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2026-11-01T15:00:47.094+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2026-11-01T15:00:47.095+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.countStudentsByCourseId]: This method is not transactional.
+Hibernate: 
+    select
+        (select
+            count(*) 
+        from
+            student_course s1_0 
+        where
+            c1_0.id=s1_0.course_id) 
+    from
+        courses c1_0 
+    where
+        c1_0.id=?
+2026-11-01T15:00:47.099+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.EnrollmentService.reserveSeat]
+Hibernate: 
+    select
+        s1_0.course_id,
+        s1_1.id,
+        s1_1.age,
+        s1_1.name,
+        s1_1.surname 
+    from
+        student_course s1_0 
+    join
+        students s1_1 
+            on s1_1.id=s1_0.student_id 
+    where
+        s1_0.course_id=?
+2026-11-01T15:00:47.103+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.StudentService.enroll]
+2026-11-01T15:00:47.103+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-01T15:00:47.103+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(2019571105<open>)]
+Hibernate: 
+    insert 
+    into
+        student_course
+        (student_id, course_id) 
+    values
+        (?, ?)
+2026-11-01T15:00:47.148+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-7] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager after transaction
+2026-11-01T15:00:47.236+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.CourseService.getStudentCount]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:47.237+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(1270896650<open>)] for JPA transaction
+2026-11-01T15:00:47.237+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@4507af02]
+2026-11-01T15:00:47.237+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.CourseService.getStudentCount]
+2026-11-01T15:00:47.237+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1270896650<open>)] for JPA transaction
+2026-11-01T15:00:47.237+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:47.237+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsById]
+Hibernate: 
+    select
+        count(*) 
+    from
+        courses c1_0 
+    where
+        c1_0.id=?
+2026-11-01T15:00:47.240+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsById]
+2026-11-01T15:00:47.240+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.countStudentsByCourseId]: This method is not transactional.
+Hibernate: 
+    select
+        (select
+            count(*) 
+        from
+            student_course s1_0 
+        where
+            c1_0.id=s1_0.course_id) 
+    from
+        courses c1_0 
+    where
+        c1_0.id=?
+2026-11-01T15:00:47.242+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-8] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.CourseService.getStudentCount]
+2026-11-01T15:00:47.242+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-01T15:00:47.242+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1270896650<open>)]
+2026-11-01T15:00:47.243+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-8] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager after transaction
+2026-11-01T15:00:47.329+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.StudentService.enroll]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:47.329+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(527071107<open>)] for JPA transaction
+2026-11-01T15:00:47.330+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@11ad9a1e]
+2026-11-01T15:00:47.330+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.StudentService.enroll]
+2026-11-01T15:00:47.330+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByIdWithCourses]: This method is not transactional.
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.age,
+        c1_0.student_id,
+        c1_1.id,
+        c1_1.capacity,
+        c1_1.credit,
+        c1_1.teacher,
+        c1_1.title,
+        s1_0.name,
+        s1_0.surname 
+    from
+        students s1_0 
+    left join
+        student_course c1_0 
+            on s1_0.id=c1_0.student_id 
+    left join
+        courses c1_1 
+            on c1_1.id=c1_0.course_id 
+    where
+        s1_0.id=?
+2026-11-01T15:00:47.333+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(527071107<open>)] for JPA transaction
+2026-11-01T15:00:47.333+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:47.333+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2026-11-01T15:00:47.334+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2026-11-01T15:00:47.334+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsByIdAndCoursesId]: This method is not transactional.
+Hibernate: 
+    select
+        s1_0.id 
+    from
+        students s1_0 
+    left join
+        student_course c1_0 
+            on s1_0.id=c1_0.student_id 
+    where
+        s1_0.id=? 
+        and c1_0.course_id=? 
+    fetch
+        first ? rows only
+2026-11-01T15:00:47.337+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(527071107<open>)] for JPA transaction
+2026-11-01T15:00:47.338+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:47.338+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.EnrollmentService.reserveSeat]
+2026-11-01T15:00:47.338+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(527071107<open>)] for JPA transaction
+2026-11-01T15:00:47.338+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:47.338+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2026-11-01T15:00:47.338+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2026-11-01T15:00:47.338+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.countStudentsByCourseId]: This method is not transactional.
+Hibernate: 
+    select
+        (select
+            count(*) 
+        from
+            student_course s1_0 
+        where
+            c1_0.id=s1_0.course_id) 
+    from
+        courses c1_0 
+    where
+        c1_0.id=?
+2026-11-01T15:00:47.341+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.EnrollmentService.reserveSeat] after exception: java.lang.IllegalStateException: Course is full
+2026-11-01T15:00:47.341+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : MethodRollbackEvent: az.iktex.organization.structure.testders.service.EnrollmentService.reserveSeat [java.lang.IllegalStateException: Course is full]
+
+java.lang.IllegalStateException: Course is full
+	at az.iktex.organization.structure.testders.service.EnrollmentService.reserveSeat(EnrollmentService.java:29) ~[!/:0.0.1-SNAPSHOT]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.10.jar!/:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.10.jar!/:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.10.jar!/:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133) ~[spring-tx-7.0.10.jar!/:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371) ~[spring-tx-7.0.10.jar!/:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.10.jar!/:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.10.jar!/:7.0.10]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:714) ~[spring-aop-7.0.10.jar!/:7.0.10]
+	at az.iktex.organization.structure.testders.service.EnrollmentService$$SpringCGLIB$$0.reserveSeat(<generated>) ~[!/:0.0.1-SNAPSHOT]
+	at az.iktex.organization.structure.testders.service.StudentService.enroll(StudentService.java:74) ~[!/:0.0.1-SNAPSHOT]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.10.jar!/:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.10.jar!/:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.10.jar!/:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133) ~[spring-tx-7.0.10.jar!/:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371) ~[spring-tx-7.0.10.jar!/:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.10.jar!/:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.10.jar!/:7.0.10]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:714) ~[spring-aop-7.0.10.jar!/:7.0.10]
+	at az.iktex.organization.structure.testders.service.StudentService$$SpringCGLIB$$0.enroll(<generated>) ~[!/:0.0.1-SNAPSHOT]
+	at az.iktex.organization.structure.testders.controller.StudentController.enroll(StudentController.java:54) ~[!/:0.0.1-SNAPSHOT]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.10.jar!/:7.0.10]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.10.jar!/:7.0.10]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.10.jar!/:7.0.10]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.10.jar!/:7.0.10]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.10.jar!/:7.0.10]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.10.jar!/:7.0.10]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.10.jar!/:7.0.10]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.10.jar!/:7.0.10]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.10.jar!/:7.0.10]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903) ~[spring-webmvc-7.0.10.jar!/:7.0.10]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649) ~[tomcat-embed-core-11.0.27.jar!/:6.1]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.10.jar!/:7.0.10]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.27.jar!/:6.1]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:132) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:59) ~[tomcat-embed-websocket-11.0.27.jar!/:11.0.27]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.10.jar!/:7.0.10]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.10.jar!/:7.0.10]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.10.jar!/:7.0.10]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.10.jar!/:7.0.10]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.10.jar!/:7.0.10]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.10.jar!/:7.0.10]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:164) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:86) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:71) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:347) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:411) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:71) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1308) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:2202) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:74) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:947) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:481) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:74) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[na:na]
+
+2026-11-01T15:00:47.346+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Participating transaction failed - marking existing transaction as rollback-only
+2026-11-01T15:00:47.346+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Setting JPA transaction on EntityManager [SessionImpl(527071107<open>)] rollback-only
+2026-11-01T15:00:47.346+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.StudentService.enroll] after exception: java.lang.IllegalStateException: Course is full
+2026-11-01T15:00:47.346+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.t.i.TransactionInterceptor           : MethodRollbackEvent: az.iktex.organization.structure.testders.service.StudentService.enroll [java.lang.IllegalStateException: Course is full]
+
+java.lang.IllegalStateException: Course is full
+	at az.iktex.organization.structure.testders.service.EnrollmentService.reserveSeat(EnrollmentService.java:29) ~[!/:0.0.1-SNAPSHOT]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.10.jar!/:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.10.jar!/:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.10.jar!/:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133) ~[spring-tx-7.0.10.jar!/:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371) ~[spring-tx-7.0.10.jar!/:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.10.jar!/:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.10.jar!/:7.0.10]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:714) ~[spring-aop-7.0.10.jar!/:7.0.10]
+	at az.iktex.organization.structure.testders.service.EnrollmentService$$SpringCGLIB$$0.reserveSeat(<generated>) ~[!/:0.0.1-SNAPSHOT]
+	at az.iktex.organization.structure.testders.service.StudentService.enroll(StudentService.java:74) ~[!/:0.0.1-SNAPSHOT]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359) ~[spring-aop-7.0.10.jar!/:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) ~[spring-aop-7.0.10.jar!/:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158) ~[spring-aop-7.0.10.jar!/:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133) ~[spring-tx-7.0.10.jar!/:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371) ~[spring-tx-7.0.10.jar!/:7.0.10]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130) ~[spring-tx-7.0.10.jar!/:7.0.10]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-7.0.10.jar!/:7.0.10]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:714) ~[spring-aop-7.0.10.jar!/:7.0.10]
+	at az.iktex.organization.structure.testders.service.StudentService$$SpringCGLIB$$0.enroll(<generated>) ~[!/:0.0.1-SNAPSHOT]
+	at az.iktex.organization.structure.testders.controller.StudentController.enroll(StudentController.java:54) ~[!/:0.0.1-SNAPSHOT]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252) ~[spring-web-7.0.10.jar!/:7.0.10]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184) ~[spring-web-7.0.10.jar!/:7.0.10]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-7.0.10.jar!/:7.0.10]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934) ~[spring-webmvc-7.0.10.jar!/:7.0.10]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853) ~[spring-webmvc-7.0.10.jar!/:7.0.10]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86) ~[spring-webmvc-7.0.10.jar!/:7.0.10]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963) ~[spring-webmvc-7.0.10.jar!/:7.0.10]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866) ~[spring-webmvc-7.0.10.jar!/:7.0.10]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000) ~[spring-webmvc-7.0.10.jar!/:7.0.10]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903) ~[spring-webmvc-7.0.10.jar!/:7.0.10]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649) ~[tomcat-embed-core-11.0.27.jar!/:6.1]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874) ~[spring-webmvc-7.0.10.jar!/:7.0.10]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710) ~[tomcat-embed-core-11.0.27.jar!/:6.1]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:132) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:59) ~[tomcat-embed-websocket-11.0.27.jar!/:11.0.27]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-7.0.10.jar!/:7.0.10]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.10.jar!/:7.0.10]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-7.0.10.jar!/:7.0.10]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.10.jar!/:7.0.10]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199) ~[spring-web-7.0.10.jar!/:7.0.10]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-7.0.10.jar!/:7.0.10]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:164) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:86) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:71) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:347) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:411) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:71) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1308) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:2202) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:74) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:947) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:481) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:74) ~[tomcat-embed-core-11.0.27.jar!/:11.0.27]
+	at java.base/java.lang.Thread.run(Thread.java:1474) ~[na:na]
+
+2026-11-01T15:00:47.347+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction rollback
+2026-11-01T15:00:47.348+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Rolling back JPA transaction on EntityManager [SessionImpl(527071107<open>)]
+2026-11-01T15:00:47.351+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-9] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager after transaction
+2026-11-01T15:00:47.438+04:00 DEBUG 46184 --- [test-demo-api] [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.StudentService.getById]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:47.438+04:00 DEBUG 46184 --- [test-demo-api] [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(946991048<open>)] for JPA transaction
+2026-11-01T15:00:47.438+04:00 DEBUG 46184 --- [test-demo-api] [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@36b616b6]
+2026-11-01T15:00:47.438+04:00 TRACE 46184 --- [test-demo-api] [io-8080-exec-10] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.StudentService.getById]
+2026-11-01T15:00:47.438+04:00 TRACE 46184 --- [test-demo-api] [io-8080-exec-10] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findByIdWithCourses]: This method is not transactional.
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.age,
+        c1_0.student_id,
+        c1_1.id,
+        c1_1.capacity,
+        c1_1.credit,
+        c1_1.teacher,
+        c1_1.title,
+        s1_0.name,
+        s1_0.surname 
+    from
+        students s1_0 
+    left join
+        student_course c1_0 
+            on s1_0.id=c1_0.student_id 
+    left join
+        courses c1_1 
+            on c1_1.id=c1_0.course_id 
+    where
+        s1_0.id=?
+2026-11-01T15:00:47.442+04:00 TRACE 46184 --- [test-demo-api] [io-8080-exec-10] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.StudentService.getById]
+2026-11-01T15:00:47.442+04:00 DEBUG 46184 --- [test-demo-api] [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-01T15:00:47.442+04:00 DEBUG 46184 --- [test-demo-api] [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(946991048<open>)]
+2026-11-01T15:00:47.443+04:00 DEBUG 46184 --- [test-demo-api] [io-8080-exec-10] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager after transaction
+2026-11-01T15:00:47.531+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.StudentService.delete]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:47.531+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(1731636106<open>)] for JPA transaction
+2026-11-01T15:00:47.531+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@3752a41b]
+2026-11-01T15:00:47.531+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-3] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.StudentService.delete]
+2026-11-01T15:00:47.531+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1731636106<open>)] for JPA transaction
+2026-11-01T15:00:47.531+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:47.531+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-3] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.age,
+        s1_0.name,
+        s1_0.surname 
+    from
+        students s1_0 
+    where
+        s1_0.id=?
+2026-11-01T15:00:47.534+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-3] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2026-11-01T15:00:47.535+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1731636106<open>)] for JPA transaction
+2026-11-01T15:00:47.535+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:47.535+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-3] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.delete]
+2026-11-01T15:00:47.538+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-3] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.delete]
+2026-11-01T15:00:47.539+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-3] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.StudentService.delete]
+2026-11-01T15:00:47.539+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-01T15:00:47.539+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1731636106<open>)]
+Hibernate: 
+    delete 
+    from
+        student_course 
+    where
+        student_id=?
+Hibernate: 
+    delete 
+    from
+        students 
+    where
+        id=?
+2026-11-01T15:00:47.579+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-3] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager after transaction
+2026-11-01T15:00:47.656+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.StudentService.delete]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+2026-11-01T15:00:47.656+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(70924361<open>)] for JPA transaction
+2026-11-01T15:00:47.657+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@1fe57a5d]
+2026-11-01T15:00:47.657+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.StudentService.delete]
+2026-11-01T15:00:47.657+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(70924361<open>)] for JPA transaction
+2026-11-01T15:00:47.657+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:47.657+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.age,
+        s1_0.name,
+        s1_0.surname 
+    from
+        students s1_0 
+    where
+        s1_0.id=?
+2026-11-01T15:00:47.660+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById]
+2026-11-01T15:00:47.660+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(70924361<open>)] for JPA transaction
+2026-11-01T15:00:47.660+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:47.660+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.delete]
+2026-11-01T15:00:47.660+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.delete]
+2026-11-01T15:00:47.660+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-1] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.StudentService.delete]
+2026-11-01T15:00:47.660+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-01T15:00:47.660+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(70924361<open>)]
+Hibernate: 
+    delete 
+    from
+        student_course 
+    where
+        student_id=?
+Hibernate: 
+    delete 
+    from
+        students 
+    where
+        id=?
+2026-11-01T15:00:47.681+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-1] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager after transaction
+2026-11-01T15:00:47.766+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [az.iktex.organization.structure.testders.service.CourseService.getStudentCount]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT,readOnly
+2026-11-01T15:00:47.766+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(1402763084<open>)] for JPA transaction
+2026-11-01T15:00:47.766+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@5e7a975]
+2026-11-01T15:00:47.767+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-2] o.s.t.i.TransactionInterceptor           : Getting transaction for [az.iktex.organization.structure.testders.service.CourseService.getStudentCount]
+2026-11-01T15:00:47.767+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1402763084<open>)] for JPA transaction
+2026-11-01T15:00:47.767+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+2026-11-01T15:00:47.767+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-2] o.s.t.i.TransactionInterceptor           : Getting transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsById]
+Hibernate: 
+    select
+        count(*) 
+    from
+        courses c1_0 
+    where
+        c1_0.id=?
+2026-11-01T15:00:47.769+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-2] o.s.t.i.TransactionInterceptor           : Completing transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.existsById]
+2026-11-01T15:00:47.769+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-2] o.s.t.i.TransactionInterceptor           : No need to create transaction for [org.springframework.data.jpa.repository.support.SimpleJpaRepository.countStudentsByCourseId]: This method is not transactional.
+Hibernate: 
+    select
+        (select
+            count(*) 
+        from
+            student_course s1_0 
+        where
+            c1_0.id=s1_0.course_id) 
+    from
+        courses c1_0 
+    where
+        c1_0.id=?
+2026-11-01T15:00:47.771+04:00 TRACE 46184 --- [test-demo-api] [nio-8080-exec-2] o.s.t.i.TransactionInterceptor           : Completing transaction for [az.iktex.organization.structure.testders.service.CourseService.getStudentCount]
+2026-11-01T15:00:47.772+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction commit
+2026-11-01T15:00:47.772+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Committing JPA transaction on EntityManager [SessionImpl(1402763084<open>)]
+2026-11-01T15:00:47.773+04:00 DEBUG 46184 --- [test-demo-api] [nio-8080-exec-2] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager after transaction

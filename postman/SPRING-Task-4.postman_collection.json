@@ -1,7 +1,7 @@
 {
   "info": {
     "name": "SPRING-Task-4",
-    "description": "Task20 endpoint-ləri və əlaqə yoxlamaları. Run bütün qovluqları sıra ilə icra edir, unikal test məlumatları yaradır və sonda silir. Mövcud məlumatları dəyişmir. Java 25 tətbiqi və PostgreSQL işləməlidir.",
+    "description": "Task20 endpoint-ləri və Task21 Cache yoxlamaları və əlaqə yoxlamaları. Run bütün qovluqları sıra ilə icra edir, unikal test məlumatları yaradır və sonda silir. Mövcud məlumatları dəyişmir. Java 25 tətbiqi və PostgreSQL işləməlidir.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -2652,6 +2652,1657 @@
                   "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
                 ]
               }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cache",
+      "description": "Task21: entity/query cache, evict, stats reset, invalidation və Book qiyməti. Seed Course 1 lazımdır. Test müəllifi və kitabı sonda silinir. Collection və bulk @Modifying yoxlamaları ayrıca JUnit testindədir.",
+      "item": [
+        {
+          "name": "01. Bütün cache-i təmizlə",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/cache"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "02. Statistikanı sıfırla",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/cache/stats"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "03. Course ilk oxuma",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/courses/1"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "04. Course miss və put",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/cache/stats"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"First read: miss1 put1 hit0\", () => { const s=pm.response.json().regions.courses; pm.expect(s.missCount).to.eql(1); pm.expect(s.putCount).to.eql(1); pm.expect(s.hitCount).to.eql(0); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "05. Course ikinci oxuma",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/courses/1"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "06. Course L2 hit",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/cache/stats"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Second read hits L2\", () => { const s=pm.response.json().regions.courses; pm.expect(s.hitCount).to.eql(1); pm.expect(s.missCount).to.eql(1); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "07. Yalnız statistikanı sıfırla",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/cache/stats"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "08. Course cache-də qalıb",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/courses/1"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "09. Reset cache-i silmir",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/cache/stats"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Reset preserves cached Course\", () => { const s=pm.response.json().regions.courses; pm.expect(s.hitCount).to.eql(1); pm.expect(s.missCount).to.eql(0); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "10. Course region-u təmizlə",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/cache/courses"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "11. Course yenidən DB-dən",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/courses/1"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "12. Evict-dən sonra miss",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/cache/stats"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Entity eviction causes a miss\", () => { const s=pm.response.json().regions.courses; pm.expect(s.missCount).to.eql(1); pm.expect(s.putCount).to.eql(1); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "13. Naməlum region",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/cache/unknown"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "14. Query yoxlaması üçün cache-i təmizlə",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/cache"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "15. Query statistikasını sıfırla",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/cache/stats"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "16. Müəllif ölkə ilə ilk oxuma",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/authors?country=Azerbaijan"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.collectionVariables.set(\"cacheAuthorCount\", pm.response.json().length);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "17. Müəllif ölkə ilə ikinci oxuma",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/authors?country=Azerbaijan"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "18. Query cache hit",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/cache/stats"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Query cache hit\", () => pm.expect(pm.response.json().queryCacheHitCount).to.eql(1));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "19. Yeni müəllif",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/authors",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"CacheCheck\",\n  \"surname\": \"{{$guid}}\",\n  \"country\": \"Azerbaijan\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "pm.collectionVariables.set(\"cacheAuthorId\", pm.response.json().id);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "20. Query invalidation-dan sonra yeni nəticə",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/authors?country=Azerbaijan"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"New author appears\", () => { const data=pm.response.json(); pm.expect(data.length).to.eql(Number(pm.collectionVariables.get(\"cacheAuthorCount\"))+1); pm.expect(data.some(a=>a.id===Number(pm.collectionVariables.get(\"cacheAuthorId\")))).to.eql(true); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "21. Test kitabı",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/books",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"CacheCheck-{{$guid}}\",\n  \"price\": 11.25,\n  \"pageCount\": 123\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                  "pm.collectionVariables.set(\"cacheBookId\", pm.response.json().id);",
+                  "pm.collectionVariables.set(\"cacheBookTitle\", pm.response.json().title);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "22. Köhnə qiymət",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/books/{{cacheBookId}}"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Old price\", () => pm.expect(pm.response.json().price).to.eql(11.25));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "23. Qiyməti dəyiş",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/books/{{cacheBookId}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"{{cacheBookTitle}}\",\n  \"price\": 22.5,\n  \"pageCount\": 123\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "24. Yeni qiyməti oxu",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/books/{{cacheBookId}}"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"Updated price\", () => pm.expect(pm.response.json().price).to.eql(22.5));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "25. Test kitabını sil",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/books/{{cacheBookId}}"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "26. Test müəllifini sil",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/authors/{{cacheAuthorId}}"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Transactions",
+      "item": [
+        {
+          "name": "C1 REQUIRED",
+          "description": "İki ayrı service bean bir tranzaksiyada. Maaş limiti keçəndə departament dəyişikliyi rollback olur. Seed departments1/2 lazımdır; test işçiləri sonda silinir.",
+          "item": [
+            {
+              "name": "01. Transfer üçün işçi yarat",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{baseUrl}}/employees",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"TxCheck\",\n  \"surname\": \"{{$guid}}\",\n  \"salary\": 1000,\n  \"departmentId\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                      "pm.collectionVariables.set(\"txSuccessId\",pm.response.json().id);"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "02. REQUIRED uğurlu transfer",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{baseUrl}}/employees/{{txSuccessId}}/transfer",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"departmentId\": 2,\n  \"raisePercent\": 15\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                      "pm.test(\"Salary1150 and department2\",()=>{const e=pm.response.json();pm.expect(e.salary).to.eql(1150);pm.expect(e.departmentId).to.eql(2);});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "03. Commit-dən sonra işçini oxu",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/employees/{{txSuccessId}}"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                      "pm.test(\"Both changes committed\",()=>{const e=pm.response.json();pm.expect(e.salary).to.eql(1150);pm.expect(e.departmentId).to.eql(2);});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "04. Rollback üçün işçi yarat",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{baseUrl}}/employees",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"TxRollback\",\n  \"surname\": \"{{$guid}}\",\n  \"salary\": 9000,\n  \"departmentId\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+                      "pm.collectionVariables.set(\"txFailureId\",pm.response.json().id);"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "05. Əvvəlki departament və maaş",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/employees/{{txFailureId}}"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                      "pm.test(\"Before: department1 salary9000\",()=>{const e=pm.response.json();pm.expect(e.departmentId).to.eql(1);pm.expect(e.salary).to.eql(9000);});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "06. Limitdən yuxarı transfer",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{baseUrl}}/employees/{{txFailureId}}/transfer",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"departmentId\": 2,\n  \"raisePercent\": 15\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));",
+                      "pm.test(\"Salary limit error\",()=>pm.expect(pm.response.json().detail).to.eql(\"Salary cannot exceed 10000\"));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "07. Rollback-dən sonra köhnə departament",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/employees/{{txFailureId}}"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                      "pm.test(\"Rollback: department1 salary9000\",()=>{const e=pm.response.json();pm.expect(e.departmentId).to.eql(1);pm.expect(e.salary).to.eql(9000);});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "08. Sərhəd yoxlaması üçün maaş8000",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{baseUrl}}/employees/{{txSuccessId}}",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"TxBoundary\",\n  \"surname\": \"{{$guid}}\",\n  \"salary\": 8000,\n  \"departmentId\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "09. Dəqiq10000 qəbul olunur",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{baseUrl}}/employees/{{txSuccessId}}/transfer",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"departmentId\": 1,\n  \"raisePercent\": 25\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+                      "pm.test(\"Salary boundary10000\",()=>{const e=pm.response.json();pm.expect(e.salary).to.eql(10000);pm.expect(e.departmentId).to.eql(1);});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "10. Uğurlu test işçisini sil",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": "{{baseUrl}}/employees/{{txSuccessId}}"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "11. Rollback test işçisini sil",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": "{{baseUrl}}/employees/{{txFailureId}}"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 204\", () => pm.response.to.have.status(204));"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "C3 MANDATORY",
+          "description": "Seed Course1 capacity1 və boş enrollment tələb edir. Yalnız yeni test tələbələri yaradılır və sonda silinir.",
+          "item": [
+            {
+              "name": "01. MANDATORY tranzaksiyasız",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/tx-demo/reserve-seat/1"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 409\",()=>pm.response.to.have.status(409));",
+                      "pm.test(\"MANDATORY rejects missing transaction\",()=>pm.expect(pm.response.json().detail.toLowerCase()).to.include(\"mandatory\"));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "02. Mövcud olmayan ID də metodun içinə çatmır",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/tx-demo/reserve-seat/999999999"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 409\",()=>pm.response.to.have.status(409));",
+                      "pm.test(\"MANDATORY rejects missing transaction\",()=>pm.expect(pm.response.json().detail.toLowerCase()).to.include(\"mandatory\"));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "03. Capacity1 kurs əvvəl boşdur",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/courses/1/students/count"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                      "pm.test(\"Initial enrollment count0\",()=>pm.expect(pm.response.json()).to.eql(0));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "04. Birinci test tələbəsi",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{baseUrl}}/students",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"MandatoryA\",\n  \"surname\": \"{{$guid}}\",\n  \"age\": 21\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\",()=>pm.response.to.have.status(201));",
+                      "pm.collectionVariables.set(\"mandatoryStudentA\",pm.response.json().id);"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "05. İkinci test tələbəsi",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{baseUrl}}/students",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"MandatoryB\",\n  \"surname\": \"{{$guid}}\",\n  \"age\": 22\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\",()=>pm.response.to.have.status(201));",
+                      "pm.collectionVariables.set(\"mandatoryStudentB\",pm.response.json().id);"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "06. enroll REQUIRED içindən MANDATORY keçir",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/students/{{mandatoryStudentA}}/courses/1"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\",()=>pm.response.to.have.status(201));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "07. Kursda bir tələbə var",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/courses/1/students/count"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                      "pm.test(\"One occupied seat\",()=>pm.expect(pm.response.json()).to.eql(1));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "08. Dolu kurs ikinci tələbəni qəbul etmir",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/students/{{mandatoryStudentB}}/courses/1"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 409\",()=>pm.response.to.have.status(409));",
+                      "pm.test(\"Course full\",()=>pm.expect(pm.response.json().detail).to.eql(\"Course is full\"));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "09. İkinci tələbə qeydiyyatsız qalıb",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/students/{{mandatoryStudentB}}"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                      "pm.test(\"Rejected student has no courses\",()=>pm.expect(pm.response.json().courses).to.have.lengthOf(0));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "10. Birinci test tələbəsini sil",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": "{{baseUrl}}/students/{{mandatoryStudentA}}"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 204\",()=>pm.response.to.have.status(204));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "11. İkinci test tələbəsini sil",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": "{{baseUrl}}/students/{{mandatoryStudentB}}"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 204\",()=>pm.response.to.have.status(204));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "12. Testdən sonra kurs yenə boşdur",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/courses/1/students/count"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                      "pm.test(\"Enrollment cleanup\",()=>pm.expect(pm.response.json()).to.eql(0));"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Isolation",
+      "item": [
+        {
+          "name": "D1 salary report",
+          "description": "Bu qovluq ardıcıl HTTP smoke/validation yoxlamasıdır. Paralel update fərqi ayrıca docs/task21/d1-parallel-results.json ilə sübut olunub; bu ardıcıl run özü concurrency sübutu deyil.",
+          "item": [
+            {
+              "name": "READ_COMMITTED",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/departments/1/salary-report?isolation=READ_COMMITTED&delayMs=0"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                      "pm.test(\"Report isolation\",()=>pm.expect(pm.response.json().isolation).to.eql(\"READ_COMMITTED\"));",
+                      "pm.test(\"No concurrent writer: averages equal\",()=>{const r=pm.response.json();pm.expect(r.firstAvg).to.eql(r.secondAvg);});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "REPEATABLE_READ",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/departments/1/salary-report?isolation=REPEATABLE_READ&delayMs=0"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                      "pm.test(\"Report isolation\",()=>pm.expect(pm.response.json().isolation).to.eql(\"REPEATABLE_READ\"));",
+                      "pm.test(\"No concurrent writer: averages equal\",()=>{const r=pm.response.json();pm.expect(r.firstAvg).to.eql(r.secondAvg);});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "D1 unsupported SERIALIZABLE",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/departments/1/salary-report?isolation=SERIALIZABLE&delayMs=0"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Negative delay",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/departments/1/salary-report?isolation=READ_COMMITTED&delayMs=-1"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "D2 salary raise",
+          "description": "Ardıcıl HTTP smoke və validation yoxlaması. Lost update və409 paralel sınağı ayrıca d2-parallel-results.json-da saxlanılıb.",
+          "item": [
+            {
+              "name": "01. D2 test employee",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{baseUrl}}/employees",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"D2Postman\",\n  \"surname\": \"{{$guid}}\",\n  \"salary\": 1000,\n  \"departmentId\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\",()=>pm.response.to.have.status(201));",
+                      "pm.collectionVariables.set(\"d2EmployeeId\",pm.response.json().id);"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "02. Sequential READ_COMMITTED raise",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/employees/{{d2EmployeeId}}/raise?amount=100&isolation=READ_COMMITTED&delayMs=0"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                      "pm.test(\"Salary1100\",()=>pm.expect(pm.response.json().newSalary).to.eql(1100));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "03. Sequential REPEATABLE_READ raise",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/employees/{{d2EmployeeId}}/raise?amount=100&isolation=REPEATABLE_READ&delayMs=0"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                      "pm.test(\"Salary1200\",()=>pm.expect(pm.response.json().newSalary).to.eql(1200));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "04. Unsupported SERIALIZABLE",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/employees/{{d2EmployeeId}}/raise?amount=100&isolation=SERIALIZABLE&delayMs=0"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "05. Negative amount",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/employees/{{d2EmployeeId}}/raise?amount=-100&isolation=READ_COMMITTED&delayMs=0"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "06. Negative delay",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/employees/{{d2EmployeeId}}/raise?amount=100&isolation=READ_COMMITTED&delayMs=-1"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "07. Final salary unchanged after rejected requests",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/employees/{{d2EmployeeId}}"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                      "pm.test(\"Final salary1200\",()=>pm.expect(pm.response.json().salary).to.eql(1200));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "08. Delete test employee",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": "{{baseUrl}}/employees/{{d2EmployeeId}}"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 204\",()=>pm.response.to.have.status(204));"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "D3 course capacity",
+          "description": "Ardıcıl smoke yoxlaması; course1 capacity1 və boş qeydiyyat tələb olunur. Paralel write skew ayrıca d3-parallel-results.json-da yoxlanılıb.",
+          "item": [
+            {
+              "name": "Create student1",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{baseUrl}}/students",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"D3Postman\",\n  \"surname\": \"{{$guid}}\",\n  \"age\": 22\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\",()=>pm.response.to.have.status(201));",
+                      "pm.collectionVariables.set(\"d3FirstId\",pm.response.json().id);"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Create student2",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "url": "{{baseUrl}}/students",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"D3Postman\",\n  \"surname\": \"{{$guid}}\",\n  \"age\": 22\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 201\",()=>pm.response.to.have.status(201));",
+                      "pm.collectionVariables.set(\"d3SecondId\",pm.response.json().id);"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "RR enroll first student",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/courses/1/enroll/{{d3FirstId}}?isolation=REPEATABLE_READ&delayMs=0"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                      "pm.test(\"Initially empty, capacity1\",()=>{const r=pm.response.json();pm.expect(r.countBefore).to.eql(0);pm.expect(r.capacity).to.eql(1);});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Full course rejects second student",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/courses/1/enroll/{{d3SecondId}}?isolation=SERIALIZABLE&delayMs=0"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 409\",()=>pm.response.to.have.status(409));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Unsupported READ_COMMITTED",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/courses/1/enroll/{{d3SecondId}}?isolation=READ_COMMITTED&delayMs=0"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Negative delay",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/courses/1/enroll/{{d3SecondId}}?isolation=SERIALIZABLE&delayMs=-1"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 400\",()=>pm.response.to.have.status(400));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Unenroll first student",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": "{{baseUrl}}/students/{{d3FirstId}}/courses/1"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 204\",()=>pm.response.to.have.status(204));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "SERIALIZABLE enroll second student",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/courses/1/enroll/{{d3SecondId}}?isolation=SERIALIZABLE&delayMs=0"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 200\",()=>pm.response.to.have.status(200));",
+                      "pm.test(\"Serializable response\",()=>pm.expect(pm.response.json().isolation).to.eql(\"SERIALIZABLE\"));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Duplicate enrollment rejected",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": "{{baseUrl}}/isolation/courses/1/enroll/{{d3SecondId}}?isolation=SERIALIZABLE&delayMs=0"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 409\",()=>pm.response.to.have.status(409));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Delete d3FirstId",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": "{{baseUrl}}/students/{{d3FirstId}}"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 204\",()=>pm.response.to.have.status(204));"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Delete d3SecondId",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": "{{baseUrl}}/students/{{d3SecondId}}"
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"HTTP 204\",()=>pm.response.to.have.status(204));"
+                    ]
+                  }
+                }
+              ]
             }
           ]
         }

@@ -1,0 +1,2 @@
+REPEATABLE_READ: status=200,200; capacity=1; final enrollments=2; concurrent counts=True
+SERIALIZABLE: status=200,409; capacity=1; final enrollments=1; concurrent counts=True
