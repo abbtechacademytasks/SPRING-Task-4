@@ -33,6 +33,10 @@ spring:
       hibernate.javax.cache:
         provider: org.ehcache.jsr107.EhcacheCachingProvider
         uri: ehcache.xml
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+    fallback-to-system-locale: false
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/db.changelog-master.yaml
