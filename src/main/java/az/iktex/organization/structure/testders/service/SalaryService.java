@@ -1,5 +1,8 @@
 package az.iktex.organization.structure.testders.service;
 
+import az.iktex.organization.structure.testders.exception.InvalidRequestException;
+import az.iktex.organization.structure.testders.enums.ErrorCode;
+import az.iktex.organization.structure.testders.exception.BusinessException;
 import az.iktex.organization.structure.testders.entity.Employee;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -14,9 +17,7 @@ public class SalaryService {
     @Transactional(propagation = Propagation.REQUIRED)
     public void raise(Employee employee, BigDecimal percent) {
         if (percent == null || percent.signum() <= 0) {
-            throw new IllegalArgumentException(
-                    "Raise percent must be positive"
-            );
+            throw new InvalidRequestException(ErrorCode.INVALID_RAISE_PERCENT);
         }
 
         BigDecimal multiplier = BigDecimal.ONE.add(
@@ -28,9 +29,7 @@ public class SalaryService {
                 .setScale(2, RoundingMode.HALF_UP);
 
         if (newSalary.compareTo(new BigDecimal("10000")) > 0) {
-            throw new IllegalStateException(
-                    "Salary cannot exceed 10000"
-            );
+            throw new BusinessException(ErrorCode.EMPLOYEE_SALARY_LIMIT);
         }
 
         employee.setSalary(newSalary);

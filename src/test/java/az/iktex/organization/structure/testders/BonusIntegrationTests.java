@@ -5,7 +5,7 @@ import az.iktex.organization.structure.testders.service.BulkEnrollmentService;
 import az.iktex.organization.structure.testders.service.IsolationRetryService;
 import az.iktex.organization.structure.testders.service.StudentService;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityNotFoundException;
+import az.iktex.organization.structure.testders.exception.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +69,7 @@ class BonusIntegrationTests {
         Long student = createStudent();
         Long course = createCourse();
         try {
-            assertThrows(EntityNotFoundException.class,
+            assertThrows(NotFoundException.class,
                     () -> bulkService.enroll(student, List.of(course, Long.MAX_VALUE)));
             assertEquals(0, countLinks(student));
             System.out.println("BONUS NESTED: later missing course rolls back the whole outer transaction");

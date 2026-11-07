@@ -1,9 +1,11 @@
 package az.iktex.organization.structure.testders.service;
 
+import az.iktex.organization.structure.testders.exception.NotFoundException;
+import az.iktex.organization.structure.testders.exception.InvalidRequestException;
+import az.iktex.organization.structure.testders.enums.ErrorCode;
 import az.iktex.organization.structure.testders.exception.CourseFullException;
 import az.iktex.organization.structure.testders.repository.JdbcEnrollmentRepository;
 import az.iktex.organization.structure.testders.response.BulkEnrollmentResponse;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -23,10 +25,10 @@ public class BulkEnrollmentService {
     public BulkEnrollmentResponse enroll(Long studentId, List<Long> courseIds) {
         if (courseIds == null || courseIds.isEmpty() || courseIds.stream().anyMatch(id -> id == null || id <= 0)
                 || new HashSet<>(courseIds).size() != courseIds.size()) {
-            throw new IllegalArgumentException("Course IDs must be positive, unique and not empty");
+            throw new InvalidRequestException(ErrorCode.INVALID_COURSE_IDS);
         }
         if (!repository.studentExists(studentId)) {
-            throw new EntityNotFoundException("Student not found: " + studentId);
+            throw new NotFoundException(ErrorCode.STUDENT_NOT_FOUND, studentId);
         }
 
         List<Long> enrolled = new ArrayList<>();

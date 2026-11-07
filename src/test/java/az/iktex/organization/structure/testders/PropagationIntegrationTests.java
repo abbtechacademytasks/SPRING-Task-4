@@ -5,6 +5,8 @@ import az.iktex.organization.structure.testders.request.TransferRequest;
 import az.iktex.organization.structure.testders.service.AuditLogService;
 import az.iktex.organization.structure.testders.service.EmployeeService;
 import az.iktex.organization.structure.testders.enums.AuditStatus;
+import az.iktex.organization.structure.testders.enums.ErrorCode;
+import az.iktex.organization.structure.testders.exception.BusinessException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -37,9 +39,9 @@ class PropagationIntegrationTests {
 
         Long id = createEmployee("9000");
         try {
-            IllegalStateException error = assertThrows(IllegalStateException.class,
+            BusinessException error = assertThrows(BusinessException.class,
                     () -> employeeService.transfer(id, new TransferRequest(2L, new BigDecimal("15"))));
-            assertEquals("Salary cannot exceed 10000", error.getMessage());
+            assertEquals(ErrorCode.EMPLOYEE_SALARY_LIMIT, error.getErrorCode());
             assertEquals(1L, jdbcTemplate.queryForObject(
                     "select department_id from employees where id = ?", Long.class, id));
             assertEquals(0, new BigDecimal("9000").compareTo(jdbcTemplate.queryForObject(

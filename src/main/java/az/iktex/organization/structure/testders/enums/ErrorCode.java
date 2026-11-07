@@ -42,7 +42,21 @@ public enum ErrorCode {
     USER_EMAIL_USED("ERR-2602", "error.user.emailUsed", HttpStatus.CONFLICT),
     USER_PASSPORT_EXISTS("ERR-2603", "error.user.passportExists", HttpStatus.CONFLICT),
     PASSPORT_NOT_FOUND("ERR-2604", "error.passport.notFound", HttpStatus.NOT_FOUND),
-    PASSPORT_SERIAL_EXISTS("ERR-2605", "error.passport.serialExists", HttpStatus.CONFLICT);
+    PASSPORT_SERIAL_EXISTS("ERR-2605", "error.passport.serialExists", HttpStatus.CONFLICT),
+
+    CONCURRENT_OPERATION("ERR-1008", "error.transaction.concurrent", HttpStatus.CONFLICT),
+    TRANSACTION_STATE("ERR-1009", "error.transaction.state", HttpStatus.CONFLICT),
+    INVALID_DELAY("ERR-1010", "error.request.delay", HttpStatus.BAD_REQUEST),
+    INVALID_ISOLATION("ERR-1011", "error.request.isolation", HttpStatus.BAD_REQUEST),
+    UNKNOWN_CACHE_REGION("ERR-1012", "error.cache.region", HttpStatus.BAD_REQUEST),
+    OPERATION_INTERRUPTED("ERR-1013", "error.operation.interrupted", HttpStatus.CONFLICT),
+    SALARY_RETRY_ISOLATION("ERR-1014", "error.salary.retryIsolation", HttpStatus.BAD_REQUEST),
+    ENROLLMENT_RETRY_ISOLATION("ERR-1015", "error.enrollment.retryIsolation", HttpStatus.BAD_REQUEST),
+    COURSE_FULL("ERR-2103", "error.course.full", HttpStatus.CONFLICT),
+    INVALID_COURSE_IDS("ERR-2104", "error.course.invalidIds", HttpStatus.BAD_REQUEST),
+    EMPLOYEE_SALARY_LIMIT("ERR-2303", "error.employee.salaryLimit", HttpStatus.CONFLICT),
+    INVALID_RAISE_PERCENT("ERR-2304", "error.employee.raisePercent", HttpStatus.BAD_REQUEST),
+    INVALID_RAISE_AMOUNT("ERR-2305", "error.employee.raiseAmount", HttpStatus.BAD_REQUEST);
 
     private final String code;
     private final String messageKey;

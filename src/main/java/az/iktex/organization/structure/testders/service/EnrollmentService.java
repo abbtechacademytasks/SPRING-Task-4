@@ -1,8 +1,10 @@
 package az.iktex.organization.structure.testders.service;
 
+import az.iktex.organization.structure.testders.exception.NotFoundException;
+import az.iktex.organization.structure.testders.enums.ErrorCode;
+import az.iktex.organization.structure.testders.exception.CourseFullException;
 import az.iktex.organization.structure.testders.entity.Course;
 import az.iktex.organization.structure.testders.repository.CourseRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -18,15 +20,13 @@ public class EnrollmentService {
     public void reserveSeat(Long courseId) {
         Course course = courseRepository.findById(courseId)
                 .orElseThrow(() ->
-                        new EntityNotFoundException(
-                                "Course not found: " + courseId
-                        ));
+                        new NotFoundException(ErrorCode.COURSE_NOT_FOUND, courseId));
 
         int studentCount =
                 courseRepository.countStudentsByCourseId(courseId);
 
         if (studentCount >= course.getCapacity()) {
-            throw new IllegalStateException("Course is full");
+            throw new CourseFullException(courseId);
         }
     }
 }

@@ -1,5 +1,7 @@
 package az.iktex.organization.structure.testders.service;
 
+import az.iktex.organization.structure.testders.exception.InvalidRequestException;
+import az.iktex.organization.structure.testders.enums.ErrorCode;
 import az.iktex.organization.structure.testders.entity.*;
 import az.iktex.organization.structure.testders.response.CacheStatsResponse;
 import jakarta.persistence.EntityManagerFactory;
@@ -66,9 +68,7 @@ public class CacheService {
             case "authors" -> Author.class;
             case "books" -> Book.class;
             case "author-books" -> AuthorBook.class;
-            default -> throw new IllegalArgumentException(
-                    "Unknown entity cache region: " + region
-            );
+            default -> throw new InvalidRequestException(ErrorCode.UNKNOWN_CACHE_REGION, region);
         };
 
         entityManagerFactory.getCache().evict(entityClass);
