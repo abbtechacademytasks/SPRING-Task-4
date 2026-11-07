@@ -1,5 +1,9 @@
 package az.iktex.organization.structure.testders.service;
 
+import az.iktex.organization.structure.testders.exception.NotFoundException;
+import az.iktex.organization.structure.testders.exception.InvalidRequestException;
+import az.iktex.organization.structure.testders.enums.ErrorCode;
+import az.iktex.organization.structure.testders.exception.AlreadyExistsException;
 import az.iktex.organization.structure.testders.enums.AuditStatus;
 import az.iktex.organization.structure.testders.request.EmployeeRequest;
 import az.iktex.organization.structure.testders.request.TransferRequest;
@@ -9,7 +13,6 @@ import az.iktex.organization.structure.testders.entity.Employee;
 import az.iktex.organization.structure.testders.mapper.EmployeeMapper;
 import az.iktex.organization.structure.testders.repository.DepartmentRepository;
 import az.iktex.organization.structure.testders.repository.EmployeeRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -33,12 +36,12 @@ public class EmployeeService {
     public EmployeeResponse create(EmployeeRequest request) {
         Department department = departmentRepository.findById(request.departmentId())
                 .orElseThrow(() ->
-                        new EntityNotFoundException("Department not found: " + request.departmentId()));
+                        new NotFoundException(ErrorCode.DEPARTMENT_NOT_FOUND, request.departmentId()));
 
         if (employeeRepository.existsByNameAndSurnameAndDepartmentId(
                 request.name(), request.surname(), request.departmentId()
         )) {
-            throw new IllegalStateException("Employee with the same name and surname already exists in this department");
+            throw new AlreadyExistsException(ErrorCode.EMPLOYEE_ALREADY_EXISTS);
         }
 
         Employee employee = employeeMapper.toEntity(request);
@@ -50,13 +53,13 @@ public class EmployeeService {
 
     public EmployeeResponse getById(Long id) {
         Employee employee = employeeRepository.findByIdWithDepartment(id)
-                .orElseThrow(() -> new EntityNotFoundException("Employee not found: " + id));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.EMPLOYEE_NOT_FOUND, id));
         return employeeMapper.toResponse(employee);
     }
 
     public List<EmployeeResponse> getByDepartment(Long departmentId) {
         if (!departmentRepository.existsById(departmentId)) {
-            throw new EntityNotFoundException("Department not found: " + departmentId);
+            throw new NotFoundException(ErrorCode.DEPARTMENT_NOT_FOUND, departmentId);
         }
         return employeeMapper.toResponseList(
                 employeeRepository.findAllByDepartmentIdWithDepartment(departmentId));
@@ -65,21 +68,21 @@ public class EmployeeService {
     @Transactional(propagation = Propagation.REQUIRED)
     public void delete(Long id) {
         Employee employee = employeeRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Employee not found: " + id));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.EMPLOYEE_NOT_FOUND, id));
         employeeRepository.delete(employee);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
     public EmployeeResponse update(Long id, EmployeeRequest request) {
         Employee employee = employeeRepository.findByIdWithDepartment(id)
-                .orElseThrow(() -> new EntityNotFoundException("Employee not found: " + id));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.EMPLOYEE_NOT_FOUND, id));
 
         Department department = departmentRepository.findById(request.departmentId())
-                .orElseThrow(() -> new EntityNotFoundException("Department not found: " + request.departmentId()));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.DEPARTMENT_NOT_FOUND, request.departmentId()));
 
         if (employeeRepository.existsByNameAndSurnameAndDepartmentIdAndIdNot(
                 request.name(), request.surname(), request.departmentId(), id)) {
-            throw new IllegalStateException("Employee with the same name and surname already exists in this department");
+            throw new AlreadyExistsException(ErrorCode.EMPLOYEE_ALREADY_EXISTS);
         }
         employeeMapper.updateEntity(request, employee);
         employee.setDepartment(department);
@@ -89,7 +92,7 @@ public class EmployeeService {
 
     public List<EmployeeResponse> getBySalaryRange(BigDecimal min, BigDecimal max) {
         if (min.compareTo(max) > 0) {
-            throw new IllegalArgumentException("Minimum salary cannot be greater than maximum salary");
+            throw new InvalidRequestException(ErrorCode.EMPLOYEE_SALARY_RANGE);
         }
 
         return employeeMapper.toResponseList(employeeRepository.findAllBySalaryBetween(min, max));
@@ -97,7 +100,7 @@ public class EmployeeService {
 
     public Double getAverageSalary(Long departmentId) {
         if (!departmentRepository.existsById(departmentId)) {
-            throw new EntityNotFoundException("Department not found: " + departmentId);
+            throw new NotFoundException(ErrorCode.DEPARTMENT_NOT_FOUND, departmentId);
         }
 
         Double averageSalary = employeeRepository.findAverageSalaryByDepartmentId(departmentId);
@@ -107,18 +110,16 @@ public class EmployeeService {
     @Transactional(propagation = Propagation.REQUIRED)
     public EmployeeResponse transfer(Long id, TransferRequest request) {
         if (request.departmentId() == null) {
-            throw new IllegalArgumentException("Department id is required");
+            throw new InvalidRequestException(ErrorCode.MISSING_PARAMETER);
         }
 
         Employee employee = employeeRepository.findByIdWithDepartment(id)
                 .orElseThrow(() ->
-                        new EntityNotFoundException("Employee not found: " + id));
+                        new NotFoundException(ErrorCode.EMPLOYEE_NOT_FOUND, id));
 
         Department department = departmentRepository
                 .findById(request.departmentId())
-                .orElseThrow(() -> new EntityNotFoundException(
-                        "Department not found: " + request.departmentId()
-                ));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.DEPARTMENT_NOT_FOUND, request.departmentId()));
 
         try {
             employee.setDepartment(department);

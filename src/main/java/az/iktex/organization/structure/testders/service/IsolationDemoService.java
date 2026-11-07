@@ -1,5 +1,11 @@
 package az.iktex.organization.structure.testders.service;
 
+import az.iktex.organization.structure.testders.exception.NotFoundException;
+import az.iktex.organization.structure.testders.exception.InvalidRequestException;
+import az.iktex.organization.structure.testders.enums.ErrorCode;
+import az.iktex.organization.structure.testders.exception.CourseFullException;
+import az.iktex.organization.structure.testders.exception.BusinessException;
+import az.iktex.organization.structure.testders.exception.AlreadyExistsException;
 import az.iktex.organization.structure.testders.entity.Employee;
 import az.iktex.organization.structure.testders.entity.Course;
 import az.iktex.organization.structure.testders.entity.Student;
@@ -9,7 +15,6 @@ import az.iktex.organization.structure.testders.response.EnrollmentAttemptRespon
 import az.iktex.organization.structure.testders.repository.EmployeeRepository;
 import az.iktex.organization.structure.testders.response.SalaryChangeResponse;
 import az.iktex.organization.structure.testders.response.SalaryReportResponse;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -36,9 +41,7 @@ public class IsolationDemoService {
             long delayMs
     ) {
         if (delayMs < 0 || delayMs > 15000) {
-            throw new IllegalArgumentException(
-                    "Delay must be between 0 and 15000 ms"
-            );
+            throw new InvalidRequestException(ErrorCode.INVALID_DELAY);
         }
 
         // Entity əvəzinə avg sorğusu istifadə olunur ki, L1 fərqi gizlətməsin.
@@ -66,9 +69,7 @@ public class IsolationDemoService {
             long delayMs
     ) {
         if (delayMs < 0 || delayMs > 15000) {
-            throw new IllegalArgumentException(
-                    "Delay must be between 0 and 15000 ms"
-            );
+            throw new InvalidRequestException(ErrorCode.INVALID_DELAY);
         }
 
         // Entity əvəzinə avg sorğusu istifadə olunur ki, L1 fərqi gizlətməsin.
@@ -92,10 +93,9 @@ public class IsolationDemoService {
             Thread.sleep(delayMs);
         } catch (InterruptedException exception) {
             Thread.currentThread().interrupt();
-            throw new IllegalStateException(
-                    "Isolation demo interrupted",
-                    exception
-            );
+            BusinessException interrupted = new BusinessException(ErrorCode.OPERATION_INTERRUPTED);
+            interrupted.initCause(exception);
+            throw interrupted;
         }
     }
 
@@ -109,20 +109,16 @@ public class IsolationDemoService {
             long delayMs
     ) {
         if (amount == null || amount.signum() <= 0) {
-            throw new IllegalArgumentException("Amount must be positive");
+            throw new InvalidRequestException(ErrorCode.INVALID_RAISE_AMOUNT);
         }
 
         if (delayMs < 0 || delayMs > 15000) {
-            throw new IllegalArgumentException(
-                    "Delay must be between 0 and 15000 ms"
-            );
+            throw new InvalidRequestException(ErrorCode.INVALID_DELAY);
         }
 
         Employee employee = employeeRepository.findById(employeeId)
                 .orElseThrow(() ->
-                        new EntityNotFoundException(
-                                "Employee not found: " + employeeId
-                        ));
+                        new NotFoundException(ErrorCode.EMPLOYEE_NOT_FOUND, employeeId));
 
         BigDecimal oldSalary = employee.getSalary();
 
@@ -151,20 +147,16 @@ public class IsolationDemoService {
             long delayMs
     ) {
         if (amount == null || amount.signum() <= 0) {
-            throw new IllegalArgumentException("Amount must be positive");
+            throw new InvalidRequestException(ErrorCode.INVALID_RAISE_AMOUNT);
         }
 
         if (delayMs < 0 || delayMs > 15000) {
-            throw new IllegalArgumentException(
-                    "Delay must be between 0 and 15000 ms"
-            );
+            throw new InvalidRequestException(ErrorCode.INVALID_DELAY);
         }
 
         Employee employee = employeeRepository.findById(employeeId)
                 .orElseThrow(() ->
-                        new EntityNotFoundException(
-                                "Employee not found: " + employeeId
-                        ));
+                        new NotFoundException(ErrorCode.EMPLOYEE_NOT_FOUND, employeeId));
 
         BigDecimal oldSalary = employee.getSalary();
 
@@ -193,34 +185,26 @@ public class IsolationDemoService {
             long delayMs
     ) {
         if (delayMs < 0 || delayMs > 15000) {
-            throw new IllegalArgumentException(
-                    "Delay must be between 0 and 15000 ms"
-            );
+            throw new InvalidRequestException(ErrorCode.INVALID_DELAY);
         }
 
         Student student = studentRepository.findByIdWithCourses(studentId)
                 .orElseThrow(() ->
-                        new EntityNotFoundException(
-                                "Student not found: " + studentId
-                        ));
+                        new NotFoundException(ErrorCode.STUDENT_NOT_FOUND, studentId));
 
         Course course = courseRepository.findById(courseId)
                 .orElseThrow(() ->
-                        new EntityNotFoundException(
-                                "Course not found: " + courseId
-                        ));
+                        new NotFoundException(ErrorCode.COURSE_NOT_FOUND, courseId));
 
         if (studentRepository.existsByIdAndCoursesId(studentId, courseId)) {
-            throw new IllegalStateException(
-                    "Student is already enrolled in this course"
-            );
+            throw new AlreadyExistsException(ErrorCode.STUDENT_ALREADY_ENROLLED);
         }
 
         int countBefore =
                 courseRepository.countStudentsByCourseId(courseId);
 
         if (countBefore >= course.getCapacity()) {
-            throw new IllegalStateException("Course is full");
+            throw new CourseFullException(courseId);
         }
 
         pause(delayMs);
@@ -246,34 +230,26 @@ public class IsolationDemoService {
             long delayMs
     ) {
         if (delayMs < 0 || delayMs > 15000) {
-            throw new IllegalArgumentException(
-                    "Delay must be between 0 and 15000 ms"
-            );
+            throw new InvalidRequestException(ErrorCode.INVALID_DELAY);
         }
 
         Student student = studentRepository.findByIdWithCourses(studentId)
                 .orElseThrow(() ->
-                        new EntityNotFoundException(
-                                "Student not found: " + studentId
-                        ));
+                        new NotFoundException(ErrorCode.STUDENT_NOT_FOUND, studentId));
 
         Course course = courseRepository.findById(courseId)
                 .orElseThrow(() ->
-                        new EntityNotFoundException(
-                                "Course not found: " + courseId
-                        ));
+                        new NotFoundException(ErrorCode.COURSE_NOT_FOUND, courseId));
 
         if (studentRepository.existsByIdAndCoursesId(studentId, courseId)) {
-            throw new IllegalStateException(
-                    "Student is already enrolled in this course"
-            );
+            throw new AlreadyExistsException(ErrorCode.STUDENT_ALREADY_ENROLLED);
         }
 
         int countBefore =
                 courseRepository.countStudentsByCourseId(courseId);
 
         if (countBefore >= course.getCapacity()) {
-            throw new IllegalStateException("Course is full");
+            throw new CourseFullException(courseId);
         }
 
         pause(delayMs);

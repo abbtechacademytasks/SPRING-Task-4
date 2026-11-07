@@ -1,5 +1,8 @@
 package az.iktex.organization.structure.testders.service;
 
+import az.iktex.organization.structure.testders.exception.NotFoundException;
+import az.iktex.organization.structure.testders.enums.ErrorCode;
+import az.iktex.organization.structure.testders.exception.AlreadyExistsException;
 import az.iktex.organization.structure.testders.request.CourseRequest;
 import az.iktex.organization.structure.testders.response.CourseResponse;
 import az.iktex.organization.structure.testders.response.StudentResponse;
@@ -9,7 +12,6 @@ import az.iktex.organization.structure.testders.mapper.CourseMapper;
 import az.iktex.organization.structure.testders.mapper.StudentMapper;
 import az.iktex.organization.structure.testders.repository.CourseRepository;
 import az.iktex.organization.structure.testders.repository.StudentRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -32,7 +34,7 @@ public class CourseService {
     @Transactional(propagation = Propagation.REQUIRED)
     public CourseResponse create(CourseRequest request) {
         if (courseRepository.existsByTitle(request.title())) {
-            throw new IllegalStateException("Course title already exists");
+            throw new AlreadyExistsException(ErrorCode.COURSE_ALREADY_EXISTS);
         }
         Course course = courseMapper.toEntity(request);
         return courseMapper.toResponse(courseRepository.save(course));
@@ -40,7 +42,7 @@ public class CourseService {
 
     public CourseResponse getById(Long id) {
         Course course = courseRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Course not found: " + id));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.COURSE_NOT_FOUND, id));
         return courseMapper.toResponse(course);
     }
 
@@ -50,20 +52,20 @@ public class CourseService {
 
     public List<CourseResponse> getByStudent(Long studentId) {
         if (!studentRepository.existsById(studentId)) {
-            throw new EntityNotFoundException("Student not found: " + studentId);
+            throw new NotFoundException(ErrorCode.STUDENT_NOT_FOUND, studentId);
         }
         return courseMapper.toResponseList(courseRepository.findAllByStudentId(studentId));
     }
 
     public List<StudentResponse> getStudents(Long id) {
         Course course = courseRepository.findByIdWithStudents(id)
-                .orElseThrow(() -> new EntityNotFoundException("Course not found: " + id));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.COURSE_NOT_FOUND, id));
         return studentMapper.toResponseList(new ArrayList<>(course.getStudents()));
     }
 
     public Integer getStudentCount(Long id) {
         if (!courseRepository.existsById(id)) {
-            throw new EntityNotFoundException("Course not found: " + id);
+            throw new NotFoundException(ErrorCode.COURSE_NOT_FOUND, id);
         }
         return courseRepository.countStudentsByCourseId(id);
     }
@@ -71,9 +73,9 @@ public class CourseService {
     @Transactional(propagation = Propagation.REQUIRED)
     public CourseResponse update(Long id, CourseRequest request) {
         Course course = courseRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Course not found: " + id));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.COURSE_NOT_FOUND, id));
         if (courseRepository.existsByTitleAndIdNot(request.title(), id)) {
-            throw new IllegalStateException("Course title already exists");
+            throw new AlreadyExistsException(ErrorCode.COURSE_TITLE_USED);
         }
         courseMapper.updateEntity(request, course);
         return courseMapper.toResponse(course);
@@ -83,7 +85,7 @@ public class CourseService {
     public void delete(Long id) {
         Course course = courseRepository.findByIdWithStudents(id)
                 .orElseThrow(() ->
-                        new EntityNotFoundException("Course not found: " + id));
+                        new NotFoundException(ErrorCode.COURSE_NOT_FOUND, id));
 
         for (Student student : new HashSet<>(course.getStudents())) {
             student.removeCourse(course);

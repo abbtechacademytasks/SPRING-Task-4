@@ -5,6 +5,7 @@ import az.iktex.organization.structure.testders.service.IsolationDemoService;
 import az.iktex.organization.structure.testders.service.IsolationRetryService;
 import org.junit.jupiter.api.Test;
 import org.springframework.dao.CannotAcquireLockException;
+import az.iktex.organization.structure.testders.exception.CourseFullException;
 
 import java.math.BigDecimal;
 
@@ -26,9 +27,9 @@ class IsolationRetryServiceTests {
     @Test
     void doesNotRetryBusinessConflict() {
         var transactionService = mock(IsolationDemoService.class);
-        when(transactionService.enrollSerializable(1L, 2L, 0)).thenThrow(new IllegalStateException("Course is full"));
+        when(transactionService.enrollSerializable(1L, 2L, 0)).thenThrow(new CourseFullException(1L));
         var retry = new IsolationRetryService(transactionService);
-        assertThrows(IllegalStateException.class, () -> retry.enroll(1L, 2L, 0));
+        assertThrows(CourseFullException.class, () -> retry.enroll(1L, 2L, 0));
         verify(transactionService).enrollSerializable(1L, 2L, 0);
     }
 

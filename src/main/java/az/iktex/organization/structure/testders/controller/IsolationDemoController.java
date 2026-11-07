@@ -1,5 +1,7 @@
 package az.iktex.organization.structure.testders.controller;
 
+import az.iktex.organization.structure.testders.exception.InvalidRequestException;
+import az.iktex.organization.structure.testders.enums.ErrorCode;
 import az.iktex.organization.structure.testders.response.EnrollmentAttemptResponse;
 import az.iktex.organization.structure.testders.response.SalaryChangeResponse;
 import az.iktex.organization.structure.testders.response.SalaryReportResponse;
@@ -36,9 +38,7 @@ public class IsolationDemoController {
                     isolationDemoService.averageRepeatableRead(
                             departmentId, delayMs
                     );
-            default -> throw new IllegalArgumentException(
-                    "Supported isolation: READ_COMMITTED, REPEATABLE_READ"
-            );
+            default -> throw new InvalidRequestException(ErrorCode.INVALID_ISOLATION);
         };
     }
 
@@ -54,7 +54,7 @@ public class IsolationDemoController {
     ) {
         if (retry) {
             if (isolation != Isolation.REPEATABLE_READ) {
-                throw new IllegalArgumentException("Salary retry requires REPEATABLE_READ");
+                throw new InvalidRequestException(ErrorCode.SALARY_RETRY_ISOLATION);
             }
             return isolationRetryService.raise(employeeId, amount, delayMs);
         }
@@ -67,9 +67,7 @@ public class IsolationDemoController {
                     isolationDemoService.raiseRepeatableRead(
                             employeeId, amount, delayMs
                     );
-            default -> throw new IllegalArgumentException(
-                    "Supported isolation: READ_COMMITTED, REPEATABLE_READ"
-            );
+            default -> throw new InvalidRequestException(ErrorCode.INVALID_ISOLATION);
         };
     }
 
@@ -85,7 +83,7 @@ public class IsolationDemoController {
     ) {
         if (retry) {
             if (isolation != Isolation.SERIALIZABLE) {
-                throw new IllegalArgumentException("Enrollment retry requires SERIALIZABLE");
+                throw new InvalidRequestException(ErrorCode.ENROLLMENT_RETRY_ISOLATION);
             }
             return isolationRetryService.enroll(courseId, studentId, delayMs);
         }
@@ -98,9 +96,7 @@ public class IsolationDemoController {
                     isolationDemoService.enrollSerializable(
                             courseId, studentId, delayMs
                     );
-            default -> throw new IllegalArgumentException(
-                    "Supported isolation: REPEATABLE_READ, SERIALIZABLE"
-            );
+            default -> throw new InvalidRequestException(ErrorCode.INVALID_ISOLATION);
         };
     }
 }

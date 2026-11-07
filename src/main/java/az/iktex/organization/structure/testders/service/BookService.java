@@ -1,5 +1,8 @@
 package az.iktex.organization.structure.testders.service;
 
+import az.iktex.organization.structure.testders.exception.NotFoundException;
+import az.iktex.organization.structure.testders.enums.ErrorCode;
+import az.iktex.organization.structure.testders.exception.AlreadyExistsException;
 import az.iktex.organization.structure.testders.request.BookRequest;
 import az.iktex.organization.structure.testders.response.BookResponse;
 import az.iktex.organization.structure.testders.entity.Author;
@@ -9,7 +12,6 @@ import az.iktex.organization.structure.testders.mapper.BookMapper;
 import az.iktex.organization.structure.testders.repository.AuthorBookRepository;
 import az.iktex.organization.structure.testders.repository.AuthorRepository;
 import az.iktex.organization.structure.testders.repository.BookRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -31,7 +33,7 @@ public class BookService {
     @Transactional(propagation = Propagation.REQUIRED)
     public BookResponse create(BookRequest request) {
         if (bookRepository.existsByTitle(request.title())) {
-            throw new IllegalStateException("Book title already exists");
+            throw new AlreadyExistsException(ErrorCode.BOOK_ALREADY_EXISTS);
         }
         Book book = bookMapper.toEntity(request);
         return bookMapper.toResponse(bookRepository.save(book));
@@ -39,7 +41,7 @@ public class BookService {
 
     public BookResponse getById(Long id) {
         Book book = bookRepository.findByIdWithAuthors(id)
-                .orElseThrow(() -> new EntityNotFoundException("Book not found: " + id));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.BOOK_NOT_FOUND, id));
         return bookMapper.toDetailResponse(book);
     }
 
@@ -57,9 +59,9 @@ public class BookService {
     @Transactional(propagation = Propagation.REQUIRED)
     public BookResponse update(Long id, BookRequest request) {
         Book book = bookRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Book not found: " + id));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.BOOK_NOT_FOUND, id));
         if (bookRepository.existsByTitleAndIdNot(request.title(), id)) {
-            throw new IllegalStateException("Book title already exists");
+            throw new AlreadyExistsException(ErrorCode.BOOK_ALREADY_EXISTS);
         }
         bookMapper.updateEntity(request, book);
         return bookMapper.toResponse(book);
@@ -68,19 +70,19 @@ public class BookService {
     @Transactional(propagation = Propagation.REQUIRED)
     public void delete(Long id) {
         Book book = bookRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Book not found: " + id));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.BOOK_NOT_FOUND, id));
         bookRepository.delete(book);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
     public void addAuthor(Long bookId, Long authorId) {
         Author author = authorRepository.findById(authorId)
-                .orElseThrow(() -> new EntityNotFoundException("Author not found: " + authorId));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.AUTHOR_NOT_FOUND, authorId));
         Book book = bookRepository.findById(bookId)
-                .orElseThrow(() -> new EntityNotFoundException("Book not found: " + bookId));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.BOOK_NOT_FOUND, bookId));
 
         if (authorBookRepository.existsByAuthorIdAndBookId(authorId, bookId)) {
-            throw new IllegalStateException("Author is already associated with this book");
+            throw new AlreadyExistsException(ErrorCode.BOOK_AUTHOR_ALREADY_LINKED);
         }
 
         AuthorBook link = new AuthorBook();
@@ -98,7 +100,7 @@ public class BookService {
         AuthorBook link = authorBookRepository
                 .findByAuthorIdAndBookId(authorId, bookId)
                 .orElseThrow(() ->
-                        new EntityNotFoundException("Author-book link not found"));
+                        new NotFoundException(ErrorCode.BOOK_AUTHOR_NOT_LINKED));
 
         link.getAuthor().removeAuthorBook(link);
     }

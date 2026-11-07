@@ -1,5 +1,8 @@
 package az.iktex.organization.structure.testders.service;
 
+import az.iktex.organization.structure.testders.exception.NotFoundException;
+import az.iktex.organization.structure.testders.enums.ErrorCode;
+import az.iktex.organization.structure.testders.exception.AlreadyExistsException;
 import az.iktex.organization.structure.testders.request.PassportRequest;
 import az.iktex.organization.structure.testders.request.UserRequest;
 import az.iktex.organization.structure.testders.response.PassportResponse;
@@ -11,7 +14,6 @@ import az.iktex.organization.structure.testders.mapper.PassportMapper;
 import az.iktex.organization.structure.testders.mapper.UserMapper;
 import az.iktex.organization.structure.testders.repository.PassportRepository;
 import az.iktex.organization.structure.testders.repository.UserRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -31,7 +33,7 @@ public class UserService {
     @Transactional(propagation = Propagation.REQUIRED)
     public UserResponse create(UserRequest request) {
         if (userRepository.existsByEmail(request.email())) {
-            throw new IllegalStateException("Email already exists");
+            throw new AlreadyExistsException(ErrorCode.USER_EMAIL_EXISTS);
         }
 
         User user = userMapper.toEntity(request);
@@ -43,7 +45,7 @@ public class UserService {
     public UserResponse getById(Long id) {
         User user = userRepository.findByIdWithPassport(id)
                 .orElseThrow(() ->
-                        new EntityNotFoundException("User not found: " + id));
+                        new NotFoundException(ErrorCode.USER_NOT_FOUND, id));
 
         return userMapper.toResponse(user);
     }
@@ -52,10 +54,10 @@ public class UserService {
     public UserResponse update(Long id, UserRequest request) {
         User user = userRepository.findByIdWithPassport(id)
                 .orElseThrow(() ->
-                        new EntityNotFoundException("User not found: " + id));
+                        new NotFoundException(ErrorCode.USER_NOT_FOUND, id));
 
         if (userRepository.existsByEmailAndIdNot(request.email(), id)) {
-            throw new IllegalStateException("Email already exists");
+            throw new AlreadyExistsException(ErrorCode.USER_EMAIL_USED);
         }
 
         userMapper.updateEntity(request, user);
@@ -67,7 +69,7 @@ public class UserService {
     public void delete(Long id) {
         User user = userRepository.findByIdWithPassport(id)
                 .orElseThrow(() ->
-                        new EntityNotFoundException("User not found: " + id));
+                        new NotFoundException(ErrorCode.USER_NOT_FOUND, id));
 
         userRepository.delete(user);
     }
@@ -75,7 +77,7 @@ public class UserService {
     public UserResponse getByEmail(String email) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() ->
-                        new EntityNotFoundException("User not found: " + email));
+                        new NotFoundException(ErrorCode.USER_NOT_FOUND, email));
 
         return userMapper.toResponse(user);
     }
@@ -98,14 +100,14 @@ public class UserService {
     public PassportResponse addPassport(Long userId, PassportRequest request) {
         User user = userRepository.findByIdWithPassport(userId)
                 .orElseThrow(() ->
-                        new EntityNotFoundException("User not found: " + userId));
+                        new NotFoundException(ErrorCode.USER_NOT_FOUND, userId));
 
         if (user.getPassport() != null) {
-            throw new IllegalStateException("User already has a passport");
+            throw new AlreadyExistsException(ErrorCode.USER_PASSPORT_EXISTS);
         }
 
         if (passportRepository.existsBySerialNumber(request.serialNumber())) {
-            throw new IllegalStateException("Passport serial number already exists");
+            throw new AlreadyExistsException(ErrorCode.PASSPORT_SERIAL_EXISTS);
         }
 
         Passport passport = passportMapper.toEntity(request);
@@ -119,10 +121,10 @@ public class UserService {
     public PassportResponse getPassport(Long userId) {
         User user = userRepository.findByIdWithPassport(userId)
                 .orElseThrow(() ->
-                        new EntityNotFoundException("User not found: " + userId));
+                        new NotFoundException(ErrorCode.USER_NOT_FOUND, userId));
 
         if (user.getPassport() == null) {
-            throw new EntityNotFoundException("Passport not found for user: " + userId);
+            throw new NotFoundException(ErrorCode.PASSPORT_NOT_FOUND, userId);
         }
 
         return passportMapper.toResponse(user.getPassport());
@@ -132,10 +134,10 @@ public class UserService {
     public void deletePassport(Long userId) {
         User user = userRepository.findByIdWithPassport(userId)
                 .orElseThrow(() ->
-                        new EntityNotFoundException("User not found: " + userId));
+                        new NotFoundException(ErrorCode.USER_NOT_FOUND, userId));
 
         if (user.getPassport() == null) {
-            throw new EntityNotFoundException("Passport not found for user: " + userId);
+            throw new NotFoundException(ErrorCode.PASSPORT_NOT_FOUND, userId);
         }
 
         user.setPassport(null);

@@ -1,6 +1,7 @@
 package az.iktex.organization.structure.testders.enums;
 
 import lombok.Getter;
+import az.iktex.organization.structure.testders.exception.InvalidRequestException;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -20,6 +21,6 @@ public enum Gender {
         return Arrays.stream(Gender.values())
                 .filter(gender -> Objects.equals(gender.getDbCode(), dbCode))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Invalid Gender id: " + dbCode));
+                .orElseThrow(() -> new InvalidRequestException(ErrorCode.TYPE_MISMATCH));
     }
 }
