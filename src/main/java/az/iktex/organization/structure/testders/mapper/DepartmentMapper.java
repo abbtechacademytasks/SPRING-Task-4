@@ -12,6 +12,7 @@ public interface DepartmentMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "employees", ignore = true)
+    @Mapping(target = "phone", source = "phone", qualifiedByName = "normalizePhone")
     Department toEntity(DepartmentRequest request);
 
     @Mapping(target = "employees", ignore = true)
@@ -24,5 +25,11 @@ public interface DepartmentMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "employees", ignore = true)
+    @Mapping(target = "phone", source = "phone", qualifiedByName = "normalizePhone")
     void updateEntity(DepartmentRequest request, @MappingTarget Department department);
+
+    @Named("normalizePhone")
+    default String normalizePhone(String phone) {
+        return phone == null ? null : phone.replaceAll("\\s+", "");
+    }
 }

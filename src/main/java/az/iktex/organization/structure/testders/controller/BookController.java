@@ -1,5 +1,6 @@
 package az.iktex.organization.structure.testders.controller;
 
+import jakarta.validation.Valid;
 import az.iktex.organization.structure.testders.request.BookRequest;
 import az.iktex.organization.structure.testders.response.BookResponse;
 import az.iktex.organization.structure.testders.service.BookService;
@@ -19,7 +20,7 @@ public class BookController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public BookResponse create(@RequestBody BookRequest request) {
+    public BookResponse create(@Valid @RequestBody BookRequest request) {
         return bookService.create(request);
     }
 
@@ -39,7 +40,7 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    public BookResponse update(@PathVariable("id") Long id, @RequestBody BookRequest request) {
+    public BookResponse update(@PathVariable("id") Long id, @Valid @RequestBody BookRequest request) {
         return bookService.update(id, request);
     }
 

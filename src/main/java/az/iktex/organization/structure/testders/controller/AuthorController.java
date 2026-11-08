@@ -1,5 +1,6 @@
 package az.iktex.organization.structure.testders.controller;
 
+import jakarta.validation.Valid;
 import az.iktex.organization.structure.testders.request.AuthorRequest;
 import az.iktex.organization.structure.testders.response.AuthorResponse;
 import az.iktex.organization.structure.testders.response.BookResponse;
@@ -19,7 +20,7 @@ public class AuthorController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public AuthorResponse create(@RequestBody AuthorRequest request) {
+    public AuthorResponse create(@Valid @RequestBody AuthorRequest request) {
         return authorService.create(request);
     }
 
@@ -44,7 +45,7 @@ public class AuthorController {
     }
 
     @PutMapping("/{id}")
-    public AuthorResponse update(@PathVariable("id") Long id, @RequestBody AuthorRequest request) {
+    public AuthorResponse update(@PathVariable("id") Long id, @Valid @RequestBody AuthorRequest request) {
         return authorService.update(id, request);
     }
 
