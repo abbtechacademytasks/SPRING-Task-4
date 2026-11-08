@@ -6,6 +6,7 @@ import az.iktex.organization.structure.testders.service.StudentService;
 import az.iktex.organization.structure.testders.service.BulkEnrollmentService;
 import az.iktex.organization.structure.testders.request.BulkEnrollmentRequest;
 import az.iktex.organization.structure.testders.response.BulkEnrollmentResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -21,13 +22,13 @@ public class StudentController {
     private final BulkEnrollmentService bulkEnrollmentService;
 
     @PostMapping("/{id}/courses/bulk")
-    public BulkEnrollmentResponse enrollBulk(@PathVariable("id") Long id, @RequestBody BulkEnrollmentRequest request) {
+    public BulkEnrollmentResponse enrollBulk(@PathVariable("id") Long id, @Valid @RequestBody BulkEnrollmentRequest request) {
         return bulkEnrollmentService.enroll(id, request.courseIds());
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public StudentResponse create(@RequestBody StudentRequest request) {
+    public StudentResponse create(@Valid @RequestBody StudentRequest request) {
         return studentService.create(request);
     }
 
@@ -47,7 +48,7 @@ public class StudentController {
     }
 
     @PutMapping("/{id}")
-    public StudentResponse update(@PathVariable("id") Long id, @RequestBody StudentRequest request) {
+    public StudentResponse update(@PathVariable("id") Long id, @Valid @RequestBody StudentRequest request) {
         return studentService.update(id, request);
     }
 

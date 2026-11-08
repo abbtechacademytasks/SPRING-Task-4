@@ -1,5 +1,6 @@
 package az.iktex.organization.structure.testders.controller;
 
+import jakarta.validation.Valid;
 import az.iktex.organization.structure.testders.request.CourseRequest;
 import az.iktex.organization.structure.testders.response.CourseResponse;
 import az.iktex.organization.structure.testders.response.StudentResponse;
@@ -19,7 +20,7 @@ public class CourseController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CourseResponse create(@RequestBody CourseRequest request) {
+    public CourseResponse create(@Valid @RequestBody CourseRequest request) {
         return courseService.create(request);
     }
 
@@ -49,7 +50,7 @@ public class CourseController {
     }
 
     @PutMapping("/{id}")
-    public CourseResponse update(@PathVariable("id") Long id, @RequestBody CourseRequest request) {
+    public CourseResponse update(@PathVariable("id") Long id, @Valid @RequestBody CourseRequest request) {
         return courseService.update(id, request);
     }
 

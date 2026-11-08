@@ -1,5 +1,6 @@
 package az.iktex.organization.structure.testders.controller;
 
+import jakarta.validation.Valid;
 import az.iktex.organization.structure.testders.request.PassportRequest;
 import az.iktex.organization.structure.testders.request.UserRequest;
 import az.iktex.organization.structure.testders.response.PassportResponse;
@@ -21,7 +22,7 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UserResponse create(@RequestBody UserRequest request) {
+    public UserResponse create(@Valid @RequestBody UserRequest request) {
         return userService.create(request);
     }
 
@@ -50,7 +51,7 @@ public class UserController {
     @PutMapping("/{id}")
     public UserResponse update(
             @PathVariable("id") Long id,
-            @RequestBody UserRequest request
+            @Valid @RequestBody UserRequest request
     ) {
         return userService.update(id, request);
     }
@@ -65,7 +66,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     public PassportResponse addPassport(
             @PathVariable("id") Long id,
-            @RequestBody PassportRequest request
+            @Valid @RequestBody PassportRequest request
     ) {
         return userService.addPassport(id, request);
     }

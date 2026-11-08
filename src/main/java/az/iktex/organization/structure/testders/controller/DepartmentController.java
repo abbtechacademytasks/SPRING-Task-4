@@ -3,6 +3,7 @@ package az.iktex.organization.structure.testders.controller;
 import az.iktex.organization.structure.testders.request.DepartmentRequest;
 import az.iktex.organization.structure.testders.response.DepartmentResponse;
 import az.iktex.organization.structure.testders.service.DepartmentService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class DepartmentController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public DepartmentResponse create(@RequestBody DepartmentRequest request) {
+    public DepartmentResponse create(@Valid @RequestBody DepartmentRequest request) {
         return departmentService.create(request);
     }
 
@@ -38,7 +39,7 @@ public class DepartmentController {
     }
 
     @PutMapping("/{id}")
-    public DepartmentResponse update(@PathVariable("id") Long id, @RequestBody DepartmentRequest request) {
+    public DepartmentResponse update(@PathVariable("id") Long id, @Valid @RequestBody DepartmentRequest request) {
         return departmentService.update(id, request);
     }
 

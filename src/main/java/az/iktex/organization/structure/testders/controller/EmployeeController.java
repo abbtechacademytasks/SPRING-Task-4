@@ -1,5 +1,6 @@
 package az.iktex.organization.structure.testders.controller;
 
+import jakarta.validation.Valid;
 import az.iktex.organization.structure.testders.request.EmployeeRequest;
 import az.iktex.organization.structure.testders.request.TransferRequest;
 import az.iktex.organization.structure.testders.response.EmployeeResponse;
@@ -20,7 +21,7 @@ public class EmployeeController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public EmployeeResponse create(@RequestBody EmployeeRequest request) {
+    public EmployeeResponse create(@Valid @RequestBody EmployeeRequest request) {
         return employeeService.create(request);
     }
 
@@ -46,7 +47,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}")
-    public EmployeeResponse update(@PathVariable("id") Long id, @RequestBody EmployeeRequest request) {
+    public EmployeeResponse update(@PathVariable("id") Long id, @Valid @RequestBody EmployeeRequest request) {
         return employeeService.update(id, request);
     }
 
@@ -59,7 +60,7 @@ public class EmployeeController {
     @PostMapping("/{id}/transfer")
     public EmployeeResponse transfer(
             @PathVariable("id") Long id,
-            @RequestBody TransferRequest request
+            @Valid @RequestBody TransferRequest request
     ) {
         return employeeService.transfer(id, request);
     }
