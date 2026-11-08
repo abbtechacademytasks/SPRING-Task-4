@@ -1,0 +1,5 @@
+2026-11-09T00:46:55.416+04:00  INFO [task23-swagger-404] 61860 --- [test-demo-api] [http-nio-8080-exec-5] a.i.o.s.testders.logging.LoggingAspect   : --> StudentController.getById args=[99999]
+2026-11-09T00:46:55.429+04:00 DEBUG [task23-swagger-404] 61860 --- [test-demo-api] [http-nio-8080-exec-5] a.i.o.s.testders.logging.LoggingAspect   : --> StudentService.getById args=[99999]
+2026-11-09T00:46:55.512+04:00 DEBUG [task23-swagger-404] 61860 --- [test-demo-api] [http-nio-8080-exec-5] a.i.o.s.testders.logging.LoggingAspect   : <x- StudentService.getById (82 ms) NotFoundException: ERR-2000 error.student.notFound
+2026-11-09T00:46:55.524+04:00  INFO [task23-swagger-404] 61860 --- [test-demo-api] [http-nio-8080-exec-5] a.i.o.s.testders.logging.LoggingAspect   : <x- StudentController.getById (109 ms) NotFoundException: ERR-2000 error.student.notFound
+2026-11-09T00:46:55.526+04:00  WARN [task23-swagger-404] 61860 --- [test-demo-api] [http-nio-8080-exec-5] a.i.o.s.t.e.GlobalExceptionHandler       : GET /test-demo/api/students/99999 -> 404 ERR-2000 (error.student.notFound) [NotFoundException] args=[99999] fields=[]

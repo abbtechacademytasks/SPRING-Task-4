@@ -1,0 +1,362 @@
+{
+  "httpRequests": 28,
+  "httpFailures": 0,
+  "operations": 64,
+  "tags": [
+    "Author",
+    "Book",
+    "Course",
+    "Department",
+    "Employee",
+    "Student",
+    "User"
+  ],
+  "errorCodes": 46,
+  "schemas": "6 fields described",
+  "checks": [
+    {
+      "name": "Locale az",
+      "status": 404,
+      "response": {
+        "status": 404,
+        "code": "ERR-2000",
+        "message": "Tələbə tapılmadı: 99999",
+        "errors": {},
+        "traceId": "5a1c1341-ba9f-486f-9270-fe80e698d419",
+        "timestamp": "2026-11-09T00:54:34.4027635"
+      }
+    },
+    {
+      "name": "Locale aze",
+      "status": 404,
+      "response": {
+        "status": 404,
+        "code": "ERR-2000",
+        "message": "Tələbə tapılmadı: 99999",
+        "errors": {},
+        "traceId": "48ac2093-1039-4030-a39f-ca13ad03def0",
+        "timestamp": "2026-11-09T00:54:34.4402437"
+      }
+    },
+    {
+      "name": "Locale en",
+      "status": 404,
+      "response": {
+        "status": 404,
+        "code": "ERR-2000",
+        "message": "Student not found: 99999",
+        "errors": {},
+        "traceId": "c462978b-3383-4849-8a13-a34b7f175016",
+        "timestamp": "2026-11-09T00:54:34.4706594"
+      }
+    },
+    {
+      "name": "Locale eng",
+      "status": 404,
+      "response": {
+        "status": 404,
+        "code": "ERR-2000",
+        "message": "Student not found: 99999",
+        "errors": {},
+        "traceId": "0d26f8ea-7bc1-4fd7-9861-8562a2b43dc0",
+        "timestamp": "2026-11-09T00:54:34.5003144"
+      }
+    },
+    {
+      "name": "Locale ru",
+      "status": 404,
+      "response": {
+        "status": 404,
+        "code": "ERR-2000",
+        "message": "Студент не найден: 99999",
+        "errors": {},
+        "traceId": "90c28664-0b0c-4214-a355-437a9ec113c8",
+        "timestamp": "2026-11-09T00:54:34.5089554"
+      }
+    },
+    {
+      "name": "Locale rus",
+      "status": 404,
+      "response": {
+        "status": 404,
+        "code": "ERR-2000",
+        "message": "Студент не найден: 99999",
+        "errors": {},
+        "traceId": "c52d7a22-2101-485c-8e1f-ec7982d7c138",
+        "timestamp": "2026-11-09T00:54:34.5165873"
+      }
+    },
+    {
+      "name": "Default language",
+      "status": 404,
+      "response": {
+        "status": 404,
+        "code": "ERR-2000",
+        "message": "Tələbə tapılmadı: 99999",
+        "errors": {},
+        "traceId": "c515ae7e-1776-47c5-8900-40d215f4df7f",
+        "timestamp": "2026-11-09T00:54:34.5233633"
+      }
+    },
+    {
+      "name": "Unknown language fallback",
+      "status": 404,
+      "response": {
+        "status": 404,
+        "code": "ERR-2000",
+        "message": "Tələbə tapılmadı: 99999",
+        "errors": {},
+        "traceId": "2a9f3ace-1581-4aa5-b0cc-39dea29a9627",
+        "timestamp": "2026-11-09T00:54:34.5471073"
+      }
+    },
+    {
+      "name": "Query overrides header",
+      "status": 404,
+      "response": {
+        "status": 404,
+        "code": "ERR-2000",
+        "message": "Студент не найден: 99999",
+        "errors": {},
+        "traceId": "5e463e83-fad1-4e71-885a-0b9fbcaeb09a",
+        "timestamp": "2026-11-09T00:54:34.5534645"
+      }
+    },
+    {
+      "name": "Unknown query overrides header",
+      "status": 404,
+      "response": {
+        "status": 404,
+        "code": "ERR-2000",
+        "message": "Tələbə tapılmadı: 99999",
+        "errors": {},
+        "traceId": "8c930098-7d1c-401a-bfda-6d70f21431cb",
+        "timestamp": "2026-11-09T00:54:34.5600649"
+      }
+    },
+    {
+      "name": "Missing courses",
+      "status": 404,
+      "response": {
+        "status": 404,
+        "code": "ERR-2100",
+        "message": "Kurs tapılmadı: 99999",
+        "errors": {},
+        "traceId": "30cb815a-9872-4b63-ba58-7ddc51649b54",
+        "timestamp": "2026-11-09T00:54:34.5693904"
+      }
+    },
+    {
+      "name": "Missing departments",
+      "status": 404,
+      "response": {
+        "status": 404,
+        "code": "ERR-2200",
+        "message": "Şöbə tapılmadı: 99999",
+        "errors": {},
+        "traceId": "a894e697-31ba-46e8-abfd-f1b87f67f53f",
+        "timestamp": "2026-11-09T00:54:34.5955698"
+      }
+    },
+    {
+      "name": "Missing employees",
+      "status": 404,
+      "response": {
+        "status": 404,
+        "code": "ERR-2300",
+        "message": "İşçi tapılmadı: 99999",
+        "errors": {},
+        "traceId": "8f481275-bf5e-4177-855a-f1a381affd09",
+        "timestamp": "2026-11-09T00:54:34.6273578"
+      }
+    },
+    {
+      "name": "Missing authors",
+      "status": 404,
+      "response": {
+        "status": 404,
+        "code": "ERR-2400",
+        "message": "Müəllif tapılmadı: 99999",
+        "errors": {},
+        "traceId": "fd538b04-0e60-4440-a442-1925832e41d4",
+        "timestamp": "2026-11-09T00:54:34.6370007"
+      }
+    },
+    {
+      "name": "Missing books",
+      "status": 404,
+      "response": {
+        "status": 404,
+        "code": "ERR-2500",
+        "message": "Kitab tapılmadı: 99999",
+        "errors": {},
+        "traceId": "174152dd-2148-40bd-954c-196e53ba1b0b",
+        "timestamp": "2026-11-09T00:54:34.6482798"
+      }
+    },
+    {
+      "name": "Missing users",
+      "status": 404,
+      "response": {
+        "status": 404,
+        "code": "ERR-2600",
+        "message": "İstifadəçi tapılmadı: 99999",
+        "errors": {},
+        "traceId": "b4c54fc1-3c6f-4e7f-a17d-c9f31561611a",
+        "timestamp": "2026-11-09T00:54:34.6752814"
+      }
+    },
+    {
+      "name": "Type mismatch",
+      "status": 400,
+      "response": {
+        "status": 400,
+        "code": "ERR-1003",
+        "message": "Parametrin tipi yanlışdır",
+        "errors": {},
+        "traceId": "332a3b47-9f48-4eb8-b13a-a2fd8f97c07e",
+        "timestamp": "2026-11-09T00:54:34.6967627"
+      }
+    },
+    {
+      "name": "Missing parameter",
+      "status": 400,
+      "response": {
+        "status": 400,
+        "code": "ERR-1004",
+        "message": "Məcburi parametr göstərilməyib",
+        "errors": {},
+        "traceId": "c9b4a55a-8e77-4bf9-91f3-e22b1c86ea99",
+        "timestamp": "2026-11-09T00:54:34.7122759"
+      }
+    },
+    {
+      "name": "Unsupported method",
+      "status": 405,
+      "response": {
+        "status": 405,
+        "code": "ERR-1005",
+        "message": "HTTP metodu dəstəklənmir",
+        "errors": {},
+        "traceId": "9abc4b80-e9b6-4ac1-9c0f-b13aacdb1a98",
+        "timestamp": "2026-11-09T00:54:34.7272786"
+      }
+    },
+    {
+      "name": "Unknown URL",
+      "status": 404,
+      "response": {
+        "status": 404,
+        "code": "ERR-1006",
+        "message": "Sorğunun ünvanı tapılmadı",
+        "errors": {},
+        "traceId": "5d3ac29f-3b8e-4458-8bd5-7610fc539b95",
+        "timestamp": "2026-11-09T00:54:34.7454438"
+      }
+    },
+    {
+      "name": "Malformed JSON",
+      "status": 400,
+      "response": {
+        "status": 400,
+        "code": "ERR-1002",
+        "message": "Sorğunun formatı yanlışdır",
+        "errors": {},
+        "traceId": "5a247ee6-32ad-4219-a626-2c9289541cf4",
+        "timestamp": "2026-11-09T00:54:34.7744433"
+      }
+    },
+    {
+      "name": "Invalid enum",
+      "status": 400,
+      "response": {
+        "status": 400,
+        "code": "ERR-1002",
+        "message": "Sorğunun formatı yanlışdır",
+        "errors": {},
+        "traceId": "d11488da-2d07-4c76-9889-911d287165b1",
+        "timestamp": "2026-11-09T00:54:34.7896788"
+      }
+    },
+    {
+      "name": "Validation az",
+      "status": 400,
+      "response": {
+        "status": 400,
+        "code": "ERR-1000",
+        "message": "Validasiya xətası",
+        "errors": {
+          "name": "Bu sahə mütləqdir"
+        },
+        "traceId": "0649a0e7-9ad7-4ef2-8714-e702cb5b1edb",
+        "timestamp": "2026-11-09T00:54:34.8123799"
+      }
+    },
+    {
+      "name": "Validation eng",
+      "status": 400,
+      "response": {
+        "status": 400,
+        "code": "ERR-1000",
+        "message": "Validation failed",
+        "errors": {
+          "name": "This field is required"
+        },
+        "traceId": "1b6696aa-148b-4501-9e23-1ef4994bf30b",
+        "timestamp": "2026-11-09T00:54:34.8163807"
+      }
+    },
+    {
+      "name": "Validation rus",
+      "status": 400,
+      "response": {
+        "status": 400,
+        "code": "ERR-1000",
+        "message": "Ошибка валидации",
+        "errors": {
+          "name": "Это поле обязательно"
+        },
+        "traceId": "4ce0aff9-0abd-4c1d-9264-7f3d9ccee476",
+        "timestamp": "2026-11-09T00:54:34.8354697"
+      }
+    },
+    {
+      "name": "Invalid phone",
+      "status": 400,
+      "response": {
+        "status": 400,
+        "code": "ERR-1000",
+        "message": "Validasiya xətası",
+        "errors": {
+          "phone": "Telefon nömrəsinin formatı yanlışdır"
+        },
+        "traceId": "f41523c3-adaa-4f70-b0cb-f56bb0eecab0",
+        "timestamp": "2026-11-09T00:54:34.8394689"
+      }
+    },
+    {
+      "name": "Accepted trace",
+      "status": 404,
+      "response": {
+        "status": 404,
+        "code": "ERR-2000",
+        "message": "Tələbə tapılmadı: 99999",
+        "errors": {},
+        "traceId": "task23-final-12345",
+        "timestamp": "2026-11-09T00:54:34.8466874"
+      }
+    },
+    {
+      "name": "Invalid trace replaced",
+      "status": 404,
+      "response": {
+        "status": 404,
+        "code": "ERR-2000",
+        "message": "Tələbə tapılmadı: 99999",
+        "errors": {},
+        "traceId": "29dfc153-fedc-4542-8c06-81ed31db3abe",
+        "timestamp": "2026-11-09T00:54:34.8541546"
+      }
+    }
+  ]
+}

@@ -1,0 +1,233 @@
+newman
+
+Task23 Infrastructure
+
+→ Locale az
+  GET http://localhost:8080/test-demo/api/students/99999 [404 Not Found, 397B, 40ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+  √  Localized message
+
+→ Locale aze
+  GET http://localhost:8080/test-demo/api/students/99999 [404 Not Found, 397B, 8ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+  √  Localized message
+
+→ Locale en
+  GET http://localhost:8080/test-demo/api/students/99999 [404 Not Found, 392B, 7ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+  √  Localized message
+
+→ Locale eng
+  GET http://localhost:8080/test-demo/api/students/99999 [404 Not Found, 393B, 8ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+  √  Localized message
+
+→ Locale ru
+  GET http://localhost:8080/test-demo/api/students/99999 [404 Not Found, 408B, 8ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+  √  Localized message
+
+→ Locale rus
+  GET http://localhost:8080/test-demo/api/students/99999 [404 Not Found, 408B, 9ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+  √  Localized message
+
+→ Default language
+  GET http://localhost:8080/test-demo/api/students/99999 [404 Not Found, 397B, 10ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+  √  Localized message
+
+→ Unknown language fallback
+  GET http://localhost:8080/test-demo/api/students/99999 [404 Not Found, 397B, 8ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+  √  Localized message
+
+→ Query overrides header
+  GET http://localhost:8080/test-demo/api/students/99999?lang=rus [404 Not Found, 408B, 8ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+  √  Localized message
+
+→ Unknown query overrides header
+  GET http://localhost:8080/test-demo/api/students/99999?lang=de [404 Not Found, 397B, 10ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+  √  Localized message
+
+→ Missing courses
+  GET http://localhost:8080/test-demo/api/courses/99999 [404 Not Found, 392B, 8ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+
+→ Missing departments
+  GET http://localhost:8080/test-demo/api/departments/99999 [404 Not Found, 395B, 8ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+
+→ Missing employees
+  GET http://localhost:8080/test-demo/api/employees/99999 [404 Not Found, 395B, 10ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+
+→ Missing authors
+  GET http://localhost:8080/test-demo/api/authors/99999 [404 Not Found, 395B, 8ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+
+→ Missing books
+  GET http://localhost:8080/test-demo/api/books/99999 [404 Not Found, 393B, 7ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+
+→ Missing users
+  GET http://localhost:8080/test-demo/api/users/99999 [404 Not Found, 401B, 9ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+
+→ Type mismatch
+  GET http://localhost:8080/test-demo/api/students/abc [400 Bad Request, 370B, 3ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+
+→ Missing parameter
+  GET http://localhost:8080/test-demo/api/users/by-email [400 Bad Request, 375B, 4ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+
+→ Unsupported method
+  PATCH http://localhost:8080/test-demo/api/students/99999 [405 Method Not Allowed, 405B, 5ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+
+→ Unknown URL
+  GET http://localhost:8080/test-demo/api/task23-not-existing [404 Not Found, 399B, 5ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+
+→ Malformed JSON
+  POST http://localhost:8080/test-demo/api/students [400 Bad Request, 373B, 3ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+
+→ Invalid enum
+  POST http://localhost:8080/test-demo/api/users [400 Bad Request, 371B, 4ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+
+→ Validation az
+  POST http://localhost:8080/test-demo/api/departments [400 Bad Request, 390B, 4ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+  √  Field error
+
+→ Validation eng
+  POST http://localhost:8080/test-demo/api/departments [400 Bad Request, 390B, 5ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+  √  Field error
+
+→ Validation rus
+  POST http://localhost:8080/test-demo/api/departments [400 Bad Request, 420B, 5ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+  √  Field error
+
+→ Invalid phone
+  POST http://localhost:8080/test-demo/api/departments [400 Bad Request, 412B, 5ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+  √  Field error
+
+→ Accepted trace
+  GET http://localhost:8080/test-demo/api/students/99999 [404 Not Found, 361B, 9ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+
+→ Invalid trace replaced
+  GET http://localhost:8080/test-demo/api/students/99999 [404 Not Found, 397B, 8ms]
+  √  Status
+  √  Error code
+  √  Trace header equals body
+  √  Error fields
+
+┌─────────────────────────┬─────────────────┬─────────────────┐
+│                         │        executed │          failed │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              iterations │               1 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│                requests │              28 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│            test-scripts │              28 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│      prerequest-scripts │               0 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              assertions │             126 │               0 │
+├─────────────────────────┴─────────────────┴─────────────────┤
+│ total run duration: 2.5s                                    │
+├─────────────────────────────────────────────────────────────┤
+│ total data received: 5.07kB (approx)                        │
+├─────────────────────────────────────────────────────────────┤
+│ average response time: 8ms [min: 3ms, max: 40ms, s.d.: 6ms] │
+└─────────────────────────────────────────────────────────────┘

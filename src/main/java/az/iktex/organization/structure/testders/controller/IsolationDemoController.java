@@ -1,5 +1,7 @@
 package az.iktex.organization.structure.testders.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Operation;
 import az.iktex.organization.structure.testders.exception.InvalidRequestException;
 import az.iktex.organization.structure.testders.enums.ErrorCode;
 import az.iktex.organization.structure.testders.response.EnrollmentAttemptResponse;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 
+@Tag(name = "Employee", description = "Employee management")
 @RestController
 @RequestMapping("/api/isolation")
 @RequiredArgsConstructor
@@ -21,6 +24,10 @@ public class IsolationDemoController {
     private final IsolationDemoService isolationDemoService;
     private final IsolationRetryService isolationRetryService;
 
+    @Operation(
+            summary = "Compare salary reads",
+            description = "Compares two average salary reads at the selected isolation. Invalid delay or isolation returns 400 (ERR-1010/ERR-1011)."
+    )
     @GetMapping("/departments/{id}/salary-report")
     public SalaryReportResponse salaryReport(
             @PathVariable("id") Long departmentId,
@@ -42,6 +49,10 @@ public class IsolationDemoController {
         };
     }
 
+    @Operation(
+            summary = "Demonstrate concurrent salary updates",
+            description = "Missing employee returns 404 (ERR-2300), invalid arguments 400 (ERR-1010/ERR-1011/ERR-1014/ERR-2305), transaction conflict 409 (ERR-1008)."
+    )
     @PostMapping("/employees/{id}/raise")
     public SalaryChangeResponse raise(
             @PathVariable("id") Long employeeId,
@@ -71,6 +82,11 @@ public class IsolationDemoController {
         };
     }
 
+    @Operation(
+            summary = "Demonstrate concurrent enrollment",
+            description = "Missing entities return 404 (ERR-2000/ERR-2100), existing enrollment or full course 409 (ERR-2001/ERR-2103), invalid arguments 400 (ERR-1010/ERR-1011/ERR-1015), transaction conflict 409 (ERR-1008).",
+            tags = {"Course"}
+    )
     @PostMapping("/courses/{courseId}/enroll/{studentId}")
     public EnrollmentAttemptResponse enroll(
             @PathVariable("courseId") Long courseId,
