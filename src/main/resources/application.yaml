@@ -43,6 +43,10 @@ spring:
     contexts: dev
 
 logging:
+  pattern:
+    level: "%5p [%X{traceId:-}]"
+  file:
+    name: logs/app.log
   level:
     org.hibernate.cache: debug
     org.springframework.orm.jpa.JpaTransactionManager: debug
