@@ -1,5 +1,9 @@
 # SPRING-Task-4
 
+Task23: [hesabat, PR-lər və Swagger ekran görüntüləri](docs/task23/README.md).
+
+Swagger: http://localhost:8080/test-demo/swagger-ui.html
+
 Task21 üçün Liquibase yoxlamaları və ekran görüntüləri: [hesabat](docs/task21/REPORT.md).
 
 Spring Boot və Spring Data JPA ilə REST API. User/Passport, Department/Employee,

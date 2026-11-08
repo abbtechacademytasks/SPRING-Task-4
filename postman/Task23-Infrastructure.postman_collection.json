@@ -1,0 +1,796 @@
+{
+  "info": {
+    "name": "Task23 Infrastructure",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Read-only error checks and rejected requests. No successful writes."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/test-demo"
+    }
+  ],
+  "item": [
+    {
+      "name": "Locale az",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept-Language",
+            "value": "az"
+          }
+        ],
+        "url": "{{baseUrl}}/api/students/99999"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(404));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-2000\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));",
+              "pm.test(\"Localized message\", () => pm.expect(pm.response.json().message).to.eql(\"Tələbə tapılmadı: 99999\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Locale aze",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept-Language",
+            "value": "aze"
+          }
+        ],
+        "url": "{{baseUrl}}/api/students/99999"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(404));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-2000\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));",
+              "pm.test(\"Localized message\", () => pm.expect(pm.response.json().message).to.eql(\"Tələbə tapılmadı: 99999\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Locale en",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept-Language",
+            "value": "en"
+          }
+        ],
+        "url": "{{baseUrl}}/api/students/99999"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(404));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-2000\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));",
+              "pm.test(\"Localized message\", () => pm.expect(pm.response.json().message).to.eql(\"Student not found: 99999\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Locale eng",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept-Language",
+            "value": "eng"
+          }
+        ],
+        "url": "{{baseUrl}}/api/students/99999"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(404));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-2000\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));",
+              "pm.test(\"Localized message\", () => pm.expect(pm.response.json().message).to.eql(\"Student not found: 99999\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Locale ru",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept-Language",
+            "value": "ru"
+          }
+        ],
+        "url": "{{baseUrl}}/api/students/99999"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(404));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-2000\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));",
+              "pm.test(\"Localized message\", () => pm.expect(pm.response.json().message).to.eql(\"Студент не найден: 99999\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Locale rus",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept-Language",
+            "value": "rus"
+          }
+        ],
+        "url": "{{baseUrl}}/api/students/99999"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(404));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-2000\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));",
+              "pm.test(\"Localized message\", () => pm.expect(pm.response.json().message).to.eql(\"Студент не найден: 99999\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Default language",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/students/99999"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(404));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-2000\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));",
+              "pm.test(\"Localized message\", () => pm.expect(pm.response.json().message).to.eql(\"Tələbə tapılmadı: 99999\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Unknown language fallback",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept-Language",
+            "value": "de"
+          }
+        ],
+        "url": "{{baseUrl}}/api/students/99999"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(404));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-2000\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));",
+              "pm.test(\"Localized message\", () => pm.expect(pm.response.json().message).to.eql(\"Tələbə tapılmadı: 99999\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Query overrides header",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept-Language",
+            "value": "eng"
+          }
+        ],
+        "url": "{{baseUrl}}/api/students/99999?lang=rus"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(404));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-2000\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));",
+              "pm.test(\"Localized message\", () => pm.expect(pm.response.json().message).to.eql(\"Студент не найден: 99999\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Unknown query overrides header",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept-Language",
+            "value": "eng"
+          }
+        ],
+        "url": "{{baseUrl}}/api/students/99999?lang=de"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(404));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-2000\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));",
+              "pm.test(\"Localized message\", () => pm.expect(pm.response.json().message).to.eql(\"Tələbə tapılmadı: 99999\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Missing courses",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/courses/99999"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(404));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-2100\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Missing departments",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/departments/99999"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(404));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-2200\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Missing employees",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/employees/99999"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(404));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-2300\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Missing authors",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/authors/99999"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(404));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-2400\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Missing books",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/books/99999"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(404));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-2500\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Missing users",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/users/99999"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(404));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-2600\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Type mismatch",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/students/abc"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-1003\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Missing parameter",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/users/by-email"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-1004\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Unsupported method",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "url": "{{baseUrl}}/api/students/99999"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(405));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-1005\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Unknown URL",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/task23-not-existing"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(404));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-1006\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Malformed JSON",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/students",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\":",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-1002\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Invalid enum",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/users",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\":\"Test\",\"surname\":\"Test\",\"email\":\"test@example.com\",\"gender\":\"UNKNOWN\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-1002\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Validation az",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept-Language",
+            "value": "az"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/departments",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\":\"\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-1000\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));",
+              "pm.test(\"Field error\", () => pm.expect(pm.response.json().errors).to.have.property(\"name\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Validation eng",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept-Language",
+            "value": "eng"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/departments",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\":\"\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-1000\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));",
+              "pm.test(\"Field error\", () => pm.expect(pm.response.json().errors).to.have.property(\"name\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Validation rus",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept-Language",
+            "value": "rus"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/departments",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\":\"\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-1000\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));",
+              "pm.test(\"Field error\", () => pm.expect(pm.response.json().errors).to.have.property(\"name\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Invalid phone",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/api/departments",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\":\"Task23 invalid phone\",\"phone\":\"123\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-1000\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));",
+              "pm.test(\"Field error\", () => pm.expect(pm.response.json().errors).to.have.property(\"phone\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Accepted trace",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Trace-Id",
+            "value": "task23-final-12345"
+          }
+        ],
+        "url": "{{baseUrl}}/api/students/99999"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(404));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-2000\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Invalid trace replaced",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Trace-Id",
+            "value": "invalid_trace"
+          }
+        ],
+        "url": "{{baseUrl}}/api/students/99999"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status\", () => pm.response.to.have.status(404));",
+              "pm.test(\"Error code\", () => pm.expect(pm.response.json().code).to.eql(\"ERR-2000\"));",
+              "pm.test(\"Trace header equals body\", () => pm.expect(pm.response.json().traceId).to.eql(pm.response.headers.get(\"X-Trace-Id\")));",
+              "pm.test(\"Error fields\", () => pm.expect(pm.response.json()).to.have.all.keys(\"status\", \"code\", \"message\", \"errors\", \"traceId\", \"timestamp\"));"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

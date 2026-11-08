@@ -53,3 +53,11 @@ logging:
     org.springframework.jdbc.support.JdbcTransactionManager: debug
     org.springframework.transaction: trace
     az.iktex.organization.structure.testders.logging.LoggingAspect: debug
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+    try-it-out-enabled: true
